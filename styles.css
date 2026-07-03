@@ -1089,6 +1089,23 @@ body.menu-open .mobile-menu {
     text-align: center;
 }
 
+.footer-legal {
+    display: flex;
+    gap: 20px;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+}
+
+.footer-legal a {
+    color: rgba(246, 240, 229, 0.4);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-legal a:hover {
+    color: var(--text-muted);
+}
+
 @media (max-width: 1200px) {
     .vertical-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
