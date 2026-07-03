@@ -209,16 +209,19 @@ async function chat({ system, messages }) {
         const rango = /semana/.test(t) ? 'semana' : (/ma(n|ñ)ana/.test(t) ? 'manana' : 'hoy');
         return toolCall('getAgenda', { rango });
     }
-    // Cancelar
-    if (/\b(cancel|anul|quitar la cita|borrar la cita)/.test(t)) {
-        if (!fecha) return texto('Claro. ¿Para qué día tienes la cita que quieres cancelar?');
-        return toolCall('cancelBooking', { fecha, ...(hora ? { hora } : {}) });
+    // Cancelar (cita, reserva o mesa). La hora solo si viene en el ÚLTIMO mensaje:
+    // usar horas de turnos anteriores cancela la reserva equivocada (o ninguna).
+    if (/\b(cancel|anul|quitar la (cita|reserva|mesa)|borrar la (cita|reserva|mesa))/.test(t)) {
+        if (!fecha) return texto('Claro. ¿Para qué día tienes la reserva que quieres cancelar?');
+        const horaUlt = parseHora(userText);
+        return toolCall('cancelBooking', { fecha, ...(horaUlt ? { hora: horaUlt } : {}) });
     }
-    // Reprogramar / mover
-    if (/(reprogram|mover la cita|cambiar la cita|cambiar la hora|cambiar el d[ií]a|otra hora|otro d[ií]a|aplazar)/.test(t)) {
+    // Reprogramar / mover (cita, reserva o mesa)
+    if (/(reprogram|mover (la|mi) (cita|reserva|mesa)|cambiar (la|mi) (cita|reserva|mesa)|cambiar la hora|cambiar el d[ií]a|otra hora|otro d[ií]a|aplazar)/.test(t)) {
         if (!fecha) return texto('Sin problema. ¿A qué día quieres moverla?');
-        if (!hora) return texto('¿Y a qué hora te viene mejor?');
-        return toolCall('rescheduleBooking', { nueva_fecha: fecha, nueva_hora: hora });
+        const horaUlt = parseHora(userText);
+        if (!horaUlt) return texto('¿Y a qué hora te viene mejor?');
+        return toolCall('rescheduleBooking', { nueva_fecha: fecha, nueva_hora: horaUlt });
     }
 
     // Reserva

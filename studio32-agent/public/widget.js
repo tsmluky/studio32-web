@@ -83,4 +83,14 @@
   }
   send.onclick = enviar;
   input.addEventListener('keydown', function (e) { if (e.key === 'Enter') enviar(); });
+
+  // API pública mínima para integraciones (p. ej. formulario de reservas de la web)
+  window.S32W = {
+    open: function () { if (!panel.classList.contains('open')) toggle(); },
+    send: function (texto) {
+      if (!panel.classList.contains('open')) toggle();
+      input.value = String(texto || '');
+      enviar();
+    }
+  };
 })();

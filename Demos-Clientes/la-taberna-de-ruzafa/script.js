@@ -123,9 +123,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (bookingForm) {
         bookingForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            // TODO: conectar con el servicio de formularios del cliente
-            // Ejemplo Netlify: añadir name="booking" data-netlify="true" al <form>
-            console.log('Formulario de reserva enviado — conectar con backend');
+            // Conecta con el asistente de reservas (widget del Studio32 Agent).
+            const campos = bookingForm.querySelectorAll('input');
+            const [nombre, telefono, fecha, invitados] = Array.from(campos).map(c => c.value.trim());
+            let fechaTxt = fecha;
+            if (fecha) {
+                const d = new Date(fecha + 'T12:00:00');
+                if (!isNaN(d)) fechaTxt = d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+            }
+            const partes = ['Hola, quiero reservar mesa'];
+            if (invitados) partes.push(`para ${invitados}`);
+            if (fechaTxt) partes.push(`el ${fechaTxt}`);
+            if (nombre) partes.push(`a nombre de ${nombre}`);
+            if (telefono) partes.push(`(tel. ${telefono})`);
+            if (window.S32W) {
+                window.S32W.send(partes.join(' ') + '.');
+            } else {
+                // El widget no está cargado (agente apagado): aviso discreto.
+                console.warn('Asistente de reservas no disponible.');
+                alert('El chat de reservas no está disponible en este momento. Llámanos o vuelve a intentarlo en unos minutos.');
+            }
         });
     }
 
