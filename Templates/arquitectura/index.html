@@ -1,0 +1,407 @@
+<!--
+  TEMPLATE: Arquitectura / Reformas Premium · Studio32 · Digital Systems
+  VERSION: 1.0
+
+  VARIABLES A PERSONALIZAR:
+  - :root en styles.css → colores, tipografía, imagen hero
+  - {{NOMBRE_NEGOCIO}}      → nombre completo del negocio (meta, footer)
+  - {{LOGO_TEXTO}}          → texto del logo sin el punto     (p.ej. "HABITAT")
+  - {{EYEBROW_HERO}}        → eyebrow/tag del hero             (p.ej. "REFORMAS INTEGRALES PREMIUM")
+  - {{HERO_TITULO}}         → primera línea del h1             (p.ej. "El renacer")
+  - {{HERO_TITULO_EM}}      → segunda línea en cursiva         (p.ej. "de tu hogar.")
+  - {{HERO_DESCRIPCION}}    → párrafo de apoyo del hero
+  - {{HERO_CTA}}            → texto del botón principal        (p.ej. "Calcular mi Reforma")
+  - {{PILARES_EYEBROW}}     → eyebrow sección pilares          (p.ej. "NUESTROS PILARES")
+  - {{PILARES_TITULO}}      → h2 sección pilares               (p.ej. "Excelencia sin compromisos.")
+  - {{PILAR_1_TITULO}}      → título pilar 1
+  - {{PILAR_1_DESC}}        → descripción pilar 1
+  - {{PILAR_2_TITULO}}      → título pilar 2
+  - {{PILAR_2_DESC}}        → descripción pilar 2
+  - {{PILAR_3_TITULO}}      → título pilar 3
+  - {{PILAR_3_DESC}}        → descripción pilar 3
+  - {{GALERIA_EYEBROW}}     → eyebrow sección galería          (p.ej. "PROYECTOS")
+  - {{GALERIA_TITULO}}      → h2 galería parte normal
+  - {{GALERIA_TITULO_EM}}   → h2 galería parte en cursiva
+  - {{PROYECTO_1_TITULO}}   → título proyecto BA slider 1
+  - {{PROYECTO_1_DESC}}     → descripción proyecto 1
+  - {{PROYECTO_2_TITULO}}   → título proyecto BA slider 2
+  - {{PROYECTO_2_DESC}}     → descripción proyecto 2
+  - {{METODO_EYEBROW}}      → eyebrow sección método           (p.ej. "CÓMO TRABAJAMOS")
+  - {{METODO_TITULO}}       → h2 sección método
+  - {{METODO_SUBTITULO}}    → párrafo sección método
+  - {{PASO_1_TITULO}}       → título paso 1 del proceso
+  - {{PASO_1_DESC}}         → descripción paso 1
+  - {{PASO_2_TITULO}}       → título paso 2
+  - {{PASO_2_DESC}}         → descripción paso 2
+  - {{PASO_3_TITULO}}       → título paso 3
+  - {{PASO_3_DESC}}         → descripción paso 3
+  - {{PASO_4_TITULO}}       → título paso 4
+  - {{PASO_4_DESC}}         → descripción paso 4
+  - {{CTA_TITULO}}          → h2 sección contacto
+  - {{CTA_SUBTITULO}}       → párrafo sección contacto
+  - {{FORM_TITULO}}         → título dentro del formulario
+  - {{FORM_INTRO}}          → párrafo intro del formulario
+  - {{FORM_CTA}}            → texto del botón submit           (p.ej. "Solicitar Tasación Gratuita")
+  - {{FORM_PRIVACY}}        → nota de privacidad del formulario
+  - {{FOOTER_DESC}}         → descripción bajo el logo en footer
+  - {{AÑO}}                 → año de copyright
+  - assets/placeholder-hero.jpg      → foto hero (izquierda, 16:9, mín. 1920×1080)
+  - assets/placeholder-antes-1.jpg   → foto ANTES proyecto 1 (4:3, mín. 1200×900)
+  - assets/placeholder-despues-1.jpg → foto DESPUÉS proyecto 1
+  - assets/placeholder-antes-2.jpg   → foto ANTES proyecto 2
+  - assets/placeholder-despues-2.jpg → foto DESPUÉS proyecto 2
+
+  SECCIONES OPCIONALES (buscar comentario OPCIONAL en el HTML):
+  - Tercer slider BA          → "OPCIONAL: tercer proyecto"
+  - Trust badge hero          → "OPCIONAL: trust badge"
+  - WhatsApp en contacto      → "OPCIONAL: whatsapp"
+
+  ATRIBUCIÓN: Mantener el texto "Studio32 · Digital Systems" en el footer.
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{NOMBRE_NEGOCIO}} | {{EYEBROW_HERO}}</title>
+    <meta name="description" content="{{HERO_DESCRIPCION}}">
+    <meta name="theme-color" content="#fcfbf9">
+
+    <!-- Favicon → sustituir por el del cliente -->
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <!-- Tipografía: Playfair Display (headings) + Inter (cuerpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- ──────────────────────────────────────
+         NAV
+    ────────────────────────────────────── -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">{{LOGO_TEXTO}}<span class="dot">.</span></a>
+
+            <!-- Botón hamburger accesible (mobile) -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false"
+                aria-controls="nav-links">
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#metodo">Metodología</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+            </ul>
+
+            <a href="#contacto" class="btn-nav">Empezar Proyecto</a>
+        </div>
+    </nav>
+
+    <!-- ──────────────────────────────────────
+         HERO
+    ────────────────────────────────────── -->
+    <header class="hero">
+        <!-- IMG: foto del proyecto o espacio reformado, lado izquierdo.
+             Definir en styles.css → :root → --img-hero -->
+        <div class="hero-bg">
+            <div class="overlay"></div>
+        </div>
+
+        <div class="container hero-content">
+            <div class="hero-text reveal-up">
+                <span class="eyebrow">{{EYEBROW_HERO}}</span>
+                <h1 class="editorial-title">{{HERO_TITULO}} <br><em>{{HERO_TITULO_EM}}</em></h1>
+                <p>{{HERO_DESCRIPCION}}</p>
+
+                <div class="hero-cta-group">
+                    <a href="#contacto" class="btn-primary btn-large">{{HERO_CTA}} &rarr;</a>
+
+                    <!-- OPCIONAL: trust badge — descomentar y ajustar con datos reales del cliente -->
+                    <!--
+                    <div class="trust-badge">
+                        <span class="stars">★★★★★</span>
+                        <span class="small-text">{{GOOGLE_SCORE}}/5 · {{GOOGLE_REVIEWS}} reseñas</span>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ──────────────────────────────────────
+         PILARES / POR QUÉ NOSOTROS
+    ────────────────────────────────────── -->
+    <section class="section pillars bg-light" id="servicios">
+        <div class="container">
+            <div class="section-header text-center reveal-up">
+                <span class="eyebrow">{{PILARES_EYEBROW}}</span>
+                <h2>{{PILARES_TITULO}}</h2>
+            </div>
+
+            <div class="pillars-grid">
+                <div class="pillar-card reveal-up">
+                    <div class="pillar-icon">01</div>
+                    <h3>{{PILAR_1_TITULO}}</h3>
+                    <p>{{PILAR_1_DESC}}</p>
+                </div>
+                <div class="pillar-card reveal-up delay-1">
+                    <div class="pillar-icon">02</div>
+                    <h3>{{PILAR_2_TITULO}}</h3>
+                    <p>{{PILAR_2_DESC}}</p>
+                </div>
+                <div class="pillar-card reveal-up delay-2">
+                    <div class="pillar-icon">03</div>
+                    <h3>{{PILAR_3_TITULO}}</h3>
+                    <p>{{PILAR_3_DESC}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────
+         GALERÍA ANTES / DESPUÉS
+    ────────────────────────────────────── -->
+    <section class="section gallery" id="proyectos">
+        <div class="container container-large">
+            <div class="section-header reveal-up text-center">
+                <span class="eyebrow">{{GALERIA_EYEBROW}}</span>
+                <h2>{{GALERIA_TITULO}} <br><em>{{GALERIA_TITULO_EM}}</em></h2>
+                <p class="section-note">Arrastra el cursor central para descubrir la transformación.</p>
+            </div>
+
+            <div class="ba-sliders-wrapper reveal-up delay-1">
+
+                <!-- Slider Antes/Después 1 -->
+                <!-- IMG antes: assets/placeholder-antes-1.jpg
+                     IMG después: assets/placeholder-despues-1.jpg -->
+                <div class="ba-slider-container">
+                    <div class="ba-slider">
+                        <div class="ba-image-after">
+                            <img src="assets/placeholder-despues-1.jpg" alt="{{PROYECTO_1_TITULO}} — Después">
+                            <span class="ba-label label-after">DESPUÉS</span>
+                        </div>
+                        <div class="ba-image-before">
+                            <img src="assets/placeholder-antes-1.jpg" alt="{{PROYECTO_1_TITULO}} — Antes">
+                            <span class="ba-label label-before">ANTES</span>
+                        </div>
+                        <div class="ba-handle">
+                            <div class="ba-handle-line"></div>
+                            <div class="ba-handle-button">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none" aria-hidden="true">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none" aria-hidden="true">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ba-info">
+                        <h3>{{PROYECTO_1_TITULO}}</h3>
+                        <p>{{PROYECTO_1_DESC}}</p>
+                    </div>
+                </div>
+
+                <!-- Slider Antes/Después 2 -->
+                <!-- IMG antes: assets/placeholder-antes-2.jpg
+                     IMG después: assets/placeholder-despues-2.jpg -->
+                <div class="ba-slider-container">
+                    <div class="ba-slider">
+                        <div class="ba-image-after">
+                            <img src="assets/placeholder-despues-2.jpg" alt="{{PROYECTO_2_TITULO}} — Después">
+                            <span class="ba-label label-after">DESPUÉS</span>
+                        </div>
+                        <div class="ba-image-before">
+                            <img src="assets/placeholder-antes-2.jpg" alt="{{PROYECTO_2_TITULO}} — Antes">
+                            <span class="ba-label label-before">ANTES</span>
+                        </div>
+                        <div class="ba-handle">
+                            <div class="ba-handle-line"></div>
+                            <div class="ba-handle-button">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none" aria-hidden="true">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none" aria-hidden="true">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ba-info">
+                        <h3>{{PROYECTO_2_TITULO}}</h3>
+                        <p>{{PROYECTO_2_DESC}}</p>
+                    </div>
+                </div>
+
+                <!-- OPCIONAL: tercer proyecto — descomentar si aplica
+                <div class="ba-slider-container">
+                    <div class="ba-slider">
+                        <div class="ba-image-after">
+                            <img src="assets/placeholder-despues-3.jpg" alt="{{PROYECTO_3_TITULO}} — Después">
+                            <span class="ba-label label-after">DESPUÉS</span>
+                        </div>
+                        <div class="ba-image-before">
+                            <img src="assets/placeholder-antes-3.jpg" alt="{{PROYECTO_3_TITULO}} — Antes">
+                            <span class="ba-label label-before">ANTES</span>
+                        </div>
+                        <div class="ba-handle">
+                            <div class="ba-handle-line"></div>
+                            <div class="ba-handle-button">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ba-info">
+                        <h3>{{PROYECTO_3_TITULO}}</h3>
+                        <p>{{PROYECTO_3_DESC}}</p>
+                    </div>
+                </div>
+                -->
+
+            </div>
+
+            <div class="text-center gallery-cta">
+                <a href="#contacto" class="btn-outline">Quiero este resultado en mi espacio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────
+         METODOLOGÍA / PROCESO
+    ────────────────────────────────────── -->
+    <section class="section method bg-dark" id="metodo">
+        <div class="container">
+            <div class="section-header light-text text-center reveal-up">
+                <span class="eyebrow">{{METODO_EYEBROW}}</span>
+                <h2>{{METODO_TITULO}}</h2>
+                <p>{{METODO_SUBTITULO}}</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-step reveal-up">
+                    <div class="step-num">01</div>
+                    <div class="step-content">
+                        <h3>{{PASO_1_TITULO}}</h3>
+                        <p>{{PASO_1_DESC}}</p>
+                    </div>
+                </div>
+                <div class="timeline-step reveal-up delay-1">
+                    <div class="step-num">02</div>
+                    <div class="step-content">
+                        <h3>{{PASO_2_TITULO}}</h3>
+                        <p>{{PASO_2_DESC}}</p>
+                    </div>
+                </div>
+                <div class="timeline-step reveal-up delay-2">
+                    <div class="step-num">03</div>
+                    <div class="step-content">
+                        <h3>{{PASO_3_TITULO}}</h3>
+                        <p>{{PASO_3_DESC}}</p>
+                    </div>
+                </div>
+                <div class="timeline-step reveal-up delay-3">
+                    <div class="step-num">04</div>
+                    <div class="step-content">
+                        <h3>{{PASO_4_TITULO}}</h3>
+                        <p>{{PASO_4_DESC}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────
+         CTA / CONTACTO
+    ────────────────────────────────────── -->
+    <section class="section cta-final" id="contacto">
+        <div class="container container-small text-center reveal-up">
+            <h2 class="serif-title cta-heading">{{CTA_TITULO}}</h2>
+            <p class="cta-subtitle">{{CTA_SUBTITULO}}</p>
+
+            <!-- OPCIONAL: whatsapp — descomentar y ajustar si el cliente lo requiere
+            <div style="margin-top: 30px;">
+                <a href="https://wa.me/{{WHATSAPP_NUMERO}}?text={{WHATSAPP_MENSAJE}}"
+                    target="_blank" rel="noopener" class="btn-whatsapp">
+                    Escribir por WhatsApp
+                </a>
+            </div>
+            -->
+
+            <div class="cta-form-container">
+                <h3 class="form-title">{{FORM_TITULO}}</h3>
+                <p class="form-intro">{{FORM_INTRO}}</p>
+
+                <form class="lead-gen-form" id="lead-gen-form" novalidate>
+                    <div class="form-row">
+                        <input
+                            type="text"
+                            placeholder="Nombre completo"
+                            aria-label="Nombre completo"
+                            required>
+                        <input
+                            type="tel"
+                            placeholder="Teléfono móvil"
+                            aria-label="Teléfono de contacto"
+                            required>
+                    </div>
+                    <div class="form-row">
+                        <input
+                            type="text"
+                            placeholder="Código postal de la obra"
+                            aria-label="Código postal de la obra"
+                            required>
+                        <select aria-label="Tipo de proyecto" required>
+                            <option value="" disabled selected>Tipo de proyecto...</option>
+                            <!-- PERSONALIZAR: ajustar opciones a los servicios del cliente -->
+                            <option value="integral">Reforma Integral (Piso / Casa)</option>
+                            <option value="banos_cocina">Baños y / o Cocina</option>
+                            <option value="local">Local Comercial</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary w-100">{{FORM_CTA}}</button>
+                    <p class="form-privacy">{{FORM_PRIVACY}}</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────
+         FOOTER
+    ────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="container flex-footer">
+            <div class="f-col">
+                <a href="#" class="logo">{{LOGO_TEXTO}}<span class="dot">.</span></a>
+                <p>{{FOOTER_DESC}}</p>
+            </div>
+            <div class="f-col">
+                <p>&copy; {{AÑO}} {{NOMBRE_NEGOCIO}}. <a href="#" target="_blank" rel="noopener"
+                        class="footer-studio-link">Studio32 · Digital Systems</a></p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

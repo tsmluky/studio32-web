@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitat | Reformas Integrales de Lujo</title>
+    <meta name="description"
+        content="Estudio de interiorismo especializado en reformas integrales premium. Transformamos espacios sin estrés ni sobrecostes." />
+    <meta name="theme-color" content="#fcfbf9"> <!-- Soft Beige -->
+
+    <!-- Fonts: Playfair Display for elegance, Inter for modern readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Swiper JS (For Gallery/Testimonials) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <!-- Lenis & GSAP for Smooth Scroll & Parallax -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">HABITAT<span class="dot">.</span></a>
+
+            <button class="mobile-menu-btn" aria-label="Abrir Menú">
+                <span></span><span></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#metodo">Metodología</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+            </ul>
+            <a href="#contacto" class="btn-nav">Empezar Proyecto</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Focus on Image + Lead Gen) -->
+    <header class="hero">
+        <div class="hero-bg"
+            style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
+            <div class="overlay"></div>
+        </div>
+
+        <div class="container hero-content">
+            <div class="hero-text reveal-up">
+                <span class="eyebrow">REFORMAS INTEGRALES PREMIUM</span>
+                <h1 class="editorial-title">El renacer <br> <em>de tu hogar.</em></h1>
+                <p>Reinventamos tu vivienda con diseño de autor y ejecución milimétrica. Presupuesto detallado, plazos definidos y seguimiento continuo de obra.</p>
+
+                <div class="hero-cta-group">
+                    <a href="#contacto" class="btn-primary btn-large">Calcular mi Reforma &rarr;</a>
+                    <div class="trust-badge">
+                        <span class="stars">★★★★★</span>
+                        <span class="small-text">[DEMO — añadir cifra real del cliente]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Why Us (Pillars) -->
+    <section class="section pillars bg-light" id="servicios">
+        <div class="container">
+            <div class="section-header text-center reveal-up">
+                <span class="eyebrow">NUESTROS PILARES</span>
+                <h2>Excelencia sin compromisos.</h2>
+            </div>
+            <div class="pillars-grid">
+                <div class="pillar-card reveal-up">
+                    <div class="pillar-icon">01</div>
+                    <h3>Diseño de Autor</h3>
+                    <p>Cada plano y textura es elegido para crear armonía absoluta. Tu casa no será una más, será una
+                        obra de arte habitable.</p>
+                </div>
+                <div class="pillar-card reveal-up delay-1">
+                    <div class="pillar-icon">02</div>
+                    <h3>Gestión Llave en Mano</h3>
+                    <p>Tú eliges el diseño, nosotros lidiamos con licencias, proveedores y escombros. Te entregamos la
+                        llave el día exacto acordado.</p>
+                </div>
+                <div class="pillar-card reveal-up delay-2">
+                    <div class="pillar-icon">03</div>
+                    <h3>Cumplimiento al Céntimo</h3>
+                    <p>Presupuesto cerrado desde el primer día, sin sorpresas al finalizar la obra.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Before & After Interactive Gallery -->
+    <section class="section gallery" id="proyectos">
+        <div class="container container-large">
+            <div class="section-header reveal-up text-center">
+                <span class="eyebrow">MAGIA REAL</span>
+                <h2>El impacto visual <br><em>de una buena reforma.</em></h2>
+                <p class="section-note">Arrastra el cursor central para descubrir la transformación.</p>
+            </div>
+
+            <div class="ba-sliders-wrapper reveal-up delay-1">
+
+                <!-- BA Slider 1 -->
+                <div class="ba-slider-container">
+                    <div class="ba-slider">
+                        <!-- Imagen "Después" (Fondo) -->
+                        <div class="ba-image-after">
+                            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                                alt="Salón Reformado Después" loading="lazy">
+                            <span class="ba-label label-after">DESPUÉS</span>
+                        </div>
+
+                        <!-- Imagen "Antes" (Div que se recorta) -->
+                        <div class="ba-image-before">
+                            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                                alt="Salón Antiguo Antes" loading="lazy">
+                            <span class="ba-label label-before">ANTES</span>
+                        </div>
+
+                        <!-- Barra deslizadora -->
+                        <div class="ba-handle">
+                            <div class="ba-handle-line"></div>
+                            <div class="ba-handle-button">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ba-info">
+                        <h3>Ático en Ruzafa</h3>
+                        <p>Rediseño espacial eliminando tabiques para fusionar cocina y salón, maximizando la luz
+                            natural.</p>
+                    </div>
+                </div>
+
+                <!-- BA Slider 2 -->
+                <div class="ba-slider-container">
+                    <div class="ba-slider">
+                        <div class="ba-image-after">
+                            <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                                alt="Cocina Reformada" loading="lazy">
+                            <span class="ba-label label-after">DESPUÉS</span>
+                        </div>
+                        <div class="ba-image-before">
+                            <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                                alt="Cocina Antigua" loading="lazy">
+                            <span class="ba-label label-before">ANTES</span>
+                        </div>
+                        <div class="ba-handle">
+                            <div class="ba-handle-line"></div>
+                            <div class="ba-handle-button">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ba-info">
+                        <h3>Cocina de Chef</h3>
+                        <p>Sustitución de baldosa antigua por isla de mármol Carrara y mobiliario oculto a medida.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center gallery-cta">
+                <a href="#contacto" class="btn-outline">Quiero este resultado en mi casa</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Method (Timeline Step by step) -->
+    <section class="section method bg-dark" id="metodo">
+        <div class="container">
+            <div class="section-header light-text text-center reveal-up">
+                <span class="eyebrow">CÓMO TRABAJAMOS</span>
+                <h2>El Camino de la Certeza.</h2>
+                <p>Cuatro pasos claros para eliminar la ansiedad y el miedo en tu reforma integral.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-step reveal-up">
+                    <div class="step-num">01</div>
+                    <div class="step-content">
+                        <h3>Auditoría y Deseos</h3>
+                        <p>Medimos cada rincón, evaluamos tuberías/electricidad y escuchamos profundamente cómo quieres
+                            vivir y usar tu espacio.</p>
+                    </div>
+                </div>
+                <div class="timeline-step reveal-up delay-1">
+                    <div class="step-num">02</div>
+                    <div class="step-content">
+                        <h3>Renderizado y Contrato</h3>
+                        <p>Te mostramos el resultado en 3D fotorrealista. Si lo apruebas, firmamos un contrato con fecha
+                            de entrega y precios blindados.</p>
+                    </div>
+                </div>
+                <div class="timeline-step reveal-up delay-2">
+                    <div class="step-num">03</div>
+                    <div class="step-content">
+                        <h3>Ejecución Quirúrgica</h3>
+                        <p>Nuestra cuadrilla de maestros de obra ejecuta el plan. Tendrás acceso a una app para ver
+                            fotos diarias del avance sin tener que ir a ensuciarte.</p>
+                    </div>
+                </div>
+                <div class="timeline-step reveal-up delay-3">
+                    <div class="step-num">04</div>
+                    <div class="step-content">
+                        <h3>Entrega "Champagne"</h3>
+                        <p>Te entregamos las llaves en la fecha exacta acordada, con la vivienda impecablemente limpia y
+                            lista para estrenar. Celebramos juntos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA for Lead Generation -->
+    <section class="section cta-final" id="contacto">
+        <div class="container container-small text-center reveal-up">
+            <h2 class="serif-title cta-heading">¿Listo para transformar tu espacio?</h2>
+            <p class="cta-subtitle">Solicita una tasación gratuita. Nuestro equipo técnico te visita, evalúa el proyecto y te entrega un presupuesto detallado sin compromiso.</p>
+
+            <div class="cta-form-container">
+                <h3 class="form-title">Da el primer paso hacia tu nuevo hogar</h3>
+                <p class="form-intro">Déjanos tus datos mínimos y te contactaremos en menos de 2h para agendar una visita técnica gratuita a la vivienda.</p>
+
+                <form class="lead-gen-form">
+                    <div class="form-row">
+                        <input type="text" placeholder="Nombre completo" required>
+                        <input type="tel" placeholder="Teléfono móvil" required>
+                    </div>
+                    <div class="form-row">
+                        <input type="text" placeholder="Código Postal de la obra" required>
+                        <select required>
+                            <option value="">Tipo de Reforma...</option>
+                            <option value="integral">Reforma Integral (Piso/Casa)</option>
+                            <option value="banos_cocina">Baños y/o Cocina</option>
+                            <option value="local">Local Comercial</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary w-100">Solicitar Tasación Gratuita de la Obra</button>
+                    <p class="form-privacy">Tus datos son 100% seguros y jamás mandamos spam.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container flex-footer">
+            <div class="f-col">
+                <a href="#" class="logo">HABITAT<span class="dot">.</span></a>
+                <p>Estudio de Interiorismo y Reformas Premium en el centro de Valencia.</p>
+            </div>
+            <div class="f-col">
+                <p>&copy; 2026 Habitat Studio. Todos los derechos reservados. <a href="#" class="footer-studio-link">Studio32 · Digital Systems</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

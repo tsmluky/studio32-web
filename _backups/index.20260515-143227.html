@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio32 · Digital Systems</title>
+    <meta name="description"
+        content="Webs premium, automatización e inteligencia artificial práctica para negocios locales que quieren verse mejor, captar mejor y operar mejor." />
+    <meta name="theme-color" content="#090908">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Studio32" />
+    <meta property="og:title" content="Studio32 · Digital Systems" />
+    <meta property="og:description"
+        content="Webs premium, automatización e IA práctica para negocios físicos. Auditoría de presencia digital, landing pages por vertical, WhatsApp y sistemas de captación." />
+    <meta property="og:locale" content="es_ES" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Studio32 · Digital Systems" />
+    <meta name="twitter:description"
+        content="Webs premium, automatización e IA práctica para negocios físicos. Auditoría de presencia digital, sistemas de captación y asistentes inteligentes." />
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23090908'/><text x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='18' fill='%23c9a86a'>32</text></svg>" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,300&family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="grain"></div>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <div class="preloader">
+        <div class="preloader-text">
+            <span>S</span><span>T</span><span>U</span><span>D</span><span>I</span><span>O</span><span
+                style="display:inline-block; width: 2vw;"></span><span>3</span><span>2</span><span
+                class="accent">.</span>
+        </div>
+        <div class="progress-bar-wrap">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#top" class="logo magnetic" data-strength="20">Studio32</a>
+            <div class="nav-right">
+                <a href="#portfolio" class="nav-link magnetic" data-strength="20">Verticales</a>
+                <a href="#process" class="nav-link magnetic" data-strength="20">Método</a>
+                <a href="#contact" class="nav-btn magnetic" data-strength="50">Auditoría</a>
+                <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"
+                    aria-controls="mobile-menu">
+                    <span class="nav-toggle-bar"></span>
+                    <span class="nav-toggle-bar"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu-inner">
+            <p class="mobile-menu-label">[ NAVEGACIÓN ]</p>
+            <nav class="mobile-menu-nav" aria-label="Menú móvil">
+                <a href="#portfolio" class="mobile-menu-link" data-mobile-close>
+                    <span class="mobile-menu-index">01</span>
+                    <span class="mobile-menu-text">Verticales</span>
+                </a>
+                <a href="#process" class="mobile-menu-link" data-mobile-close>
+                    <span class="mobile-menu-index">02</span>
+                    <span class="mobile-menu-text">Método</span>
+                </a>
+                <a href="#contact" class="mobile-menu-link" data-mobile-close>
+                    <span class="mobile-menu-index">03</span>
+                    <span class="mobile-menu-text">Auditoría</span>
+                </a>
+            </nav>
+            <div class="mobile-menu-foot">
+                <a href="https://wa.me/34623456789?text=Hola,%20quiero%20solicitar%20una%20auditor%C3%ADa%20de%20presencia%20digital%20para%20mi%20negocio."
+                    target="_blank" rel="noopener" class="mobile-menu-cta" data-mobile-close>
+                    Solicitar auditoría
+                </a>
+                <div class="mobile-menu-contact">
+                    <a href="mailto:hello@studio32.es">hello@studio32.es</a>
+                    <a href="https://wa.me/34623456789" target="_blank" rel="noopener">+34 623 456 789</a>
+                </div>
+                <p class="mobile-menu-brand">Studio32 · Digital Systems · Valencia</p>
+            </div>
+        </div>
+    </div>
+
+    <header class="hero" id="top">
+        <div class="container hero-inner">
+            <div class="hero-top">
+                <p class="hero-subtitle">[ ESTUDIO DE SISTEMAS DIGITALES · VALENCIA ]</p>
+                <p class="hero-kicker">Construimos el sistema digital<br>de negocios locales <em>premium</em>.</p>
+            </div>
+
+            <h1 class="hero-title">
+                <span class="line"><span class="reveal-text display-impact">Sistemas</span></span>
+                <span class="line"><span class="reveal-text display-italic">digitales</span></span>
+            </h1>
+
+            <div class="hero-bottom">
+                <p class="hero-desc">No vendemos páginas web. Construimos el sistema digital completo de tu negocio:
+                    presencia, captación, automatización e IA práctica.</p>
+                <div class="hero-actions">
+                    <a href="#contact" class="hero-cta magnetic" data-strength="40">Solicitar auditoría</a>
+                    <a href="#portfolio" class="hero-link magnetic" data-strength="20">Ver demos</a>
+                </div>
+            </div>
+
+            <div class="system-rail" aria-label="Capacidades principales">
+                <div>
+                    <span>01</span>
+                    <strong>Presence</strong>
+                    <p>Imagen digital premium y mobile-first.</p>
+                </div>
+                <div>
+                    <span>02</span>
+                    <strong>Capture</strong>
+                    <p>Contacto, reservas y solicitudes claras.</p>
+                </div>
+                <div>
+                    <span>03</span>
+                    <strong>Automation</strong>
+                    <p>Flujos simples que ahorran trabajo manual.</p>
+                </div>
+                <div>
+                    <span>04</span>
+                    <strong>Applied AI</strong>
+                    <p>Asistentes útiles, discretos y entrenados.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section diagnosis" id="about">
+        <div class="container">
+            <div class="diagnosis-grid">
+                <div>
+                    <p class="section-label">[ DIAGNÓSTICO ]</p>
+                    <h3 class="split-lines headline-med">La mayoría de negocios no tienen un problema de
+                        calidad.<br>Tienen un problema de <em>traducción digital</em>.</h3>
+                </div>
+                <div class="diagnosis-copy">
+                    <p class="body-large split-lines">Una clínica excelente puede parecer genérica. Un restaurante con
+                        experiencia real puede perder reservas por una web lenta. Un estudio con buen criterio puede no
+                        transmitir autoridad porque su portfolio no está diseñado como sistema comercial.</p>
+                    <p class="body-large split-lines">Studio32 ordena esa capa digital: presencia, mensajes, captación,
+                        automatización y pequeñas piezas de IA donde mejoran la operación.</p>
+                </div>
+            </div>
+
+            <div class="signal-list">
+                <div>
+                    <span>Señal 01</span>
+                    <strong>Mobile débil</strong>
+                    <p>Cuando el primer contacto ocurre en móvil, cada segundo y cada decisión visual cuenta.</p>
+                </div>
+                <div>
+                    <span>Señal 02</span>
+                    <strong>Contacto disperso</strong>
+                    <p>WhatsApp, formularios, reservas y llamadas deben sentirse como un único flujo claro.</p>
+                </div>
+                <div>
+                    <span>Señal 03</span>
+                    <strong>Valor mal percibido</strong>
+                    <p>La calidad real del negocio necesita una interfaz que la haga evidente antes de la visita.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section capabilities" id="services">
+        <div class="container">
+            <div class="cap-grid">
+                <div class="cap-title">
+                    <p class="section-label">[ SERVICIOS ]</p>
+                    <h2 class="split-lines headline-med">De <em>presencia</em><br>a sistema.</h2>
+                    <p>Entramos por la auditoría y construimos solo lo que el negocio necesita para captar y operar con
+                        más claridad.</p>
+                </div>
+                <div class="cap-list">
+                    <article class="cap-item">
+                        <span class="cap-number">01</span>
+                        <h3 class="split-lines">Digital Presence Audit</h3>
+                        <p>Auditoría de web, mobile, claridad comercial, CTAs, SEO local, Google Business Profile,
+                            contacto, reservas, imagen visual y oportunidades de automatización.</p>
+                        <small>Puerta de entrada recomendada</small>
+                    </article>
+                    <article class="cap-item">
+                        <span class="cap-number">02</span>
+                        <h3 class="split-lines">Presence Pack</h3>
+                        <p>Landing o web corporativa premium para negocios locales: estructura comercial, galería,
+                            servicios, mapa, WhatsApp, formulario o reserva y configuración técnica inicial.</p>
+                        <small>Web premium mobile-first</small>
+                    </article>
+                    <article class="cap-item">
+                        <span class="cap-number">03</span>
+                        <h3 class="split-lines">Presence + AI Pack</h3>
+                        <p>Web premium con asistente inteligente para responder dudas, filtrar leads, orientar reservas
+                            o solicitudes y derivar el contacto hacia WhatsApp o formulario.</p>
+                        <small>IA aplicada al contacto real</small>
+                    </article>
+                    <article class="cap-item">
+                        <span class="cap-number">04</span>
+                        <h3 class="split-lines">Digital System Custom</h3>
+                        <p>Dashboards simples, CRM básico, paneles internos, reservas avanzadas, automatizaciones e
+                            integraciones con herramientas como Google Sheets, Make, Zapier o n8n.</p>
+                        <small>Sistemas operativos a medida</small>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section verticals">
+        <div class="container">
+            <div class="verticals-header">
+                <p class="section-label">[ VERTICALES ]</p>
+                <h2 class="split-lines headline-med">Cada sector,<br>su <em>propio sistema</em>.</h2>
+                <p>Las demos no son plantillas aisladas. Son direcciones visuales y comerciales para mostrar cómo puede
+                    sentirse una presencia digital bien resuelta por sector.</p>
+            </div>
+
+            <div class="vertical-grid">
+                <a href="../Landing1-L'Obscur/restaurant_landing.html" target="_blank" rel="noopener"
+                    class="vertical-card magnetic" data-strength="35">
+                    <div class="vertical-media"
+                        style="background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=1200');">
+                    </div>
+                    <div class="vertical-content">
+                        <span>01 · Restaurantes premium</span>
+                        <h3>Reservas, carta y percepción de alta calidad.</h3>
+                        <p>Sistemas digitales para restaurantes que necesitan presentar mejor su propuesta, ordenar las
+                            reservas y reducir fricción en el primer contacto.</p>
+                        <strong>Ver demo</strong>
+                    </div>
+                </a>
+
+                <a href="../Landing2-PrimeBurger/index.html" target="_blank" rel="noopener"
+                    class="vertical-card magnetic" data-strength="35">
+                    <div class="vertical-media"
+                        style="background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=1200');">
+                    </div>
+                    <div class="vertical-content">
+                        <span>02 · Food brands urbanas</span>
+                        <h3>Impacto visual y conversión móvil rápida.</h3>
+                        <p>Presencia digital para marcas gastronómicas que necesitan carta clara, identidad potente y
+                            una experiencia móvil directa.</p>
+                        <strong>Ver demo</strong>
+                    </div>
+                </a>
+
+                <a href="../Landing3-Clinic/index.html" target="_blank" rel="noopener" class="vertical-card magnetic"
+                    data-strength="35">
+                    <div class="vertical-media"
+                        style="background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1200');">
+                    </div>
+                    <div class="vertical-content">
+                        <span>03 · Clínicas dentales</span>
+                        <h3>Confianza, claridad y primeras consultas.</h3>
+                        <p>Presencia online y captación inteligente para clínicas modernas que necesitan explicar bien
+                            sus tratamientos y facilitar el primer contacto.</p>
+                        <strong>Ver demo</strong>
+                    </div>
+                </a>
+
+                <a href="../Landing4-Habitat/index.html" target="_blank" rel="noopener" class="vertical-card magnetic"
+                    data-strength="35">
+                    <div class="vertical-media"
+                        style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&q=80&w=1200');">
+                    </div>
+                    <div class="vertical-content">
+                        <span>04 · Arquitectura e interiorismo</span>
+                        <h3>Portfolio editorial y autoridad visual.</h3>
+                        <p>Webs editoriales y sistemas de captación para estudios de arquitectura e interiorismo que
+                            necesitan transmitir criterio, autoridad y proyectos desde el primer scroll.</p>
+                        <strong>Ver demo</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section process" id="process">
+        <div class="container">
+            <div class="process-header">
+                <p class="section-label">[ MÉTODO ]</p>
+                <h2 class="split-lines headline-med">Una secuencia clara,<br>sin <em>caja negra</em>.</h2>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <span>01</span>
+                    <h3>Auditamos</h3>
+                    <p>Detectamos fricción digital, oportunidades de conversión y automatizaciones con impacto real.</p>
+                </div>
+                <div class="process-step">
+                    <span>02</span>
+                    <h3>Diseñamos</h3>
+                    <p>Definimos estructura, mensajes, jerarquía visual y experiencia de contacto con criterio premium.
+                    </p>
+                </div>
+                <div class="process-step">
+                    <span>03</span>
+                    <h3>Construimos</h3>
+                    <p>Desarrollamos una web rápida, responsive y preparada para convertir visitas en conversaciones.
+                    </p>
+                </div>
+                <div class="process-step">
+                    <span>04</span>
+                    <h3>Automatizamos</h3>
+                    <p>Conectamos WhatsApp, formularios, asistentes, reservas o paneles internos cuando aporta valor.
+                    </p>
+                </div>
+                <div class="process-step">
+                    <span>05</span>
+                    <h3>Mantenemos</h3>
+                    <p>Medimos, damos soporte y evolucionamos el sistema digital con mejoras graduales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section footer-cta">
+        <div class="container">
+            <div class="cta-panel">
+                <p class="section-label centered">[ AUDITORÍA DE PRESENCIA DIGITAL ]</p>
+                <h2 class="huge-text split-lines">Empieza por la <em>auditoría</em></h2>
+                <p class="cta-sub">Antes de rediseñar, entendemos qué debe mejorar.</p>
+
+                <div class="cta-wrapper">
+                    <a href="https://wa.me/34623456789?text=Hola,%20quiero%20solicitar%20una%20auditor%C3%ADa%20de%20presencia%20digital%20para%20mi%20negocio."
+                        target="_blank" rel="noopener" class="btn-massive magnetic" data-strength="60">
+                        Solicitar auditoría ↗
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-grid">
+                <div>
+                    <p class="section-label">[ STUDIO32 ]</p>
+                    <h3>Diseño premium, sistemas funcionales e IA práctica para negocios físicos.</h3>
+                </div>
+                <div>
+                    <p>Revisamos tu presencia actual y detectamos qué conviene mejorar primero: web, experiencia móvil,
+                        captación, reservas, automatización o IA aplicada. Sin ruido. Sin promesas vacías. Una sesión de
+                        auditoría antes de cualquier propuesta de proyecto.</p>
+                    <div class="contact-links">
+                        <a href="mailto:hello@studio32.es" class="magnetic" data-strength="20">hello@studio32.es</a>
+                        <a href="https://wa.me/34623456789" target="_blank" rel="noopener" class="magnetic"
+                            data-strength="20">+34 623 456 789</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="brand">Studio32 · Digital Systems ©2026</div>
+                <div class="footer-services" aria-hidden="true">Webs
+                    Premium&nbsp;·&nbsp;IA&nbsp;·&nbsp;Automatización&nbsp;·&nbsp;Sistemas Digitales</div>
+                <div class="location">Valencia, España</div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

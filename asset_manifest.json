@@ -1,0 +1,98 @@
+[
+  {
+    "file": "Landing1-L'Obscur/assets/dish1.png",
+    "size_bytes": 964070,
+    "format": "JPEG",
+    "width": 1024,
+    "height": 1024,
+    "mode": "RGB"
+  },
+  {
+    "file": "Landing1-L'Obscur/assets/dish2.png",
+    "size_bytes": 774102,
+    "format": "JPEG",
+    "width": 1024,
+    "height": 1024,
+    "mode": "RGB"
+  },
+  {
+    "file": "Landing1-L'Obscur/assets/hero-luxury.png",
+    "size_bytes": 817050,
+    "format": "JPEG",
+    "width": 1024,
+    "height": 1024,
+    "mode": "RGB"
+  },
+  {
+    "file": "Landing1-L'Obscur/assets/hero.png",
+    "size_bytes": 817050,
+    "format": "JPEG",
+    "width": 1024,
+    "height": 1024,
+    "mode": "RGB"
+  },
+  {
+    "file": "Landing1-L'Obscur/assets/menu-cocktail.png",
+    "size_bytes": 774102,
+    "format": "JPEG",
+    "width": 1024,
+    "height": 1024,
+    "mode": "RGB"
+  },
+  {
+    "file": "Landing1-L'Obscur/assets/menu-wagyu.png",
+    "size_bytes": 964070,
+    "format": "JPEG",
+    "width": 1024,
+    "height": 1024,
+    "mode": "RGB"
+  },
+  {
+    "file": "Landing2-PrimeBurger/assets/bunker-interior.png",
+    "size_bytes": 768141,
+    "format": "JPEG",
+    "width": 1024,
+    "height": 1024,
+    "mode": "RGB"
+  },
+  {
+    "file": "Landing2-PrimeBurger/assets/hero-burger.png",
+    "size_bytes": 693292,
+    "format": "JPEG",
+    "width": 1024,
+    "height": 1024,
+    "mode": "RGB"
+  },
+  {
+    "file": "Landing2-PrimeBurger/assets/menu-heavy-metal.png",
+    "size_bytes": 723261,
+    "format": "JPEG",
+    "width": 1024,
+    "height": 1024,
+    "mode": "RGB"
+  },
+  {
+    "file": "Landing2-PrimeBurger/assets/menu-prototype.png",
+    "size_bytes": 773883,
+    "format": "JPEG",
+    "width": 1024,
+    "height": 1024,
+    "mode": "RGB"
+  },
+  {
+    "file": "Landing2-PrimeBurger/assets/menu-reactor.png",
+    "size_bytes": 735357,
+    "format": "JPEG",
+    "width": 1024,
+    "height": 1024,
+    "mode": "RGB"
+  },
+  {
+    "file": "Landing2-PrimeBurger/assets/texture-closeup.png",
+    "size_bytes": 798865,
+    "format": "JPEG",
+    "width": 1024,
+    "height": 1024,
+    "mode": "RGB"
+  }
+]

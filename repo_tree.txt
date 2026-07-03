@@ -1,0 +1,41 @@
+ejemplos landing/
+|-- Agencia-Portfolio/
+|   |-- index.html
+|   |-- script.js
+|   `-- styles.css
+|-- docs/
+|   |-- implementation-plan.md
+|   |-- project-brief.md
+|   `-- repo-map.md
+|-- Landing1-L'Obscur/
+|   |-- assets/
+|   |   |-- dish1.png
+|   |   |-- dish2.png
+|   |   |-- hero-luxury.png
+|   |   |-- hero.png
+|   |   |-- menu-cocktail.png
+|   |   `-- menu-wagyu.png
+|   |-- restaurant_landing.html
+|   |-- script.js
+|   `-- styles.css
+|-- Landing2-PrimeBurger/
+|   |-- assets/
+|   |   |-- bunker-interior.png
+|   |   |-- hero-burger.png
+|   |   |-- menu-heavy-metal.png
+|   |   |-- menu-prototype.png
+|   |   |-- menu-reactor.png
+|   |   `-- texture-closeup.png
+|   |-- index.html
+|   |-- script.js
+|   `-- styles.css
+|-- Landing3-Clinic/
+|   |-- index.html
+|   |-- script.js
+|   `-- styles.css
+|-- Landing4-Habitat/
+|   |-- index.html
+|   |-- script.js
+|   `-- styles.css
+|-- AGENTS.md
+`-- index.html

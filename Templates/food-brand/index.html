@@ -1,0 +1,422 @@
+<!--
+  TEMPLATE: Food Brand Urbana · Studio32 · Digital Systems
+  VERSION: 1.0
+
+  VARIABLES A PERSONALIZAR:
+  - :root en styles.css → colores y tipografía
+  - {{NOMBRE_NEGOCIO}}     → nombre del negocio (10 ocurrencias)
+  - {{NOMBRE_CORTO}}       → versión corta del nombre para el logo (p.ej. "PRIME")
+  - {{TAGLINE_L1}}         → primera línea hero en mayúsculas  (p.ej. "EL CULTO")
+  - {{TAGLINE_L2}}         → segunda línea hero (outline)       (p.ej. "A LA CARNE")
+  - {{MARQUEE_TEXTO}}      → texto del ticker repetido          (p.ej. "ABIERTO CADA DÍA // SOLO PRODUCTO FRESCO // ")
+  - {{CONCEPTO_EYEBROW}}   → etiqueta sección concepto          (p.ej. "// EL MÉTODO")
+  - {{CONCEPTO_TITULO}}    → título sección concepto
+  - {{CONCEPTO_DESC}}      → descripción del concepto / propuesta de valor
+  - {{SPEC_1_LABEL}}       → etiqueta spec técnica 1            (p.ej. "ORIGEN:")
+  - {{SPEC_1_VALOR}}       → valor spec 1
+  - {{SPEC_2_LABEL}}       → etiqueta spec 2
+  - {{SPEC_2_VALOR}}       → valor spec 2
+  - {{SPEC_3_LABEL}}       → etiqueta spec 3
+  - {{SPEC_3_VALOR}}       → valor spec 3
+  - {{MENU_EYEBROW}}       → etiqueta sección menú
+  - {{MENU_TITULO}}        → título sección menú
+  - {{PRODUCTO_X_NOMBRE}}  → nombre producto (×3)
+  - {{PRODUCTO_X_DESC}}    → descripción producto (×3)
+  - {{PRODUCTO_X_PRECIO}}  → precio con símbolo (×3)            (p.ej. 14.50€)
+  - {{REVIEW_X_TEXTO}}     → texto reseña (×4)
+  - {{REVIEW_X_AUTOR}}     → nombre del autor reseña (×4)
+  - {{REVIEW_X_FECHA}}     → fecha de la reseña (×4)
+  - {{UBICACION_EYEBROW}}  → etiqueta sección ubicación
+  - {{UBICACION_TITULO}}   → título sección ubicación (dos líneas)
+  - {{UBICACION_SUBTITULO}}→ subtítulo del bloque info
+  - {{DIRECCION}}          → dirección completa
+  - {{HORARIOS}}           → horarios de apertura
+  - {{MAPS_URL}}           → URL de Google Maps del negocio
+  - {{AÑO}}                → año de copyright
+  - assets/placeholder-*.jpg → imágenes reales del cliente
+
+  SECCIONES OPCIONALES (buscar comentario OPCIONAL en el HTML):
+  - Switch de idioma EN/ES → "OPCIONAL: bilingüe"
+  - Cuarto producto de menú → "OPCIONAL: cuarto producto"
+  - Delivery / pedido online → "OPCIONAL: delivery"
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{NOMBRE_NEGOCIO}} · {{DIRECCION}}</title>
+    <meta name="description" content="{{CONCEPTO_DESC}}">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Favicon → sustituir por el del cliente -->
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <!-- Tipografía: Anton (display/headings) + Space Mono (body/código) -->
+    <!-- PERSONALIZAR: cambiar fuentes si la identidad del cliente lo requiere -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- Overlay de ruido (textura de film) -->
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <!-- Cursor personalizado (desktop) -->
+    <div class="cursor" aria-hidden="true"></div>
+
+    <!-- ──────────────────────────────────────
+         NAV
+    ────────────────────────────────────── -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">{{NOMBRE_CORTO}}<span class="dot">.</span></a>
+
+            <!-- Botón hamburger accesible -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir Menú" aria-expanded="false" aria-controls="mobile-menu-overlay">
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="#concepto">Concepto</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#location">Ubicación</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <!-- OPCIONAL: delivery — sustituir href por la URL de la plataforma de pedido
+                <a href="#" class="btn-order hover-target" target="_blank" rel="noopener">PEDIR AHORA</a>
+                -->
+                <!-- OPCIONAL: bilingüe
+                <button id="lang-toggle" class="lang-toggle hover-target">EN</button>
+                -->
+            </div>
+
+            <!-- Menú overlay mobile -->
+            <div class="mobile-menu-overlay" id="mobile-menu-overlay" aria-hidden="true">
+                <ul class="mobile-nav-links">
+                    <li><a href="#concepto" class="mobile-link">Concepto</a></li>
+                    <li><a href="#menu"     class="mobile-link">Menú</a></li>
+                    <li><a href="#location" class="mobile-link">Ubicación</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- ──────────────────────────────────────
+             HERO + MARQUEE
+        ────────────────────────────────────── -->
+        <section id="hero" class="hero">
+            <!-- IMG: foto hero del local o producto estrella, formato 16:9,
+                 mínimo 1920×1080px, imagen impactante con carácter visual fuerte -->
+            <div class="hero-bg-image" aria-hidden="true"></div>
+
+            <div class="container hero-container">
+                <div class="hero-text">
+                    <h1 class="reveal-text">{{TAGLINE_L1}}</h1>
+                    <h1 class="reveal-text outline">{{TAGLINE_L2}}</h1>
+                </div>
+
+                <!-- Marquee ticker — reemplazar texto con propuesta de valor corta -->
+                <div class="marquee-wrapper" aria-hidden="true">
+                    <div class="marquee">
+                        <span>{{MARQUEE_TEXTO}}</span>
+                        <span>{{MARQUEE_TEXTO}}</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ──────────────────────────────────────
+             CONCEPTO / LAB
+        ────────────────────────────────────── -->
+        <section id="concepto" class="section lab">
+            <div class="container">
+                <div class="section-header">
+                    <span class="label">{{CONCEPTO_EYEBROW}}</span>
+                    <h2>{{CONCEPTO_TITULO}}</h2>
+                </div>
+
+                <div class="grid-2">
+                    <div class="text-block reveal">
+                        <p>{{CONCEPTO_DESC}}</p>
+                        <ul class="specs-list">
+                            <li><span>{{SPEC_1_LABEL}}</span> {{SPEC_1_VALOR}}</li>
+                            <li><span>{{SPEC_2_LABEL}}</span> {{SPEC_2_VALOR}}</li>
+                            <li><span>{{SPEC_3_LABEL}}</span> {{SPEC_3_VALOR}}</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-block parallax-wrapper placeholder-block reveal delay-1">
+                        <!-- IMG: foto de detalle del producto o del proceso de elaboración,
+                             formato cuadrado o 4:3, alta calidad, sin texto superpuesto -->
+                        <div class="placeholder-content concepto-image" aria-hidden="true"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ──────────────────────────────────────
+             MENÚ — PRODUCT CARDS
+        ────────────────────────────────────── -->
+        <section id="menu" class="section menu">
+            <div class="container">
+                <div class="section-header">
+                    <span class="label">{{MENU_EYEBROW}}</span>
+                    <h2>{{MENU_TITULO}}</h2>
+                </div>
+
+                <div class="menu-grid">
+
+                    <!-- Producto 1 -->
+                    <div class="menu-item reveal">
+                        <div class="menu-image">
+                            <!-- IMG: foto producto 1, formato 4:3, fondo neutro o del local,
+                                 iluminación limpia, mínimo 800×600px -->
+                            <img src="assets/placeholder-producto-1.jpg" alt="{{PRODUCTO_1_NOMBRE}}" class="product-img">
+                        </div>
+                        <div class="menu-content">
+                            <div class="item-header">
+                                <span class="item-number">01</span>
+                                <h3>{{PRODUCTO_1_NOMBRE}}</h3>
+                            </div>
+                            <div class="item-specs">
+                                <span>{{PRODUCTO_1_DESC}}</span>
+                            </div>
+                            <div class="item-footer">
+                                <div class="price">{{PRODUCTO_1_PRECIO}}</div>
+                                <!-- OPCIONAL: delivery — descomentar si hay botón de añadir
+                                <button class="btn-add hover-target" aria-label="Añadir {{PRODUCTO_1_NOMBRE}}">+</button>
+                                -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 2 -->
+                    <div class="menu-item reveal delay-1">
+                        <div class="menu-image">
+                            <!-- IMG: foto producto 2, mismas especificaciones -->
+                            <img src="assets/placeholder-producto-2.jpg" alt="{{PRODUCTO_2_NOMBRE}}" class="product-img">
+                        </div>
+                        <div class="menu-content">
+                            <div class="item-header">
+                                <span class="item-number">02</span>
+                                <h3>{{PRODUCTO_2_NOMBRE}}</h3>
+                            </div>
+                            <div class="item-specs">
+                                <span>{{PRODUCTO_2_DESC}}</span>
+                            </div>
+                            <div class="item-footer">
+                                <div class="price">{{PRODUCTO_2_PRECIO}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Producto 3 -->
+                    <div class="menu-item reveal delay-2">
+                        <div class="menu-image">
+                            <!-- IMG: foto producto 3, mismas especificaciones -->
+                            <img src="assets/placeholder-producto-3.jpg" alt="{{PRODUCTO_3_NOMBRE}}" class="product-img">
+                        </div>
+                        <div class="menu-content">
+                            <div class="item-header">
+                                <span class="item-number">03</span>
+                                <h3>{{PRODUCTO_3_NOMBRE}}</h3>
+                            </div>
+                            <div class="item-specs">
+                                <span>{{PRODUCTO_3_DESC}}</span>
+                            </div>
+                            <div class="item-footer">
+                                <div class="price">{{PRODUCTO_3_PRECIO}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OPCIONAL: cuarto producto — descomentar y rellenar si aplica
+                    <div class="menu-item reveal delay-3">
+                        <div class="menu-image">
+                            <img src="assets/placeholder-producto-4.jpg" alt="{{PRODUCTO_4_NOMBRE}}" class="product-img">
+                        </div>
+                        <div class="menu-content">
+                            <div class="item-header">
+                                <span class="item-number">04</span>
+                                <h3>{{PRODUCTO_4_NOMBRE}}</h3>
+                            </div>
+                            <div class="item-specs">
+                                <span>{{PRODUCTO_4_DESC}}</span>
+                            </div>
+                            <div class="item-footer">
+                                <div class="price">{{PRODUCTO_4_PRECIO}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ──────────────────────────────────────
+             REVIEWS — SWIPER
+        ────────────────────────────────────── -->
+        <section id="reviews" class="section reviews">
+            <div class="container">
+                <div class="section-header">
+                    <span class="label">// OPINIONES</span>
+                    <h2>LO QUE DICEN</h2>
+                </div>
+
+                <div class="swiper reviews-swiper">
+                    <div class="swiper-wrapper">
+
+                        <!-- Review 1 -->
+                        <div class="swiper-slide">
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="date">{{REVIEW_1_FECHA}}</span>
+                                </div>
+                                <p class="review-text">{{REVIEW_1_TEXTO}}</p>
+                                <div class="reviewer">
+                                    <span class="name">{{REVIEW_1_AUTOR}}</span>
+                                    <span class="platform">GOOGLE REVIEWS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 2 -->
+                        <div class="swiper-slide">
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="date">{{REVIEW_2_FECHA}}</span>
+                                </div>
+                                <p class="review-text">{{REVIEW_2_TEXTO}}</p>
+                                <div class="reviewer">
+                                    <span class="name">{{REVIEW_2_AUTOR}}</span>
+                                    <span class="platform">GOOGLE REVIEWS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 3 -->
+                        <div class="swiper-slide">
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="date">{{REVIEW_3_FECHA}}</span>
+                                </div>
+                                <p class="review-text">{{REVIEW_3_TEXTO}}</p>
+                                <div class="reviewer">
+                                    <span class="name">{{REVIEW_3_AUTOR}}</span>
+                                    <span class="platform">GOOGLE REVIEWS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 4 -->
+                        <div class="swiper-slide">
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="date">{{REVIEW_4_FECHA}}</span>
+                                </div>
+                                <p class="review-text">{{REVIEW_4_TEXTO}}</p>
+                                <div class="reviewer">
+                                    <span class="name">{{REVIEW_4_AUTOR}}</span>
+                                    <span class="platform">GOOGLE REVIEWS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ──────────────────────────────────────
+             UBICACIÓN
+        ────────────────────────────────────── -->
+        <section id="location" class="section location">
+            <div class="container">
+                <div class="section-header">
+                    <span class="label">{{UBICACION_EYEBROW}}</span>
+                    <h2>{{UBICACION_TITULO}}</h2>
+                </div>
+
+                <div class="bunker-container reveal">
+                    <!-- IMG: foto exterior o interior del local, formato 3:2 o 16:9,
+                         ambiente real del espacio, mínimo 1200×800px -->
+                    <div class="bunker-image" aria-label="Exterior del local"></div>
+
+                    <div class="bunker-info">
+                        <h3>{{UBICACION_SUBTITULO}}</h3>
+                        <div class="bunker-details">
+                            <p>
+                                <span>DIRECCIÓN:</span>
+                                {{DIRECCION}}
+                            </p>
+                            <p>
+                                <span>HORARIO:</span>
+                                {{HORARIOS}}
+                            </p>
+                            <!-- URL real: sustituir {{MAPS_URL}} por la URL de Google Maps -->
+                            <button id="btn-directions" class="btn-order hover-target">
+                                CÓMO LLEGAR
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ──────────────────────────────────────
+         FOOTER
+    ────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h2>{{NOMBRE_CORTO}}</h2>
+            </div>
+
+            <div class="social-links">
+                <!-- URL real: perfil Instagram del cliente -->
+                <a href="{{INSTAGRAM_URL}}" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <!-- URL real: perfil TikTok / Facebook del cliente -->
+                <a href="{{FACEBOOK_URL}}" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="footer-info">
+                <p>{{DIRECCION}}</p>
+                <p>&copy; {{AÑO}} {{NOMBRE_NEGOCIO}}. Todos los derechos reservados.</p>
+                <p class="footer-attribution">Studio32 · Digital Systems</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

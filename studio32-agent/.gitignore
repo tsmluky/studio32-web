@@ -1,0 +1,9 @@
+node_modules/
+.env
+credentials.json
+*.log
+.DS_Store
+
+# Datos de runtime (conversaciones, reservas, leads, logs por tenant)
+/data/*
+!/data/.gitkeep

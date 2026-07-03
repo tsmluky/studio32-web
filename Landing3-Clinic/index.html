@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Dental | Odontología Avanzada en Valencia</title>
+    <meta name="description"
+        content="Especialistas en implantes, ortodoncia invisible y estética dental en el centro de Valencia. Primera visita gratuita.">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="contact-info">
+                <span class="topbar-item">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                    C/ Colón 45, Valencia
+                </span>
+                <span class="divider">|</span>
+                <span>L-V: 09:00 - 20:00</span>
+            </div>
+            <div class="social-info">
+                <a href="tel:+34900000000" class="hover-scale topbar-item">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.14 11.9 19.79 19.79 0 0 1 1.07 3.27 2 2 0 0 1 3.05 1.1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    900 000 000
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">Aura<span class="accent-color">Dental.</span></a>
+
+            <button class="mobile-menu-btn" aria-label="Abrir Menú">
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="#tratamientos" class="hover-link">Tratamientos</a></li>
+                <li><a href="#equipo" class="hover-link">Equipo</a></li>
+                <li><a href="#casos" class="hover-link">Casos de Éxito</a></li>
+                <li><a href="#contacto" class="btn-primary hover-scale">Pedir Primera Cita Gratuita</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="inicio">
+            <div class="hero-bg"
+                style="background: linear-gradient(to right, rgba(255,255,255,1) 40%, rgba(255,255,255,0.7) 100%), url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=2000') right/cover no-repeat; width: 100%; border-radius: 0;">
+            </div>
+            <div class="container hero-container">
+                <div class="hero-text reveal">
+                    <span class="tag">ODONTOLOGÍA AVANZADA</span>
+                    <h1>Recupera la <span class="serif-italic accent-color">confianza</span> en tu sonrisa.</h1>
+                    <p>Tecnología 3D, especialistas en implantes y estética dental sin dolor en el centro de Valencia.
+                        Tu primera valoración y diagnóstico son completamente gratuitos.</p>
+                    <div class="hero-actions">
+                        <a href="#contacto" class="btn-primary btn-large hover-scale">Reservar Cita Gratuita</a>
+                        <div class="trust-badges">
+                            <!-- [DEMO — reemplazar con datos reales del cliente] -->
+                            <div class="google-rating">
+                                <span>★★★★★</span>
+                                <small>4.9/5 en Google Reviews</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Treatments Section -->
+        <section id="tratamientos" class="section bg-light">
+            <div class="container">
+                <div class="section-header reveal text-center">
+                    <h2>Especialidades Clínicas</h2>
+                    <p>Odontología integral con la tecnología más avanzada y un trato cercano.</p>
+                </div>
+
+                <div class="grid-3 treatments-grid">
+                    <div class="treatment-card reveal delay-1">
+                        <div class="card-icon">01</div>
+                        <h3>Implantología Inmediata</h3>
+                        <p>Recupera la funcionalidad y estética de tus dientes en una sola sesión con implantes de carga
+                            inmediata y sedación consciente.</p>
+                    </div>
+                    <div class="treatment-card reveal delay-2">
+                        <div class="card-icon">02</div>
+                        <h3>Estética Dental</h3>
+                        <p>Carillas de porcelana ultrafinas, blanqueamiento LED y diseño de sonrisa digital en 3D para
+                            unos resultados predecibles y naturales.</p>
+                    </div>
+                    <div class="treatment-card reveal delay-3">
+                        <div class="card-icon">03</div>
+                        <h3>Ortodoncia Invisible</h3>
+                        <p>Alinea tus dientes de forma discreta y cómoda con los mejores alineadores transparentes del
+                            mercado. Escáner intraoral sin moldes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Us / Equipment -->
+        <section id="equipo" class="section split-section">
+            <div class="container">
+                <div class="split-content">
+                    <div class="image-block reveal parallax-wrapper">
+                        <div class="img-placeholder"
+                            style="background: url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800') center/cover;">
+                        </div>
+                    </div>
+                    <div class="text-block reveal delay-1">
+                        <h2>Experiencia médica en la que puedes <span class="serif-italic accent-color">confiar</span>.
+                        </h2>
+                        <p>No somos una franquicia. Somos un equipo médico colegiado obsesionado con la atención al
+                            paciente y los resultados duraderos.</p>
+                        <ul class="check-list">
+                            <li><span class="check-mark" aria-hidden="true"></span>Escáner Intraoral 3D (Cero moldes de pasta)</li>
+                            <li><span class="check-mark" aria-hidden="true"></span>Financiación a medida hasta en 36 meses sin intereses</li>
+                            <li><span class="check-mark" aria-hidden="true"></span>Sedación consciente para evitar cualquier dolor o ansiedad</li>
+                            <li><span class="check-mark" aria-hidden="true"></span>Materiales de primera calidad y biocompatibles</li>
+                        </ul>
+                        <a href="#contacto" class="btn-outline hover-scale mt-3">Conocer a la Directora Médica</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Cases (Before / After Slider) -->
+        <section id="casos" class="section bg-dark text-white">
+            <div class="container">
+                <div class="section-header reveal text-center">
+                    <h2 class="text-white">Casos Reales. <br><span class="serif-italic">Vidas Transformadas.</span></h2>
+                    <p>Desliza para ver la calidad de nuestros tratamientos en estética y ortodoncia.</p>
+                </div>
+
+                <div class="swiper cases-swiper reveal delay-1">
+                    <div class="swiper-wrapper">
+                        <!-- Case 1 -->
+                        <div class="swiper-slide">
+                            <div class="case-card">
+                                <div class="case-image"
+                                    style="height: 300px; background: url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=800') center/cover;">
+                                </div>
+                                <div class="case-info">
+                                    <h3>Diseño de Sonrisa + Carillas</h3>
+                                    <p>"Llevaba años sin querer sonreír en las fotos. En 2 sesiones cambiaron por
+                                        completo mi confianza." — María C.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Case 2 -->
+                        <div class="swiper-slide">
+                            <div class="case-card">
+                                <div class="case-image"
+                                    style="height: 300px; background: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=800') center/cover;">
+                                </div>
+                                <div class="case-info">
+                                    <h3>Ortodoncia Invisible Integrada</h3>
+                                    <p>Tratamiento de 12 meses para corrección de mordida y alineamiento complejo.
+                                        Resultados 100% naturales.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Case 3 -->
+                        <div class="swiper-slide">
+                            <div class="case-card">
+                                <div class="case-image"
+                                    style="height: 300px; background: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800') center/cover;">
+                                </div>
+                                <div class="case-info">
+                                    <h3>Implantología Avanzada</h3>
+                                    <p>"Poder volver a comer sin molestias y sonreír abiertamente no tiene precio. El
+                                        equipo es increíble." — Elena S.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Contact -->
+        <section id="contacto" class="section cta-section">
+            <div class="container">
+                <div class="cta-card reveal">
+                    <div class="cta-text">
+                        <h2>Da el primer paso hacia tu <span class="serif-italic accent-color">nueva sonrisa</span>.
+                        </h2>
+                        <p>Pide tu cita hoy. Incluye valoración con el especialista, radiografía panorámica y plan de
+                            tratamiento personalizado sin ningún compromiso.</p>
+
+                        <div class="contact-methods">
+                            <a href="https://wa.me/34600000000?text=Hola,%20quisiera%20pedir%20la%20primera%20cita%20gratuita."
+                                target="_blank" class="btn-whatsapp hover-scale">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                    </path>
+                                </svg>
+                                Escribir por WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cta-form">
+                        <form class="appointment-form">
+                            <h3>Solicitar Llamada</h3>
+                            <input type="text" placeholder="Nombre completo" required>
+                            <input type="tel" placeholder="Teléfono" required>
+                            <select required>
+                                <option value="" disabled selected>¿En qué podemos ayudarte?</option>
+                                <option value="implantes">Implantes Dentales</option>
+                                <option value="estetica">Estética (Carillas/Blanqueamiento)</option>
+                                <option value="ortodoncia">Ortodoncia Invisible</option>
+                                <option value="general">Revisión General / Dolor</option>
+                            </select>
+                            <button type="submit" class="btn-primary w-100 hover-scale">Enviar Solicitud</button>
+                            <small>Tus datos están seguros. Te llamaremos en menos de 24h.</small>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h3>Aura<span class="accent-color">Dental.</span></h3>
+                <p>Clínica Odontológica Especializada</p>
+                <p class="mt-2">Calle Colón 45, 46004, Valencia</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Aviso Legal</a>
+                <a href="#">Política de Privacidad</a>
+                <a href="#">Política de Cookies</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura Dental. <a href="#" target="_blank">Studio32 · Digital Systems</a></p>
+        </div>
+    </footer>
+</body>
+
+</html>

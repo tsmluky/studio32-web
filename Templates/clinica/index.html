@@ -1,0 +1,392 @@
+<!--
+  TEMPLATE: Clínica Premium · Studio32 · Digital Systems
+  VERSION: 1.0
+
+  VARIABLES A PERSONALIZAR:
+  - :root en styles.css → colores, tipografía, imágenes
+  - {{NOMBRE_NEGOCIO}}       → nombre completo del negocio (meta, footer)
+  - {{LOGO_TEXTO}}           → parte inicial del logo           (p.ej. "Aura")
+  - {{LOGO_ACENTO}}          → parte con acento de color        (p.ej. "Dental.")
+  - {{ESPECIALIDAD_EYEBROW}} → tag/eyebrow en el hero           (p.ej. "ODONTOLOGÍA AVANZADA")
+  - {{HERO_TITULO}}          → h1 sin la palabra de acento      (p.ej. "Recupera la confianza en tu")
+  - {{HERO_ACENTO}}          → palabra en cursiva de color      (p.ej. "sonrisa")
+  - {{HERO_DESCRIPCION}}     → párrafo de apoyo del hero
+  - {{HERO_CTA}}             → texto del botón principal hero   (p.ej. "Reservar Cita Gratuita")
+  - {{TRATAMIENTOS_TITULO}}  → h2 sección de tratamientos
+  - {{TRATAMIENTOS_SUBTITULO}} → párrafo sección tratamientos
+  - {{TRAT_1_TITULO}}        → nombre tratamiento 1
+  - {{TRAT_1_DESC}}          → descripción tratamiento 1
+  - {{TRAT_2_TITULO}}        → nombre tratamiento 2
+  - {{TRAT_2_DESC}}          → descripción tratamiento 2
+  - {{TRAT_3_TITULO}}        → nombre tratamiento 3
+  - {{TRAT_3_DESC}}          → descripción tratamiento 3
+  - {{EQUIPO_TITULO}}        → h2 sección equipo (sin la palabra de acento)
+  - {{EQUIPO_ACENTO}}        → palabra en cursiva de color en h2 equipo
+  - {{EQUIPO_DESC}}          → párrafo sección equipo
+  - {{EQUIPO_CHECK_1}}       → ítem checklist 1
+  - {{EQUIPO_CHECK_2}}       → ítem checklist 2
+  - {{EQUIPO_CHECK_3}}       → ítem checklist 3
+  - {{EQUIPO_CHECK_4}}       → ítem checklist 4
+  - {{EQUIPO_CTA}}           → texto del btn-outline equipo     (p.ej. "Conocer al equipo médico")
+  - {{CASOS_TITULO}}         → h2 sección casos (parte normal)
+  - {{CASOS_TITULO_ACENTO}}  → parte en cursiva del h2 casos
+  - {{CASO_1_TITULO}}        → título caso 1
+  - {{CASO_1_TEXTO}}         → testimonio / descripción caso 1
+  - {{CASO_2_TITULO}}        → título caso 2
+  - {{CASO_2_TEXTO}}         → descripción caso 2
+  - {{CASO_3_TITULO}}        → título caso 3
+  - {{CASO_3_TEXTO}}         → testimonio / descripción caso 3
+  - {{CTA_TITULO}}           → h2 sección contacto (parte normal)
+  - {{CTA_ACENTO}}           → parte en cursiva del h2 contacto
+  - {{CTA_DESC}}             → párrafo sección contacto
+  - {{WHATSAPP_NUMERO}}      → número wa.me sin +  (p.ej. 34600000000)
+  - {{WHATSAPP_MENSAJE}}     → mensaje prefill URL-encoded
+  - {{TELEFONO}}             → número con prefijo para href tel: (p.ej. +34900000000)
+  - {{TELEFONO_DISPLAY}}     → número formateado para mostrar   (p.ej. 900 000 000)
+  - {{DIRECCION}}            → dirección completa del negocio
+  - {{HORARIOS}}             → horario de atención
+  - {{FOOTER_ESPECIALIDAD}}  → subtítulo footer                 (p.ej. "Clínica Odontológica Especializada")
+  - {{AÑO}}                  → año de copyright
+  - assets/placeholder-hero.jpg     → foto hero (formato: landscape 16:9, mín. 1920×1080)
+  - assets/placeholder-equipo.jpg   → foto equipo/clínica (formato: portrait 4:5, mín. 800×1000)
+  - assets/placeholder-caso-1.jpg   → caso antes/después 1 (formato: 4:3, mín. 800×600)
+  - assets/placeholder-caso-2.jpg   → caso antes/después 2
+  - assets/placeholder-caso-3.jpg   → caso antes/después 3
+
+  SECCIONES OPCIONALES (buscar comentario OPCIONAL en el HTML):
+  - Cuarto tratamiento         → "OPCIONAL: cuarto tratamiento"
+  - Cuarto caso Swiper         → "OPCIONAL: cuarto caso"
+  - Aviso legal / Cookies CTA  → "OPCIONAL: legal"
+
+  ATRIBUCIÓN: Mantener el texto "Studio32 · Digital Systems" en el footer.
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{NOMBRE_NEGOCIO}} | {{ESPECIALIDAD_EYEBROW}}</title>
+    <meta name="description" content="{{HERO_DESCRIPCION}}">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Favicon → sustituir por el del cliente -->
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <!-- Tipografía: Playfair Display (headings) + Outfit (cuerpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- ──────────────────────────────────────
+         TOP BAR
+    ────────────────────────────────────── -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="contact-info">
+                <span class="topbar-item">
+                    <!-- Icono pin -->
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                        <circle cx="12" cy="9" r="2.5"/>
+                    </svg>
+                    {{DIRECCION}}
+                </span>
+                <span class="divider">|</span>
+                <span>{{HORARIOS}}</span>
+            </div>
+            <div class="social-info">
+                <!-- URL real: tel: del cliente -->
+                <a href="tel:{{TELEFONO}}" class="hover-scale topbar-item">
+                    <!-- Icono teléfono -->
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.14 11.9 19.79 19.79 0 0 1 1.07 3.27 2 2 0 0 1 3.05 1.1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    {{TELEFONO_DISPLAY}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         NAV
+    ────────────────────────────────────── -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">{{LOGO_TEXTO}}<span class="accent-color">{{LOGO_ACENTO}}</span></a>
+
+            <!-- Botón hamburger accesible (mobile) -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú" aria-expanded="false"
+                aria-controls="nav-links">
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#tratamientos" class="hover-link">Tratamientos</a></li>
+                <li><a href="#equipo" class="hover-link">Equipo</a></li>
+                <li><a href="#casos" class="hover-link">Casos de Éxito</a></li>
+                <li><a href="#contacto" class="btn-primary hover-scale">{{HERO_CTA}}</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- ──────────────────────────────────────
+             HERO
+        ────────────────────────────────────── -->
+        <section class="hero" id="inicio">
+            <!-- IMG: foto del equipo o clínica, semivelada a la derecha.
+                 Definir en styles.css → :root → --img-hero -->
+            <div class="hero-bg"></div>
+            <div class="container hero-container">
+                <div class="hero-text reveal">
+                    <span class="tag">{{ESPECIALIDAD_EYEBROW}}</span>
+                    <h1>{{HERO_TITULO}} <span class="serif-italic accent-color">{{HERO_ACENTO}}</span>.</h1>
+                    <p>{{HERO_DESCRIPCION}}</p>
+                    <div class="hero-actions">
+                        <a href="#contacto" class="btn-primary btn-large hover-scale">{{HERO_CTA}}</a>
+                        <!-- OPCIONAL: trust badge — descomentar y ajustar con datos reales del cliente -->
+                        <!--
+                        <div class="trust-badges">
+                            <div class="google-rating">
+                                <span>★★★★★</span>
+                                <small>{{GOOGLE_SCORE}}/5 en Google Reviews</small>
+                            </div>
+                        </div>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ──────────────────────────────────────
+             TRATAMIENTOS
+        ────────────────────────────────────── -->
+        <section id="tratamientos" class="section bg-light">
+            <div class="container">
+                <div class="section-header reveal text-center">
+                    <h2>{{TRATAMIENTOS_TITULO}}</h2>
+                    <p>{{TRATAMIENTOS_SUBTITULO}}</p>
+                </div>
+
+                <div class="grid-3 treatments-grid">
+                    <div class="treatment-card reveal delay-1">
+                        <div class="card-icon">01</div>
+                        <h3>{{TRAT_1_TITULO}}</h3>
+                        <p>{{TRAT_1_DESC}}</p>
+                    </div>
+                    <div class="treatment-card reveal delay-2">
+                        <div class="card-icon">02</div>
+                        <h3>{{TRAT_2_TITULO}}</h3>
+                        <p>{{TRAT_2_DESC}}</p>
+                    </div>
+                    <div class="treatment-card reveal delay-3">
+                        <div class="card-icon">03</div>
+                        <h3>{{TRAT_3_TITULO}}</h3>
+                        <p>{{TRAT_3_DESC}}</p>
+                    </div>
+
+                    <!-- OPCIONAL: cuarto tratamiento — descomentar si aplica
+                    <div class="treatment-card reveal delay-3">
+                        <div class="card-icon">04</div>
+                        <h3>{{TRAT_4_TITULO}}</h3>
+                        <p>{{TRAT_4_DESC}}</p>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ──────────────────────────────────────
+             EQUIPO / POR QUÉ NOSOTROS
+        ────────────────────────────────────── -->
+        <section id="equipo" class="section split-section">
+            <div class="container">
+                <div class="split-content">
+                    <!-- IMG: foto del equipo médico o sala clínica.
+                         Definir en styles.css → :root → --img-equipo -->
+                    <div class="image-block reveal parallax-wrapper">
+                        <div class="img-placeholder"></div>
+                    </div>
+                    <div class="text-block reveal delay-1">
+                        <h2>{{EQUIPO_TITULO}} <span class="serif-italic accent-color">{{EQUIPO_ACENTO}}</span>.</h2>
+                        <p>{{EQUIPO_DESC}}</p>
+                        <ul class="check-list">
+                            <li><span class="check-mark" aria-hidden="true"></span>{{EQUIPO_CHECK_1}}</li>
+                            <li><span class="check-mark" aria-hidden="true"></span>{{EQUIPO_CHECK_2}}</li>
+                            <li><span class="check-mark" aria-hidden="true"></span>{{EQUIPO_CHECK_3}}</li>
+                            <li><span class="check-mark" aria-hidden="true"></span>{{EQUIPO_CHECK_4}}</li>
+                        </ul>
+                        <a href="#contacto" class="btn-outline hover-scale mt-3">{{EQUIPO_CTA}}</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ──────────────────────────────────────
+             CASOS DE ÉXITO
+        ────────────────────────────────────── -->
+        <section id="casos" class="section bg-dark text-white">
+            <div class="container">
+                <div class="section-header reveal text-center">
+                    <h2 class="text-white">{{CASOS_TITULO}} <br><span class="serif-italic">{{CASOS_TITULO_ACENTO}}</span></h2>
+                    <p>Desliza para ver la calidad de nuestros resultados.</p>
+                </div>
+
+                <div class="swiper cases-swiper reveal delay-1">
+                    <div class="swiper-wrapper">
+
+                        <!-- Caso 1 -->
+                        <!-- IMG: foto antes/después, resultado o paciente.
+                             Definir en styles.css → :root → --img-caso-1 -->
+                        <div class="swiper-slide">
+                            <div class="case-card">
+                                <div class="case-image case-image-1"></div>
+                                <div class="case-info">
+                                    <h3>{{CASO_1_TITULO}}</h3>
+                                    <p>{{CASO_1_TEXTO}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Caso 2 -->
+                        <!-- IMG: foto → --img-caso-2 en styles.css -->
+                        <div class="swiper-slide">
+                            <div class="case-card">
+                                <div class="case-image case-image-2"></div>
+                                <div class="case-info">
+                                    <h3>{{CASO_2_TITULO}}</h3>
+                                    <p>{{CASO_2_TEXTO}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Caso 3 -->
+                        <!-- IMG: foto → --img-caso-3 en styles.css -->
+                        <div class="swiper-slide">
+                            <div class="case-card">
+                                <div class="case-image case-image-3"></div>
+                                <div class="case-info">
+                                    <h3>{{CASO_3_TITULO}}</h3>
+                                    <p>{{CASO_3_TEXTO}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- OPCIONAL: cuarto caso — descomentar si aplica
+                        <div class="swiper-slide">
+                            <div class="case-card">
+                                <div class="case-image case-image-4"></div>
+                                <div class="case-info">
+                                    <h3>{{CASO_4_TITULO}}</h3>
+                                    <p>{{CASO_4_TEXTO}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        -->
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ──────────────────────────────────────
+             CTA / CONTACTO
+        ────────────────────────────────────── -->
+        <section id="contacto" class="section cta-section">
+            <div class="container">
+                <div class="cta-card reveal">
+                    <div class="cta-text">
+                        <h2>{{CTA_TITULO}} <span class="serif-italic accent-color">{{CTA_ACENTO}}</span>.</h2>
+                        <p>{{CTA_DESC}}</p>
+
+                        <div class="contact-methods">
+                            <!-- URL real: wa.me del cliente con número y mensaje prefill -->
+                            <a href="https://wa.me/{{WHATSAPP_NUMERO}}?text={{WHATSAPP_MENSAJE}}"
+                                target="_blank" rel="noopener" class="btn-whatsapp hover-scale">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                                Escribir por WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="cta-form">
+                        <form class="appointment-form" id="appointment-form" novalidate>
+                            <h3>Solicitar Llamada</h3>
+                            <input
+                                type="text"
+                                placeholder="Nombre completo"
+                                aria-label="Nombre completo"
+                                required>
+                            <input
+                                type="tel"
+                                placeholder="Teléfono de contacto"
+                                aria-label="Teléfono de contacto"
+                                required>
+                            <select aria-label="Motivo de la consulta" required>
+                                <option value="" disabled selected>¿En qué podemos ayudarte?</option>
+                                <!-- PERSONALIZAR: ajustar opciones a los servicios del cliente -->
+                                <option value="trat1">{{TRAT_1_TITULO}}</option>
+                                <option value="trat2">{{TRAT_2_TITULO}}</option>
+                                <option value="trat3">{{TRAT_3_TITULO}}</option>
+                                <option value="general">Revisión General / Consulta</option>
+                            </select>
+                            <button type="submit" class="btn-primary w-100 hover-scale">Enviar Solicitud</button>
+                            <small>Tus datos están seguros. Te llamaremos en menos de 24 h.</small>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ──────────────────────────────────────
+         FOOTER
+    ────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h3>{{LOGO_TEXTO}}<span class="accent-color">{{LOGO_ACENTO}}</span></h3>
+                <p>{{FOOTER_ESPECIALIDAD}}</p>
+                <p class="mt-2">{{DIRECCION}}</p>
+            </div>
+            <div class="footer-links">
+                <!-- URL real: páginas legales del cliente -->
+                <a href="#">Aviso Legal</a>
+                <a href="#">Política de Privacidad</a>
+                <a href="#">Política de Cookies</a>
+
+                <!-- OPCIONAL: legal — descomentar si hay más enlaces
+                <a href="#">RGPD / Protección de Datos</a>
+                -->
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; {{AÑO}} {{NOMBRE_NEGOCIO}}. <a href="#" target="_blank" rel="noopener">Studio32 · Digital Systems</a></p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

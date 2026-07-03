@@ -1,0 +1,16 @@
+{
+  "nombre": "[Nombre de la clínica]",
+  "agente_nombre": "Recepción",
+  "ciudad": "",
+  "whatsapp_number": "",
+  "horario_texto": "Lunes a viernes de 9:00 a 14:00 y de 16:00 a 20:00.",
+  "profesionales": ["Dr. [Apellido]", "Higienista"],
+  "horario": {
+    "dias_laborables": [1, 2, 3, 4, 5],
+    "franjas": [
+      { "inicio": "09:00", "fin": "14:00" },
+      { "inicio": "16:00", "fin": "20:00" }
+    ]
+  },
+  "calendar": { "calendar_id": "", "timezone": "Europe/Madrid" }
+}

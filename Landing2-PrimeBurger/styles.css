@@ -99,6 +99,15 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+}
+
+@media (min-width: 769px) {
+
+    .mobile-menu-btn,
+    .hamburger {
+        display: none !important;
+    }
 }
 
 .nav-actions {
@@ -127,6 +136,9 @@ ul {
 .nav-links {
     display: flex;
     gap: 30px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nav-links a {
@@ -431,6 +443,12 @@ ul {
     font-size: 0.9rem;
 }
 
+.footer-attribution {
+    font-size: 0.75rem !important;
+    opacity: 0.5;
+    margin-top: 8px;
+}
+
 .specs-list {
     margin-top: 30px;
     border-left: 2px solid var(--accent-color);
@@ -448,36 +466,33 @@ ul {
 }
 
 /* Placeholders */
+/* Placeholders -> Converted to Visual Block */
 .placeholder-block {
-    background: #1a1a1a;
     height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px dashed #333;
     position: relative;
     overflow: hidden;
+    /* Removed dashed border and background */
 }
 
-.placeholder-block::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(45deg,
-            rgba(255, 255, 255, 0.02),
-            rgba(255, 255, 255, 0.02) 10px,
-            transparent 10px,
-            transparent 20px);
-}
+/* Removed ::after pseudo-element with stripes */
 
 .placeholder-content {
-    border: 1px solid var(--text-primary);
-    padding: 10px 20px;
+    width: 80%;
+    /* Adjust width to fit */
+    height: 80%;
+    /* Adjust height */
     z-index: 2;
     transform: rotate(-5deg);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    /* Add nice shadow */
+    transition: transform 0.5s ease;
+}
+
+.placeholder-content:hover {
+    transform: rotate(0deg) scale(1.02);
 }
 
 /* Cursor */
@@ -701,6 +716,10 @@ ul {
     color: #bbb;
 }
 
+.bunker-details .btn-order {
+    margin-top: 20px;
+}
+
 .bunker-details span {
     color: var(--accent-color);
     font-weight: 700;
@@ -876,7 +895,72 @@ ul {
     transform: translateY(0);
 }
 
-/* Responsive */
+/* ─── WhatsApp Flotante ──────────────────────────────────────────────────── */
+.wa-float {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    z-index: 998;
+    background: #25D366;
+    color: #fff;
+    border-radius: 50px;
+    padding: 14px 20px 14px 16px;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+    min-height: 52px;
+}
+
+/* CTA extra en el overlay móvil */
+.mobile-order-cta {
+    display: block;
+    margin-top: 20px;
+    padding: 18px 32px;
+    background: var(--accent-color);
+    color: #000;
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(100%);
+    transition: 0.5s;
+}
+
+.mobile-menu-overlay.active .mobile-order-cta {
+    transform: translateY(0);
+    transition-delay: 0.15s;
+}
+
+.mobile-wa-cta {
+    display: block;
+    margin-top: 12px;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #25D366;
+    text-decoration: none;
+    text-align: center;
+    padding: 12px 0;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.25s;
+}
+
+.mobile-menu-overlay.active .mobile-wa-cta {
+    opacity: 1;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
     .nav-links,
@@ -886,6 +970,11 @@ ul {
 
     .mobile-menu-btn {
         display: flex;
+        /* Touch target mínimo 44px */
+        min-width: 44px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
     }
 
     .logo {
@@ -895,17 +984,67 @@ ul {
 
     .hamburger {
         display: none;
-        /* This was previously 'block' but is now replaced by mobile-menu-btn */
-        width: 30px;
-        height: 2px;
-        background: #fff;
     }
 
+    /* Botones — mínimo 44px */
+    .btn-order {
+        min-height: 52px;
+        padding: 14px 24px;
+        font-size: 0.85rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-add {
+        width: 48px;
+        height: 48px;
+        font-size: 1.4rem;
+    }
+
+    /* Layout */
     .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    /* Hero */
+    .hero-text h1 {
+        font-size: 17vw;
+    }
+
+    /* Menu grid: 1 columna en móvil */
+    .menu-grid {
         grid-template-columns: 1fr;
     }
 
-    .hero-text h1 {
-        font-size: 18vw;
+    /* Inputs — evitar zoom automático en iOS */
+    input,
+    select,
+    textarea {
+        font-size: 16px;
+    }
+
+    /* WhatsApp flotante visible en móvil */
+    .wa-float {
+        display: flex;
+    }
+
+    /* Espacio para botón flotante */
+    .footer {
+        padding-bottom: 88px;
+    }
+
+    /* Cursor */
+    .cursor { display: none; }
+    * { cursor: auto; }
+
+    /* prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+        .mobile-menu-overlay { transition: none; }
+        .mobile-link,
+        .mobile-order-cta,
+        .mobile-wa-cta { transition: none; transform: none; opacity: 1; }
+        * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
 }

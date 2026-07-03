@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeBurger · Valencia</title>
+    <meta name="description"
+        content="Valencia's edible engineering. 45-day dry aged smash burgers served in a brutalist bunker.">
+    <!-- Removed Favicon as per request -->
+    <meta name="theme-color" content="#0a0a0a">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Lenis -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="noise-overlay"></div>
+    <div class="cursor"></div>
+
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">PRIME<span class="dot">.</span></a>
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" aria-label="Open Menu">
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Navigation Links -->
+            <ul class="nav-links">
+                <li><a href="#lab" data-i18n="nav_lab">The Lab</a></li>
+                <li><a href="#menu" data-i18n="nav_menu">Menu</a></li>
+                <li><a href="#location" data-i18n="nav_bunker">Bunker</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="#menu" class="btn-order hover-target" data-i18n="btn_order">ORDER NOW</a>
+                <button id="lang-toggle" class="lang-toggle hover-target">ES</button>
+            </div>
+
+            <!-- Mobile Menu Overlay -->
+            <div class="mobile-menu-overlay">
+                <ul class="mobile-nav-links">
+                    <li><a href="#lab" class="mobile-link" data-i18n="nav_lab">The Lab</a></li>
+                    <li><a href="#menu" class="mobile-link" data-i18n="nav_menu">Menu</a></li>
+                    <li><a href="#location" class="mobile-link" data-i18n="nav_bunker">Bunker</a></li>
+                </ul>
+                <a href="#menu" class="mobile-order-cta mobile-link" data-i18n="btn_order">ORDER NOW</a>
+                <a href="https://wa.me/34600000000?text=Quiero%20hacer%20un%20pedido%20en%20PrimeBurger"
+                    target="_blank" rel="noopener" class="mobile-wa-cta">
+                    WhatsApp ↗
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-bg-image"></div> <!-- New dedicated bg div -->
+            <div class="container hero-container">
+                <div class="hero-text">
+                    <h1 class="reveal-text" data-i18n="hero_line1">NOT JUST</h1>
+                    <h1 class="reveal-text outline" data-i18n="hero_line2">A BURGER</h1>
+                </div>
+                <!-- Marquee -->
+                <div class="marquee-wrapper">
+                    <div class="marquee">
+                        <span data-i18n="marquee_text">PREMIUM CUTS // 45 DAY DRY AGED // SMASHED TO PERFECTION // NO
+                            SHORTCUTS // </span>
+                        <span data-i18n="marquee_text">PREMIUM CUTS // 45 DAY DRY AGED // SMASHED TO PERFECTION // NO
+                            SHORTCUTS // </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="lab" class="section lab">
+            <div class="container">
+                <div class="section-header">
+                    <span class="label" data-i18n="label_craft">// THE CRAFT</span>
+                    <h2 data-i18n="lab_title">EDIBLE <br> ENGINEERING</h2>
+                </div>
+                <div class="grid-2">
+                    <div class="text-block reveal">
+                        <p data-i18n="lab_desc">We don't cook. We engineer flavor. Every patty is a result of obsessive
+                            testing, precise
+                            temperature control, and a bit of madness. Welcome to the lab.</p>
+                        <ul class="specs-list">
+                            <li><span data-i18n="spec_blend_label">BLEND:</span> <span
+                                    data-i18n="spec_blend_val">BRISKET + SHORT RIB</span></li>
+                            <li><span data-i18n="spec_fat_label">FAT RATIO:</span> 80/20</li>
+                            <li><span data-i18n="spec_tech_label">TECHNIQUE:</span> <span
+                                    data-i18n="spec_tech_val">SMASH & SEAR</span></li>
+                        </ul>
+                    </div>
+                    <div class="visual-block parallax-wrapper placeholder-block" data-speed="0.05">
+                        <div class="placeholder-content"
+                            style="background-image: url('assets/texture-closeup.png'); background-size: cover;">
+                            <!-- Removed text -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENU SECTION -->
+        <section id="menu" class="section menu">
+            <div class="container">
+                <div class="section-header">
+                    <span class="label" data-i18n="label_menu">// THE LINEUP</span>
+                    <h2 data-i18n="menu_title">SYSTEM <br> CONFIGURATIONS</h2>
+                </div>
+
+                <div class="menu-grid">
+                    <!-- Item 1 -->
+                    <div class="menu-item reveal">
+                        <div class="menu-image">
+                            <img src="assets/menu-prototype.png" alt="The Prototype" class="product-img" loading="lazy">
+                        </div>
+                        <div class="menu-content">
+                            <div class="item-header">
+                                <span class="item-number">01</span>
+                                <h3 data-i18n="item1_title">THE PROTOTYPE</h3>
+                            </div>
+                            <div class="item-specs">
+                                <span data-i18n="item1_desc">Single Patty, American Cheese, House Pickles, Prime Sauce.
+                                    No distractions.</span>
+                            </div>
+                            <div class="item-footer">
+                                <div class="price">12.00€</div>
+                                <button class="btn-add hover-target">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="menu-item reveal delay-1">
+                        <div class="menu-image">
+                            <img src="assets/menu-heavy-metal.png" alt="Heavy Metal" class="product-img" loading="lazy">
+                        </div>
+                        <div class="menu-content">
+                            <div class="item-header">
+                                <span class="item-number">02</span>
+                                <h3 data-i18n="item2_title">HEAVY METAL</h3>
+                            </div>
+                            <div class="item-specs">
+                                <span data-i18n="item2_desc">Double Smashed, Smoked Bacon, Caravane Onion Jam, BBQ
+                                    dust.</span>
+                            </div>
+                            <div class="item-footer">
+                                <div class="price">16.50€</div>
+                                <button class="btn-add hover-target">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="menu-item reveal delay-2">
+                        <div class="menu-image">
+                            <img src="assets/menu-reactor.png" alt="The Reactor" class="product-img" loading="lazy">
+                        </div>
+                        <div class="menu-content">
+                            <div class="item-header">
+                                <span class="item-number">03</span>
+                                <h3 data-i18n="item3_title">THE REACTOR</h3>
+                            </div>
+                            <div class="item-specs">
+                                <span data-i18n="item3_desc">Triple Patty, Spicy Jalapeño Relish, Pepper Jack, Chipotle
+                                    Injector.</span>
+                            </div>
+                            <div class="item-footer">
+                                <div class="price">19.00€</div>
+                                <button class="btn-add hover-target">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews" class="section reviews">
+            <div class="container">
+                <div class="section-header">
+                    <span class="label" data-i18n="label_proof">// SOCIAL PROOF</span>
+                    <h2 data-i18n="reviews_title">THE DATA</h2>
+                </div>
+
+                <!-- Swiper -->
+                <div class="swiper reviews-swiper">
+                    <div class="swiper-wrapper">
+                        <!-- Review 1 -->
+                        <div class="swiper-slide">
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="date">12.04.26</span>
+                                </div>
+                                <p class="review-text" data-i18n="review_1">"The smash technique here is surgical. Best
+                                    burger in the district, hands down."</p>
+                                <div class="reviewer">
+                                    <span class="name">ALEX R.</span>
+                                    <span class="platform">GOOGLE REVIEWS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 2 -->
+                        <div class="swiper-slide">
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="date">08.05.26</span>
+                                </div>
+                                <p class="review-text" data-i18n="review_2">"No nonsense. Just incredible meat and
+                                    perfect ratio. The industrial vibe is unmatched."</p>
+                                <div class="reviewer">
+                                    <span class="name">SARAH K.</span>
+                                    <span class="platform">GOOGLE REVIEWS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 3 -->
+                        <div class="swiper-slide">
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="date">01.06.26</span>
+                                </div>
+                                <p class="review-text" data-i18n="review_3">"Finally a place that understands that a
+                                    burger doesn't need fireworks to be bomb."</p>
+                                <div class="reviewer">
+                                    <span class="name">MIKE T.</span>
+                                    <span class="platform">GOOGLE REVIEWS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 4 (Added for carousel length) -->
+                        <div class="swiper-slide">
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="date">15.06.26</span>
+                                </div>
+                                <p class="review-text" data-i18n="review_4">"Efficiency and flavor. The 'Heavy Metal'
+                                    burger changed my life."</p>
+                                <div class="reviewer">
+                                    <span class="name">DAVID L.</span>
+                                    <span class="platform">GOOGLE REVIEWS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pagination is nice for premium feel -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BUNKER SECTION -->
+        <section id="location" class="section location">
+            <div class="container">
+                <div class="section-header">
+                    <span class="label" data-i18n="label_bunker">// THE BUNKER</span>
+                    <h2 data-i18n="bunker_title">SECTOR 4 <br> HEADQUARTERS</h2>
+                </div>
+
+                <div class="bunker-container reveal">
+                    <div class="bunker-image"></div>
+                    <div class="bunker-info">
+                        <h3 data-i18n="bunker_sub">OPERATIONS CENTER</h3>
+                        <div class="bunker-details">
+                            <p>
+                                <span data-i18n="bunker_addr_label">COORDINATES:</span>
+                                Carrer de Cadis, 45<br>
+                                46006 València, España
+                            </p>
+                            <p>
+                                <span data-i18n="bunker_hours_label">OPERATING HOURS:</span>
+                                MON - SUN: 19:00 - 01:00<br>
+                                FRI - SAT: 19:00 - 02:00
+                            </p>
+                            <button id="btn-directions" class="btn-order hover-target" data-i18n="btn_map">GET
+                                DIRECTIONS</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- WhatsApp flotante (solo móvil) -->
+    <a href="https://wa.me/34600000000?text=Quiero%20hacer%20un%20pedido%20en%20PrimeBurger"
+        target="_blank" rel="noopener" class="wa-float" aria-label="Pedir por WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span>PEDIR</span>
+    </a>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h2>PRIME</h2>
+            </div>
+
+            <!-- Social Links -->
+            <div class="social-links">
+                <a href="#" class="social-icon" aria-label="Instagram">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="Facebook">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="footer-info">
+                <p>Carrer de Cadis, 45, 46006 València, España</p>
+                <p>&copy; 2026 Prime Burger. All rights reserved.</p>
+                <p class="footer-attribution">Demo · Studio32 · Digital Systems</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

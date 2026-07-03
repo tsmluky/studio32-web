@@ -1,0 +1,75 @@
+{
+  "_nota": "Plantilla de referencia para Studio32 · Digital Systems. Elimina todos los campos que empiezan por '_' antes de usar este archivo — son solo documentación.",
+  "_version": "1.0",
+
+  "nombre": "Nombre Completo del Negocio",
+  "_nombre": "Nombre del negocio tal como aparece en el logo y en el pie de página. Obligatorio.",
+
+  "vertical": "restaurante",
+  "_vertical": "Template a usar. Valores posibles: restaurante | food-brand | clinica | arquitectura. Obligatorio.",
+
+  "tagline": "Tu frase de posicionamiento breve",
+  "_tagline": "Frase que define al negocio. Se usa en la meta description y en el hero. Si no defines tagline_l1/tagline_l2, el script los divide automáticamente.",
+
+  "tagline_l1": "",
+  "_tagline_l1": "[OPCIONAL] Primera línea del h1 del hero. Si se omite, se divide 'tagline' automáticamente. Corto: 2-3 palabras para impacto visual.",
+
+  "tagline_l2": "",
+  "_tagline_l2": "[OPCIONAL] Segunda línea del h1, en cursiva de color acento. Si se omite, se calcula desde 'tagline'.",
+
+  "eyebrow_hero": "",
+  "_eyebrow_hero": "[OPCIONAL] Etiqueta pequeña sobre el h1 del hero (ej: 'ODONTOLOGÍA AVANZADA' o 'REFORMAS INTEGRALES PREMIUM'). Específico de los verticales clinica y arquitectura.",
+
+  "logo_texto": "",
+  "_logo_texto": "[OPCIONAL] Parte inicial del logo cuando tiene dos tonos de color (ej: 'Aura'). Si se omite, se usa 'nombre'. Específico de clinica.",
+
+  "logo_acento": "",
+  "_logo_acento": "[OPCIONAL] Parte del logo con el color de acento (ej: 'Dental.'). Específico de clinica.",
+
+  "nombre_corto": "",
+  "_nombre_corto": "[OPCIONAL] Nombre abreviado para contextos compactos (nav mobile, marquee). Si se omite, se usa la primera palabra de 'nombre'. Específico de food-brand.",
+
+  "telefono": "+34 900 000 000",
+  "_telefono": "Número de teléfono con prefijo internacional. Se usa en el topbar (clinica) y en el href tel:.",
+
+  "whatsapp": "34900000000",
+  "_whatsapp": "Número de WhatsApp SIN '+' NI espacios (solo dígitos). Se usa en el enlace wa.me/. Ej: '34963000000'.",
+
+  "whatsapp_mensaje": "Hola, me gustaría obtener más información.",
+  "_whatsapp_mensaje": "Mensaje prefill del chat de WhatsApp. El script lo codifica automáticamente para la URL.",
+
+  "direccion": "Calle Ejemplo 10, 46001 Valencia",
+  "_direccion": "Dirección completa del negocio. Se usa en el footer y para generar el enlace a Google Maps.",
+
+  "horarios": "L-V: 09:00–20:00 · Sábados: 10:00–14:00",
+  "_horarios": "Horario de atención. Se usa en el topbar (clinica, food-brand).",
+
+  "maps_url": "",
+  "_maps_url": "[OPCIONAL] URL directa a Google Maps (perfil del negocio o enlace de búsqueda). Si se omite, el script genera una URL de búsqueda automáticamente desde 'direccion'.",
+
+  "instagram": "https://www.instagram.com/usuario",
+  "_instagram": "URL completa del perfil de Instagram. Se sustituye en el enlace del footer.",
+
+  "facebook": "https://www.facebook.com/usuario",
+  "_facebook": "URL completa del perfil de Facebook / TikTok. Se sustituye en el enlace del footer.",
+
+  "email": "contacto@negocio.com",
+  "_email": "Email de contacto principal. Se usa en enlaces mailto: y en el footer.",
+
+  "web": "https://www.negocio.com",
+  "_web": "[OPCIONAL] Web actual del cliente, si tiene. Puede ser útil para el footer o CTA.",
+
+  "color_primario": "#1f201e",
+  "_color_primario": "Color principal del negocio. Según el vertical: fondo oscuro (restaurante, food-brand) o color de texto/nav (clinica, arquitectura). Formato: #rrggbb.",
+
+  "color_acento": "#b08d55",
+  "_color_acento": "Color de acento: botones, links, destacados, eyebrow. Debe contrastar bien con el fondo. Formato: #rrggbb.",
+
+  "_notas_finales": [
+    "Los campos con [OPCIONAL] pueden omitirse — el script aplicará el valor por defecto o calculado.",
+    "Elimina todas las claves que empiezan por '_' antes de ejecutar el script.",
+    "Comando: python Tools/personalizar_demo.py clientes/nombre-cliente.json",
+    "El slug de la carpeta de salida se genera automáticamente desde 'nombre'.",
+    "Los placeholders de contenido (textos de cada sección) se editan manualmente en el index.html generado."
+  ]
+}

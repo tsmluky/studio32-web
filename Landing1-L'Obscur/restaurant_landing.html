@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Obscur | Experiencia Gastronómica</title>
+    <meta name="description"
+        content="Experimente la cima de la alta cocina en L'Obscur. Una sinfonía de sabor y elegancia." />
+    <meta name="theme-color" content="#050505">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div class="cursor"></div>
+
+    <div class="preloader">
+        <div class="loader-content">
+            <span class="logo-loader">L'Obscur</span>
+            <div class="loading-line"></div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo hover-target">L'Obscur</a>
+            <ul class="nav-links">
+                <li><a href="#home" class="hover-target" data-i18n="nav_home">Inicio</a></li>
+                <li><a href="#story" class="hover-target" data-i18n="nav_story">Nuestra Historia</a></li>
+                <li><a href="#menu" class="hover-target" data-i18n="nav_menu">Menú</a></li>
+                <li><a href="#reservations" class="btn-nav hover-target" data-i18n="nav_reservations">Reservas</a></li>
+                <li><button class="lang-switch hover-target" id="lang-toggle">EN</button></li>
+            </ul>
+            <button class="hamburger hover-target" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav" type="button">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+        <div class="mobile-nav-inner">
+            <nav class="mobile-nav-links" aria-label="Menú móvil">
+                <a href="#home" class="mobile-nav-link" data-mobile-close data-i18n="nav_home">Inicio</a>
+                <a href="#story" class="mobile-nav-link" data-mobile-close data-i18n="nav_story">Nuestra Historia</a>
+                <a href="#menu" class="mobile-nav-link" data-mobile-close data-i18n="nav_menu">Menú</a>
+                <a href="#reservations" class="mobile-nav-cta" data-mobile-close data-i18n="nav_reservations">Reservas</a>
+            </nav>
+            <div class="mobile-nav-foot">
+                <a href="https://wa.me/34600000000?text=Hola%2C%20quisiera%20solicitar%20una%20reserva%20en%20L%27Obscur."
+                    target="_blank" rel="noopener" class="mobile-nav-wa">
+                    WhatsApp ↗
+                </a>
+                <button class="lang-switch" id="lang-toggle-mobile">EN</button>
+            </div>
+        </div>
+    </div>
+
+    <header id="home" class="hero">
+        <div class="hero-bg" style="background-image: url('assets/hero-luxury.png');"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="reveal-text"><span data-i18n="hero_title_1">Experimenta</span> <br> <span class="accent-text"
+                    data-i18n="hero_title_2">Lo Divino</span></h1>
+            <p class="reveal-text delay-1" data-i18n="hero_subtitle">Donde el arte culinario se encuentra con la noche.
+            </p>
+            <a href="#reservations" class="btn-primary hover-target reveal-text delay-2" data-i18n="hero_cta">Reservar
+                Mesa</a>
+        </div>
+        <div class="scroll-indicator">
+            <span data-i18n="scroll_indicator">Scroll</span>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <section id="story" class="section story">
+        <div class="container split-layout">
+            <div class="text-content reveal">
+                <span class="eyebrow" data-i18n="story_eyebrow">La Filosofía</span>
+                <h2><span data-i18n="story_title_1">Una Sinfonía de</span> <span class="italic"
+                        data-i18n="story_title_2">Sabor</span></h2>
+                <p data-i18n="story_p1">Ubicado en el corazón de la ciudad, pero a kilómetros de lo ordinario. L'Obscur
+                    no es solo un restaurante; es un santuario para los sentidos. Creemos en la pureza del sabor, la
+                    elegancia del silencio y la belleza de la noche.</p>
+                <p data-i18n="story_p2">Nuestros chefs curan un menú degustación nocturno que desafía las expectativas y
+                    deleita el paladar, utilizando solo los ingredientes más raros de origen global.</p>
+                <a href="#menu" class="link-arrow hover-target" data-i18n="story_cta">Ver Filosofía</a>
+            </div>
+            <div class="image-content reveal delay-1">
+                <div class="image-wrapper parallax-wrapper">
+                     <!-- Reusing hero interior for story but different crop via CSS if needed, or arguably same asset for consistency of space -->
+                    <img src="assets/hero-luxury.png" alt="Interior" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="section menu">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="eyebrow" data-i18n="menu_eyebrow">Excelencia Curada</span>
+                <h2 data-i18n="menu_title">La Colección</h2>
+            </div>
+
+            <div class="menu-grid editorial-grid">
+                <div class="menu-card reveal">
+                    <div class="card-image">
+                        <img src="assets/menu-wagyu.png" alt="Wagyu A5" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3 data-i18n="dish1_title">El Corte Obsidiana</h3>
+                        <p data-i18n="dish1_desc">Wagyu A5, Reducción de trufa, Hoja de oro.</p>
+                        <span class="price">€180</span>
+                    </div>
+                </div>
+
+                <div class="menu-card reveal delay-1 offset-card">
+                    <div class="card-image">
+                        <img src="assets/menu-cocktail.png" alt="Midnight Elixir" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3 data-i18n="dish2_title">Elixir de Medianoche</h3>
+                        <p data-i18n="dish2_desc">Whisky Añejo, Romero Ahumado, Esencia de la Noche.</p>
+                        <span class="price">€45</span>
+                    </div>
+                </div>
+
+                <div class="menu-card reveal delay-2">
+                    <div class="card-image placeholder-block">
+                        <div class="placeholder-text">
+                            <span class="ph-mark">III</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 data-i18n="dish3_title">La Atmósfera</h3>
+                        <p data-i18n="dish3_desc">Cabinas privadas, perfección acústica, servicio inigualable.</p>
+                        <span class="price" data-i18n="dish3_price">Priceless</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-footer reveal">
+                <a href="#" class="btn-secondary hover-target" data-i18n="menu_cta">Ver Menú Completo</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="quote-section">
+        <div class="container">
+            <blockquote class="reveal">
+                "<span data-i18n="quote_text">Cenar en L'Obscur no es solo una comida. Es un recuerdo grabado en
+                    oro.</span>"
+                <cite data-i18n="quote_author">— The Culinary Times</cite>
+            </blockquote>
+        </div>
+    </section>
+
+    <section id="reservations" class="section reservations">
+        <div class="container narrow">
+            <div class="form-wrapper reveal">
+                <h2 data-i18n="reservations_title">Asegure su asiento</h2>
+                <p data-i18n="reservations_subtitle">Disponibilidad limitada. Se requieren reservas con 2 semanas de
+                    antelación.</p>
+
+                <form class="booking-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Nombre" data-i18n-placeholder="placeholder_name" aria-label="Nombre completo" required
+                            class="hover-target">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Teléfono" data-i18n-placeholder="placeholder_phone" aria-label="Teléfono" required
+                            class="hover-target">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="date" aria-label="Fecha de reserva" required class="hover-target">
+                        </div>
+                        <div class="form-group guest-input-group">
+                            <span class="guest-label" data-i18n="label_guests">Invitados</span>
+                            <input type="number" min="1" max="20" value="2" aria-label="Número de invitados" class="hover-target minimal-input">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary full-width hover-target"
+                        data-i18n="reservations_btn">Solicitar Reserva</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp flotante (solo móvil) -->
+    <a href="https://wa.me/34600000000?text=Hola%2C%20quisiera%20solicitar%20una%20reserva%20en%20L%27Obscur."
+        target="_blank" rel="noopener" class="wa-float" aria-label="Contactar por WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span>Reservar</span>
+    </a>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h3>L'Obscur</h3>
+                <p>Gran Vía del Marqués del Turia, 49<br>46005 Valencia, España</p>
+            </div>
+            <div class="footer-col center">
+                <div class="socials">
+                    <a href="#" class="hover-target">Instagram</a>
+                    <a href="#" class="hover-target">Facebook</a>
+                </div>
+            </div>
+            <div class="footer-col right">
+                <p>&copy; 2026 L'Obscur Group.</p>
+                <small>Demo · Studio32 · Digital Systems</small>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

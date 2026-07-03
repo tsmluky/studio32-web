@@ -1,0 +1,338 @@
+<!--
+  TEMPLATE: Restaurante Premium · Studio32 · Digital Systems
+  VERSION: 1.0
+
+  VARIABLES A PERSONALIZAR:
+  - :root en styles.css → colores, tipografía, espaciado
+  - La Taberna de Ruzafa     → nombre del restaurante (9 ocurrencias)
+  - Cocina valenciana         → primera línea del titular hero  (p.ej. "Descubre")
+  - de mercado en el corazón de Ruzafa         → segunda línea, acento de color   (p.ej. "Lo Esencial")
+  - Cocina valenciana de mercado en el corazón de Ruzafa  → frase de apertura bajo el titular
+  - {{HISTORIA_EYEBROW}}   → etiqueta sección historia       (p.ej. "La Filosofía")
+  - {{HISTORIA_TITULO_1}}  → primera parte del título        (p.ej. "Una Cocina de")
+  - {{HISTORIA_TITULO_2}}  → segunda parte, en cursiva       (p.ej. "Producto")
+  - {{HISTORIA_P1}}        → párrafo 1 sección historia
+  - {{HISTORIA_P2}}        → párrafo 2 sección historia
+  - {{HISTORIA_CTA}}       → texto del enlace de historia    (p.ej. "Conocer el equipo")
+  - {{MENU_EYEBROW}}       → etiqueta sección menú           (p.ej. "Carta de Temporada")
+  - {{MENU_TITULO}}        → título sección menú             (p.ej. "Selección")
+  - {{PLATO_X_NOMBRE}}     → nombre de cada plato (×3)
+  - {{PLATO_X_DESC}}       → descripción corta del plato (×3)
+  - {{PLATO_X_PRECIO}}     → precio con símbolo              (p.ej. €28)
+  - {{CITA_TEXTO}}         → texto de la cita editorial
+  - {{CITA_FUENTE}}        → fuente/autor de la cita         (p.ej. "— El País")
+  - {{RESERVAS_TITULO}}    → título sección reservas
+  - {{RESERVAS_SUBTITULO}} → descripción política de reservas
+  - Calle Sueca 12, 46006 Valencia          → dirección completa del negocio
+  - 2026                → año de copyright
+  - assets/placeholder-*.jpg → imágenes reales del cliente
+
+  SECCIONES OPCIONALES (buscar comentario OPCIONAL en el HTML):
+  - Cuarto ítem de carta      → "OPCIONAL: cuarto plato"
+  - Quote / cita editorial    → "OPCIONAL: quote section"
+  - Switch de idioma EN/ES    → "OPCIONAL: bilingüe"
+  - Sección eventos/privados  → "OPCIONAL: eventos"
+
+  ATRIBUCIÓN: Mantener el texto "Studio32 · Digital Systems" en el footer.
+-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Taberna de Ruzafa | Cocina valenciana de mercado en el corazón de Ruzafa</title>
+    <meta name="description" content="Cocina valenciana de mercado en el corazón de Ruzafa — La Taberna de Ruzafa, Calle Sueca 12, 46006 Valencia">
+    <meta name="theme-color" content="#050505">
+
+    <!-- Favicon → sustituir por el del cliente -->
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <!-- Tipografía: Playfair Display (headings) + Lato (cuerpo) -->
+    <!-- OPCIONAL: bilingüe — cambiar las fuentes aquí si el cliente usa otras -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Cursor personalizado (desktop only) -->
+    <div class="cursor" aria-hidden="true"></div>
+
+    <!-- ──────────────────────────────────────
+         PRELOADER
+    ────────────────────────────────────── -->
+    <div class="preloader" aria-hidden="true">
+        <div class="loader-content">
+            <span class="logo-loader">La Taberna de Ruzafa</span>
+            <div class="loading-line"></div>
+        </div>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         NAV
+    ────────────────────────────────────── -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo hover-target">La Taberna de Ruzafa</a>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#story" class="hover-target">Nuestra Historia</a></li>
+                <li><a href="#menu" class="hover-target">Menú</a></li>
+                <li><a href="#reservations" class="btn-nav hover-target">Reservas</a></li>
+                <!-- OPCIONAL: bilingüe
+                <li><button class="lang-switch hover-target" id="lang-toggle">EN</button></li>
+                -->
+            </ul>
+
+            <!-- Botón hamburger accesible (mobile) -->
+            <button class="hamburger hover-target" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ──────────────────────────────────────
+         HERO
+    ────────────────────────────────────── -->
+    <header id="home" class="hero">
+        <!-- IMG: foto hero del restaurante, formato 16:9, mínimo 1920×1080px,
+             bien iluminada, ambiente oscuro o con luz ambiental cálida -->
+        <div class="hero-bg" style="background-image: url('assets/placeholder-hero.jpg');"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+            <h1 class="reveal-text">
+                <span>Cocina valenciana</span>
+                <br>
+                <span class="accent-text">de mercado en el corazón de Ruzafa</span>
+            </h1>
+            <p class="reveal-text delay-1">Cocina valenciana de mercado en el corazón de Ruzafa</p>
+            <a href="#reservations" class="btn-primary hover-target reveal-text delay-2">Reservar Mesa</a>
+        </div>
+
+        <div class="scroll-indicator" aria-hidden="true">
+            <span>Scroll</span>
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <!-- ──────────────────────────────────────
+         IDENTIDAD / FILOSOFÍA
+    ────────────────────────────────────── -->
+    <section id="story" class="section story">
+        <div class="container split-layout">
+            <div class="text-content reveal">
+                <span class="eyebrow">{{HISTORIA_EYEBROW}}</span>
+                <h2>
+                    <span>{{HISTORIA_TITULO_1}}</span>
+                    <span class="italic"> {{HISTORIA_TITULO_2}}</span>
+                </h2>
+                <p>{{HISTORIA_P1}}</p>
+                <p>{{HISTORIA_P2}}</p>
+                <a href="#menu" class="link-arrow hover-target">{{HISTORIA_CTA}}</a>
+            </div>
+
+            <div class="image-content reveal delay-1">
+                <div class="image-wrapper parallax-wrapper">
+                    <!-- IMG: foto interior del restaurante, formato 2:3 (retrato),
+                         mínimo 800×1200px, ambiente de sala o cocina -->
+                    <img src="assets/placeholder-interior.jpg" alt="Interior de La Taberna de Ruzafa">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────
+         CARTA
+    ────────────────────────────────────── -->
+    <section id="menu" class="section menu">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="eyebrow">{{MENU_EYEBROW}}</span>
+                <h2>{{MENU_TITULO}}</h2>
+            </div>
+
+            <div class="menu-grid editorial-grid">
+
+                <!-- Plato 1 -->
+                <div class="menu-card reveal">
+                    <div class="card-image">
+                        <!-- IMG: foto plato 1, formato 2:3, fondo oscuro o neutro,
+                             iluminación de estudio, mínimo 600×900px -->
+                        <img src="assets/placeholder-plato-1.jpg" alt="{{PLATO_1_NOMBRE}}">
+                    </div>
+                    <div class="card-content">
+                        <h3>{{PLATO_1_NOMBRE}}</h3>
+                        <p>{{PLATO_1_DESC}}</p>
+                        <span class="price">{{PLATO_1_PRECIO}}</span>
+                    </div>
+                </div>
+
+                <!-- Plato 2 -->
+                <div class="menu-card reveal delay-1 offset-card">
+                    <div class="card-image">
+                        <!-- IMG: foto plato 2, mismas especificaciones que plato 1 -->
+                        <img src="assets/placeholder-plato-2.jpg" alt="{{PLATO_2_NOMBRE}}">
+                    </div>
+                    <div class="card-content">
+                        <h3>{{PLATO_2_NOMBRE}}</h3>
+                        <p>{{PLATO_2_DESC}}</p>
+                        <span class="price">{{PLATO_2_PRECIO}}</span>
+                    </div>
+                </div>
+
+                <!-- Plato 3 — bloque editorial (sin foto) -->
+                <!-- ALTERNATIVA: reemplazar el div.card-image.placeholder-block por
+                     <div class="card-image"><img src="assets/placeholder-plato-3.jpg" alt="..."></div>
+                     si el cliente tiene foto para este plato -->
+                <div class="menu-card reveal delay-2">
+                    <div class="card-image placeholder-block">
+                        <div class="placeholder-text">
+                            <span class="ph-mark">III</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>{{PLATO_3_NOMBRE}}</h3>
+                        <p>{{PLATO_3_DESC}}</p>
+                        <span class="price">{{PLATO_3_PRECIO}}</span>
+                    </div>
+                </div>
+
+                <!-- OPCIONAL: cuarto plato — descomentar y rellenar si aplica
+                <div class="menu-card reveal delay-3">
+                    <div class="card-image">
+                        <img src="assets/placeholder-plato-4.jpg" alt="{{PLATO_4_NOMBRE}}">
+                    </div>
+                    <div class="card-content">
+                        <h3>{{PLATO_4_NOMBRE}}</h3>
+                        <p>{{PLATO_4_DESC}}</p>
+                        <span class="price">{{PLATO_4_PRECIO}}</span>
+                    </div>
+                </div>
+                -->
+
+            </div>
+
+            <div class="menu-footer reveal">
+                <!-- URL real: enlace a carta completa en PDF o página secundaria -->
+                <a href="#" class="btn-secondary hover-target">Ver Carta Completa</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────
+         QUOTE EDITORIAL — OPCIONAL
+         Activar si el cliente tiene prensa, reseña o frase relevante.
+         Comentar este bloque si no aplica.
+    ────────────────────────────────────── -->
+    <!--
+    <section class="quote-section">
+        <div class="container">
+            <blockquote class="reveal">
+                "{{CITA_TEXTO}}"
+                <cite>{{CITA_FUENTE}}</cite>
+            </blockquote>
+        </div>
+    </section>
+    -->
+
+    <!-- ──────────────────────────────────────
+         RESERVAS
+    ────────────────────────────────────── -->
+    <section id="reservations" class="section reservations">
+        <div class="container narrow">
+            <div class="form-wrapper reveal">
+                <h2>{{RESERVAS_TITULO}}</h2>
+                <p>{{RESERVAS_SUBTITULO}}</p>
+
+                <form class="booking-form" id="booking-form" novalidate>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            placeholder="Nombre completo"
+                            aria-label="Nombre completo"
+                            required
+                            class="hover-target">
+                    </div>
+                    <div class="form-group">
+                        <input
+                            type="tel"
+                            placeholder="Teléfono"
+                            aria-label="Teléfono de contacto"
+                            required
+                            class="hover-target">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input
+                                type="date"
+                                aria-label="Fecha de reserva"
+                                required
+                                class="hover-target">
+                        </div>
+                        <div class="form-group guest-input-group">
+                            <span class="guest-label">Invitados</span>
+                            <input
+                                type="number"
+                                min="1"
+                                max="20"
+                                value="2"
+                                aria-label="Número de invitados"
+                                class="hover-target minimal-input">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary full-width hover-target">
+                        Solicitar Reserva
+                    </button>
+                </form>
+
+                <!-- OPCIONAL: eventos — descomentar si el restaurante tiene sala privada
+                <div class="events-note">
+                    <p>¿Buscas un espacio para un evento privado?
+                        <a href="mailto:eventos@La Taberna de Ruzafa.com" class="hover-target">Contacta directamente</a>
+                    </p>
+                </div>
+                -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ──────────────────────────────────────
+         FOOTER
+    ────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h3>La Taberna de Ruzafa</h3>
+                <!-- URL real: enlace a Google Maps -->
+                <p><a href="https://www.google.com/maps/search/?api=1&query=Calle%20Sueca%2012%2C%2046006%20Valencia" class="hover-target" style="color: inherit;">Calle Sueca 12, 46006 Valencia</a></p>
+            </div>
+
+            <div class="footer-col center">
+                <div class="socials">
+                    <!-- URL real: perfil Instagram del cliente -->
+                    <a href="https://www.instagram.com/latabernaderuzafa" class="hover-target" target="_blank" rel="noopener">Instagram</a>
+                    <!-- URL real: perfil Facebook del cliente -->
+                    <a href="{{FACEBOOK_URL}}" class="hover-target" target="_blank" rel="noopener">Facebook</a>
+                </div>
+            </div>
+
+            <div class="footer-col right">
+                <p>&copy; 2026 La Taberna de Ruzafa.</p>
+                <small>Studio32 · Digital Systems</small>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

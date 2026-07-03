@@ -1,1 +1,24 @@
-/Landing1-L'Obscur
+# ── Secretos — nunca al repo ──
+.env
+.env.*
+!.env.example
+credentials.json
+*.pem
+*.key
+
+# ── Dependencias ──
+node_modules/
+
+# ── Herramientas de agente / sesiones locales ──
+.claude/
+.hermes/
+
+# ── Datos de runtime (conversaciones, reservas, leads) ──
+studio32-agent/data/*
+!studio32-agent/data/.gitkeep
+
+# ── Artefactos y temporales ──
+*.zip
+*.log
+.DS_Store
+Thumbs.db

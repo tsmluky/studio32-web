@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studio32 · Roadmap de Ejecución</title>
+  <meta name="description" content="Checklist operativo para convertir Studio32 en pilotos, ventas y activos repetibles." />
+  <style>
+    :root {
+      --bg: #090908;
+      --panel: #11110f;
+      --panel-2: #171713;
+      --ink: #f6f0e5;
+      --muted: #b8ad9c;
+      --dim: #766d60;
+      --line: rgba(246, 240, 229, 0.13);
+      --gold: #c9a86a;
+      --gold-2: #e6c780;
+      --acid: #b7ff4a;
+      --danger: #ff6b5f;
+      --ok: #80d89b;
+      --warn: #f1c76b;
+      --shadow: 0 24px 80px rgba(0,0,0,.42);
+      --radius: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --serif: Georgia, "Times New Roman", serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 16% -8%, rgba(201,168,106,.18), transparent 28%),
+        radial-gradient(circle at 86% 8%, rgba(183,255,74,.08), transparent 26%),
+        var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.45;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .05;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      z-index: 50;
+    }
+    a { color: inherit; }
+    button, input, textarea { font: inherit; }
+
+    .app {
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+      padding: 24px;
+      border-right: 1px solid var(--line);
+      background: rgba(9,9,8,.82);
+      backdrop-filter: blur(18px);
+      overflow: auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .brand-mark {
+      font-family: var(--serif);
+      font-size: 24px;
+      letter-spacing: -.03em;
+    }
+    .brand-mark span { color: var(--gold); }
+    .badge {
+      border: 1px solid var(--line);
+      color: var(--muted);
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .progress-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015));
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    .progress-number {
+      font-family: var(--serif);
+      font-size: 52px;
+      line-height: 1;
+      letter-spacing: -.06em;
+    }
+    .progress-number small {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--dim);
+      letter-spacing: 0;
+    }
+    .bar {
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(246,240,229,.08);
+      overflow: hidden;
+      margin: 14px 0 8px;
+    }
+    .bar > span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--acid));
+      transition: width .25s ease;
+    }
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .nav-title {
+      color: var(--dim);
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 11px;
+      margin: 24px 0 10px;
+    }
+    .phase-nav {
+      display: grid;
+      gap: 6px;
+    }
+    .phase-nav a {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--muted);
+      padding: 9px 10px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      font-size: 13px;
+    }
+    .phase-nav a:hover {
+      border-color: var(--line);
+      color: var(--ink);
+      background: rgba(255,255,255,.035);
+    }
+    .phase-nav code {
+      color: var(--gold);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .sidebar-actions {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .btn {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      background: rgba(246,240,229,.04);
+      color: var(--ink);
+      border-radius: 12px;
+      cursor: pointer;
+      padding: 10px 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .btn:hover { border-color: rgba(201,168,106,.55); background: rgba(201,168,106,.08); }
+    .btn.primary { background: var(--gold); color: #14100a; border-color: var(--gold); font-weight: 700; }
+    .btn.danger:hover { border-color: rgba(255,107,95,.6); background: rgba(255,107,95,.08); }
+
+    main { padding: 38px min(5vw, 72px) 80px; }
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto 30px;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background:
+        linear-gradient(135deg, rgba(246,240,229,.055), rgba(246,240,229,.018)),
+        rgba(17,17,15,.72);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 260px;
+      height: 260px;
+      border: 1px solid rgba(201,168,106,.25);
+      border-radius: 50%;
+    }
+    .eyebrow {
+      font-family: var(--mono);
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-size: 12px;
+      margin: 0 0 14px;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(44px, 7vw, 92px);
+      line-height: .9;
+      letter-spacing: -.075em;
+      max-width: 920px;
+      margin: 0;
+    }
+    h1 em { color: var(--gold); font-style: italic; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(280px, .8fr);
+      gap: 28px;
+      margin-top: 28px;
+      align-items: end;
+    }
+    .hero p { color: var(--muted); max-width: 760px; font-size: 17px; }
+    .rule-box {
+      border: 1px solid rgba(201,168,106,.28);
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(201,168,106,.06);
+    }
+    .rule-box strong { display: block; color: var(--gold-2); margin-bottom: 6px; }
+    .rule-box p { margin: 0; font-family: var(--mono); font-size: 13px; color: var(--ink); }
+
+    .filters {
+      max-width: 1180px;
+      margin: 0 auto 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(17,17,15,.65);
+    }
+    .filter-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .chip {
+      border: 1px solid var(--line);
+      background: rgba(246,240,229,.035);
+      color: var(--muted);
+      padding: 8px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .chip.active { color: #15130d; background: var(--gold); border-color: var(--gold); font-weight: 700; }
+    .search {
+      min-width: min(100%, 260px);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(0,0,0,.22);
+      color: var(--ink);
+      padding: 10px 14px;
+      outline: none;
+    }
+    .search:focus { border-color: rgba(201,168,106,.65); }
+
+    .content {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+    }
+
+    .phase {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(17,17,15,.78);
+      overflow: hidden;
+      box-shadow: 0 18px 60px rgba(0,0,0,.28);
+    }
+    .phase-header {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: start;
+      padding: 22px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(246,240,229,.04), transparent);
+    }
+    .phase-index {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(201,168,106,.4);
+      color: var(--gold);
+      font-family: var(--mono);
+    }
+    .phase h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(26px, 3vw, 42px);
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+    .phase-desc { color: var(--muted); margin: 8px 0 0; max-width: 760px; }
+    .phase-status {
+      text-align: right;
+      min-width: 110px;
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    .phase-status strong { display: block; color: var(--ink); font-size: 18px; }
+    .phase-body { padding: 18px 22px 24px; }
+
+    .section-block {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(246,240,229,.08);
+    }
+    .section-block:last-child { border-bottom: 0; }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .section-title h3 { margin: 0; font-size: 18px; }
+    .tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--gold);
+      border: 1px solid rgba(201,168,106,.28);
+      padding: 4px 7px;
+      border-radius: 999px;
+    }
+
+    .tasks { display: grid; gap: 8px; }
+    .task {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: start;
+      padding: 12px;
+      border: 1px solid rgba(246,240,229,.08);
+      border-radius: 14px;
+      background: rgba(255,255,255,.018);
+    }
+    .task.hidden { display: none; }
+    .task input[type="checkbox"] {
+      width: 19px;
+      height: 19px;
+      margin-top: 2px;
+      accent-color: var(--gold);
+      cursor: pointer;
+    }
+    .task-main strong { display: block; margin-bottom: 3px; }
+    .task-main p { margin: 0; color: var(--muted); font-size: 13px; }
+    .task-main code {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--gold-2);
+      background: rgba(201,168,106,.08);
+      border: 1px solid rgba(201,168,106,.18);
+      padding: 1px 5px;
+      border-radius: 6px;
+    }
+    .task.done .task-main strong { text-decoration: line-through; color: var(--dim); }
+    .task.done .task-main p { color: var(--dim); }
+    .task-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end;
+      min-width: 96px;
+    }
+    .pill {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      padding: 4px 7px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .pill.cash { color: var(--acid); border-color: rgba(183,255,74,.35); }
+    .pill.delivery { color: var(--gold-2); border-color: rgba(201,168,106,.35); }
+    .pill.asset { color: var(--ok); border-color: rgba(128,216,155,.35); }
+    .pill.risk { color: var(--danger); border-color: rgba(255,107,95,.35); }
+
+    .callout-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 12px 0;
+    }
+    .callout {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      background: rgba(0,0,0,.16);
+    }
+    .callout strong { color: var(--gold-2); display: block; margin-bottom: 5px; }
+    .callout p { color: var(--muted); margin: 0; font-size: 13px; }
+
+    .whiteboard {
+      max-width: 1180px;
+      margin: 26px auto;
+      border: 1px solid rgba(183,255,74,.24);
+      border-radius: 24px;
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(183,255,74,.08), rgba(201,168,106,.04));
+    }
+    .whiteboard h2 {
+      margin: 0 0 14px;
+      font-family: var(--serif);
+      font-size: 38px;
+      letter-spacing: -.04em;
+    }
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      counter-reset: p;
+    }
+    .principle {
+      counter-increment: p;
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 12px;
+      border: 1px solid rgba(246,240,229,.1);
+      border-radius: 14px;
+      background: rgba(9,9,8,.45);
+    }
+    .principle::before {
+      content: counter(p, decimal-leading-zero);
+      color: var(--acid);
+      font-family: var(--mono);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .parking {
+      max-width: 1180px;
+      margin: 0 auto 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .note-box {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      background: rgba(17,17,15,.72);
+    }
+    .note-box h3 { margin: 0 0 10px; }
+    .note-box ul { color: var(--muted); padding-left: 18px; }
+    .note-box textarea {
+      width: 100%;
+      min-height: 160px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(0,0,0,.22);
+      color: var(--ink);
+      padding: 12px;
+      outline: none;
+    }
+    .note-box textarea:focus { border-color: rgba(201,168,106,.65); }
+
+    .print-footer {
+      color: var(--dim);
+      text-align: center;
+      font-size: 12px;
+      margin: 40px auto 0;
+    }
+
+    @media (max-width: 980px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { position: relative; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+      main { padding: 24px 16px 60px; }
+      .hero { padding: 22px; }
+      .hero-grid, .parking { grid-template-columns: 1fr; }
+      .callout-grid, .principles { grid-template-columns: 1fr; }
+      .phase-header { grid-template-columns: auto 1fr; }
+      .phase-status { grid-column: 1 / -1; text-align: left; }
+      .task { grid-template-columns: auto 1fr; }
+      .task-meta { grid-column: 2; align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+    }
+
+    @media print {
+      body { background: #fff; color: #111; }
+      body::before, .sidebar, .filters, .sidebar-actions, .note-box textarea { display: none !important; }
+      .app { display: block; }
+      main { padding: 0; }
+      .hero, .phase, .whiteboard, .note-box { box-shadow: none; background: #fff; border-color: #ccc; break-inside: avoid; }
+      .task { background: #fff; border-color: #ddd; }
+      .task-main p, .phase-desc, .hero p, .callout p, .note-box ul { color: #333; }
+      .pill, .tag, .phase-index { color: #111; border-color: #bbb; }
+      h1, .phase h2, .whiteboard h2 { color: #111; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">Studio<span>32</span></div>
+        <div class="badge">Roadmap</div>
+      </div>
+
+      <div class="progress-card">
+        <div class="progress-number"><span id="progressPct">0</span><small>%</small></div>
+        <div class="bar"><span id="progressBar"></span></div>
+        <div class="meta-row">
+          <span><span id="doneCount">0</span> hechas</span>
+          <span><span id="totalCount">0</span> tareas</span>
+        </div>
+      </div>
+
+      <div class="nav-title">Fases</div>
+      <nav class="phase-nav" id="phaseNav"></nav>
+
+      <div class="sidebar-actions">
+        <button class="btn primary" id="exportBtn">Exportar progreso</button>
+        <button class="btn" onclick="window.print()">Imprimir / PDF</button>
+        <button class="btn danger" id="resetBtn">Reset progreso</button>
+      </div>
+    </aside>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Studio32 · ejecución, foco y caja</p>
+        <h1>El camino es <em>piloto real</em>, no otra vuelta de construcción.</h1>
+        <div class="hero-grid">
+          <p>
+            Este documento convierte el roadmap de Studio32 en una lista operativa. No está pensado para inspirarte: está pensado para que puedas abrirlo cada mañana, marcar una tarea concreta y avanzar hacia una venta real.
+          </p>
+          <div class="rule-box">
+            <strong>Filtro obligatorio</strong>
+            <p>¿Esto acerca un cliente de pago, un piloto real o una demo vendible en menos de 7 días? Si no, parking.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="filters">
+        <div class="filter-group" aria-label="Filtros de tarea">
+          <button class="chip active" data-filter="all">Todo</button>
+          <button class="chip" data-filter="cash">Caja</button>
+          <button class="chip" data-filter="delivery">Entrega</button>
+          <button class="chip" data-filter="asset">Activo</button>
+          <button class="chip" data-filter="risk">Riesgo</button>
+          <button class="chip" data-filter="open">Pendiente</button>
+        </div>
+        <input class="search" id="search" placeholder="Buscar tarea, archivo, fase…" />
+      </section>
+
+      <section class="whiteboard" id="pizarra">
+        <h2>Pizarra: reglas que no se negocian</h2>
+        <div class="principles">
+          <div class="principle">Caja primero, arquitectura después.</div>
+          <div class="principle">No construir sin cliente o piloto concreto.</div>
+          <div class="principle">Studio32 vende sistemas digitales, no webs.</div>
+          <div class="principle">El agente de restaurantes es la cuña, no el imperio.</div>
+          <div class="principle">Demo enseñable &gt; plataforma perfecta.</div>
+          <div class="principle">Una tarea activa por día. Máximo tres por semana.</div>
+          <div class="principle">Si no acerca a venta en 7 días, va al parking.</div>
+          <div class="principle">No abrir otro frente hasta cerrar Antonio o piloto equivalente.</div>
+          <div class="principle">El feedback real manda más que la intuición técnica.</div>
+          <div class="principle">Cada semana debe terminar con algo más vendible.</div>
+        </div>
+      </section>
+
+      <section class="content" id="content"></section>
+
+      <section class="parking">
+        <div class="note-box">
+          <h3>Parking explícito</h3>
+          <ul>
+            <li>TraderCopilot, salvo venta concreta o comprador real.</li>
+            <li>MEV/quant, salvo hipótesis monetizable acotada.</li>
+            <li>Rehacer Studio32 en Next.js.</li>
+            <li>Postgres antes de tener clientes activos.</li>
+            <li>Voz, pagos, TPV, CRM avanzado y dashboards bonitos.</li>
+          </ul>
+        </div>
+        <div class="note-box">
+          <h3>Notas de ejecución</h3>
+          <textarea id="notes" placeholder="Notas rápidas: objeciones de clientes, decisiones, tareas de mañana…"></textarea>
+        </div>
+      </section>
+
+      <p class="print-footer">Studio32 · Roadmap operativo generado para Pancho · abrir, ejecutar, marcar, vender.</p>
+    </main>
+  </div>
+
+  <script>
+    const phases = [
+      {
+        id: 'fase-0', n: '00', title: 'Congelar el patrón viejo',
+        desc: 'Antes de tocar código, se define foco, límites y criterio de avance. Esta fase evita que la ansiedad técnica vuelva a disfrazarse de productividad.',
+        blocks: [
+          { title: 'Foco de 14 días', tag: 'decisión', tasks: [
+            ['Definir foco único: restaurante piloto con agente de reservas + demo web/widget.', 'Resultado escrito: “Studio32 → restaurante piloto → caso real → paquete vendible”.', 'cash'],
+            ['Escribir explícitamente qué NO se toca: TraderCopilot, MEV, Next.js, voz, CRM, Postgres.', 'Si aparece una idea nueva, se mide contra el foco y se manda al parking.', 'risk'],
+            ['Crear una pizarra física o digital con columnas: Parking / Hoy / Semana / Bloqueado / Hecho / No tocar.', 'Máximo 1 tarea en Hoy y máximo 3 en Semana.', 'asset'],
+            ['Definir North Star: conseguir que Antonio u otro restaurante pruebe una demo funcional y acepte sesión de configuración.', 'Fecha límite sugerida: 14 días.', 'cash']
+          ]},
+          { title: 'Ritual diario', tag: 'operación', tasks: [
+            ['Cada mañana elegir una sola tarea que acerque a piloto o venta.', 'Si la tarea no se puede explicar como avance comercial, no entra.', 'cash'],
+            ['Cerrar el día marcando evidencia: archivo listo, demo probada, mensaje enviado o reunión cerrada.', 'No cuenta “pensé/ordené/investigué” si no deja output.', 'delivery']
+          ]}
+        ]
+      },
+      {
+        id: 'fase-1', n: '01', title: 'Higiene mínima del repo',
+        desc: 'Poner Studio32 en estado seguro antes de seguir. No se vende bien desde un repo que puede filtrar claves o perder trabajo.',
+        blocks: [
+          { title: 'Seguridad Git', tag: 'riesgo', tasks: [
+            ['Crear/restaurar `.gitignore` raíz.', 'Ruta: `C:/Users/lukys/Desktop/Studio32/.gitignore`. Debe ignorar `.env`, `credentials.json`, node_modules, runtime data, backups y archivos comprimidos.', 'risk'],
+            ['Verificar que `studio32-agent/.env` y `studio32-agent/credentials.json` no entran en git.', 'Comando: `git status --short` desde la raíz.', 'risk'],
+            ['Buscar secretos antes de commitear.', 'Comando orientativo: `git grep -n "OPENAI_API_KEY\\|DEEPSEEK_API_KEY\\|TWILIO_AUTH_TOKEN\\|META_ACCESS_TOKEN\\|SMTP_PASS" || true`.', 'risk'],
+            ['Decidir qué entra en commit base.', 'Entra código/docs/templates. No entra runtime, backups, zips, rars, secretos, `.claude`.', 'delivery'],
+            ['Hacer commit base limpio.', 'Mensaje sugerido: `chore: estabilizar base Studio32`.', 'asset']
+          ]},
+          { title: 'Reglas de no destrucción', tag: 'guardrail', tasks: [
+            ['No tocar `Landing2-PrimeBurger/.git`.', 'Es un repo anidado. Cualquier operación git ahí puede liar la historia.', 'risk'],
+            ['No borrar demos ni backups sin decisión explícita.', 'Primero estabilizar; luego limpiar.', 'risk']
+          ]}
+        ]
+      },
+      {
+        id: 'fase-2', n: '02', title: 'Superficie comercial de Studio32',
+        desc: 'La web debe captar, no solo verse bien. Cualquier CTA falso o legal placeholder reduce confianza y mata caja.',
+        blocks: [
+          { title: 'CTAs reales', tag: 'caja', tasks: [
+            ['Sustituir WhatsApp placeholder `34623456789` en `index.html`.', 'Debe apuntar a número real o a un canal real alternativo.', 'cash'],
+            ['Sustituir WhatsApp placeholder en `Agencia-Portfolio/index.html`.', 'Aunque sea landing anterior, puede recibir tráfico o enlaces.', 'cash'],
+            ['Elegir un email público único.', 'Decidir entre `info@studio32.es` y `hello@studio32.es`. Usar uno de forma consistente.', 'cash'],
+            ['Probar manualmente cada CTA principal.', 'WhatsApp abre con mensaje correcto; email abre compose correcto.', 'delivery']
+          ]},
+          { title: 'Legal y confianza', tag: 'entrega', tasks: [
+            ['Completar o retirar placeholders de `Agencia-Portfolio/aviso-legal.html`.', 'No publicar con NIF/CIF/dirección ficticios.', 'delivery'],
+            ['Completar o retirar placeholders de `Agencia-Portfolio/privacidad.html`.', 'Especialmente si se captan leads o datos por formulario.', 'delivery'],
+            ['Verificar que no hay “DD/MM/AAAA”, “XXXXXXXXX” o “+34 XXX XXX XXX” visible.', 'Buscar antes de publicar.', 'risk']
+          ]},
+          { title: 'Verificación estática', tag: 'validación', tasks: [
+            ['Levantar servidor estático.', 'Comando: `cd /c/Users/lukys/Desktop/Studio32 && python -m http.server 8080`.', 'delivery'],
+            ['Abrir `http://localhost:8080/` y revisar hero, CTAs y demos.', 'No revisar estética infinita. Solo confianza, claridad y funcionamiento.', 'delivery'],
+            ['Probar rutas de demos.', '`/Landing1-L%27Obscur/restaurant_landing.html`, `/Landing2-PrimeBurger/index.html`, `/Landing3-Clinic/index.html`, `/Landing4-Habitat/index.html`.', 'delivery']
+          ]}
+        ]
+      },
+      {
+        id: 'fase-3', n: '03', title: 'La Taberna como demo vendible',
+        desc: 'La demo de cliente tiene que poder enseñarse sin pedir perdón. Nada de llaves `{{...}}`, imágenes rotas o “esto luego lo cambiamos”.',
+        blocks: [
+          { title: 'Contenido mínimo', tag: 'demo', tasks: [
+            ['Eliminar todos los `{{...}}` visibles de `Demos-Clientes/la-taberna-de-ruzafa/index.html`.', 'Buscar `{{` y resolver cada aparición visible.', 'delivery'],
+            ['Completar historia del restaurante con copy realista.', 'No inventar premios ni métricas. Sí se puede usar contenido demo plausible.', 'delivery'],
+            ['Completar carta mínima: 3 platos, descripción y precio.', 'Si no hay carta real, usar “platos de ejemplo” sin dejar placeholders.', 'delivery'],
+            ['Resolver `FACEBOOK_URL` o quitar el link de Facebook.', 'Un link con placeholder baja confianza al instante.', 'delivery'],
+            ['Completar título y subtítulo de reservas.', 'Debe orientar a “reserva tu mesa” con disponibilidad real.', 'cash']
+          ]},
+          { title: 'Imágenes y assets', tag: 'demo', tasks: [
+            ['Resolver `assets/placeholder-hero.jpg`.', 'Foto real si existe; si no, imagen temporal decente o solución editorial sin foto rota.', 'delivery'],
+            ['Resolver `assets/placeholder-interior.jpg`.', 'No enseñar demo con imagen ausente.', 'delivery'],
+            ['Resolver `assets/placeholder-plato-1.jpg` y `placeholder-plato-2.jpg`.', 'Si no hay fotos, adaptar bloque visual.', 'delivery'],
+            ['Añadir o corregir favicon.', 'No bloquea venta, pero evita sensación de plantilla rota.', 'asset']
+          ]},
+          { title: 'Conexión con agente', tag: 'caja', tasks: [
+            ['Añadir botón visible “Probar agente de reservas”.', 'Debe abrir `http://localhost:3000/demo/?tenant=la-taberna-de-ruzafa-o4gb` durante demo local.', 'cash'],
+            ['Valorar incrustar widget en la demo.', 'Script local: `http://localhost:3000/widget.js` con `data-tenant="la-taberna-de-ruzafa-o4gb"`.', 'cash'],
+            ['Probar flujo cliente: “mesa para 4 mañana por la noche”.', 'Debe pedir datos faltantes y no inventar disponibilidad.', 'delivery'],
+            ['Probar grupo grande.', 'Debe derivar/handoff, no confirmar alegremente.', 'risk']
+          ]}
+        ]
+      },
+      {
+        id: 'fase-4', n: '04', title: 'Agente listo para demo',
+        desc: 'No tocar el core por gusto. Solo verificar que lo existente corre y se puede enseñar con seguridad.',
+        blocks: [
+          { title: 'Tests obligatorios', tag: 'validación', tasks: [
+            ['Ejecutar `npm run check`.', 'Debe mostrar DeepSeek/OpenAI, Twilio, Google Calendar y SMTP configurados; Meta puede quedar pendiente.', 'delivery'],
+            ['Ejecutar `npm run test:agent`.', 'Esperado: smoke test OK.', 'delivery'],
+            ['Ejecutar `npm run test:qa`.', 'Esperado actual: 47 OK, 0 fallos.', 'delivery'],
+            ['Ejecutar `npm run test:sec`.', 'Esperado actual: 12 OK, 0 fallos.', 'risk']
+          ]},
+          { title: 'Pruebas manuales', tag: 'demo', tasks: [
+            ['Arrancar `npm run dev` en `studio32-agent`.', 'Abrir `http://localhost:3000/demo/?tenant=la-taberna-de-ruzafa-o4gb`.', 'delivery'],
+            ['Probar reserva normal.', 'Cliente pide mesa; agente confirma datos; reserva aparece donde corresponde.', 'delivery'],
+            ['Probar cancelación y reprogramación.', 'No se puede vender reservas si mover/cancelar rompe.', 'delivery'],
+            ['Probar aviso email.', 'El “momento wow” es que al dueño le llegue el aviso.', 'cash'],
+            ['Probar Google Calendar.', 'La reserva debe verse en un calendario entendible por el restaurante.', 'cash']
+          ]}
+        ]
+      },
+      {
+        id: 'fase-5', n: '05', title: 'Reunión piloto con Antonio',
+        desc: 'Objetivo: cerrar piloto o conseguir una objeción concreta. No se va a “presentar una idea”; se va a provocar una decisión.',
+        blocks: [
+          { title: 'Preparación', tag: 'preventa', tasks: [
+            ['Leer `docs/piloto-antonio/GUION-REUNION.md` antes de ir.', 'No improvisar el guion en la puerta.', 'cash'],
+            ['Crear o revisar tenant con datos aproximados de Antonio.', 'Que la demo no arranque desde cero delante de él.', 'delivery'],
+            ['Probar demo completa 30 minutos antes.', 'Evita sorpresas por puerto, claves, internet o rutas.', 'risk'],
+            ['Preparar 5 preguntas de diagnóstico.', 'Reservas actuales, llamadas perdidas, TheFork, WhatsApp, quién apunta, dónde.', 'cash']
+          ]},
+          { title: 'Durante la reunión', tag: 'venta', tasks: [
+            ['Empezar por su problema, no por IA.', 'Preguntar cómo entran reservas y qué se pierde en servicio.', 'cash'],
+            ['Hacer que Antonio pruebe él la demo.', 'La convicción sube cuando lo toca, no cuando lo mira.', 'cash'],
+            ['Mostrar aviso y Calendar.', 'El valor es operativo: responde, apunta y avisa.', 'cash'],
+            ['Proponer piloto 3–4 semanas.', 'Sin coste o bajo coste inicial, feedback semanal, permiso de caso si sale bien.', 'cash'],
+            ['Cerrar fecha de configuración.', 'No aceptar “ya hablamos” sin fecha o siguiente paso concreto.', 'cash']
+          ]},
+          { title: 'Después de la reunión', tag: 'seguimiento', tasks: [
+            ['Escribir resultado real en notas.', 'Sí/no/tal vez, objeciones literales, fecha de próxima acción.', 'asset'],
+            ['Si dice sí, enviar resumen con pasos y fecha.', 'Que no se enfríe.', 'cash'],
+            ['Si dice no, registrar motivo exacto.', 'No convertir rechazo en más código. Convertirlo en aprendizaje.', 'asset']
+          ]}
+        ]
+      },
+      {
+        id: 'fase-6', n: '06', title: 'Configuración del piloto',
+        desc: 'Convertir demo en operación real supervisada. Configuración conservadora, no prometer automatización total.',
+        blocks: [
+          { title: 'Base de conocimiento', tag: 'entrega', tasks: [
+            ['Completar `business.json` del tenant real.', 'Nombre, horarios, turnos, timezone, capacidad, duración, máximo de comensales.', 'delivery'],
+            ['Completar `faq.md`.', 'Parking, terraza, niños, mascotas, celiacos, grupos, menú, reservas.', 'delivery'],
+            ['Completar `policies.md`.', 'Antelación mínima, retrasos, no-show, grupos grandes, eventos.', 'delivery'],
+            ['Completar `tone.md` con voz real del dueño.', 'Pedirle que responda 3 mensajes y destilar su tono.', 'asset'],
+            ['Crear/completar `menu.json` si aplica.', 'Carta, precios, secciones, alérgenos. Es el 50% de las preguntas.', 'delivery']
+          ]},
+          { title: 'Conexiones', tag: 'operación', tasks: [
+            ['Crear Google Calendar `Reservas — [Restaurante]`.', 'Compartir con service account de Studio32 con permiso de edición.', 'delivery'],
+            ['Pegar `calendar_id` en tenant.', 'Sin calendar real, el piloto pierde fuerza operativa.', 'delivery'],
+            ['Configurar email/WhatsApp de avisos en `handoff.json`.', 'El dueño debe recibir cada reserva/handoff.', 'delivery'],
+            ['Configurar owner token/número.', 'El dueño puede preguntar “qué tengo esta noche”.', 'asset'],
+            ['Elegir canal inicial: widget, link webchat, Twilio sandbox o WhatsApp real.', 'No bloquear por Meta. Widget/sandbox sirven para validar.', 'cash']
+          ]},
+          { title: 'Prueba con dueño', tag: 'validación', tasks: [
+            ['Reserva completa desde móvil del dueño.', 'Pedir mesa → confirmar → aviso → Calendar.', 'delivery'],
+            ['Cancelación y cambio de hora.', 'Debe funcionar antes de activar.', 'delivery'],
+            ['Grupo grande.', 'Debe derivar, no confirmar.', 'risk'],
+            ['Pregunta de carta/alérgenos.', 'Debe responder desde conocimiento, no inventar.', 'risk'],
+            ['Borrar reservas de prueba.', 'No dejar basura operativa.', 'delivery']
+          ]}
+        ]
+      },
+      {
+        id: 'fase-7', n: '07', title: 'Piloto supervisado',
+        desc: 'El piloto no es “lo dejo encendido y veo”. Es una máquina de aprendizaje comercial y operativo.',
+        blocks: [
+          { title: 'Operación del piloto', tag: 'piloto', tasks: [
+            ['Activar canal acordado.', 'Widget, webchat o WhatsApp según lo que no bloquee.', 'cash'],
+            ['Mantener handoff agresivo.', 'Ante duda rara, deriva. Mejor perder automatización que confianza.', 'risk'],
+            ['Revisar conversaciones cada 2–3 días.', 'Ajustar FAQ, policies y tone con preguntas reales.', 'asset'],
+            ['Hacer llamada semanal de feedback.', '10 minutos. Qué funcionó, qué falló, qué preguntó la gente.', 'cash'],
+            ['No añadir features no pagadas durante piloto.', 'Solo corregir lo que impide funcionamiento o venta.', 'risk']
+          ]},
+          { title: 'Métricas', tag: 'evidencia', tasks: [
+            ['Registrar conversaciones totales.', 'Sin números no hay caso.', 'asset'],
+            ['Registrar reservas creadas/modificadas/canceladas.', 'Es la métrica de valor.', 'asset'],
+            ['Registrar handoffs.', 'Indica límites y nuevas FAQs.', 'asset'],
+            ['Registrar errores reales.', 'No esconderlos; son roadmap de producto.', 'risk'],
+            ['Evaluar criterio de éxito.', '20+ conversaciones reales sin errores graves + dueño dispuesto a seguir/recomendar.', 'cash']
+          ]}
+        ]
+      },
+      {
+        id: 'fase-8', n: '08', title: 'Caso de éxito y paquete',
+        desc: 'Si el piloto funciona, se transforma en activo de venta. Si no funciona, se transforma en aprendizaje de mercado.',
+        blocks: [
+          { title: 'Caso', tag: 'activo', tasks: [
+            ['Documentar problema inicial.', 'Cómo gestionaban reservas antes y qué fricción tenían.', 'asset'],
+            ['Documentar sistema instalado.', 'Agente, widget/WhatsApp, Calendar, avisos, base de conocimiento.', 'asset'],
+            ['Documentar resultado real.', 'Conversaciones, reservas, handoffs, frase cualitativa. No inventar métricas.', 'asset'],
+            ['Pedir testimonio corto.', 'Una frase real del dueño vale más que 20 claims genéricos.', 'cash']
+          ]},
+          { title: 'Oferta restaurante', tag: 'paquete', tasks: [
+            ['Nombrar oferta de forma simple.', 'Ejemplo: “Sistema de Reservas Inteligente para Restaurantes”.', 'asset'],
+            ['Definir qué incluye v1.', 'Agente, configuración, Calendar, avisos, handoff, revisión y soporte.', 'cash'],
+            ['Definir qué NO incluye v1.', 'Pagos, delivery, TPV, CRM avanzado, voz, analítica compleja.', 'risk'],
+            ['Probar precio con Juanma.', 'Setup + mensualidad. No discutir 3 semanas; testear mercado.', 'cash'],
+            ['Crear one-pager comercial.', 'Una página: problema, solución, piloto, precio, siguiente paso.', 'asset']
+          ]}
+        ]
+      },
+      {
+        id: 'fase-9', n: '09', title: 'Prospección controlada',
+        desc: 'Sin pipeline, Studio32 vuelve a ser un laboratorio. La prospección es parte del producto.',
+        blocks: [
+          { title: 'Lista y scoring', tag: 'growth', tasks: [
+            ['Crear lista inicial de 30 restaurantes en Valencia.', 'Buenos negocios con presencia digital floja o canal de reservas manual.', 'cash'],
+            ['Scoring de cada lead.', 'Web, Google, Instagram, canal de reserva, problema visible, ángulo, prioridad 1–5.', 'asset'],
+            ['Elegir top 10 para outreach personalizado.', 'No mandar spam genérico.', 'cash']
+          ]},
+          { title: 'Outbound semanal', tag: 'ventas', tasks: [
+            ['Enviar 10 mensajes personalizados por semana.', 'Ángulo: reservas perdidas / atención fuera de horario / Calendar simple.', 'cash'],
+            ['Hacer 3 seguimientos por semana.', 'El dinero está en el seguimiento, no en el primer mensaje.', 'cash'],
+            ['Objetivo semanal: 1 demo agendada.', 'Si no se consigue, ajustar mensaje/oferta antes de construir más.', 'cash'],
+            ['Registrar objeciones repetidas.', 'Material para copy, producto y ventas.', 'asset']
+          ]}
+        ]
+      },
+      {
+        id: 'fase-10', n: '10', title: 'Producción técnica razonable',
+        desc: 'Endurecer técnica cuando haya piloto o cliente que lo justifique. No antes.',
+        blocks: [
+          { title: 'Deploy', tag: 'producción', tasks: [
+            ['Deploy `studio32-agent` en Railway.', 'Usar `railway.json` y `Procfile` existentes.', 'delivery'],
+            ['Configurar variables de entorno.', 'LLM, Google, SMTP, PANEL_TOKEN, CORS, Twilio/Meta según canal.', 'delivery'],
+            ['Configurar `PANEL_TOKEN` obligatorio.', 'Panel sin token no debe exponer datos.', 'risk'],
+            ['Restringir CORS en producción.', 'No dejar `*` si hay datos sensibles o widget cliente.', 'risk']
+          ]},
+          { title: 'Escala con criterio', tag: 'yagni', tasks: [
+            ['Mantener JSON + Calendar durante piloto.', 'Suficiente para validar. No migrar por ansiedad.', 'risk'],
+            ['Migrar a Postgres solo con 2–3 clientes activos o riesgo real de datos.', 'Arquitectura después de caja.', 'asset'],
+            ['No bloquear por Meta Cloud API.', 'Orden: widget → sandbox → Twilio propio → Meta directo.', 'cash']
+          ]}
+        ]
+      },
+      {
+        id: 'fase-11', n: '11', title: 'Repetir o cortar con datos',
+        desc: 'Después del primer piloto se decide con evidencia, no con inspiración.',
+        blocks: [
+          { title: 'Si funciona', tag: 'doblar', tasks: [
+            ['Conseguir 3 restaurantes más.', 'Misma oferta, mismos límites, mismo proceso.', 'cash'],
+            ['Pulir plantilla restaurante.', 'Solo lo aprendido del uso real.', 'asset'],
+            ['Convertir caso en sección comercial.', 'Con permiso y métricas reales.', 'cash']
+          ]},
+          { title: 'Si no funciona', tag: 'corte', tasks: [
+            ['Diagnosticar causa.', 'Dolor débil, cliente equivocado, canal mal, precio, demo o timing.', 'asset'],
+            ['No saltar automáticamente a otra vertical.', 'Primero entender por qué falló.', 'risk'],
+            ['Abrir segunda vertical solo con cliente concreto.', 'Clínicas/apartamentos/arquitectura solo si hay demanda real.', 'cash']
+          ]}
+        ]
+      }
+    ];
+
+    const stateKey = 'studio32-roadmap-checks-v1';
+    const notesKey = 'studio32-roadmap-notes-v1';
+    let checks = JSON.parse(localStorage.getItem(stateKey) || '{}');
+    let currentFilter = 'all';
+
+    function taskId(phase, blockIndex, taskIndex) {
+      return `${phase.id}::${blockIndex}::${taskIndex}`;
+    }
+
+    function render() {
+      const nav = document.getElementById('phaseNav');
+      const content = document.getElementById('content');
+      nav.innerHTML = '';
+      content.innerHTML = '';
+
+      phases.forEach(phase => {
+        const total = phase.blocks.reduce((sum, b) => sum + b.tasks.length, 0);
+        const done = phase.blocks.reduce((sum, b, bi) => sum + b.tasks.filter((_, ti) => checks[taskId(phase, bi, ti)]).length, 0);
+        const a = document.createElement('a');
+        a.href = `#${phase.id}`;
+        a.innerHTML = `<span>${phase.n} · ${phase.title}</span><code>${done}/${total}</code>`;
+        nav.appendChild(a);
+
+        const section = document.createElement('article');
+        section.className = 'phase';
+        section.id = phase.id;
+        section.innerHTML = `
+          <header class="phase-header">
+            <div class="phase-index">${phase.n}</div>
+            <div>
+              <h2>${phase.title}</h2>
+              <p class="phase-desc">${phase.desc}</p>
+            </div>
+            <div class="phase-status"><strong>${done}/${total}</strong> avance</div>
+          </header>
+          <div class="phase-body"></div>
+        `;
+        const body = section.querySelector('.phase-body');
+
+        phase.blocks.forEach((block, bi) => {
+          const blockEl = document.createElement('div');
+          blockEl.className = 'section-block';
+          blockEl.innerHTML = `
+            <div class="section-title"><span class="tag">${block.tag}</span><h3>${block.title}</h3></div>
+            <div class="tasks"></div>
+          `;
+          const tasksEl = blockEl.querySelector('.tasks');
+          block.tasks.forEach((task, ti) => {
+            const [title, detail, kind] = task;
+            const id = taskId(phase, bi, ti);
+            const done = !!checks[id];
+            const taskEl = document.createElement('label');
+            taskEl.className = `task ${done ? 'done' : ''}`;
+            taskEl.dataset.kind = kind;
+            taskEl.dataset.text = `${phase.title} ${block.title} ${title} ${detail}`.toLowerCase();
+            taskEl.innerHTML = `
+              <input type="checkbox" ${done ? 'checked' : ''} data-id="${id}" />
+              <div class="task-main"><strong>${title}</strong><p>${detail}</p></div>
+              <div class="task-meta"><span class="pill ${kind}">${labelFor(kind)}</span></div>
+            `;
+            tasksEl.appendChild(taskEl);
+          });
+          body.appendChild(blockEl);
+        });
+        content.appendChild(section);
+      });
+      bindChecks();
+      applyFilters();
+      updateProgress();
+    }
+
+    function labelFor(kind) {
+      return ({ cash: 'Caja', delivery: 'Entrega', asset: 'Activo', risk: 'Riesgo' })[kind] || kind;
+    }
+
+    function bindChecks() {
+      document.querySelectorAll('input[type="checkbox"][data-id]').forEach(input => {
+        input.addEventListener('change', e => {
+          checks[e.target.dataset.id] = e.target.checked;
+          if (!e.target.checked) delete checks[e.target.dataset.id];
+          localStorage.setItem(stateKey, JSON.stringify(checks));
+          e.target.closest('.task').classList.toggle('done', e.target.checked);
+          render();
+        });
+      });
+    }
+
+    function updateProgress() {
+      const all = [];
+      phases.forEach((p, bi) => p.blocks.forEach((b, bj) => b.tasks.forEach((_, ti) => all.push(taskId(p, bj, ti)))));
+      const total = all.length;
+      const done = all.filter(id => checks[id]).length;
+      const pct = total ? Math.round((done / total) * 100) : 0;
+      document.getElementById('progressPct').textContent = pct;
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('doneCount').textContent = done;
+      document.getElementById('totalCount').textContent = total;
+    }
+
+    function applyFilters() {
+      const q = document.getElementById('search').value.trim().toLowerCase();
+      document.querySelectorAll('.task').forEach(task => {
+        const kindMatch = currentFilter === 'all' || task.dataset.kind === currentFilter || (currentFilter === 'open' && !task.classList.contains('done'));
+        const textMatch = !q || task.dataset.text.includes(q);
+        task.classList.toggle('hidden', !(kindMatch && textMatch));
+      });
+    }
+
+    document.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        currentFilter = chip.dataset.filter;
+        applyFilters();
+      });
+    });
+
+    document.getElementById('search').addEventListener('input', applyFilters);
+
+    document.getElementById('notes').value = localStorage.getItem(notesKey) || '';
+    document.getElementById('notes').addEventListener('input', e => localStorage.setItem(notesKey, e.target.value));
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if (!confirm('¿Resetear todo el progreso marcado?')) return;
+      checks = {};
+      localStorage.removeItem(stateKey);
+      render();
+    });
+
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      const payload = {
+        exported_at: new Date().toISOString(),
+        progress: checks,
+        notes: localStorage.getItem(notesKey) || ''
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'studio32-roadmap-progress.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "nombre": "La Taberna de Ruzafa",
+  "vertical": "restaurante",
+
+  "tagline": "Cocina valenciana de mercado en el corazón de Ruzafa",
+
+  "telefono": "+34 963 000 000",
+  "whatsapp": "34963000000",
+  "whatsapp_mensaje": "Hola, quiero reservar una mesa en La Taberna",
+
+  "direccion": "Calle Sueca 12, 46006 Valencia",
+  "horarios": "Mar-Dom: 13:00-16:00 y 20:00-23:30. Lunes cerrado.",
+
+  "instagram": "https://www.instagram.com/latabernaderuzafa",
+  "email": "contacto@latabernaderuzafa.com",
+
+  "color_primario": "#2c1810",
+  "color_acento": "#c9a86a"
+}

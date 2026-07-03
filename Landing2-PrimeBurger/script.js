@@ -80,19 +80,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenu = document.querySelector('.mobile-menu-overlay');
     const mobileLinks = document.querySelectorAll('.mobile-link');
 
+    function openMobileMenu() {
+        mobileBtn.classList.add('active');
+        mobileMenu.classList.add('active');
+        mobileBtn.setAttribute('aria-label', 'Cerrar menú');
+        lenis.stop();
+    }
+
+    function closeMobileMenu() {
+        mobileBtn.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        mobileBtn.setAttribute('aria-label', 'Abrir menú');
+        lenis.start();
+    }
+
     if (mobileBtn && mobileMenu) {
         mobileBtn.addEventListener('click', () => {
-            mobileBtn.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            mobileMenu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
         });
 
         mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileBtn.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            });
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) closeMobileMenu();
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) closeMobileMenu();
+        });
+    }
+
+    // --- GET DIRECTIONS handler ---
+    const btnDirections = document.getElementById('btn-directions');
+    if (btnDirections) {
+        btnDirections.addEventListener('click', () => {
+            window.open('https://www.google.com/maps/search/?api=1&query=Carrer+de+Cadis+45+Valencia', '_blank');
         });
     }
 
@@ -146,18 +170,18 @@ document.addEventListener('DOMContentLoaded', () => {
             nav_bunker: "Bunker",
             btn_order: "PEDIR AHORA",
 
-            hero_line1: "NO ES SOLO",
-            hero_line2: "UNA HAMBURGUESA",
-            marquee_text: "CORTES PREMIUM // MADURACIÓN 45 DÍAS // SMASH PERFECTO // SIN ATAJOS // ",
+            hero_line1: "EL CULTO",
+            hero_line2: "A LA CARNE",
+            marquee_text: "RESERVAS AGOTADAS CADA FIN DE SEMANA // LA MEJOR SMASH DEL PAÍS // SOLD OUT DIARIO // ",
 
-            label_craft: "// LA ARTESANÍA",
-            lab_title: "INGENIERÍA <br> COMESTIBLE",
-            lab_desc: "No cocinamos. Diseñamos sabor. Cada hamburguesa es el resultado de pruebas obsesivas, control preciso de temperatura y un poco de locura. Bienvenido al laboratorio.",
-            spec_blend_label: "MEZCLA:",
-            spec_blend_val: "BRISKET + COSTILLA",
-            spec_fat_label: "RATIO GRASA:",
-            spec_tech_label: "TÉCNICA:",
-            spec_tech_val: "APLASTAR Y SELLAR",
+            label_craft: "// LA SECTA",
+            lab_title: "INGENIERÍA <br> EXTREMA",
+            lab_desc: "Olvida la 'comida rápida'. Nosotros aplicamos ingeniería termodinámica para lograr la costra Maillard perfecta. Carne madurada 45 días, picada a diario. 200 Burgers al día. Cuando se acaban, cerramos.",
+            spec_blend_label: "FÓRMULA SECRETA:",
+            spec_blend_val: "BRISKET DE PASTO + COSTILLA",
+            spec_fat_label: "CORTESÍA:",
+            spec_tech_label: "TÉCNICA DE DESTRUCCIÓN:",
+            spec_tech_val: "DOBLE SMASH AL ROJO VIVO",
 
             label_menu: "// LA ALINEACIÓN",
             menu_title: "CONFIGURACIONES <br> DEL SISTEMA",
@@ -168,12 +192,12 @@ document.addEventListener('DOMContentLoaded', () => {
             item3_title: "EL REACTOR",
             item3_desc: "Triple Patty, Relish de Jalapeño Picante, Queso Pepper Jack, Inyector Chipotle.",
 
-            label_proof: "// PRUEBA SOCIAL",
-            reviews_title: "LOS DATOS",
-            review_1: "\"La técnica de smash aquí es quirúrgica. La mejor hamburguesa del distrito, sin duda.\"",
-            review_2: "\"Sin tonterías. Solo carne increíble y ratio perfecto. El ambiente industrial es inigualable.\"",
-            review_3: "\"Por fin un sitio que entiende que una hamburguesa no necesita fuegos artificiales para ser la bomba.\"",
-            review_4: "\"Eficiencia y sabor. La hamburguesa 'Heavy Metal' me cambió la vida.\"",
+            label_proof: "// HYPE REAL",
+            reviews_title: "EL CULTO",
+            review_1: "\"Intenté venir en sábado sin reserva y tuve que hacer 45 minutos de cola. Valió cada maldito segundo.\"",
+            review_2: "\"No hay trampa. Solo la mejor reacción de Maillard que he visto en España. Destroza a las franquicias.\"",
+            review_3: "\"La Heavy Metal es un atentado contra la dieta y una bendición para el alma. Brutal.\"",
+            review_4: "\"Eficiencia clínica. Entras, comes la mejor carne de tu vida y sales. Una máquina perfecta.\"",
 
             label_bunker: "// EL BÚNKER",
             bunker_title: "SECTOR 4 <br> CUARTEL GENERAL",

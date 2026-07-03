@@ -1,0 +1,676 @@
+{
+  "text_files": [
+    {
+      "file": "AGENTS.md",
+      "bytes": 4534,
+      "lines": 92,
+      "extension": ".md"
+    },
+    {
+      "file": "Agencia-Portfolio/index.html",
+      "bytes": 16881,
+      "lines": 333,
+      "extension": ".html"
+    },
+    {
+      "file": "Agencia-Portfolio/script.js",
+      "bytes": 5914,
+      "lines": 201,
+      "extension": ".js"
+    },
+    {
+      "file": "Agencia-Portfolio/styles.css",
+      "bytes": 20215,
+      "lines": 1021,
+      "extension": ".css"
+    },
+    {
+      "file": "Landing1-L'Obscur/restaurant_landing.html",
+      "bytes": 9623,
+      "lines": 199,
+      "extension": ".html"
+    },
+    {
+      "file": "Landing1-L'Obscur/script.js",
+      "bytes": 9290,
+      "lines": 246,
+      "extension": ".js"
+    },
+    {
+      "file": "Landing1-L'Obscur/styles.css",
+      "bytes": 15203,
+      "lines": 792,
+      "extension": ".css"
+    },
+    {
+      "file": "Landing2-PrimeBurger/index.html",
+      "bytes": 16973,
+      "lines": 341,
+      "extension": ".html"
+    },
+    {
+      "file": "Landing2-PrimeBurger/script.js",
+      "bytes": 8561,
+      "lines": 212,
+      "extension": ".js"
+    },
+    {
+      "file": "Landing2-PrimeBurger/styles.css",
+      "bytes": 17558,
+      "lines": 920,
+      "extension": ".css"
+    },
+    {
+      "file": "Landing3-Clinic/index.html",
+      "bytes": 14440,
+      "lines": 267,
+      "extension": ".html"
+    },
+    {
+      "file": "Landing3-Clinic/script.js",
+      "bytes": 2519,
+      "lines": 96,
+      "extension": ".js"
+    },
+    {
+      "file": "Landing3-Clinic/styles.css",
+      "bytes": 12343,
+      "lines": 680,
+      "extension": ".css"
+    },
+    {
+      "file": "Landing4-Habitat/index.html",
+      "bytes": 16371,
+      "lines": 309,
+      "extension": ".html"
+    },
+    {
+      "file": "Landing4-Habitat/script.js",
+      "bytes": 3489,
+      "lines": 118,
+      "extension": ".js"
+    },
+    {
+      "file": "Landing4-Habitat/styles.css",
+      "bytes": 15186,
+      "lines": 822,
+      "extension": ".css"
+    },
+    {
+      "file": "docs/implementation-plan.md",
+      "bytes": 4757,
+      "lines": 122,
+      "extension": ".md"
+    },
+    {
+      "file": "docs/project-brief.md",
+      "bytes": 4723,
+      "lines": 152,
+      "extension": ".md"
+    },
+    {
+      "file": "docs/repo-map.md",
+      "bytes": 7759,
+      "lines": 300,
+      "extension": ".md"
+    },
+    {
+      "file": "index.html",
+      "bytes": 575,
+      "lines": 16,
+      "extension": ".html"
+    }
+  ],
+  "binary_assets": [
+    {
+      "file": "Landing1-L'Obscur/assets/dish1.png",
+      "size_bytes": 964070,
+      "format": "JPEG",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "file": "Landing1-L'Obscur/assets/dish2.png",
+      "size_bytes": 774102,
+      "format": "JPEG",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "file": "Landing1-L'Obscur/assets/hero-luxury.png",
+      "size_bytes": 817050,
+      "format": "JPEG",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "file": "Landing1-L'Obscur/assets/hero.png",
+      "size_bytes": 817050,
+      "format": "JPEG",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "file": "Landing1-L'Obscur/assets/menu-cocktail.png",
+      "size_bytes": 774102,
+      "format": "JPEG",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "file": "Landing1-L'Obscur/assets/menu-wagyu.png",
+      "size_bytes": 964070,
+      "format": "JPEG",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "file": "Landing2-PrimeBurger/assets/bunker-interior.png",
+      "size_bytes": 768141,
+      "format": "JPEG",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "file": "Landing2-PrimeBurger/assets/hero-burger.png",
+      "size_bytes": 693292,
+      "format": "JPEG",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "file": "Landing2-PrimeBurger/assets/menu-heavy-metal.png",
+      "size_bytes": 723261,
+      "format": "JPEG",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "file": "Landing2-PrimeBurger/assets/menu-prototype.png",
+      "size_bytes": 773883,
+      "format": "JPEG",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "file": "Landing2-PrimeBurger/assets/menu-reactor.png",
+      "size_bytes": 735357,
+      "format": "JPEG",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "file": "Landing2-PrimeBurger/assets/texture-closeup.png",
+      "size_bytes": 798865,
+      "format": "JPEG",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    }
+  ],
+  "html_summaries": [
+    {
+      "file": "Agencia-Portfolio/index.html",
+      "title": "Studio32 · Digital Systems",
+      "headings": [
+        [
+          "h1",
+          "Studio32 Digital Systems"
+        ],
+        [
+          "h2",
+          "La mayoría de negocios no tienen un problema de calidad. Tienen un problema de traducción digital."
+        ],
+        [
+          "h2",
+          "De presencia a sistema."
+        ],
+        [
+          "h3",
+          "Digital Presence Audit"
+        ],
+        [
+          "h3",
+          "Presence Pack"
+        ],
+        [
+          "h3",
+          "Presence + AI Pack"
+        ],
+        [
+          "h3",
+          "Digital System Custom"
+        ],
+        [
+          "h2",
+          "Sistemas digitales diseñados para industrias concretas."
+        ],
+        [
+          "h3",
+          "Reservas, carta y percepción de alta calidad."
+        ],
+        [
+          "h3",
+          "Impacto visual y conversión móvil rápida."
+        ],
+        [
+          "h3",
+          "Confianza, claridad y primeras consultas."
+        ],
+        [
+          "h3",
+          "Portfolio editorial y autoridad visual."
+        ],
+        [
+          "h2",
+          "Construimos con una secuencia clara, sin convertir el proyecto en una caja negra."
+        ],
+        [
+          "h3",
+          "Auditamos"
+        ],
+        [
+          "h3",
+          "Diseñamos"
+        ],
+        [
+          "h3",
+          "Construimos"
+        ],
+        [
+          "h3",
+          "Automatizamos"
+        ],
+        [
+          "h3",
+          "Mantenemos"
+        ],
+        [
+          "h2",
+          "Antes de rediseñar, entendemos qué debe mejorar."
+        ],
+        [
+          "h3",
+          "Diseño premium, sistemas funcionales e IA práctica para negocios físicos."
+        ]
+      ],
+      "links": [
+        "#top",
+        "#services",
+        "#portfolio",
+        "#process",
+        "#contact",
+        "#contact",
+        "#portfolio",
+        "../Landing1-L'Obscur/restaurant_landing.html",
+        "../Landing2-PrimeBurger/index.html",
+        "../Landing3-Clinic/index.html",
+        "../Landing4-Habitat/index.html",
+        "https://wa.me/34657695181?text=Hola,%20quiero%20solicitar%20una%20auditor%C3%ADa%20de%20presencia%20digital%20para%20mi%20negocio.",
+        "mailto:tsmluky@gmail.com",
+        "https://wa.me/34657695181"
+      ],
+      "scripts": [
+        "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+        "https://unpkg.com/split-type",
+        "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js",
+        "script.js"
+      ],
+      "styles": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap",
+        "styles.css"
+      ],
+      "forms": 0,
+      "buttons": 0,
+      "size": 16881
+    },
+    {
+      "file": "Landing1-L'Obscur/restaurant_landing.html",
+      "title": "L'Obscur | Experiencia Gastronómica",
+      "headings": [
+        [
+          "h1",
+          "Experimenta Lo Divino"
+        ],
+        [
+          "h2",
+          "Una Sinfonía de Sabor"
+        ],
+        [
+          "h2",
+          "La Colección"
+        ],
+        [
+          "h3",
+          "El Corte Obsidiana"
+        ],
+        [
+          "h3",
+          "Elixir de Medianoche"
+        ],
+        [
+          "h3",
+          "La Atmósfera"
+        ],
+        [
+          "h2",
+          "Asegure su asiento"
+        ],
+        [
+          "h3",
+          "L'Obscur"
+        ]
+      ],
+      "links": [
+        "#",
+        "#home",
+        "#story",
+        "#menu",
+        "#reservations",
+        "#reservations",
+        "#menu",
+        "#",
+        "#",
+        "#"
+      ],
+      "scripts": [
+        "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js",
+        "script.js"
+      ],
+      "styles": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap",
+        "styles.css"
+      ],
+      "forms": 1,
+      "buttons": 2,
+      "size": 9623
+    },
+    {
+      "file": "Landing2-PrimeBurger/index.html",
+      "title": "PRIME BURGER | Industrial Smash Lab",
+      "headings": [
+        [
+          "h1",
+          "NOT JUST"
+        ],
+        [
+          "h1",
+          "A BURGER"
+        ],
+        [
+          "h2",
+          "EDIBLE ENGINEERING"
+        ],
+        [
+          "h2",
+          "SYSTEM CONFIGURATIONS"
+        ],
+        [
+          "h3",
+          "THE PROTOTYPE"
+        ],
+        [
+          "h3",
+          "HEAVY METAL"
+        ],
+        [
+          "h3",
+          "THE REACTOR"
+        ],
+        [
+          "h2",
+          "THE DATA"
+        ],
+        [
+          "h2",
+          "SECTOR 4 HEADQUARTERS"
+        ],
+        [
+          "h3",
+          "OPERATIONS CENTER"
+        ],
+        [
+          "h2",
+          "PRIME"
+        ]
+      ],
+      "links": [
+        "#",
+        "#lab",
+        "#menu",
+        "#location",
+        "#menu",
+        "#lab",
+        "#menu",
+        "#location",
+        "#",
+        "#"
+      ],
+      "scripts": [
+        "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js",
+        "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js",
+        "script.js"
+      ],
+      "styles": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap",
+        "styles.css",
+        "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+      ],
+      "forms": 0,
+      "buttons": 6,
+      "size": 16973
+    },
+    {
+      "file": "Landing3-Clinic/index.html",
+      "title": "Aura Dental | Odontología Avanzada en Valencia",
+      "headings": [
+        [
+          "h1",
+          "Recupera la confianza en tu sonrisa."
+        ],
+        [
+          "h2",
+          "Especialidades Clínicas"
+        ],
+        [
+          "h3",
+          "Implantología Inmediata"
+        ],
+        [
+          "h3",
+          "Estética Dental"
+        ],
+        [
+          "h3",
+          "Ortodoncia Invisible"
+        ],
+        [
+          "h2",
+          "Experiencia médica en la que puedes confiar."
+        ],
+        [
+          "h2",
+          "Casos Reales. Vidas Transformadas."
+        ],
+        [
+          "h3",
+          "Diseño de Sonrisa + Carillas"
+        ],
+        [
+          "h3",
+          "Ortodoncia Invisible Integrada"
+        ],
+        [
+          "h3",
+          "Implantología Avanzada"
+        ],
+        [
+          "h2",
+          "Da el primer paso hacia tu nueva sonrisa."
+        ],
+        [
+          "h3",
+          "Solicitar Llamada"
+        ],
+        [
+          "h3",
+          "AuraDental."
+        ]
+      ],
+      "links": [
+        "tel:+34900000000",
+        "#",
+        "#tratamientos",
+        "#equipo",
+        "#casos",
+        "#contacto",
+        "#contacto",
+        "#contacto",
+        "https://wa.me/34600000000?text=Hola,%20quisiera%20pedir%20la%20primera%20cita%20gratuita.",
+        "#",
+        "#",
+        "#",
+        "#"
+      ],
+      "scripts": [
+        "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js",
+        "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js",
+        "script.js"
+      ],
+      "styles": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap",
+        "styles.css",
+        "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+      ],
+      "forms": 1,
+      "buttons": 2,
+      "size": 14440
+    },
+    {
+      "file": "Landing4-Habitat/index.html",
+      "title": "Habitat | Reformas Integrales de Lujo",
+      "headings": [
+        [
+          "h1",
+          "El renacer de tu hogar."
+        ],
+        [
+          "h2",
+          "Excelencia sin compromisos."
+        ],
+        [
+          "h3",
+          "Diseño de Autor"
+        ],
+        [
+          "h3",
+          "Gestión Llave en Mano"
+        ],
+        [
+          "h3",
+          "Cumplimiento al Céntimo"
+        ],
+        [
+          "h2",
+          "El impacto visual de una buena reforma."
+        ],
+        [
+          "h3",
+          "Ático en Ruzafa"
+        ],
+        [
+          "h3",
+          "Cocina de Chef"
+        ],
+        [
+          "h2",
+          "El Camino de la Certeza."
+        ],
+        [
+          "h3",
+          "Auditoría y Deseos"
+        ],
+        [
+          "h3",
+          "Renderizado y Contrato"
+        ],
+        [
+          "h3",
+          "Ejecución Quirúrgica"
+        ],
+        [
+          "h3",
+          "Entrega \"Champagne\""
+        ],
+        [
+          "h2",
+          "\"El 90% de las reformas acaban en juicio o estrés psicológico. Nosotros fundamos Habitat para ser la cura.\""
+        ],
+        [
+          "h3",
+          "Da el primer paso hacia tu nuevo hogar"
+        ]
+      ],
+      "links": [
+        "#",
+        "#proyectos",
+        "#metodo",
+        "#servicios",
+        "#contacto",
+        "#contacto",
+        "#contacto",
+        "#"
+      ],
+      "scripts": [
+        "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js",
+        "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js",
+        "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+        "script.js"
+      ],
+      "styles": [
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap",
+        "styles.css",
+        "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+      ],
+      "forms": 1,
+      "buttons": 2,
+      "size": 16371
+    },
+    {
+      "file": "index.html",
+      "title": "Redirigiendo a Studio 32...",
+      "headings": [],
+      "links": [
+        "./Agencia-Portfolio/index.html"
+      ],
+      "scripts": [],
+      "styles": [],
+      "forms": 0,
+      "buttons": 0,
+      "size": 575
+    }
+  ]
+}
