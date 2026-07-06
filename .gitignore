@@ -31,3 +31,6 @@ Studio32_Context_Pack_for_Claude_Code.pdf
 .DS_Store
 Thumbs.db
 .fuse_hidden*
+
+# ── Carpeta generada solo para arrastrar a Netlify (duplicado del sitio) ──
+netlify-deploy-seguro/
