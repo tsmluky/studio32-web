@@ -21,6 +21,10 @@ studio32-agent/data/*
 studio32-agent/tenants/*
 !studio32-agent/tenants/.gitkeep
 
+# ── Volcados de contexto con datos personales (email/whatsapp de Pancho) ──
+studio32_FULL_RAW_CONTEXT_FOR_CLAUDE_CODE.txt
+Studio32_Context_Pack_for_Claude_Code.pdf
+
 # ── Artefactos y temporales ──
 *.zip
 *.log
