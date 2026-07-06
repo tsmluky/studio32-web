@@ -17,8 +17,13 @@ node_modules/
 studio32-agent/data/*
 !studio32-agent/data/.gitkeep
 
+# ── Tenants: llevan owner.token real y WhatsApp personal — nunca al repo ──
+studio32-agent/tenants/*
+!studio32-agent/tenants/.gitkeep
+
 # ── Artefactos y temporales ──
 *.zip
 *.log
 .DS_Store
 Thumbs.db
+.fuse_hidden*
