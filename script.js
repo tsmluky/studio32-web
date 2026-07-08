@@ -66,6 +66,9 @@ function initHeroAnimations() {
 
 // 4. Scroll Reveal Animations (SplitType)
 function initScrollAnimations() {
+    // Respeta reduced-motion: deja el texto visible sin animación.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     // Romper textos en lineas para animarlos
     const splitTexts = document.querySelectorAll('.split-lines');
 
@@ -98,66 +101,59 @@ function initScrollAnimations() {
 }
 
 
-// 5. Magnetic Hover Cursor
+// 5. Cursor personalizado + efecto magnético
+// Solo en punteros finos (desktop) y si el usuario no ha pedido reduced-motion.
+// En móvil/táctil no se ejecuta nada de esto (mejor performance).
+const finePointer = window.matchMedia('(pointer: fine)').matches
+    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const cursor = document.querySelector('.cursor');
 const follower = document.querySelector('.cursor-follower');
-const magnetics = document.querySelectorAll('.magnetic');
 
-let mouseX = 0, mouseY = 0;
-let cursorX = 0, cursorY = 0;
-let followerX = 0, followerY = 0;
+if (finePointer && cursor && follower) {
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    let followerX = 0, followerY = 0;
 
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-});
-
-// Loop for smooth cursor following
-gsap.ticker.add(() => {
-    // Cursor dot follows instantly
-    cursorX += (mouseX - cursorX) * 0.5;
-    cursorY += (mouseY - cursorY) * 0.5;
-    cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
-
-    // Follower ring follows with delay
-    followerX += (mouseX - followerX) * 0.15;
-    followerY += (mouseY - followerY) * 0.15;
-    follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
-});
-
-// Magnetic effect when hovering over elements
-magnetics.forEach(btn => {
-    btn.addEventListener('mousemove', function (e) {
-        const bound = this.getBoundingClientRect();
-        const strength = this.dataset.strength || 20;
-
-        // Calculate distance from center of element
-        const x = ((e.clientX - bound.left) / bound.width - 0.5) * strength;
-        const y = ((e.clientY - bound.top) / bound.height - 0.5) * strength;
-
-        gsap.to(this, {
-            x: x,
-            y: y,
-            duration: 1,
-            ease: "power4.out"
-        });
-
-        cursor.classList.add('active');
-        follower.classList.add('active');
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
     });
 
-    btn.addEventListener('mouseleave', function () {
-        gsap.to(this, {
-            x: 0,
-            y: 0,
-            duration: 1,
-            ease: "elastic.out(1, 0.3)"
+    // Loop for smooth cursor following
+    gsap.ticker.add(() => {
+        cursorX += (mouseX - cursorX) * 0.5;
+        cursorY += (mouseY - cursorY) * 0.5;
+        cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+
+        followerX += (mouseX - followerX) * 0.15;
+        followerY += (mouseY - followerY) * 0.15;
+        follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
+    });
+
+    // Efecto magnético solo en elementos ligeros (botones/enlaces con .magnetic).
+    // Las tarjetas grandes con imagen ya NO llevan .magnetic para evitar el lag.
+    document.querySelectorAll('.magnetic').forEach(btn => {
+        btn.addEventListener('mousemove', function (e) {
+            const bound = this.getBoundingClientRect();
+            const strength = this.dataset.strength || 20;
+
+            const x = ((e.clientX - bound.left) / bound.width - 0.5) * strength;
+            const y = ((e.clientY - bound.top) / bound.height - 0.5) * strength;
+
+            gsap.to(this, { x: x, y: y, duration: 1, ease: "power4.out" });
+
+            cursor.classList.add('active');
+            follower.classList.add('active');
         });
 
-        cursor.classList.remove('active');
-        follower.classList.remove('active');
+        btn.addEventListener('mouseleave', function () {
+            gsap.to(this, { x: 0, y: 0, duration: 1, ease: "elastic.out(1, 0.3)" });
+
+            cursor.classList.remove('active');
+            follower.classList.remove('active');
+        });
     });
-});
+}
 
 
 // 6. Mobile menu (hamburger toggle + overlay)
@@ -214,4 +210,3 @@ if (navToggle && mobileMenu) {
         }
     });
 }
-

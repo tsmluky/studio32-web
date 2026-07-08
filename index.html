@@ -4,29 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studio32 · Diseño Web y Sistemas Digitales para Negocios en Valencia</title>
+    <title>Studio32 · Diseño Web y Sistemas Digitales para Negocios</title>
     <meta name="description"
-        content="Diseñamos webs premium y sistemas digitales para negocios en Valencia: presencia, captación, WhatsApp e IA práctica. Empieza con una auditoría." />
+        content="Diseñamos webs premium y sistemas digitales para negocios: presencia, captación, WhatsApp e IA práctica. Empieza con una auditoría." />
     <meta name="theme-color" content="#090908">
-    <meta name="geo.region" content="ES-VC">
-    <meta name="geo.placename" content="Valencia">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Studio32" />
-    <meta property="og:title" content="Studio32 · Diseño Web y Sistemas Digitales para Negocios en Valencia" />
+    <meta property="og:title" content="Studio32 · Diseño Web y Sistemas Digitales para Negocios" />
     <meta property="og:description"
-        content="Diseñamos webs premium y sistemas digitales para negocios en Valencia: presencia, captación, WhatsApp e IA práctica. Empieza con una auditoría." />
+        content="Diseñamos webs premium y sistemas digitales para negocios: presencia, captación, WhatsApp e IA práctica. Empieza con una auditoría." />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:url" content="https://www.studio32.es/" />
     <meta property="og:image" content="https://www.studio32.es/assets/og-cover.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Studio32 · Diseño web y sistemas digitales para negocios en Valencia" />
+    <meta property="og:image:alt" content="Studio32 · Diseño web y sistemas digitales para negocios" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Studio32 · Diseño Web y Sistemas Digitales para Negocios en Valencia" />
+    <meta name="twitter:title" content="Studio32 · Diseño Web y Sistemas Digitales para Negocios" />
     <meta name="twitter:description"
-        content="Webs premium y sistemas digitales para negocios en Valencia. Presencia, captación, WhatsApp e IA práctica." />
+        content="Webs premium y sistemas digitales para negocios. Presencia, captación, WhatsApp e IA práctica." />
     <meta name="twitter:image" content="https://www.studio32.es/assets/og-cover.png" />
 
     <link rel="icon"
@@ -42,53 +40,80 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://unpkg.com/split-type@0.3.4"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
     <script src="script.js" defer></script>
+
+    <!-- Red de seguridad del preloader: si un CDN falla o el JS principal
+         no llega a retirarlo, lo forzamos para no dejar la web en negro. -->
+    <script>
+        (function () {
+            function hidePreloader() {
+                var p = document.querySelector('.preloader');
+                if (p) { p.classList.add('is-done'); }
+            }
+            document.addEventListener('DOMContentLoaded', function () {
+                if (typeof window.gsap === 'undefined') { hidePreloader(); }
+            });
+            window.addEventListener('load', function () {
+                setTimeout(function () {
+                    var p = document.querySelector('.preloader');
+                    if (p && !p.classList.contains('is-done')) { hidePreloader(); }
+                }, 4000);
+            });
+        })();
+    </script>
+    <noscript>
+        <style>
+            .preloader,
+            .cursor,
+            .cursor-follower,
+            .grain {
+                display: none !important;
+            }
+        </style>
+    </noscript>
+
     <link rel="canonical" href="https://www.studio32.es/" />
 
     <!--
-      JSON-LD · Datos estructurados para SEO local (LocalBusiness + ProfessionalService).
+      JSON-LD · Datos estructurados (ProfessionalService).
       Datos de contacto reales aplicados (07/2026). Añadir sameAs cuando existan perfiles sociales.
       Valida en: https://search.google.com/test/rich-results
     -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": ["LocalBusiness", "ProfessionalService"],
+      "@type": "ProfessionalService",
       "@id": "https://www.studio32.es/#studio32",
       "name": "Studio32",
       "alternateName": "Studio32 · Digital Systems",
-      "description": "Diseñamos webs premium y sistemas digitales para negocios en Valencia: presencia, captación, WhatsApp e IA práctica.",
+      "description": "Diseñamos webs premium y sistemas digitales para negocios: presencia, captación, WhatsApp e IA práctica.",
       "url": "https://www.studio32.es/",
       "image": "https://www.studio32.es/assets/og-cover.png",
       "logo": "https://www.studio32.es/assets/og-cover.png",
       "priceRange": "€€€",
       "telephone": "+34 694 29 31 66",
       "email": "info@studio32.es",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Valencia",
-        "addressRegion": "Comunidad Valenciana",
-        "addressCountry": "ES"
+      "areaServed": { "@type": "Country", "name": "España" },
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://www.studio32.es/",
+        "servicePhone": "+34 694 29 31 66"
       },
-      "areaServed": [
-        { "@type": "City", "name": "Valencia" },
-        { "@type": "Country", "name": "España" }
-      ],
       "serviceType": [
         "Diseño web premium",
         "Auditoría de presencia digital",
         "Automatización con WhatsApp",
         "IA aplicada a captación",
-        "Sistemas digitales para negocios locales"
+        "Sistemas digitales para negocios"
       ],
       "knowsAbout": [
         "Diseño web para restaurantes",
         "Diseño web para clínicas dentales",
         "Diseño web para estudios de arquitectura",
         "Automatización de captación",
-        "Asistentes de IA para negocios locales"
+        "Asistentes de IA para negocios"
       ]
     }
     </script>
@@ -152,7 +177,7 @@
                     <a href="mailto:info@studio32.es">info@studio32.es</a>
                     <a href="https://wa.me/34694293166" target="_blank" rel="noopener">+34 694 29 31 66</a>
                 </div>
-                <p class="mobile-menu-brand">Studio32 · Digital Systems · Valencia</p>
+                <p class="mobile-menu-brand">Studio32 · Digital Systems</p>
             </div>
         </div>
     </div>
@@ -160,7 +185,7 @@
     <header class="hero" id="top">
         <div class="container hero-inner">
             <div class="hero-top">
-                <p class="hero-subtitle">[ ESTUDIO DE SISTEMAS DIGITALES · VALENCIA ]</p>
+                <p class="hero-subtitle">[ ESTUDIO DE SISTEMAS DIGITALES ]</p>
                 <p class="hero-meta">Cuatro capas. <em>Un solo sistema.</em></p>
             </div>
 
@@ -296,8 +321,22 @@
             </div>
 
             <div class="vertical-grid">
-                <a href="Landing1-L%27Obscur/restaurant_landing.html" target="_blank" rel="noopener"
-                    class="vertical-card magnetic" data-strength="35">
+                <a href="Demos-Clientes/la-taberna-de-ruzafa/index.html" target="_blank" rel="noopener"
+                    class="vertical-card vertical-card--case">
+                    <div class="vertical-media"
+                        style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200');">
+                    </div>
+                    <div class="vertical-content">
+                        <span>Caso real · La Taberna de Ruzafa</span>
+                        <h3>Un cliente real, ya funcionando.</h3>
+                        <p>Web premium conectada al asistente de Studio32: carta, reservas y contacto en un único
+                            flujo. La misma calidad de las demos, aplicada a un negocio real.</p>
+                        <strong>Ver caso real</strong>
+                    </div>
+                </a>
+
+                <a href="Landing1-L%27Obscur/index.html" target="_blank" rel="noopener"
+                    class="vertical-card">
                     <div class="vertical-media"
                         style="background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=1200');">
                     </div>
@@ -311,7 +350,7 @@
                 </a>
 
                 <a href="Landing2-PrimeBurger/index.html" target="_blank" rel="noopener"
-                    class="vertical-card magnetic" data-strength="35">
+                    class="vertical-card">
                     <div class="vertical-media"
                         style="background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=1200');">
                     </div>
@@ -324,8 +363,7 @@
                     </div>
                 </a>
 
-                <a href="Landing3-Clinic/index.html" target="_blank" rel="noopener" class="vertical-card magnetic"
-                    data-strength="35">
+                <a href="Landing3-Clinic/index.html" target="_blank" rel="noopener" class="vertical-card">
                     <div class="vertical-media"
                         style="background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1200');">
                     </div>
@@ -338,8 +376,7 @@
                     </div>
                 </a>
 
-                <a href="Landing4-Habitat/index.html" target="_blank" rel="noopener" class="vertical-card magnetic"
-                    data-strength="35">
+                <a href="Landing4-Habitat/index.html" target="_blank" rel="noopener" class="vertical-card">
                     <div class="vertical-media"
                         style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&q=80&w=1200');">
                     </div>
@@ -428,7 +465,7 @@
 
             <div class="footer-bottom">
                 <div class="brand">Studio32 · Digital Systems ©2026</div>
-                <div class="location">Valencia, España</div>
+                <div class="location">España</div>
             </div>
         </div>
     </section>

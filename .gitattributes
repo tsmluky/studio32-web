@@ -1,0 +1,15 @@
+# Normaliza los fines de línea: en el repo se guardan como LF.
+# Elimina el "ruido" de 128 archivos marcados como modificados en Windows.
+* text=auto eol=lf
+
+# Binarios: nunca tocar los fines de línea.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.ico  binary
+*.pdf  binary
+*.woff  binary
+*.woff2 binary
+*.zip  binary
