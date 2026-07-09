@@ -1,0 +1,5 @@
+# Netlify · Studio32
+# La web publicable vive en site/. El resto del repo (docs, agente, scripts y
+# manuales internos como CLAUDE.md o PROMPT.md) queda FUERA del dominio.
+[build]
+  publish = "site"
