@@ -101,9 +101,11 @@ function initScrollAnimations() {
 }
 
 
-// 5. Cursor personalizado + efecto magnético
-// Solo en punteros finos (desktop) y si el usuario no ha pedido reduced-motion.
-// En móvil/táctil no se ejecuta nada de esto (mejor performance).
+// 5. Cursor personalizado (solo en punteros finos / desktop, sin reduced-motion).
+// Se elimina el efecto magnético para priorizar la fluidez: los elementos ya no
+// se desplazan. El cursor sigue reaccionando al hover de elementos interactivos
+// (estado .active), lo que mantiene la firma visual sin coste de rendimiento.
+// En móvil/táctil no se ejecuta nada de esto.
 const finePointer = window.matchMedia('(pointer: fine)').matches
     && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const cursor = document.querySelector('.cursor');
@@ -119,7 +121,7 @@ if (finePointer && cursor && follower) {
         mouseY = e.clientY;
     });
 
-    // Loop for smooth cursor following
+    // Loop suave de seguimiento del cursor.
     gsap.ticker.add(() => {
         cursorX += (mouseX - cursorX) * 0.5;
         cursorY += (mouseY - cursorY) * 0.5;
@@ -130,25 +132,14 @@ if (finePointer && cursor && follower) {
         follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
     });
 
-    // Efecto magnético solo en elementos ligeros (botones/enlaces con .magnetic).
-    // Las tarjetas grandes con imagen ya NO llevan .magnetic para evitar el lag.
-    document.querySelectorAll('.magnetic').forEach(btn => {
-        btn.addEventListener('mousemove', function (e) {
-            const bound = this.getBoundingClientRect();
-            const strength = this.dataset.strength || 20;
-
-            const x = ((e.clientX - bound.left) / bound.width - 0.5) * strength;
-            const y = ((e.clientY - bound.top) / bound.height - 0.5) * strength;
-
-            gsap.to(this, { x: x, y: y, duration: 1, ease: "power4.out" });
-
+    // El cursor crece sobre elementos interactivos, sin desplazarlos.
+    const interactive = document.querySelectorAll('a, button, .cap-item, .vertical-card, .assistant-proof');
+    interactive.forEach(el => {
+        el.addEventListener('mouseenter', () => {
             cursor.classList.add('active');
             follower.classList.add('active');
         });
-
-        btn.addEventListener('mouseleave', function () {
-            gsap.to(this, { x: 0, y: 0, duration: 1, ease: "elastic.out(1, 0.3)" });
-
+        el.addEventListener('mouseleave', () => {
             cursor.classList.remove('active');
             follower.classList.remove('active');
         });
