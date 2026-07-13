@@ -1,5 +1,12 @@
 # PROMPT — Contexto Studio32
 
+> **Actualización vigente (11/07/2026):** el foco principal es Studio32 Agent
+> Platform. La definición canónica, el reparto de repositorios, las pizarras y el
+> concepto de dashboard están en
+> `../../00-direccion-y-operaciones/estrategia/NORTE-AGENT-PLATFORM-2026-07.md`.
+> Este
+> prompt conserva contexto útil de marca y de la web estática.
+
 > Prompt condensado para pegar al inicio de una conversación con Claude y arrancar con el contexto completo del proyecto. Versión densa del `CLAUDE.md`.
 
 ---

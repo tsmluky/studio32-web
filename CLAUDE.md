@@ -1,5 +1,12 @@
 # CLAUDE.md — Studio32 Working Instruction Manual
 
+> **Current product direction (11/07/2026):** read
+> `../../00-direccion-y-operaciones/estrategia/NORTE-AGENT-PLATFORM-2026-07.md`
+> before product or architecture work.
+> This manual remains useful for the static commercial web, but its older repo
+> map and "no backend" rules do not apply to the independent Agent Platform
+> backend or independent panel.
+
 This file is the operating reference for Claude Code inside this repository.
 Read it before making any changes. Keep it updated when the project evolves.
 

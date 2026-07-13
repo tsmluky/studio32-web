@@ -28,25 +28,59 @@ Use these four service lines as the commercial spine:
 - **Presence + AI Pack**: premium web plus assistant for FAQs, lead capture, booking/request support and basic business-data training.
 - **Digital System Custom**: dashboards, basic CRM, internal automations, inventory, advanced reservations, internal panels and integrations with Sheets, Make, Zapier, n8n or similar.
 
+## Current Product Priority · July 2026
+
+The current number-one product focus is **Studio32 Agent Platform**: a
+multi-tenant reception system for WhatsApp with conversations, appointments,
+human takeover and editable business knowledge.
+
+- First vertical: dental clinics.
+- MVP channel: Twilio Sandbox; real numbers later.
+- Client surface: an independent responsive web panel.
+- Data foundation: Supabase/PostgreSQL, Auth, RLS and Realtime.
+- Completion criterion: WhatsApp → agent → appointment → panel → human takeover
+  → updated knowledge used in the next conversation.
+
+This priority does not remove the four service lines. Studio32 remains the
+Digital Systems umbrella; Agent Platform is the flagship operational product.
+
+Canonical strategic reference:
+`../../00-direccion-y-operaciones/estrategia/NORTE-AGENT-PLATFORM-2026-07.md`.
+
 ## Repo Structure
 
-This repo is currently a static multi-landing collection:
+This repository is `studio32-web`. Its public surface remains static:
 
-- Root `index.html`: redirects to the main agency landing.
-- `Agencia-Portfolio/`: current Studio32 landing.
-- `Landing1-L'Obscur/`: premium restaurant demo. Entry: `restaurant_landing.html`.
-- `Landing2-PrimeBurger/`: urban burger/food brand demo. Entry: `index.html`.
-- `Landing3-Clinic/`: dental clinic demo. Entry: `index.html`.
-- `Landing4-Habitat/`: architecture/interiorism/reforms demo. Entry: `index.html`.
+- `site/index.html`: current Studio32 landing and Netlify publish entry.
+- `site/Agencia-Portfolio/`: previous landing plus incomplete legal pages.
+- `site/Landing1-L'Obscur/`: premium restaurant demo.
+- `site/Landing2-PrimeBurger/`: urban burger/food brand demo; nested `.git` risk.
+- `site/Landing3-Clinic/`: dental clinic demo.
+- `site/Landing4-Habitat/`: architecture/interiorism/reforms demo.
+- `site/Demos-Clientes/la-taberna-de-ruzafa/`: conceptual restaurant demo, not
+  a real client case.
+- `studio32-agent/`: complete reference/development copy of the agent inside the
+  web repo. It is excluded from the Netlify publish surface.
 
-There is no detected `package.json`, Vite, Next, Astro or build pipeline yet. Treat the project as static HTML/CSS/JS until that changes.
+Separate product surfaces:
+
+- Canonical backend repo: `github.com/tsmluky/studio32-agent`; local clone
+  `C:\Users\lukys\Desktop\Studio32\10-producto\studio32-agent`.
+- Independent panel repo: `C:\Users\lukys\Desktop\Studio32\10-producto\studio32-panel`,
+  currently deployed on a temporary Netlify URL and intended for
+  `panel.studio32.es`.
+- Shared data layer: Supabase project for Agent Platform; migrations live in
+  the canonical backend repo.
+
+The static web must not be converted wholesale to a framework. The panel uses
+its own stack and build pipeline without changing `site/`.
 
 ## How To Run
 
-Open files directly in a browser, or serve the repo root with a static server:
+Serve the public `site/` directory:
 
 ```bash
-python -m http.server 8080
+python -m http.server 8080 --directory site
 ```
 
 Then visit:
@@ -63,11 +97,18 @@ External runtime dependencies are loaded from CDNs: Google Fonts, Lenis, GSAP, S
 ## Working Rules
 
 - Preserve existing folders, assets and demos unless the user explicitly approves removal.
+- Treat La Taberna as a conceptual demo, never as a verified client or market proof.
+- Keep web, agent backend and panel as independently deployable surfaces.
+- Do not treat `Studio32/studio32-agent-deploy/` as canonical.
+- Reconcile changes into the standalone agent repo deliberately; do not copy
+  directories blindly between clones.
 - Keep changes small, reviewable and scoped.
 - Do not convert the entire repo to a framework without explicit approval.
 - Do not install dependencies unless there is a clear maintenance or deploy reason.
 - Before major UI redesigns, update the plan and explain the intended direction.
-- Prefer improving the main Studio32 landing first, then connect and normalize the demos.
+- Product work now prioritizes the Agent Platform foundation and dental MVP.
+- Do not redesign the full Studio32 landing until the Agent Platform has a
+  validated E2E flow and the user approves the commercial repositioning.
 - Keep demos useful as vertical proof, not just visual experiments.
 
 ## Quality Criteria
@@ -85,7 +126,13 @@ Review changes against:
 
 ## Known Risks
 
-- The worktree is currently dirty and includes prior changes/deletions not created by Codex.
-- `Landing2-PrimeBurger/` contains its own nested `.git` directory; handle carefully.
+- The root worktree can be clean while ignored or nested repositories remain
+  dirty. Inspect each Git boundary separately.
+- `site/Landing2-PrimeBurger/` contains its own nested `.git` directory; handle carefully.
+- `studio32-agent-deploy/` is an ignored nested clone with pre-existing changes.
+- The standalone backend repo currently differs from the complete reference
+  copy and must be reconciled before new backend deployment work.
 - Several pages rely on external Unsplash/CDN assets, so offline rendering is incomplete.
-- The current main landing copy is too aggressive for the target Studio32 brand and should be rewritten before commercial use.
+- Documentation predating 11/07/2026 may still describe the restaurant-first
+  roadmap or a client experience without a panel. The canonical north document
+  supersedes those decisions when they conflict.
