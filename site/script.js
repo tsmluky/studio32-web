@@ -177,7 +177,7 @@ if (finePointer && cursor && follower) {
     });
 
     // El cursor crece sobre elementos interactivos, sin desplazarlos.
-    const interactive = document.querySelectorAll('a, button, .cap-item, .vertical-card, .chat-mockup, .dashboard-mockup, .fit-card, .service-mini');
+    const interactive = document.querySelectorAll('a, button, .cap-item, .vertical-card, .demo-card, .chat-mockup, .dashboard-mockup, .fit-card, .service-mini');
     interactive.forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursor.classList.add('active');

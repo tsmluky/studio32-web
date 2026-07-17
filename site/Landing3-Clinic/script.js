@@ -1,119 +1,83 @@
-// Initialize Lenis for smooth scroll
-const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    direction: 'vertical',
-    gestureDirection: 'vertical',
-    smooth: true,
-    mouseMultiplier: 1,
-    smoothTouch: false,
-    touchMultiplier: 2,
-    infinite: false,
-})
+document.documentElement.classList.add('js');
 
-function raf(time) {
-    lenis.raf(time)
-    requestAnimationFrame(raf)
+const navToggle = document.querySelector('.nav-toggle');
+const primaryNav = document.querySelector('.primary-nav');
+
+function closeNavigation() {
+    if (!navToggle || !primaryNav) return;
+    primaryNav.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Abrir menú');
 }
 
-requestAnimationFrame(raf)
-
-// Navbar scroll effect
-const navbar = document.querySelector('.navbar');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.style.boxShadow = '0 10px 30px rgba(0,0,0,0.05)';
-        navbar.style.padding = '15px 0';
-    } else {
-        navbar.style.boxShadow = 'none';
-        navbar.style.padding = '20px 0';
-    }
-});
-
-// Scroll Reveal
-function reveal() {
-    var reveals = document.querySelectorAll(".reveal");
-    for (var i = 0; i < reveals.length; i++) {
-        var windowHeight = window.innerHeight;
-        var elementTop = reveals[i].getBoundingClientRect().top;
-        var elementVisible = 150;
-        if (elementTop < windowHeight - elementVisible) {
-            reveals[i].classList.add("active");
-        }
-    }
-}
-
-// Trigger reveal on load
-window.addEventListener('load', reveal);
-window.addEventListener("scroll", reveal);
-
-// Smooth scroll to anchor links using Lenis
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = this.getAttribute('href');
-        if (target !== '#') {
-            lenis.scrollTo(target, { offset: -80 });
-        }
-    });
-});
-
-// Initialize Swiper for Success Cases
-const casesSwiper = new Swiper('.cases-swiper', {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    loop: true,
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-    },
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    breakpoints: {
-        768: {
-            slidesPerView: 2,
-        }
-    }
-});
-
-// Mobile menu toggle
-const mobileBtn = document.querySelector('.mobile-menu-btn');
-const navLinks = document.querySelector('.nav-links');
-
-function closeMobileNav() {
-    navLinks.classList.remove('active');
-    mobileBtn.setAttribute('aria-expanded', 'false');
-    mobileBtn.setAttribute('aria-label', 'Abrir menú');
-}
-
-if (mobileBtn && navLinks) {
-    mobileBtn.addEventListener('click', () => {
-        const isOpen = navLinks.classList.contains('active');
-        navLinks.classList.toggle('active');
-        mobileBtn.setAttribute('aria-expanded', String(!isOpen));
-        mobileBtn.setAttribute('aria-label', isOpen ? 'Abrir menú' : 'Cerrar menú');
+if (navToggle && primaryNav) {
+    navToggle.addEventListener('click', () => {
+        const willOpen = !primaryNav.classList.contains('is-open');
+        primaryNav.classList.toggle('is-open', willOpen);
+        navToggle.setAttribute('aria-expanded', String(willOpen));
+        navToggle.setAttribute('aria-label', willOpen ? 'Cerrar menú' : 'Abrir menú');
     });
 
-    // Cerrar al hacer clic en un enlace
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', closeMobileNav);
+    primaryNav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeNavigation);
     });
 
-    // Cerrar con Escape
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && navLinks.classList.contains('active')) closeMobileNav();
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeNavigation();
     });
 
-    // Cerrar si se redimensiona a desktop
     window.addEventListener('resize', () => {
-        if (window.innerWidth > 900) closeMobileNav();
+        if (window.innerWidth > 820) closeNavigation();
     });
 }
 
+const revealElements = document.querySelectorAll('.reveal');
+
+if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.14, rootMargin: '0px 0px -6% 0px' });
+
+    revealElements.forEach((element) => revealObserver.observe(element));
+} else {
+    revealElements.forEach((element) => element.classList.add('is-visible'));
+}
+
+const bookingDemo = document.querySelector('[data-booking-demo]');
+
+if (bookingDemo) {
+    const bookingStatus = bookingDemo.querySelector('[data-booking-status]');
+    const bookingAction = bookingDemo.querySelector('[data-booking-action]');
+    const selections = {};
+
+    bookingDemo.querySelectorAll('[data-choice-group]').forEach((group) => {
+        const groupName = group.dataset.choiceGroup;
+        const buttons = group.querySelectorAll('[data-choice]');
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                buttons.forEach((candidate) => candidate.setAttribute('aria-pressed', 'false'));
+                button.setAttribute('aria-pressed', 'true');
+                selections[groupName] = button.dataset.choice;
+                bookingStatus.classList.remove('is-ready');
+                bookingStatus.textContent = 'Selección guardada. Completa ambos bloques.';
+            });
+        });
+    });
+
+    bookingAction.addEventListener('click', () => {
+        if (!selections.motivo || !selections.horario) {
+            bookingStatus.classList.remove('is-ready');
+            bookingStatus.textContent = 'Selecciona una opción en cada bloque para preparar la solicitud.';
+            return;
+        }
+
+        bookingStatus.classList.add('is-ready');
+        bookingStatus.textContent = `${selections.motivo} · preferencia de ${selections.horario.toLowerCase()}. Solicitud de demostración preparada.`;
+        bookingAction.textContent = 'Solicitud preparada';
+    });
+}
