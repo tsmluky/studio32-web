@@ -147,7 +147,6 @@ button {
     pointer-events: none;
     z-index: 10000;
     transform: translate(-50%, -50%);
-    transition: width 0.3s var(--transition), height 0.3s var(--transition), mix-blend-mode 0.3s;
 }
 
 .cursor-follower {
@@ -162,19 +161,6 @@ button {
     z-index: 9999;
     transform: translate(-50%, -50%);
     transition: width 0.4s var(--transition), height 0.4s var(--transition), border-color 0.4s;
-}
-
-.cursor.active {
-    width: 70px;
-    height: 70px;
-    background-color: #fff;
-    mix-blend-mode: difference;
-}
-
-.cursor-follower.active {
-    width: 0;
-    height: 0;
-    border: none;
 }
 
 .container {
@@ -1809,26 +1795,26 @@ body.menu-open .mobile-menu {
 
 .demo-showcase-header {
     display: grid;
-    grid-template-columns: minmax(230px, 0.5fr) minmax(0, 1.2fr);
-    gap: 7vw;
-    align-items: start;
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.58fr);
+    gap: 6vw;
+    align-items: end;
     margin: 120px 0 50px;
     padding-top: 34px;
     border-top: 1px solid var(--border);
 }
 
 .demo-showcase-header .section-label {
-    margin: 0;
+    margin-bottom: 24px;
 }
 
 .demo-showcase-header h3 {
-    margin-bottom: 20px;
+    margin: 0;
     font-family: var(--font-heading);
     font-size: clamp(2.5rem, 4.8vw, 5.8rem);
     line-height: 0.96;
 }
 
-.demo-showcase-header p:last-child {
+.demo-showcase-header > p {
     max-width: 52ch;
     color: var(--text-muted);
     font-size: 1.02rem;
@@ -1998,9 +1984,17 @@ body.menu-open .mobile-menu {
     min-height: 100vh;
     display: flex;
     align-items: center;
+    /* Imagen auto-alojada (antes era un Unsplash remoto a 2200px). WebP con
+       respaldo JPG: los navegadores sin image-set usan la primera declaración. */
     background:
         linear-gradient(180deg, rgba(9, 9, 8, 0.3), rgba(9, 9, 8, 0.92)),
-        url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=85&w=2200') center/cover;
+        url('assets/cta-bg.jpg') center / cover;
+    background:
+        linear-gradient(180deg, rgba(9, 9, 8, 0.3), rgba(9, 9, 8, 0.92)),
+        image-set(
+            url('assets/cta-bg.webp') type('image/webp'),
+            url('assets/cta-bg.jpg') type('image/jpeg')
+        ) center / cover;
 }
 
 .cta-panel {
