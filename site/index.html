@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agente de WhatsApp para negocios locales · Studio32</title>
     <meta name="description"
-        content="Agente de recepción por WhatsApp: atiende, informa y agenda citas 24/7, con panel de control e intervención humana. Para clínicas, restaurantes y servicios locales en España." />
+        content="Agente de recepción por WhatsApp para negocios locales: atiende, informa y gestiona citas 24/7, con panel e intervención humana." />
     <meta name="theme-color" content="#090908">
 
     <!-- Open Graph -->
@@ -14,7 +14,7 @@
     <meta property="og:site_name" content="Studio32" />
     <meta property="og:title" content="Agente de WhatsApp para negocios locales · Studio32" />
     <meta property="og:description"
-        content="Agente de recepción por WhatsApp: atiende, informa y agenda citas 24/7, con panel de control e intervención humana. Para clínicas, restaurantes y servicios locales en España." />
+        content="Agente de recepción por WhatsApp para negocios locales: atiende, informa y gestiona citas 24/7, con panel e intervención humana." />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:url" content="https://www.studio32.es/" />
     <meta property="og:image" content="https://www.studio32.es/assets/og-cover.png" />
@@ -36,13 +36,13 @@
         href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,300&family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20260717-agent-2">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/split-type@0.3.4"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
-    <script src="script.js" defer></script>
+    <script src="script.js?v=20260717-agent-2" defer></script>
 
     <!-- Red de seguridad del preloader: si un CDN falla o el JS principal
          no llega a retirarlo, lo forzamos para no dejar la web en negro. -->
@@ -137,6 +137,7 @@
 </head>
 
 <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
     <div class="grain"></div>
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
@@ -156,10 +157,10 @@
         <div class="container nav-content">
             <a href="#top" class="logo">Studio32</a>
             <div class="nav-right">
-                <a href="#assistant" class="nav-link">Agente</a>
-                <a href="#portfolio" class="nav-link">Verticales</a>
-                <a href="#process" class="nav-link">Método</a>
-                <a href="#contact" class="nav-btn">Auditoría</a>
+                <a href="#agente" class="nav-link">Agente</a>
+                <a href="#control" class="nav-link">Control</a>
+                <a href="#process" class="nav-link">Implantación</a>
+                <a href="#contact" class="nav-btn">Hablemos</a>
                 <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"
                     aria-controls="mobile-menu">
                     <span class="nav-toggle-bar"></span>
@@ -173,27 +174,27 @@
         <div class="mobile-menu-inner">
             <p class="mobile-menu-label">[ NAVEGACIÓN ]</p>
             <nav class="mobile-menu-nav" aria-label="Menú móvil">
-                <a href="#assistant" class="mobile-menu-link" data-mobile-close>
+                <a href="#agente" class="mobile-menu-link" data-mobile-close>
                     <span class="mobile-menu-index">01</span>
                     <span class="mobile-menu-text">Agente</span>
                 </a>
-                <a href="#portfolio" class="mobile-menu-link" data-mobile-close>
+                <a href="#control" class="mobile-menu-link" data-mobile-close>
                     <span class="mobile-menu-index">02</span>
-                    <span class="mobile-menu-text">Verticales</span>
+                    <span class="mobile-menu-text">Control</span>
                 </a>
                 <a href="#process" class="mobile-menu-link" data-mobile-close>
                     <span class="mobile-menu-index">03</span>
-                    <span class="mobile-menu-text">Método</span>
+                    <span class="mobile-menu-text">Implantación</span>
                 </a>
                 <a href="#contact" class="mobile-menu-link" data-mobile-close>
                     <span class="mobile-menu-index">04</span>
-                    <span class="mobile-menu-text">Auditoría</span>
+                    <span class="mobile-menu-text">Hablemos</span>
                 </a>
             </nav>
             <div class="mobile-menu-foot">
-                <a href="https://wa.me/34694293166?text=Hola,%20quiero%20solicitar%20una%20auditor%C3%ADa%20de%20presencia%20digital%20para%20mi%20negocio."
+                <a href="https://wa.me/34694293166?text=Hola,%20quiero%20ver%20si%20el%20agente%20de%20WhatsApp%20encaja%20en%20mi%20negocio."
                     target="_blank" rel="noopener" class="mobile-menu-cta" data-mobile-close>
-                    Solicitar auditoría
+                    Hablar sobre mi negocio
                 </a>
                 <div class="mobile-menu-contact">
                     <a href="mailto:info@studio32.es">info@studio32.es</a>
@@ -254,6 +255,8 @@
         </div>
     </header>
 
+    <main id="contenido">
+
     <section class="section diagnosis" id="problema">
         <div class="container">
             <div class="diagnosis-grid">
@@ -274,8 +277,8 @@
                 <div>
                     <span>Señal 01</span>
                     <strong>Fuera de horario</strong>
-                    <p>Buena parte de las consultas llegan cuando el negocio está cerrado. Quien no obtiene respuesta,
-                        escribe al siguiente.</p>
+                    <p>Las consultas también llegan cuando el negocio está cerrado. Quien no obtiene respuesta puede
+                        escribir al siguiente.</p>
                 </div>
                 <div>
                     <span>Señal 02</span>
@@ -291,20 +294,65 @@
         </div>
     </section>
 
-    <section class="section assistant" id="assistant">
+    <section class="section assistant" id="agente">
         <div class="container">
-            <div class="diagnosis-grid">
-                <div>
-                    <p class="section-label">[ AGENTE DE WHATSAPP ]</p>
-                    <h2 class="split-lines headline-med">Tu recepción,<br>ahora en <em>WhatsApp</em>.</h2>
-                </div>
-                <div class="diagnosis-copy">
+            <div class="agent-grid">
+                <div class="agent-copy">
+                    <p class="section-label">[ EL AGENTE ]</p>
+                    <h2 class="split-lines headline-med">Una recepción<br>que <em>no cierra</em>.</h2>
                     <p class="body-large split-lines">El agente atiende en WhatsApp con la información real de tu
                         negocio: servicios, precios, horarios y políticas. Resuelve las dudas de siempre, recoge el
                         contacto y gestiona citas —también fuera de horario.</p>
                     <p class="body-large split-lines">Todo queda en un panel: conversaciones, citas y lo que hizo el
                         agente. Tu equipo entra en cualquier momento sin perder el contexto y se la devuelve cuando
                         quiera.</p>
+                </div>
+
+                <div class="chat-mockup" data-chat-demo>
+                    <figure class="chat-frame" role="img"
+                        aria-label="Conversación de ejemplo: un cliente escribe fuera de horario y el agente le informa y le agenda una cita.">
+                        <div class="chat-header">
+                            <span class="chat-avatar" aria-hidden="true">C</span>
+                            <div class="chat-header-meta">
+                                <strong>Clínica Ejemplo</strong>
+                                <span class="chat-status">Agente activo · responde al momento</span>
+                            </div>
+                        </div>
+                        <div class="chat-body">
+                            <span class="chat-day">Hoy · 21:47</span>
+                            <div class="chat-msg chat-msg--in">
+                                <p>Hola, ¿hacéis limpiezas dentales? ¿Qué precio tienen?</p>
+                                <time>21:47</time>
+                            </div>
+                            <div class="chat-typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                            <div class="chat-msg chat-msg--out">
+                                <p>Hola, soy el agente de Clínica Ejemplo. Sí: la higiene dental completa son 45 €
+                                    y dura unos 40 minutos.</p>
+                                <time>21:47</time>
+                            </div>
+                            <div class="chat-msg chat-msg--in">
+                                <p>¿Podría ir el jueves por la tarde?</p>
+                                <time>21:48</time>
+                            </div>
+                            <div class="chat-typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                            <div class="chat-msg chat-msg--out">
+                                <p>El jueves tenemos hueco a las 16:30 y a las 18:00. ¿Cuál te viene mejor?</p>
+                                <time>21:48</time>
+                            </div>
+                            <div class="chat-msg chat-msg--in">
+                                <p>A las 18:00. Soy Marta García.</p>
+                                <time>21:49</time>
+                            </div>
+                            <div class="chat-typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                            <div class="chat-msg chat-msg--out">
+                                <p>Hecho, Marta: higiene dental el jueves a las 18:00. Si necesitas cambiar la cita,
+                                    escríbeme por aquí a cualquier hora.</p>
+                                <time>21:49</time>
+                            </div>
+                        </div>
+                        <figcaption class="chat-note">Conversación de ejemplo · simulación con un negocio ficticio
+                        </figcaption>
+                    </figure>
                 </div>
             </div>
 
@@ -331,44 +379,102 @@
         </div>
     </section>
 
-    <section class="section capabilities" id="services">
+    <section class="section control" id="control">
         <div class="container">
-            <div class="cap-grid">
-                <div class="cap-title">
-                    <p class="section-label">[ SERVICIOS ]</p>
-                    <h2 class="split-lines headline-med">De <em>presencia</em><br>a sistema.</h2>
-                    <p>Entramos por la auditoría y construimos solo lo que el negocio necesita para captar y operar con
-                        más claridad.</p>
+            <div class="control-grid">
+                <div class="control-copy">
+                    <p class="section-label">[ PANEL DE CONTROL ]</p>
+                    <h2 class="split-lines headline-med">El agente atiende.<br>Tu equipo <em>decide</em>.</h2>
+                    <p class="body-large split-lines">No instalamos un chatbot y desaparecemos. El sistema deja cada
+                        conversación, cita y cambio a la vista del negocio, con un panel preparado para supervisar sin
+                        fricción.</p>
+
+                    <div class="control-points">
+                        <article>
+                            <span>01</span>
+                            <div>
+                                <h3>Historial completo</h3>
+                                <p>Conversaciones, datos de contacto, citas y acciones del agente en un mismo lugar.</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span>02</span>
+                            <div>
+                                <h3>Intervención humana</h3>
+                                <p>Tu equipo toma una conversación cuando lo necesita y la devuelve al agente después.</p>
+                            </div>
+                        </article>
+                        <article>
+                            <span>03</span>
+                            <div>
+                                <h3>Información editable</h3>
+                                <p>Servicios, horarios y políticas se actualizan sin rehacer todo el sistema.</p>
+                            </div>
+                        </article>
+                    </div>
                 </div>
-                <div class="cap-list">
-                    <article class="cap-item">
-                        <span class="cap-number">01</span>
-                        <h3 class="split-lines">Digital Presence Audit</h3>
-                        <p>Auditoría de web, mobile, claridad comercial, CTAs, SEO local, Google Business Profile,
-                            contacto, reservas, imagen visual y oportunidades de automatización.</p>
-                        <small>Puerta de entrada recomendada</small>
-                    </article>
-                    <article class="cap-item">
-                        <span class="cap-number">02</span>
-                        <h3 class="split-lines">Presence Pack</h3>
-                        <p>Landing o web corporativa premium para negocios locales: estructura comercial, galería,
-                            servicios, mapa, WhatsApp, formulario o reserva y configuración técnica inicial.</p>
-                        <small>Web premium mobile-first</small>
-                    </article>
-                    <article class="cap-item">
-                        <span class="cap-number">03</span>
-                        <h3 class="split-lines">Presence + AI Pack</h3>
-                        <p>Web premium con asistente inteligente para responder dudas, filtrar leads, orientar reservas
-                            o solicitudes y derivar el contacto hacia WhatsApp o formulario.</p>
-                        <small>IA aplicada al contacto real</small>
-                    </article>
-                    <article class="cap-item">
-                        <span class="cap-number">04</span>
-                        <h3 class="split-lines">Digital System Custom</h3>
-                        <p>Dashboards simples, CRM básico, paneles internos, reservas avanzadas y automatizaciones a medida, integradas con las herramientas que el negocio ya usa (WhatsApp, hojas de cálculo, calendarios).</p>
-                        <small>Sistemas operativos a medida</small>
-                    </article>
-                </div>
+
+                <figure class="dashboard-mockup"
+                    aria-label="Vista simulada del panel de control del agente con conversaciones, citas e intervención humana.">
+                    <div class="dashboard-bar">
+                        <div class="dashboard-brand"><span>32</span> Studio32 Agent</div>
+                        <div class="dashboard-business">Clínica Ejemplo <span aria-hidden="true">⌄</span></div>
+                    </div>
+                    <div class="dashboard-shell">
+                        <aside class="dashboard-nav" aria-label="Navegación simulada del panel">
+                            <span class="is-active">Inbox</span>
+                            <span>Citas</span>
+                            <span>Servicios</span>
+                            <span>Agente</span>
+                        </aside>
+                        <div class="dashboard-workspace">
+                            <div class="dashboard-heading">
+                                <div>
+                                    <small>INBOX</small>
+                                    <strong>Conversaciones</strong>
+                                </div>
+                                <span class="dashboard-live">Agente activo</span>
+                            </div>
+                            <div class="dashboard-columns">
+                                <div class="conversation-list">
+                                    <article class="conversation-row is-selected">
+                                        <span class="conversation-avatar">MG</span>
+                                        <div><strong>Marta García</strong><small>Higiene dental · 21:49</small></div>
+                                        <em>Agente</em>
+                                    </article>
+                                    <article class="conversation-row">
+                                        <span class="conversation-avatar">DL</span>
+                                        <div><strong>David López</strong><small>Primera consulta · 20:32</small></div>
+                                        <em>Equipo</em>
+                                    </article>
+                                    <article class="conversation-row">
+                                        <span class="conversation-avatar">AP</span>
+                                        <div><strong>Ana Pérez</strong><small>Cambio de cita · 18:15</small></div>
+                                        <em>Resuelta</em>
+                                    </article>
+                                </div>
+                                <div class="conversation-detail">
+                                    <div class="detail-top">
+                                        <div><strong>Marta García</strong><small>WhatsApp · conversación activa</small></div>
+                                        <span class="detail-action">Intervenir</span>
+                                    </div>
+                                    <div class="detail-messages">
+                                        <p class="detail-message detail-message--client">A las 18:00. Soy Marta García.</p>
+                                        <p class="detail-message detail-message--agent">Hecho: higiene dental el jueves a
+                                            las 18:00.</p>
+                                    </div>
+                                    <div class="appointment-card">
+                                        <span>PRÓXIMA CITA</span>
+                                        <strong>Jueves · 18:00</strong>
+                                        <small>Higiene dental · Confirmada</small>
+                                    </div>
+                                    <div class="detail-status"><span></span> El agente lleva la conversación</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption>Vista de producto · datos simulados</figcaption>
+                </figure>
             </div>
         </div>
     </section>
@@ -376,64 +482,40 @@
     <section id="portfolio" class="section verticals">
         <div class="container">
             <div class="verticals-header">
-                <p class="section-label">[ VERTICALES ]</p>
-                <h2 class="split-lines headline-med">Cada sector,<br>su <em>propio sistema</em>.</h2>
-                <p>Las demos no son plantillas aisladas. Son direcciones visuales y comerciales para mostrar cómo puede
-                    sentirse una presencia digital bien resuelta por sector.</p>
+                <p class="section-label">[ DÓNDE ENCAJA ]</p>
+                <h2 class="split-lines headline-med">Primero, clínicas.<br>Una base para <em>más negocios</em>.</h2>
+                <p>La plataforma se construye primero para clínicas dentales. La misma base puede adaptarse a otros
+                    negocios locales con consultas repetitivas, agenda y un equipo que necesita mantener el control.</p>
             </div>
 
-            <div class="vertical-grid">
-                <a href="Landing1-L%27Obscur/index.html" target="_blank" rel="noopener" class="vertical-card">
-                    <div class="vertical-media"
-                        style="background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&q=80&w=1200');">
-                    </div>
-                    <div class="vertical-content">
-                        <span>01 · Restaurantes premium</span>
-                        <h3>Reservas, carta y percepción de alta calidad.</h3>
-                        <p>Sistemas digitales para restaurantes que necesitan presentar mejor su propuesta, ordenar las
-                            reservas y reducir fricción en el primer contacto.</p>
-                        <strong>Ver demo</strong>
-                    </div>
-                </a>
-
-                <a href="Landing2-PrimeBurger/index.html" target="_blank" rel="noopener" class="vertical-card">
-                    <div class="vertical-media"
-                        style="background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=1200');">
-                    </div>
-                    <div class="vertical-content">
-                        <span>02 · Food brands urbanas</span>
-                        <h3>Impacto visual y conversión móvil rápida.</h3>
-                        <p>Presencia digital para marcas gastronómicas que necesitan carta clara, identidad potente y
-                            una experiencia móvil directa.</p>
-                        <strong>Ver demo</strong>
-                    </div>
-                </a>
-
-                <a href="Landing3-Clinic/index.html" target="_blank" rel="noopener" class="vertical-card">
-                    <div class="vertical-media"
-                        style="background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=1200');">
-                    </div>
-                    <div class="vertical-content">
-                        <span>03 · Clínicas dentales</span>
-                        <h3>Confianza, claridad y primeras consultas.</h3>
-                        <p>Presencia online y captación inteligente para clínicas modernas que necesitan explicar bien
-                            sus tratamientos y facilitar el primer contacto.</p>
-                        <strong>Ver demo</strong>
-                    </div>
-                </a>
-
-                <a href="Landing4-Habitat/index.html" target="_blank" rel="noopener" class="vertical-card">
-                    <div class="vertical-media"
-                        style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&q=80&w=1200');">
-                    </div>
-                    <div class="vertical-content">
-                        <span>04 · Arquitectura e interiorismo</span>
-                        <h3>Portfolio editorial y autoridad visual.</h3>
-                        <p>Webs editoriales y sistemas de captación para estudios de arquitectura e interiorismo que
-                            necesitan transmitir criterio, autoridad y proyectos desde el primer scroll.</p>
-                        <strong>Ver demo</strong>
-                    </div>
-                </a>
+            <div class="fit-grid">
+                <article class="fit-card fit-card--primary">
+                    <span>01 · PRIMER VERTICAL</span>
+                    <h3>Clínicas dentales</h3>
+                    <p>Tratamientos, precios orientativos, primeras consultas, cambios de cita y derivación al equipo
+                        cuando la conversación necesita criterio humano.</p>
+                    <small>Producto prioritario</small>
+                </article>
+                <article class="fit-card">
+                    <span>02 · SALUD Y BIENESTAR</span>
+                    <h3>Centros con agenda</h3>
+                    <p>Disponibilidad, preparación previa, servicios y seguimiento del primer contacto sin cargar la
+                        recepción.</p>
+                    <small>Adaptación por validar</small>
+                </article>
+                <article class="fit-card">
+                    <span>03 · RESTAURACIÓN</span>
+                    <h3>Reservas y consultas</h3>
+                    <p>Horarios, carta, alérgenos, grupos y solicitudes de reserva respondidas desde el mismo canal.</p>
+                    <small>Adaptación por validar</small>
+                </article>
+                <article class="fit-card">
+                    <span>04 · SERVICIOS LOCALES</span>
+                    <h3>Negocios con demanda repetitiva</h3>
+                    <p>Presupuestos iniciales, cualificación, agenda y preguntas frecuentes para equipos que no pueden
+                        estar pendientes del móvil.</p>
+                    <small>Adaptación por validar</small>
+                </article>
             </div>
         </div>
     </section>
@@ -441,66 +523,109 @@
     <section class="section process" id="process">
         <div class="container">
             <div class="process-header">
-                <p class="section-label">[ MÉTODO ]</p>
-                <h2 class="split-lines headline-med">Una secuencia clara,<br>sin <em>caja negra</em>.</h2>
+                <p class="section-label">[ IMPLANTACIÓN ]</p>
+                <h2 class="split-lines headline-med">De tu operativa<br>a un agente <em>controlado</em>.</h2>
             </div>
             <div class="process-grid">
                 <div class="process-step">
                     <span>01</span>
-                    <h3>Auditamos</h3>
-                    <p>Detectamos fricción digital, oportunidades de conversión y automatizaciones con impacto real.</p>
+                    <h3>Entendemos el negocio</h3>
+                    <p>Servicios, horarios, precios, políticas, preguntas frecuentes y cuándo debe intervenir una
+                        persona.</p>
                 </div>
                 <div class="process-step">
                     <span>02</span>
-                    <h3>Diseñamos</h3>
-                    <p>Definimos estructura, mensajes, jerarquía visual y experiencia de contacto con criterio premium.
-                    </p>
+                    <h3>Configuramos el agente</h3>
+                    <p>Preparamos conocimiento, tono, agenda y reglas de seguridad para que responda con información
+                        real.</p>
                 </div>
                 <div class="process-step">
                     <span>03</span>
-                    <h3>Construimos</h3>
-                    <p>Desarrollamos una web rápida, responsive y preparada para convertir visitas en conversaciones.
-                    </p>
+                    <h3>Conectamos y probamos</h3>
+                    <p>WhatsApp, citas y panel se validan de extremo a extremo antes de abrir el flujo a clientes.</p>
                 </div>
                 <div class="process-step">
                     <span>04</span>
-                    <h3>Automatizamos</h3>
-                    <p>Conectamos WhatsApp, formularios, asistentes, reservas o paneles internos cuando aporta valor.
-                    </p>
-                </div>
-                <div class="process-step">
-                    <span>05</span>
-                    <h3>Mantenemos</h3>
-                    <p>Medimos, damos soporte y evolucionamos el sistema digital con mejoras graduales.</p>
+                    <h3>Acompañamos al equipo</h3>
+                    <p>Revisamos conversaciones, afinamos el conocimiento y mantenemos el sistema conforme cambia el
+                        negocio.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="section footer-cta">
+    <section class="section capabilities capabilities--compact" id="services">
+        <div class="container">
+            <div class="services-compact-header">
+                <div>
+                    <p class="section-label">[ STUDIO32 · DIGITAL SYSTEMS ]</p>
+                    <h2 class="split-lines headline-med">El agente es el producto estrella.<br>El estudio cubre <em>el resto</em>.</h2>
+                </div>
+                <p>Agent Platform puede contratarse por separado. Cuando el negocio necesita también presencia,
+                    captación o una integración específica, Studio32 lo resuelve como un sistema conectado.</p>
+            </div>
+
+            <div class="service-mini-grid">
+                <article class="service-mini">
+                    <span>01</span>
+                    <h3>Digital Presence Audit</h3>
+                    <p>Diagnóstico de web, móvil, SEO local, contacto, reservas y oportunidades de automatización.</p>
+                </article>
+                <article class="service-mini">
+                    <span>02</span>
+                    <h3>Presence Pack</h3>
+                    <p>Web premium mobile-first para presentar, captar y facilitar el contacto.</p>
+                </article>
+                <article class="service-mini">
+                    <span>03</span>
+                    <h3>Presence + AI Pack</h3>
+                    <p>Presencia digital con una capa inteligente para dudas, leads y solicitudes.</p>
+                </article>
+                <article class="service-mini">
+                    <span>04</span>
+                    <h3>Digital System Custom</h3>
+                    <p>Paneles, automatizaciones e integraciones que no encajan en un producto estándar.</p>
+                </article>
+            </div>
+
+            <div class="demo-strip" aria-label="Demos de presencia digital por sector">
+                <span>Demos de presencia digital</span>
+                <a href="Landing1-L%27Obscur/index.html" target="_blank" rel="noopener">Restauración ↗</a>
+                <a href="Landing2-PrimeBurger/index.html" target="_blank" rel="noopener">Food brand ↗</a>
+                <a href="Landing3-Clinic/index.html" target="_blank" rel="noopener">Clínica ↗</a>
+                <a href="Landing4-Habitat/index.html" target="_blank" rel="noopener">Arquitectura ↗</a>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <footer id="contact" class="section footer-cta">
         <div class="container">
             <div class="cta-panel">
-                <p class="section-label centered">[ AUDITORÍA DE PRESENCIA DIGITAL ]</p>
-                <h2 class="huge-text split-lines">Empieza por la <em>auditoría</em></h2>
-                <p class="cta-sub">Antes de rediseñar, entendemos qué debe mejorar.</p>
+                <p class="section-label centered">[ HABLEMOS DE TU NEGOCIO ]</p>
+                <h2 class="huge-text split-lines">Tu próxima consulta<br>no debería <em>esperar</em></h2>
+                <p class="cta-sub">Cuéntanos cómo atiende hoy tu equipo y veremos si el agente encaja.</p>
 
-                <div class="cta-wrapper">
-                    <a href="https://wa.me/34694293166?text=Hola,%20quiero%20solicitar%20una%20auditor%C3%ADa%20de%20presencia%20digital%20para%20mi%20negocio."
+                <div class="cta-wrapper cta-wrapper--dual">
+                    <a href="https://wa.me/34694293166?text=Hola,%20quiero%20ver%20si%20el%20agente%20de%20WhatsApp%20encaja%20en%20mi%20negocio."
                         target="_blank" rel="noopener" class="btn-massive">
-                        Solicitar auditoría ↗
+                        Hablar por WhatsApp ↗
                     </a>
+                    <a href="mailto:info@studio32.es?subject=Agente%20de%20WhatsApp%20para%20mi%20negocio"
+                        class="btn-secondary">Escribir por email</a>
                 </div>
             </div>
 
             <div class="contact-grid">
                 <div>
                     <p class="section-label">[ STUDIO32 ]</p>
-                    <h3>Diseño premium, sistemas funcionales e IA práctica para negocios físicos.</h3>
+                    <h3>Sistemas digitales que atienden, conectan y dejan el control en el negocio.</h3>
                 </div>
                 <div>
-                    <p>Revisamos tu presencia actual y detectamos qué conviene mejorar primero: web, experiencia móvil,
-                        captación, reservas, automatización o IA aplicada. Sin ruido. Sin promesas vacías. Una sesión de
-                        auditoría antes de cualquier propuesta de proyecto.</p>
+                    <p>Studio32 Agent Platform es nuestro producto principal: agente de recepción por WhatsApp, citas,
+                        panel e intervención humana. El estudio también diseña presencia digital y sistemas a medida
+                        cuando forman parte del mismo problema.</p>
                     <div class="contact-links">
                         <a href="mailto:info@studio32.es">info@studio32.es</a>
                         <a href="https://wa.me/34694293166" target="_blank" rel="noopener">+34 694 29 31 66</a>
@@ -510,10 +635,11 @@
 
             <div class="footer-bottom">
                 <div class="brand">Studio32 · Digital Systems ©2026</div>
+                <div class="footer-services">Agent Platform · Presence · Systems</div>
             </div>
         </div>
-    </section>
-    <script src="https://studio32-agent2.bonto.run/widget.js" data-tenant="studio32" data-title="Habla con Estudio"
+    </footer>
+    <script src="https://web-production-d722c.up.railway.app/widget.js" data-tenant="studio32" data-title="Habla con Studio32"
         data-accent="#c9a86a" defer></script>
 </body>
 

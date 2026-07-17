@@ -6,12 +6,6 @@ const lenis = new Lenis({
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
 });
 
-function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-
 // Integrate Lenis with GSAP ScrollTrigger
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => {
@@ -61,6 +55,7 @@ function initHeroAnimations() {
         .from('.hero-bottom', { opacity: 0, y: 20, duration: 0.8 }, "-=0.6")
         .from('.navbar', { y: -50, opacity: 0, duration: 1 }, "-=1");
 
+    initChatDemo();
     initScrollAnimations();
 }
 
@@ -101,7 +96,56 @@ function initScrollAnimations() {
 }
 
 
-// 5. Cursor personalizado (solo en punteros finos / desktop, sin reduced-motion).
+// 5. Conversación de producto: se reproduce una sola vez al entrar en pantalla.
+// Si JS, GSAP o las animaciones están desactivados, el HTML permanece legible.
+function initChatDemo() {
+    const mockup = document.querySelector('[data-chat-demo]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!mockup || reduceMotion) return;
+
+    const messages = Array.from(mockup.querySelectorAll('.chat-msg'));
+    const typingIndicators = Array.from(mockup.querySelectorAll('.chat-typing'));
+
+    if (!messages.length) return;
+
+    mockup.classList.add('is-armed');
+
+    const chatTimeline = gsap.timeline({ paused: true });
+    let typingIndex = 0;
+
+    messages.forEach((message) => {
+        chatTimeline.to(message, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.42,
+            ease: 'power2.out'
+        });
+
+        if (message.classList.contains('chat-msg--in') && typingIndicators[typingIndex]) {
+            const indicator = typingIndicators[typingIndex];
+            typingIndex += 1;
+
+            chatTimeline
+                .call(() => indicator.classList.add('is-visible'))
+                .to({}, { duration: 0.62 })
+                .call(() => indicator.classList.remove('is-visible'));
+        } else {
+            chatTimeline.to({}, { duration: 0.18 });
+        }
+    });
+
+    ScrollTrigger.create({
+        trigger: mockup,
+        start: 'top 82%',
+        once: true,
+        onEnter: () => chatTimeline.play()
+    });
+}
+
+
+// 6. Cursor personalizado (solo en punteros finos / desktop, sin reduced-motion).
 // Se elimina el efecto magnético para priorizar la fluidez: los elementos ya no
 // se desplazan. El cursor sigue reaccionando al hover de elementos interactivos
 // (estado .active), lo que mantiene la firma visual sin coste de rendimiento.
@@ -133,7 +177,7 @@ if (finePointer && cursor && follower) {
     });
 
     // El cursor crece sobre elementos interactivos, sin desplazarlos.
-    const interactive = document.querySelectorAll('a, button, .cap-item, .vertical-card, .assistant-proof');
+    const interactive = document.querySelectorAll('a, button, .cap-item, .vertical-card, .chat-mockup, .dashboard-mockup, .fit-card, .service-mini');
     interactive.forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursor.classList.add('active');
@@ -147,7 +191,7 @@ if (finePointer && cursor && follower) {
 }
 
 
-// 6. Mobile menu (hamburger toggle + overlay)
+// 7. Mobile menu (hamburger toggle + overlay)
 const navToggle = document.querySelector('.nav-toggle');
 const mobileMenu = document.querySelector('.mobile-menu');
 const mobileMenuLinks = document.querySelectorAll('[data-mobile-close]');
