@@ -35,12 +35,26 @@ tlPreload.to('.preloader-text span', {
         yPercent: -100,
         duration: 1,
         ease: "power4.inOut",
-        onComplete: initHeroAnimations // Llama a la anim principal
+        onComplete: () => {
+            // Marca el preloader como resuelto (la red de seguridad de index.html
+            // comprueba esta clase) y arranca la animación principal.
+            const p = document.querySelector('.preloader');
+            if (p) p.classList.add('is-done');
+            initHeroAnimations();
+        }
     });
 
 
 // 3. Hero Animations (Runs after preloader)
+// Guard de arranque único: el resto del sistema (hero, chat demo y los reveals
+// por scroll con SplitType) cuelga de esta función. La llama el onComplete del
+// preloader y, como red de seguridad, el propio index.html si ese onComplete no
+// llega a dispararse (p. ej. pestaña en segundo plano con requestAnimationFrame
+// frenado). El flag evita que se inicialice dos veces.
+let heroAnimationsStarted = false;
 function initHeroAnimations() {
+    if (heroAnimationsStarted) return;
+    heroAnimationsStarted = true;
     const tlHero = gsap.timeline();
 
     // Revelar líneas del hero ("Studio32 / Digital Systems")
@@ -70,14 +84,19 @@ function initScrollAnimations() {
     splitTexts.forEach(text => {
         const split = new SplitType(text, { types: 'lines' });
 
-        // Esconder overflow pero dar margen para los descendentes (g, p, etc)
+        // Cada línea va en un envoltorio con overflow:hidden que la recorta para el
+        // revelado (entra deslizándose desde abajo con una leve rotación). El
+        // padding-bottom da holgura para los descendentes (g, j, p) y esa rotación;
+        // el margin-bottom negativo lo compensa para no alterar el interlineado.
+        const wrappers = [];
         split.lines.forEach(line => {
             const wrapper = document.createElement('div');
             wrapper.style.overflow = 'hidden';
-            wrapper.style.paddingBottom = '3vw';
-            wrapper.style.marginBottom = '-3vw';
+            wrapper.style.paddingBottom = '0.35em';
+            wrapper.style.marginBottom = '-0.35em';
             line.parentNode.insertBefore(wrapper, line);
             wrapper.appendChild(line);
+            wrappers.push(wrapper);
         });
 
         gsap.from(split.lines, {
@@ -90,7 +109,19 @@ function initScrollAnimations() {
             opacity: 0,
             stagger: 0.1,
             duration: 1,
-            ease: "power4.out"
+            ease: "power4.out",
+            onComplete: () => {
+                // Terminado el revelado, se retira el recorte. Los envoltorios
+                // solapaban la zona de clic de la línea anterior (la selección
+                // saltaba carácter a carácter); al quitar overflow/padding/margin
+                // —que se anulaban entre sí, así que el interlineado no cambia—
+                // el texto vuelve a seleccionarse por palabras con normalidad.
+                wrappers.forEach(w => {
+                    w.style.overflow = 'visible';
+                    w.style.paddingBottom = '0';
+                    w.style.marginBottom = '0';
+                });
+            }
         });
     });
 }
@@ -146,9 +177,8 @@ function initChatDemo() {
 
 
 // 6. Cursor personalizado (solo en punteros finos / desktop, sin reduced-motion).
-// Se elimina el efecto magnético para priorizar la fluidez: los elementos ya no
-// se desplazan. El cursor sigue reaccionando al hover de elementos interactivos
-// (estado .active), lo que mantiene la firma visual sin coste de rendimiento.
+// Punto dorado + anillo que siguen al ratón con suavizado. No hay estado de hover
+// (se retiró el círculo invertido con mix-blend-mode que crecía sobre lo interactivo).
 // En móvil/táctil no se ejecuta nada de esto.
 const finePointer = window.matchMedia('(pointer: fine)').matches
     && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -174,19 +204,6 @@ if (finePointer && cursor && follower) {
         followerX += (mouseX - followerX) * 0.15;
         followerY += (mouseY - followerY) * 0.15;
         follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
-    });
-
-    // El cursor crece sobre elementos interactivos, sin desplazarlos.
-    const interactive = document.querySelectorAll('a, button, .cap-item, .vertical-card, .demo-card, .chat-mockup, .dashboard-mockup, .fit-card, .service-mini');
-    interactive.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.classList.add('active');
-            follower.classList.add('active');
-        });
-        el.addEventListener('mouseleave', () => {
-            cursor.classList.remove('active');
-            follower.classList.remove('active');
-        });
     });
 }
 
