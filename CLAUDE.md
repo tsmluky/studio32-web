@@ -59,7 +59,7 @@ Primary target clients:
 - Architecture, interiorism, and reform studios
 - Local premium services (any vertical with strong real-world quality but weak digital presence)
 
-Geographic context: Spain (Valencia-based). Prices in EUR. Copy in Spanish unless explicitly requested otherwise.
+Geographic context: national scope, not tied to any city or region. Do not name Valencia or Spain in marketing copy or imagery — Studio32 stands on its own. Prices in EUR. Copy in Spanish unless explicitly requested otherwise.
 
 ---
 

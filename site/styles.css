@@ -2146,6 +2146,110 @@ body.menu-open .mobile-menu {
     color: var(--text-muted);
 }
 
+/* ---------- Preguntas frecuentes ---------- */
+.faq-header {
+    max-width: 760px;
+    margin-bottom: clamp(46px, 6vw, 80px);
+}
+
+.faq-header .headline-med {
+    margin: 22px 0 26px;
+}
+
+.faq-header p {
+    max-width: 60ch;
+    color: var(--text-muted);
+    font-size: 1.02rem;
+    line-height: 1.65;
+}
+
+.faq-list {
+    max-width: 940px;
+    border-top: 1px solid var(--border);
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--border);
+}
+
+.faq-item summary {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 28px;
+    padding: 30px 4px;
+    cursor: pointer;
+    list-style: none;
+    transition: color 0.25s var(--transition);
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item summary:hover {
+    color: var(--accent-color);
+}
+
+.faq-q {
+    font-family: var(--font-body);
+    font-size: clamp(1.02rem, 1.5vw, 1.24rem);
+    font-weight: 600;
+    line-height: 1.4;
+    color: inherit;
+}
+
+.faq-icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    color: var(--text-subtle);
+    transition: color 0.25s var(--transition);
+}
+
+.faq-item summary:hover .faq-icon {
+    color: var(--accent-color);
+}
+
+.faq-icon::before,
+.faq-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 1.5px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s var(--transition), opacity 0.3s var(--transition);
+}
+
+.faq-icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq-item[open] .faq-icon {
+    color: var(--accent-color);
+}
+
+.faq-item[open] .faq-icon::after {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.faq-a {
+    max-width: 68ch;
+    padding: 0 4px 34px;
+}
+
+.faq-a p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.72;
+}
+
 @media (max-width: 1200px) {
     .control-grid {
         grid-template-columns: 1fr;
@@ -2598,6 +2702,15 @@ body.menu-open .mobile-menu {
 
     .hero-meta {
         font-size: 0.82rem;
+    }
+
+    .faq-item summary {
+        gap: 18px;
+        padding: 24px 2px;
+    }
+
+    .faq-a {
+        padding: 0 2px 28px;
     }
 }
 
