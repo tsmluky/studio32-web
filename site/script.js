@@ -176,45 +176,14 @@ function initChatDemo() {
 }
 
 
-// 6. Cursor personalizado (solo en punteros finos / desktop, sin reduced-motion).
-// Punto dorado + anillo que siguen al ratón con suavizado. No hay estado de hover
-// (se retiró el círculo invertido con mix-blend-mode que crecía sobre lo interactivo).
-// En móvil/táctil no se ejecuta nada de esto.
-const finePointer = window.matchMedia('(pointer: fine)').matches
-    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const cursor = document.querySelector('.cursor');
-const follower = document.querySelector('.cursor-follower');
-
-if (finePointer && cursor && follower) {
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-    let followerX = 0, followerY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    // Loop suave de seguimiento del cursor.
-    gsap.ticker.add(() => {
-        cursorX += (mouseX - cursorX) * 0.5;
-        cursorY += (mouseY - cursorY) * 0.5;
-        cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
-
-        followerX += (mouseX - followerX) * 0.15;
-        followerY += (mouseY - followerY) * 0.15;
-        follower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
-    });
-}
-
-
-// 7. Mobile menu (hamburger toggle + overlay)
+// 6. Mobile menu (hamburger toggle + overlay)
 const navToggle = document.querySelector('.nav-toggle');
 const mobileMenu = document.querySelector('.mobile-menu');
 const mobileMenuLinks = document.querySelectorAll('[data-mobile-close]');
 
 function openMobileMenu() {
     if (!navToggle || !mobileMenu) return;
+    mobileMenu.removeAttribute('inert');
     document.body.classList.add('menu-open');
     navToggle.setAttribute('aria-expanded', 'true');
     navToggle.setAttribute('aria-label', 'Cerrar menú');
@@ -225,6 +194,7 @@ function openMobileMenu() {
 function closeMobileMenu() {
     if (!navToggle || !mobileMenu) return;
     document.body.classList.remove('menu-open');
+    mobileMenu.setAttribute('inert', '');
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.setAttribute('aria-label', 'Abrir menú');
     mobileMenu.setAttribute('aria-hidden', 'true');
@@ -262,3 +232,15 @@ if (navToggle && mobileMenu) {
         }
     });
 }
+
+// 7. FAQ: keep one answer open so the section remains compact and scannable.
+const faqItems = Array.from(document.querySelectorAll('.faq-item'));
+
+faqItems.forEach((item) => {
+    item.addEventListener('toggle', () => {
+        if (!item.open) return;
+        faqItems.forEach((otherItem) => {
+            if (otherItem !== item) otherItem.open = false;
+        });
+    });
+});

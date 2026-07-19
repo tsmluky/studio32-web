@@ -21,7 +21,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none;
 }
 
 html {
@@ -95,8 +94,10 @@ body::before {
 }
 
 a,
-button {
+button,
+summary {
     -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
 }
 
 .grain {
@@ -147,6 +148,7 @@ button {
     pointer-events: none;
     z-index: 10000;
     transform: translate(-50%, -50%);
+    display: none;
 }
 
 .cursor-follower {
@@ -161,10 +163,11 @@ button {
     z-index: 9999;
     transform: translate(-50%, -50%);
     transition: width 0.4s var(--transition), height 0.4s var(--transition), border-color 0.4s;
+    display: none;
 }
 
 .container {
-    width: min(calc(100% - 8vw), 1480px);
+    width: min(calc(100% - 8vw), 1360px);
     margin: 0 auto;
 }
 
@@ -196,6 +199,11 @@ button {
     font-weight: 700;
     margin-bottom: 30px;
     overflow: hidden;
+}
+
+.preloader-space {
+    display: inline-block;
+    width: 2vw;
 }
 
 .preloader-text span {
@@ -231,9 +239,12 @@ button {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 24px 0;
+    padding: 17px 0;
     z-index: 100;
-    background: linear-gradient(180deg, rgba(9, 9, 8, 0.82), rgba(9, 9, 8, 0));
+    background: rgba(9, 9, 8, 0.76);
+    border-bottom: 1px solid rgba(246, 240, 229, 0.1);
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
 }
 
 .nav-content,
@@ -247,12 +258,29 @@ button {
 }
 
 .logo {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
     color: var(--text-color);
     text-decoration: none;
+}
+
+.logo span {
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.logo small {
+    padding-left: 13px;
+    border-left: 1px solid var(--border-strong);
+    color: var(--text-subtle);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.17em;
+    line-height: 1.25;
     text-transform: uppercase;
 }
 
@@ -556,14 +584,14 @@ body.menu-open .mobile-menu {
 
 .hero-title {
     display: block;
-    max-width: 980px;
+    max-width: 1160px;
     margin: 5vh 0 4vh;
     padding-left: 0;
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 4.6vw, 4.4rem);
+    font-size: clamp(4rem, 6.4vw, 7.4rem);
     font-weight: 600;
-    line-height: 1.08;
-    letter-spacing: -0.005em;
+    line-height: 0.95;
+    letter-spacing: -0.025em;
     color: var(--text-color);
     text-wrap: balance;
 }
@@ -627,6 +655,31 @@ body.menu-open .mobile-menu {
     justify-content: flex-end;
 }
 
+.hero-action-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 18px;
+}
+
+.hero-assurance {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--text-subtle);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+}
+
+.hero-assurance span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    box-shadow: 0 0 0 5px rgba(201, 168, 106, 0.1);
+}
+
 .hero-link {
     color: rgba(246, 240, 229, 0.72);
     font-size: 0.84rem;
@@ -645,14 +698,17 @@ body.menu-open .mobile-menu {
 /* System rail elevado: pasa de "cierre del hero" a pieza visual principal */
 .system-rail {
     margin-top: 6vh;
-    border-top: 1px solid rgba(246, 240, 229, 0.22);
-    background: transparent;
-    backdrop-filter: none;
+    border: 1px solid rgba(246, 240, 229, 0.14);
+    border-radius: 2px;
+    background: rgba(246, 240, 229, 0.026);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.24);
+    overflow: hidden;
 }
 
 .system-rail-label {
     display: block;
-    padding: 18px 0 22px;
+    padding: 16px 22px;
+    border-bottom: 1px solid rgba(246, 240, 229, 0.12);
     font-family: var(--font-body);
     font-size: 0.72rem;
     font-weight: 600;
@@ -664,7 +720,6 @@ body.menu-open .mobile-menu {
 .system-rail-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    border-top: 1px solid rgba(246, 240, 229, 0.18);
 }
 
 .system-rail-grid > div {
@@ -674,6 +729,12 @@ body.menu-open .mobile-menu {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    transition: background 0.35s var(--transition), transform 0.35s var(--transition);
+}
+
+.system-rail-grid > div:hover {
+    background: rgba(201, 168, 106, 0.055);
+    transform: translateY(-2px);
 }
 
 .system-rail-grid > div:last-child {
@@ -708,7 +769,7 @@ body.menu-open .mobile-menu {
 }
 
 .section {
-    padding: 14vh 0;
+    padding: clamp(96px, 10vw, 144px) 0;
     position: relative;
 }
 
@@ -2147,40 +2208,108 @@ body.menu-open .mobile-menu {
 }
 
 /* ---------- Preguntas frecuentes ---------- */
+.faq {
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 12% 24%, rgba(201, 168, 106, 0.1), transparent 25rem),
+        linear-gradient(180deg, var(--bg-color), #0d0c0a 58%, var(--bg-color));
+}
+
+.faq-layout {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.72fr) minmax(560px, 1.28fr);
+    gap: clamp(64px, 8vw, 132px);
+    align-items: start;
+}
+
 .faq-header {
-    max-width: 760px;
-    margin-bottom: clamp(46px, 6vw, 80px);
+    position: sticky;
+    top: 124px;
+    max-width: 470px;
 }
 
 .faq-header .headline-med {
-    margin: 22px 0 26px;
+    margin: 20px 0 24px;
+    font-size: clamp(3rem, 4.4vw, 5.4rem);
 }
 
 .faq-header p {
-    max-width: 60ch;
+    max-width: 45ch;
     color: var(--text-muted);
-    font-size: 1.02rem;
-    line-height: 1.65;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.faq-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 34px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--border-strong);
+    color: var(--text-color);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.faq-contact span {
+    color: var(--accent-color);
+}
+
+.faq-contact:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
 }
 
 .faq-list {
-    max-width: 940px;
-    border-top: 1px solid var(--border);
+    display: grid;
+    gap: 12px;
+    max-width: none;
+    counter-reset: faq-counter;
 }
 
 .faq-item {
-    border-bottom: 1px solid var(--border);
+    counter-increment: faq-counter;
+    border: 1px solid var(--border);
+    background: rgba(246, 240, 229, 0.025);
+    transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s var(--transition);
+}
+
+.faq-item:hover {
+    border-color: rgba(246, 240, 229, 0.24);
+    transform: translateX(-3px);
+}
+
+.faq-item[open] {
+    border-color: rgba(201, 168, 106, 0.46);
+    background:
+        linear-gradient(100deg, rgba(201, 168, 106, 0.1), transparent 72%),
+        rgba(246, 240, 229, 0.025);
 }
 
 .faq-item summary {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 28px;
-    padding: 30px 4px;
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) 28px;
+    align-items: center;
+    gap: 18px;
+    min-height: 92px;
+    padding: 24px 26px;
     cursor: pointer;
     list-style: none;
     transition: color 0.25s var(--transition);
+}
+
+.faq-item summary::before {
+    content: counter(faq-counter, decimal-leading-zero);
+    color: var(--accent-color);
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
 }
 
 .faq-item summary::-webkit-details-marker {
@@ -2193,19 +2322,21 @@ body.menu-open .mobile-menu {
 
 .faq-q {
     font-family: var(--font-body);
-    font-size: clamp(1.02rem, 1.5vw, 1.24rem);
-    font-weight: 600;
-    line-height: 1.4;
+    font-size: clamp(1rem, 1.25vw, 1.18rem);
+    font-weight: 650;
+    line-height: 1.42;
     color: inherit;
 }
 
 .faq-icon {
     position: relative;
     flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    margin-top: 3px;
-    color: var(--text-subtle);
+    width: 28px;
+    height: 28px;
+    margin-top: 0;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--text-muted);
     transition: color 0.25s var(--transition);
 }
 
@@ -2219,8 +2350,8 @@ body.menu-open .mobile-menu {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 15px;
-    height: 1.5px;
+    width: 10px;
+    height: 1px;
     background: currentColor;
     transform: translate(-50%, -50%);
     transition: transform 0.3s var(--transition), opacity 0.3s var(--transition);
@@ -2232,6 +2363,8 @@ body.menu-open .mobile-menu {
 
 .faq-item[open] .faq-icon {
     color: var(--accent-color);
+    border-color: rgba(201, 168, 106, 0.45);
+    background: rgba(201, 168, 106, 0.08);
 }
 
 .faq-item[open] .faq-icon::after {
@@ -2240,14 +2373,14 @@ body.menu-open .mobile-menu {
 }
 
 .faq-a {
-    max-width: 68ch;
-    padding: 0 4px 34px;
+    max-width: 66ch;
+    padding: 0 72px 30px 86px;
 }
 
 .faq-a p {
-    color: var(--text-muted);
-    font-size: 1rem;
-    line-height: 1.72;
+    color: rgba(246, 240, 229, 0.74);
+    font-size: 0.96rem;
+    line-height: 1.78;
 }
 
 @media (max-width: 1200px) {
@@ -2372,6 +2505,11 @@ body.menu-open .mobile-menu {
         width: 100%;
     }
 
+    .hero-action-group {
+        width: 100%;
+        align-items: flex-start;
+    }
+
     .hero-desc {
         width: calc(100vw - 12vw);
         max-width: calc(100vw - 12vw);
@@ -2400,9 +2538,20 @@ body.menu-open .mobile-menu {
     .verticals-header,
     .services-compact-header,
     .demo-showcase-header,
+    .faq-layout,
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 44px;
+    }
+
+    .faq-header {
+        position: static;
+        max-width: 680px;
+        margin-bottom: 18px;
+    }
+
+    .faq-header .headline-med {
+        font-size: clamp(2.8rem, 9vw, 4.8rem);
     }
 
     .agent-grid {
@@ -2532,6 +2681,10 @@ body.menu-open .mobile-menu {
 }
 
 @media (max-width: 540px) {
+    .logo small {
+        display: none;
+    }
+
     .mobile-menu-inner {
         padding-top: 96px;
     }
@@ -2705,12 +2858,18 @@ body.menu-open .mobile-menu {
     }
 
     .faq-item summary {
-        gap: 18px;
-        padding: 24px 2px;
+        grid-template-columns: 32px minmax(0, 1fr) 26px;
+        gap: 12px;
+        min-height: 82px;
+        padding: 20px 18px;
     }
 
     .faq-a {
-        padding: 0 2px 28px;
+        padding: 0 18px 24px 62px;
+    }
+
+    .faq-contact {
+        margin-top: 26px;
     }
 }
 
