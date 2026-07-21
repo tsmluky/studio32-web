@@ -10,8 +10,13 @@ credentials.json
 node_modules/
 
 # ── Herramientas de agente / sesiones locales ──
-.claude/
 .hermes/
+# `.claude/*` y no `.claude/`: git no puede re-incluir un archivo si su directorio
+# padre está excluido. Con `/*` la excepción de abajo sí funciona.
+.claude/*
+# Excepción: la config compartida SÍ va al repo — es lo que sincroniza los hooks
+# entre portátil y sobremesa. Las sesiones y la caché siguen ignoradas.
+!.claude/settings.json
 
 # ── Datos de runtime (conversaciones, reservas, leads) ──
 studio32-agent/data/*
