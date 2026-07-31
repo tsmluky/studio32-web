@@ -1511,11 +1511,237 @@ body.menu-open .mobile-menu {
     font-size: 0.6rem;
 }
 
-.detail-status span {
+/* Sólo el primer span es el punto indicador; el segundo lleva el texto de estado. */
+.detail-status span:first-child {
+    flex-shrink: 0;
     width: 6px;
     height: 6px;
     border-radius: 50%;
     background: var(--accent-color);
+}
+
+/* ---------- Demo interactiva (chat del visitante + panel en vivo) ---------- */
+.live-demo {
+    display: grid;
+    grid-template-columns: minmax(320px, 400px) minmax(0, 1fr);
+    gap: 28px;
+    align-items: stretch;
+}
+
+.live-chat {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: var(--bg-soft);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+}
+
+.live-chat .chat-header {
+    gap: 12px;
+}
+
+.live-chat .chat-header-meta {
+    flex: 1;
+    min-width: 0;
+}
+
+.live-reset {
+    padding: 6px 12px;
+    border: 1px solid rgba(201, 168, 106, 0.34);
+    border-radius: 999px;
+    background: none;
+    color: var(--accent-color);
+    font-family: var(--font-body);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s var(--transition), border-color 0.3s var(--transition);
+}
+
+.live-reset:hover {
+    border-color: var(--accent-color);
+    background: rgba(201, 168, 106, 0.12);
+}
+
+.live-chat-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 330px;
+    max-height: 430px;
+    padding: 20px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.live-chat-body .chat-msg {
+    opacity: 0;
+    transform: translateY(9px);
+    animation: liveMsgIn 0.36s var(--transition) forwards;
+}
+
+@keyframes liveMsgIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.live-typing {
+    display: flex;
+    gap: 4px;
+    padding: 0 26px 14px;
+}
+
+.live-typing[hidden] {
+    display: none;
+}
+
+.live-typing span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--text-subtle);
+    animation: liveTyping 1s infinite ease-in-out;
+}
+
+.live-typing span:nth-child(2) {
+    animation-delay: 0.16s;
+}
+
+.live-typing span:nth-child(3) {
+    animation-delay: 0.32s;
+}
+
+@keyframes liveTyping {
+    0%, 60%, 100% { opacity: 0.28; transform: translateY(0); }
+    30% { opacity: 1; transform: translateY(-3px); }
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.live-composer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: auto;
+    padding: 16px 20px 12px;
+    border-top: 1px solid var(--border);
+}
+
+.live-input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 16px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: rgba(246, 240, 229, 0.03);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    transition: border-color 0.3s var(--transition), background 0.3s var(--transition);
+}
+
+.live-input::placeholder {
+    color: var(--text-subtle);
+}
+
+.live-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    background: rgba(246, 240, 229, 0.05);
+}
+
+.live-send {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border: 1px solid var(--accent-color);
+    border-radius: 50%;
+    background: var(--accent-color);
+    color: var(--bg-color);
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: opacity 0.3s var(--transition), transform 0.3s var(--transition);
+}
+
+.live-send:hover:not(:disabled) {
+    transform: scale(1.06);
+}
+
+.live-send:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.live-note {
+    padding: 0 20px 18px;
+    color: var(--text-subtle);
+    font-size: 0.68rem;
+    line-height: 1.5;
+}
+
+.live-note.is-error {
+    color: #e08a7a;
+}
+
+.live-dashboard {
+    margin: 0;
+    align-self: stretch;
+}
+
+.detail-message--empty {
+    align-self: center;
+    margin: auto 0;
+    color: var(--text-subtle);
+    text-align: center;
+}
+
+.appointment-card[hidden] {
+    display: none;
+}
+
+.appointment-card.is-new {
+    animation: appointmentIn 0.5s var(--transition);
+}
+
+@keyframes appointmentIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+        border-color: var(--accent-color);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Relevo humano: el panel avisa de que ha entrado una persona. */
+.detail-action.is-hot {
+    border-color: var(--accent-color);
+    background: var(--accent-color);
+    color: var(--bg-color);
+}
+
+.conversation-row em.is-hot {
+    color: var(--accent-color);
 }
 
 .dashboard-mockup figcaption {
@@ -1603,6 +1829,120 @@ body.menu-open .mobile-menu {
     margin-top: auto;
     padding-top: 28px;
     color: var(--text-subtle);
+}
+
+/* ---------- Selector de sector (pestañas + conversación) ---------- */
+/* Las tarjetas de .fit-grid pasan a ser pestañas: reutilizan el estilo base de
+   .fit-card y sólo añaden el reset de <button> y el estado activo. */
+.fit-card--tab {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    appearance: none;
+}
+
+.fit-card--tab::after {
+    content: "";
+    position: absolute;
+    right: 28px;
+    bottom: 28px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border-strong);
+    transition: background 0.4s var(--transition), box-shadow 0.4s var(--transition);
+}
+
+.fit-card--tab.is-active {
+    border-color: rgba(201, 168, 106, 0.5);
+    background: linear-gradient(145deg, rgba(201, 168, 106, 0.13), rgba(201, 168, 106, 0.035));
+}
+
+.fit-card--tab.is-active::after {
+    background: var(--accent-color);
+    box-shadow: 0 0 0 4px rgba(201, 168, 106, 0.16);
+}
+
+.fit-card--tab:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 3px;
+}
+
+/* Reserva el hueco del punto indicador para que no colisione al envolver. */
+.fit-card--tab > small {
+    padding-right: 26px;
+}
+
+.sector-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
+    gap: 6vw;
+    align-items: center;
+    margin-top: 16px;
+    padding: 44px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(246, 240, 229, 0.025);
+}
+
+.sector-panel[hidden] {
+    display: none;
+}
+
+.sector-detail-label {
+    margin-bottom: 22px;
+    color: var(--accent-color);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.sector-detail h4 {
+    margin-bottom: 20px;
+    font-family: var(--font-heading);
+    font-size: clamp(1.55rem, 2.1vw, 2.2rem);
+    line-height: 1.1;
+}
+
+.sector-detail p:not(.sector-detail-label) {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+}
+
+.sector-points {
+    margin-top: 26px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    gap: 11px;
+    list-style: none;
+}
+
+.sector-points li {
+    position: relative;
+    padding-left: 20px;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.sector-points li::before {
+    content: "";
+    position: absolute;
+    top: 0.62em;
+    left: 0;
+    width: 8px;
+    height: 1px;
+    background: var(--accent-color);
+}
+
+.sector-panel .chat-mockup {
+    max-width: 420px;
 }
 
 .vertical-grid {
@@ -1791,6 +2131,44 @@ body.menu-open .mobile-menu {
     font-family: var(--font-heading);
     font-size: 1.22rem;
     line-height: 1.35;
+}
+
+/* Tarifas: el bloque comercial ahora abre sección propia, no cuelga del grid
+   de implantación, así que no necesita el margen superior heredado. */
+.pricing .commercial-model {
+    margin-top: 0;
+}
+
+.pricing .commercial-model article > span,
+.pricing .commercial-model-note > span {
+    margin-bottom: 24px;
+}
+
+.model-includes {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    gap: 10px;
+    list-style: none;
+}
+
+.model-includes li {
+    position: relative;
+    padding-left: 20px;
+    color: var(--text-muted);
+    font-size: 0.86rem;
+    line-height: 1.5;
+}
+
+.model-includes li::before {
+    content: "";
+    position: absolute;
+    top: 0.62em;
+    left: 0;
+    width: 8px;
+    height: 1px;
+    background: var(--accent-color);
 }
 
 /* ---------- Studio32 · oferta completa ---------- */
@@ -2590,8 +2968,25 @@ body.menu-open .mobile-menu {
     .vertical-grid,
     .process-grid,
     .commercial-model,
-    .demo-showcase {
+    .demo-showcase,
+    .sector-panel,
+    .live-demo {
         grid-template-columns: 1fr;
+    }
+
+    .sector-panel {
+        gap: 44px;
+        padding: 30px;
+    }
+
+    .live-demo {
+        gap: 34px;
+    }
+
+    .live-chat {
+        max-width: 420px;
+        width: 100%;
+        margin: 0 auto;
     }
 
     .commercial-model article,
@@ -2735,6 +3130,21 @@ body.menu-open .mobile-menu {
     .fit-card h3,
     .service-mini h3 {
         margin-top: 34px;
+    }
+
+    .sector-panel {
+        padding: 22px;
+    }
+
+    /* Sin conversación todavía, 330px de hueco vacío es demasiado en móvil. */
+    .live-chat-body {
+        min-height: 210px;
+        max-height: 340px;
+        padding: 16px;
+    }
+
+    .live-replies {
+        padding: 14px 16px 16px;
     }
 
     .dashboard-bar {

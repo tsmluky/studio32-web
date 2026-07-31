@@ -1,3 +1,16 @@
+// Backend del agente (Railway). Lo usa la demo en vivo de la sección #control.
+const AGENT_BASE = 'https://web-production-d722c.up.railway.app';
+
+// Despierta el contenedor en cuanto alguien entra en la web. Railway lo duerme y
+// el arranque en frío se comía ~15 s en el primer mensaje, que en una landing es
+// letal. Mientras el visitante lee, el agente ya se está poniendo en pie.
+// Es un GET al healthcheck: no gasta modelo ni cuenta para el rate limit del chat.
+(function calentarAgente() {
+    try {
+        fetch(AGENT_BASE + '/', { mode: 'no-cors', cache: 'no-store' }).catch(() => { });
+    } catch (_) { /* sin red: la demo ya avisa al fallar el primer mensaje */ }
+})();
+
 gsap.registerPlugin(ScrollTrigger);
 
 // 1. Lenis Smooth Scroll Setup
@@ -70,6 +83,8 @@ function initHeroAnimations() {
         .from('.navbar', { y: -50, opacity: 0, duration: 1 }, "-=1");
 
     initChatDemo();
+    initSectorDemo();
+    initLiveDemo();
     initScrollAnimations();
 }
 
@@ -129,49 +144,319 @@ function initScrollAnimations() {
 
 // 5. Conversación de producto: se reproduce una sola vez al entrar en pantalla.
 // Si JS, GSAP o las animaciones están desactivados, el HTML permanece legible.
+// Una línea de tiempo por mockup, indexada para que el selector de sector pueda
+// relanzar la conversación de la pestaña que se acaba de abrir.
+const chatTimelines = new Map();
+
 function initChatDemo() {
-    const mockup = document.querySelector('[data-chat-demo]');
+    const mockups = Array.from(document.querySelectorAll('[data-chat-demo]'));
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (!mockup || reduceMotion) return;
+    // Sin animación los mensajes quedan visibles de serie: no se añade .is-armed.
+    if (!mockups.length || reduceMotion) return;
 
-    const messages = Array.from(mockup.querySelectorAll('.chat-msg'));
-    const typingIndicators = Array.from(mockup.querySelectorAll('.chat-typing'));
+    mockups.forEach((mockup) => {
+        const messages = Array.from(mockup.querySelectorAll('.chat-msg'));
+        const typingIndicators = Array.from(mockup.querySelectorAll('.chat-typing'));
 
-    if (!messages.length) return;
+        if (!messages.length) return;
 
-    mockup.classList.add('is-armed');
+        mockup.classList.add('is-armed');
 
-    const chatTimeline = gsap.timeline({ paused: true });
-    let typingIndex = 0;
+        const chatTimeline = gsap.timeline({ paused: true });
+        let typingIndex = 0;
 
-    messages.forEach((message) => {
-        chatTimeline.to(message, {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.42,
-            ease: 'power2.out'
+        messages.forEach((message) => {
+            chatTimeline.to(message, {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.42,
+                ease: 'power2.out'
+            });
+
+            if (message.classList.contains('chat-msg--in') && typingIndicators[typingIndex]) {
+                const indicator = typingIndicators[typingIndex];
+                typingIndex += 1;
+
+                chatTimeline
+                    .call(() => indicator.classList.add('is-visible'))
+                    .to({}, { duration: 0.62 })
+                    .call(() => indicator.classList.remove('is-visible'));
+            } else {
+                chatTimeline.to({}, { duration: 0.18 });
+            }
         });
 
-        if (message.classList.contains('chat-msg--in') && typingIndicators[typingIndex]) {
-            const indicator = typingIndicators[typingIndex];
-            typingIndex += 1;
+        chatTimelines.set(mockup, chatTimeline);
 
-            chatTimeline
-                .call(() => indicator.classList.add('is-visible'))
-                .to({}, { duration: 0.62 })
-                .call(() => indicator.classList.remove('is-visible'));
+        const panel = mockup.closest('[data-sector-panel]');
+
+        if (panel) {
+            // En el selector, el disparador es el bloque entero: un panel oculto
+            // no tiene altura y nunca cruzaría el umbral de scroll.
+            ScrollTrigger.create({
+                trigger: panel.closest('[data-sector-demo]') || panel,
+                start: 'top 82%',
+                once: true,
+                onEnter: () => {
+                    if (!panel.hidden) chatTimeline.play();
+                }
+            });
         } else {
-            chatTimeline.to({}, { duration: 0.18 });
+            ScrollTrigger.create({
+                trigger: mockup,
+                start: 'top 82%',
+                once: true,
+                onEnter: () => chatTimeline.play()
+            });
         }
     });
+}
 
-    ScrollTrigger.create({
-        trigger: mockup,
-        start: 'top 82%',
-        once: true,
-        onEnter: () => chatTimeline.play()
+// ---------------------------------------------------------------------------
+// Demo en vivo: el visitante habla con el AGENTE REAL desplegado, sin guion.
+// Mismo backend que atiende WhatsApp — mismas herramientas, mismo tono.
+// El tenant `clinica-cobalto` es ficticio y existe sólo para demostraciones.
+// ---------------------------------------------------------------------------
+const DEMO_AGENT = {
+    endpoint: AGENT_BASE + '/chat',
+    tenant: 'clinica-cobalto',
+    maxTurnos: 25
+};
+
+function initLiveDemo() {
+    const root = document.querySelector('[data-live-demo]');
+
+    if (!root) return;
+
+    const pick = (selector) => root.querySelector(selector);
+
+    const log = pick('[data-demo-log]');
+    const form = pick('[data-demo-form]');
+    const input = pick('[data-demo-input]');
+    const sendBtn = pick('[data-demo-send]');
+    const note = pick('[data-demo-note]');
+    const typing = pick('[data-demo-typing]');
+    const resetBtn = pick('[data-demo-reset]');
+    const mirror = pick('[data-demo-mirror]');
+    const countEl = pick('[data-demo-count]');
+    const statusEl = pick('[data-demo-status]');
+    const rowName = pick('[data-demo-row-name]');
+    const rowMeta = pick('[data-demo-row-meta]');
+    const rowBadge = pick('[data-demo-row-badge]');
+    const detailName = pick('[data-demo-detail-name]');
+    const actionEl = pick('[data-demo-action]');
+    const appointment = pick('[data-demo-appointment]');
+    const avatar = pick('.conversation-row.is-selected .conversation-avatar');
+
+    if (!log || !form || !input) return;
+
+    const NOTA_INICIAL = note.textContent;
+
+    let sesion = '';
+    let count = 0;
+    let turnos = 0;
+    let busy = false;
+
+    function stamp() {
+        const now = new Date();
+        return String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+    }
+
+    function mirrorMessage(kind, text) {
+        const empty = mirror.querySelector('.detail-message--empty');
+        if (empty) empty.remove();
+
+        const line = document.createElement('p');
+        line.className = 'detail-message detail-message--' + (kind === 'in' ? 'client' : 'agent');
+        line.textContent = text;
+        mirror.appendChild(line);
+
+        // El panel real muestra sólo la cola reciente de la conversación.
+        while (mirror.children.length > 5) mirror.removeChild(mirror.firstChild);
+        mirror.scrollTop = mirror.scrollHeight;
+
+        count += 1;
+        countEl.textContent = count === 1 ? '1 mensaje' : count + ' mensajes';
+    }
+
+    function appendMessage(kind, text) {
+        const wrap = document.createElement('div');
+        wrap.className = 'chat-msg chat-msg--' + kind;
+
+        const body = document.createElement('p');
+        body.textContent = text;
+
+        const time = document.createElement('time');
+        time.textContent = stamp();
+
+        wrap.append(body, time);
+        log.appendChild(wrap);
+        log.scrollTop = log.scrollHeight;
+
+        mirrorMessage(kind, text);
+    }
+
+    function setNote(text, isError) {
+        note.textContent = text;
+        note.classList.toggle('is-error', !!isError);
+    }
+
+    function marcarContacto() {
+        if (rowName.textContent !== 'Nuevo contacto') return;
+
+        rowName.textContent = 'Visitante web';
+        detailName.textContent = 'Visitante web';
+        avatar.textContent = 'VW';
+        rowMeta.textContent = 'Demostración · ' + stamp();
+    }
+
+    async function enviar(texto) {
+        if (busy) return;
+
+        if (turnos >= DEMO_AGENT.maxTurnos) {
+            setNote('Has llegado al límite de esta demostración. Reinicia para empezar otra conversación.', false);
+            return;
+        }
+
+        busy = true;
+        turnos += 1;
+        input.value = '';
+        sendBtn.disabled = true;
+        resetBtn.hidden = false;
+
+        appendMessage('in', texto);
+        marcarContacto();
+
+        typing.hidden = false;
+        log.scrollTop = log.scrollHeight;
+        statusEl.textContent = 'El agente está respondiendo';
+
+        try {
+            const res = await fetch(DEMO_AGENT.endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tenant: DEMO_AGENT.tenant, sesion: sesion, mensaje: texto })
+            });
+
+            const data = await res.json();
+            typing.hidden = true;
+
+            if (res.status === 429) {
+                appendMessage('out', data.respuesta || 'Vas muy rápido, espera un momento y seguimos.');
+                statusEl.textContent = 'Límite de ritmo alcanzado';
+            } else if (!res.ok || !data.respuesta) {
+                throw new Error('respuesta no válida');
+            } else {
+                appendMessage('out', data.respuesta);
+                statusEl.textContent = 'El agente lleva la conversación';
+                setNote(NOTA_INICIAL, false);
+            }
+        } catch (err) {
+            typing.hidden = true;
+            statusEl.textContent = 'Sin conexión con el agente';
+            setNote('No he podido conectar con el agente. Vuelve a intentarlo en un momento.', true);
+        } finally {
+            busy = false;
+            sendBtn.disabled = false;
+            input.focus();
+        }
+    }
+
+    function reset() {
+        sesion = 'landing-' + Math.random().toString(36).slice(2, 10);
+        count = 0;
+        turnos = 0;
+        busy = false;
+
+        log.innerHTML = '';
+        const day = document.createElement('span');
+        day.className = 'chat-day';
+        day.textContent = 'Agente real · escríbele tú';
+        log.appendChild(day);
+
+        mirror.innerHTML = '';
+        const empty = document.createElement('p');
+        empty.className = 'detail-message detail-message--empty';
+        empty.textContent = 'Aquí aparecerá la conversación en cuanto escribas.';
+        mirror.appendChild(empty);
+
+        typing.hidden = true;
+        appointment.hidden = true;
+        appointment.classList.remove('is-new');
+        resetBtn.hidden = true;
+        sendBtn.disabled = false;
+        input.value = '';
+
+        countEl.textContent = '0 mensajes';
+        statusEl.textContent = 'Esperando el primer mensaje';
+        rowName.textContent = 'Nuevo contacto';
+        rowMeta.textContent = 'Sin mensajes todavía';
+        detailName.textContent = 'Nuevo contacto';
+        avatar.textContent = '?';
+
+        rowBadge.textContent = 'Agente';
+        rowBadge.classList.remove('is-hot');
+        actionEl.textContent = 'Intervenir';
+        actionEl.classList.remove('is-hot');
+
+        setNote(NOTA_INICIAL, false);
+    }
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const texto = input.value.trim();
+        if (texto) enviar(texto);
+    });
+
+    resetBtn.addEventListener('click', reset);
+    reset();
+}
+
+function initSectorDemo() {
+    const root = document.querySelector('[data-sector-demo]');
+
+    if (!root) return;
+
+    const tabs = Array.from(root.querySelectorAll('[data-sector-tab]'));
+    const panels = Array.from(root.querySelectorAll('[data-sector-panel]'));
+
+    if (tabs.length !== panels.length || !tabs.length) return;
+
+    function activate(index, moveFocus) {
+        tabs.forEach((tab, i) => {
+            const isActive = i === index;
+            tab.classList.toggle('is-active', isActive);
+            tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            tab.tabIndex = isActive ? 0 : -1;
+        });
+
+        panels.forEach((panel, i) => {
+            const isActive = i === index;
+            panel.classList.toggle('is-active', isActive);
+            panel.hidden = !isActive;
+
+            if (!isActive) return;
+
+            const timeline = chatTimelines.get(panel.querySelector('[data-chat-demo]'));
+            if (timeline) timeline.restart();
+        });
+
+        if (moveFocus) tabs[index].focus();
+        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    }
+
+    tabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => activate(i, false));
+
+        tab.addEventListener('keydown', (event) => {
+            const step = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+            if (!step) return;
+
+            event.preventDefault();
+            activate((i + step + tabs.length) % tabs.length, true);
+        });
     });
 }
 

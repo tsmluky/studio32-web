@@ -48,3 +48,45 @@ como redirect. Verificado en disco el 2026-07-21.
 **Por qué:** documentación que avisa de peligros inexistentes entrena al agente
 (y al humano) a ignorar los avisos. Quedan registrados aquí como histórico y
 listados en `STATE.md` como "resueltos" para que no se vuelvan a añadir.
+
+## 2026-07-31 · No se adopta la landing generada por Polsia
+
+Polsia (agente autónomo de terceros) generó en `studio32.polsia.io` una landing
+alternativa, además de market research, misión y roadmap, partiendo solo de la URL
+pública de studio32.es.
+
+**Decisión:** **no** migrar a ese diseño. Se conserva el sistema visual propio
+(vanilla, negro/crema/oro, Playfair + Inter) y se portan solo las ganancias
+comerciales concretas.
+
+**Por qué:** su landing es una plantilla Next.js + Tailwind + shadcn parametrizada
+por **una sola variable de color** (`--brand-h: 192`), con Inter para títulos y
+cuerpo. Es la misma plantilla para todos sus clientes. Adoptarla habría cambiado
+el único diferenciador visual de Studio32 por la estética SaaS genérica que ya
+usan Converpilot, SAPIENSDATAAI y el resto de competidores del vertical.
+
+Estructuralmente no aportaba nada: la web ya tenía hero → problema → agente →
+control → verticales → proceso → servicios → FAQ → CTA, es decir, el mismo
+esqueleto.
+
+**Su roadmap tampoco se adopta.** Está escrito para una empresa en día cero
+(propone construir panel, demos sectoriales y editor de conocimiento, que ya
+existen en `studio32-panel` y `studio32-agent`) y coloca en "Later" la
+verificación del número en Meta, que es el bloqueante real del go-live.
+
+## 2026-07-31 · El chat demo daba precios; el agente real no
+
+El mockup de conversación de `site/index.html` mostraba a la clínica dando el
+precio de una higiene por WhatsApp ("cuesta 45 €"). El agente real de GH Dent
+tiene la regla contraria: no da precios ni confirma mutuas por chat, ofrece la
+valoración gratuita.
+
+**Decisión:** reescrita la conversación. Ahora hace triage de dolor sin
+diagnosticar, deriva la cuestión del precio a la valoración sin coste, cierra la
+cita y ofrece escalar a una persona.
+
+**Por qué:** la demo vendía un comportamiento que el producto no tiene, y de paso
+desperdiciaba la mejor baza comercial — el criterio del oficio es justo lo que el
+Meta Business Agent (nativo, global desde el 03/06/2026 y gratis por ahora) no
+sabe hacer. Regla para futuros mockups: toda conversación demo debe ser
+comportamiento que el agente ejecute de verdad, y debe cerrar el bucle.

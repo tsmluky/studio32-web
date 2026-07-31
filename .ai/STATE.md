@@ -82,7 +82,73 @@ Si te la saltas, `STATE.md` entra en conflicto. Rama de trabajo: `main`.
 
 ## Foco actual
 
-La web está en buen estado tras el rediseño comercial (último commit:
-`feat(web): elevate landing visual system and FAQ`). No hay tarea abierta en este
-repo. El foco del ecosistema está en el **Agent Platform / GH Dent**, que vive en
-los repos `studio32-agent` y `studio32-panel`, no aquí.
+Sesión del **2026-07-31**: se revisó la landing contra la que generó Polsia
+(agente de terceros) y se decidió **no** migrar a su diseño — ver `DECISIONS.md`.
+Se portaron solo las ganancias comerciales. Hecho en `site/`:
+
+- **Chat demo corregido** (`index.html`, sección `#agente`): daba precio por
+  WhatsApp, comportamiento que el agente real NO tiene. Ahora hace triage,
+  ofrece valoración gratuita, cierra cita y ofrece escalar a humano.
+- **Sección de tarifas propia** (`#tarifas`): el bloque `.commercial-model` sale
+  de dentro de `#process`, gana cabecera propia (reutiliza `.verticals-header`) y
+  una lista de incluidos por tramo (`.model-includes`, nueva en `styles.css`).
+  Añadida al nav de escritorio y al menú móvil (índices móviles renumerados).
+- **FAQ ampliada** de 6 a 10 preguntas: número nuevo, cambios de precio/horario,
+  datos y RGPD, plazo de puesta en marcha.
+
+- **Selector por sector** en `#portfolio`: las tres `.fit-card` pasan a ser
+  pestañas (`role="tablist"`, flechas ←/→), cada una con su panel y una
+  conversación completa distinta. Nuevo: `.fit-card--tab`, `.sector-panel`,
+  `.sector-points`; en JS, `initSectorDemo()`.
+- **Demo interactiva** en `#control` (`[data-live-demo]`): el visitante elige sus
+  respuestas y el panel del negocio se actualiza en vivo — conversación espejada,
+  contador, contacto, tarjeta de cita y relevo humano. El mockup estático de panel
+  que había en esa sección **se eliminó**: ahora sólo existe el vivo.
+
+### Cómo funciona la demo en vivo
+
+**Habla con el agente REAL desplegado, sin guion** (decisión del usuario, 31/07).
+Se probó primero con guion cerrado y se descartó: los botones de respuesta
+predefinida delataban el mockup.
+
+- `DEMO_AGENT` (`script.js`) → `POST https://web-production-d722c.up.railway.app/chat`
+  con `{ tenant: 'clinica-cobalto', sesion, mensaje }`. Mismo backend y mismas
+  herramientas que atienden WhatsApp. Verificado E2E el 31/07.
+- La sesión es aleatoria por visita (`landing-xxxxxxxx`) y se renueva al reiniciar.
+  En el agente, esa sesión hace de "teléfono": el tenant de demo tiene **agenda
+  por sesión**, así que cada visitante ve la agenda limpia y solo sus reservas.
+- **Ping de calentamiento** (`calentarAgente()`, arriba del todo en `script.js`):
+  un GET al healthcheck en cuanto carga la página. Railway duerme el contenedor y
+  el arranque en frío se comía ~15 s del primer mensaje; con el ping baja a ~10 s
+  (el resto ya es el modelo). No gasta modelo ni consume rate limit.
+- ⚠️ El tono del agente **no se edita aquí ni en `tenants/<id>/`**: Supabase pisa
+  al archivo. Hay que ejecutar `node scripts/import-tenants-to-supabase.js <id>`
+  en el repo `studio32-agent`. Ver su `DECISIONS.md` (2026-07-31).
+- `CORS_ORIGINS` en el agente vale `*` por defecto, así que no hizo falta tocarlo.
+- Tope de 25 turnos **en cliente** (`maxTurnos`) — es cosmético, se salta desde
+  consola. El límite que cuenta es el `rateLimit` del servidor (30 req / 5 min
+  por IP).
+
+**Pendiente para que el panel sea del todo real:** la tarjeta de cita no se
+rellena porque no hay endpoint público que devuelva el estado de una sesión. Hace
+falta añadir en `studio32-agent` algo tipo `GET /demo/estado?sesion=` (sólo
+lectura, acotado a esa sesión). Hoy el panel espeja la conversación real, pero la
+cita no aparece aunque el agente la cree.
+- `initChatDemo()` ahora maneja **varios** mockups (antes uno solo) y guarda las
+  líneas de tiempo en `chatTimelines` para que el selector relance la animación
+  de la pestaña que se abre.
+- `.detail-status span` se acotó a `:first-child`: antes convertía en punto
+  cualquier span hijo, y el marcado nuevo mete un segundo span con el texto.
+
+**Pendiente decidir con el usuario:**
+- Copy del `<h1>` del hero: hoy habla al negocio ("Tu negocio atiende aunque esté
+  cerrado"), no al dueño. Cambiar el H1 es decisión de marca — no tocar sin visto
+  bueno.
+- Conectar la demo al agente real (`studio32-agent`) con tenant de demo y límite
+  de uso. Sería fase 2 y **no vive en este repo**.
+
+**Limpieza menor pendiente:** `.control-grid` quedó como CSS muerto (3 bloques:
+`styles.css` ~1128, ~2725, ~3047). Ya no lo usa ningún HTML.
+
+Nada de esto está commiteado todavía. El foco del ecosistema sigue siendo el
+**Agent Platform / GH Dent** (`studio32-agent`, `studio32-panel`), no este repo.
