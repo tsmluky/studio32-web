@@ -248,6 +248,8 @@ function initLiveDemo() {
     const detailName = pick('[data-demo-detail-name]');
     const actionEl = pick('[data-demo-action]');
     const appointment = pick('[data-demo-appointment]');
+    const appointmentSlot = pick('[data-demo-appointment-slot]');
+    const appointmentNote = pick('[data-demo-appointment-note]');
     const avatar = pick('.conversation-row.is-selected .conversation-avatar');
 
     if (!log || !form || !input) return;
@@ -303,6 +305,37 @@ function initLiveDemo() {
         note.classList.toggle('is-error', !!isError);
     }
 
+    // Lee del agente lo que ha hecho DE VERDAD en esta sesión y lo pinta en el
+    // panel. No se deduce del texto de la respuesta: se consulta el estado real.
+    async function refrescarPanel() {
+        try {
+            const url = AGENT_BASE + '/demo/estado?tenant=' + encodeURIComponent(DEMO_AGENT.tenant) +
+                '&sesion=' + encodeURIComponent(sesion);
+            const res = await fetch(url, { cache: 'no-store' });
+            if (!res.ok) return;
+
+            const data = await res.json();
+            const cita = (data.citas || [])[0];
+            if (!cita) return;
+
+            appointmentSlot.textContent = cita.fecha + ' · ' + cita.hora;
+            appointmentNote.textContent = (cita.servicio || 'Cita') + ' · Confirmada';
+
+            if (appointment.hidden) {
+                appointment.hidden = false;
+                appointment.classList.remove('is-new');
+                void appointment.offsetWidth; // reinicia la animación al reprogramar
+                appointment.classList.add('is-new');
+            }
+
+            if (cita.nombre) {
+                rowName.textContent = cita.nombre;
+                detailName.textContent = cita.nombre;
+                avatar.textContent = cita.nombre.split(' ').map((p) => p[0]).join('').slice(0, 2).toUpperCase();
+            }
+        } catch (_) { /* el panel simplemente no se actualiza; el chat sigue */ }
+    }
+
     function marcarContacto() {
         if (rowName.textContent !== 'Nuevo contacto') return;
 
@@ -352,6 +385,7 @@ function initLiveDemo() {
                 appendMessage('out', data.respuesta);
                 statusEl.textContent = 'El agente lleva la conversación';
                 setNote(NOTA_INICIAL, false);
+                refrescarPanel();
             }
         } catch (err) {
             typing.hidden = true;
