@@ -3532,31 +3532,39 @@ body {
 }
 
 /* ── Hero ───────────────────────────────────────────────────────────────── */
-/* Se queda oscuro: abre con fuerza y hace de contraste con el resto. Es el
-   patrón de las piezas que funcionan — apertura dramática, cuerpo legible. */
+/* Se probó oscuro (apertura dramática, cuerpo claro) y hacía demasiado ruido:
+   la costura entre el negro y el papel se comía la entrada. Ahora es claro como
+   el resto y la página se lee de un tirón. Su texto llevaba el crema escrito a
+   pelo, así que hay que reasignarlo o queda invisible. */
 .hero {
-    background: linear-gradient(165deg, #14120f 0%, #090908 62%, #14100a 100%);
-    color: #f6f0e5;
+    background: linear-gradient(170deg, var(--bg-soft) 0%, var(--bg-color) 58%, var(--bg-warm) 100%);
+    color: var(--text-color);
 }
 
 .hero .hero-title,
 .hero .hero-desc,
 .hero .hero-meta,
 .hero .system-rail strong {
-    color: #f6f0e5;
+    color: var(--text-color);
+}
+
+.hero .hero-desc {
+    color: var(--text-muted);
 }
 
 .hero .hero-subtitle,
 .hero .hero-assurance,
 .hero .system-rail p,
 .hero .system-rail-label {
-    color: rgba(246, 240, 229, .66);
+    color: var(--text-muted);
 }
 
-.hero .hero-title em {
-    color: var(--accent-fill);
+.hero .hero-title em,
+.hero .hero-meta em {
+    color: var(--accent-color);
 }
 
+/* Relleno dorado con tinta oscura: es el botón principal de la página. */
 .hero .hero-cta {
     background: var(--accent-fill);
     border-color: var(--accent-fill);
@@ -3564,16 +3572,16 @@ body {
 }
 
 .hero .hero-link {
-    color: #f6f0e5;
+    color: var(--text-color);
 }
 
 .hero .system-rail,
 .hero .system-rail-grid > div {
-    border-color: rgba(246, 240, 229, .16);
+    border-color: var(--border);
 }
 
 .hero .system-rail span {
-    color: var(--accent-fill);
+    color: var(--accent-color);
 }
 
 /* ── Tarjetas: de filete sobre negro a papel con sombra ─────────────────── */
