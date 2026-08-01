@@ -236,15 +236,6 @@ const SECTORES = {
         marcador: 'Clínica Cobalto · ayer por la noche',
         nota: 'Agente real conectado. Pregúntale lo que se te ocurra: precios, horarios, miedo al dentista, o pídele cita de verdad.',
         placeholder: 'Escribe lo que quieras preguntarle…',
-        preview: {
-            knowledge: 'Servicios, horarios y políticas de la clínica',
-            services: [
-                ['Primera visita', '30 min · Sin coste'],
-                ['Higiene dental', '45 min · Con cita'],
-                ['Urgencia dental', 'Huecos prioritarios'],
-                ['Revisión', '30 min · Seguimiento']
-            ]
-        },
         showreel: [
             { kind: 'in', texto: 'Buenas noches, llevo dos días con dolor en una muela y no sé si aguantar hasta el lunes.', estado: 'Conversación entrante · fuera de horario' },
             { kind: 'out', texto: 'Vaya, lo siento. ¿Te duele todo el rato o solo al morder?', estado: 'El agente está valorando la urgencia' },
@@ -269,15 +260,6 @@ const SECTORES = {
         marcador: 'Casa Duarte · anoche, en pleno servicio',
         nota: 'Agente real conectado. Pregúntale por la carta, por alérgenos o pídele mesa de verdad.',
         placeholder: 'Pregúntale por la carta o pide mesa…',
-        preview: {
-            knowledge: 'Carta, alérgenos, horarios y políticas de reserva',
-            services: [
-                ['Reserva de mesa', 'Sin coste · 2–12 personas'],
-                ['Menú de grupos', 'Disponible desde 6 personas'],
-                ['Opciones sin gluten', 'Cocina informada'],
-                ['Celebraciones', 'Consulta previa']
-            ]
-        },
         showreel: [
             { kind: 'in', texto: '¿Tenéis mesa para 6 el sábado sobre las 21:30?', estado: 'Conversación entrante · sala llena' },
             { kind: 'out', texto: 'El sábado a las 21:30 me queda mesa de 6 en el salón. ¿Hay alguna alergia o intolerancia en el grupo?', estado: 'El agente consulta el aforo real del turno' },
@@ -300,15 +282,6 @@ const SECTORES = {
         marcador: 'Instalaciones Vera · antes de abrir el taller',
         nota: 'Agente real conectado. Pídele presupuesto y fíjate en lo que pregunta antes de pasarte al técnico.',
         placeholder: 'Cuéntale qué necesitas…',
-        preview: {
-            knowledge: 'Servicios, coberturas, zonas y criterios técnicos',
-            services: [
-                ['Visita técnica', 'Gratuita · Con cita'],
-                ['Cambio de caldera', 'Valoración previa'],
-                ['Reparación urgente', 'Prioridad 24 h'],
-                ['Mantenimiento', 'Plan anual']
-            ]
-        },
         showreel: [
             { kind: 'in', texto: 'Buenos días, quería presupuesto para cambiar la caldera.', estado: 'Conversación entrante · 07:58' },
             { kind: 'out', texto: 'Te lo prepara el técnico. Para que salga ajustado, ¿es piso o unifamiliar, y sabes qué caldera tienes ahora?', estado: 'El agente está cualificando la petición' },
@@ -347,26 +320,17 @@ function initLiveDemo() {
     const mirror = pick('[data-demo-mirror]');
     const countEl = pick('[data-demo-count]');
     const statusEl = pick('[data-demo-status]');
-    const conversationList = pick('[data-demo-conversation-list]');
-    let activeRow = pick('[data-demo-active-row]');
-    let rowName = pick('[data-demo-row-name]');
-    let rowMeta = pick('[data-demo-row-meta]');
-    let rowBadge = pick('[data-demo-row-badge]');
+    const rowName = pick('[data-demo-row-name]');
+    const rowMeta = pick('[data-demo-row-meta]');
+    const rowBadge = pick('[data-demo-row-badge]');
     const detailName = pick('[data-demo-detail-name]');
     const actionEl = pick('[data-demo-action]');
     const appointment = pick('[data-demo-appointment]');
     const appointmentSlot = pick('[data-demo-appointment-slot]');
     const appointmentNote = pick('[data-demo-appointment-note]');
-    let avatar = pick('.conversation-row.is-selected .conversation-avatar');
+    const avatar = pick('.conversation-row.is-selected .conversation-avatar');
     const takeover = pick('[data-demo-takeover]');
     const takeoverBtn = pick('[data-demo-takeover-btn]');
-    const dashboardTabs = [...root.querySelectorAll('[data-dashboard-tab]')];
-    const dashboardViews = [...root.querySelectorAll('[data-dashboard-view]')];
-    const calendarLive = pick('[data-demo-calendar-live]');
-    const calendarSlot = pick('[data-demo-calendar-slot]');
-    const serviceNames = [...root.querySelectorAll('[data-preview-service-name]')];
-    const serviceMetas = [...root.querySelectorAll('[data-preview-service-meta]')];
-    const knowledgePreview = pick('[data-preview-knowledge]');
 
     if (!log || !form || !input) return;
 
@@ -384,91 +348,6 @@ function initLiveDemo() {
     let count = 0;
     let turnos = 0;
     let busy = false;
-
-    function bindActiveRow(row) {
-        if (!row) return;
-        activeRow = row;
-        rowName = row.querySelector('[data-demo-row-name]');
-        rowMeta = row.querySelector('[data-demo-row-meta]');
-        rowBadge = row.querySelector('[data-demo-row-badge]');
-        avatar = row.querySelector('.conversation-avatar');
-    }
-
-    function mostrarVista(id) {
-        dashboardTabs.forEach((tab) => {
-            const activa = tab.dataset.dashboardTab === id;
-            tab.classList.toggle('is-active', activa);
-            tab.setAttribute('aria-selected', activa ? 'true' : 'false');
-            tab.tabIndex = activa ? 0 : -1;
-            if (activa && id === 'citas') tab.classList.remove('has-update');
-        });
-
-        dashboardViews.forEach((view) => {
-            const activa = view.dataset.dashboardView === id;
-            view.classList.toggle('is-active', activa);
-            view.hidden = !activa;
-        });
-    }
-
-    dashboardTabs.forEach((tab) => {
-        tab.addEventListener('click', () => mostrarVista(tab.dataset.dashboardTab));
-    });
-
-    function actualizarPreviewSector() {
-        const preview = sector.preview;
-        if (!preview) return;
-
-        preview.services.forEach((service, index) => {
-            if (serviceNames[index]) serviceNames[index].textContent = service[0];
-            if (serviceMetas[index]) serviceMetas[index].textContent = service[1];
-        });
-
-        if (knowledgePreview) knowledgePreview.textContent = preview.knowledge;
-    }
-
-    function restaurarConversacionShowreel() {
-        const generada = conversationList?.querySelector('[data-demo-generated-row]');
-        if (generada) generada.remove();
-
-        const showreelRow = conversationList?.querySelector('[data-demo-showreel-row]');
-        if (!showreelRow) return;
-
-        conversationList.querySelectorAll('.conversation-row').forEach((row) => {
-            row.classList.remove('is-selected');
-            row.removeAttribute('data-demo-active-row');
-        });
-        showreelRow.classList.add('is-selected');
-        showreelRow.setAttribute('data-demo-active-row', '');
-        bindActiveRow(showreelRow);
-        conversationList.scrollTop = 0;
-    }
-
-    // El showreel no desaparece al empezar la prueba real: queda como una
-    // conversación ya atendida y la del visitante entra encima, como ocurriría
-    // en el inbox de verdad.
-    function abrirNuevaConversacion() {
-        if (!conversationList || !activeRow) return;
-
-        activeRow.classList.remove('is-selected');
-        activeRow.removeAttribute('data-demo-active-row');
-        rowBadge.textContent = 'Atendida';
-        rowBadge.classList.remove('is-hot');
-        rowMeta.textContent = appointment.hidden ? 'Conversación resuelta · ahora' : 'Cita gestionada · ahora';
-
-        const row = document.createElement('article');
-        row.className = 'conversation-row is-selected is-entering';
-        row.setAttribute('data-demo-active-row', '');
-        row.setAttribute('data-demo-generated-row', '');
-        row.innerHTML = '<span class="conversation-avatar">?</span>' +
-            '<div><strong data-demo-row-name>Nuevo contacto</strong>' +
-            '<small data-demo-row-meta>Sin mensajes todavía</small></div>' +
-            '<em data-demo-row-badge>Agente</em>';
-
-        conversationList.prepend(row);
-        bindActiveRow(row);
-        conversationList.scrollTop = 0;
-        requestAnimationFrame(() => row.classList.remove('is-entering'));
-    }
 
     function stamp() {
         const now = new Date();
@@ -555,13 +434,6 @@ function initLiveDemo() {
         appointment.classList.remove('is-new');
         void appointment.offsetWidth; // reinicia la animación al reprogramar
         appointment.classList.add('is-new');
-
-        if (calendarLive && calendarSlot) {
-            calendarSlot.textContent = slot;
-            calendarLive.hidden = false;
-            const citasTab = dashboardTabs.find((tab) => tab.dataset.dashboardTab === 'citas');
-            if (citasTab && !citasTab.classList.contains('is-active')) citasTab.classList.add('has-update');
-        }
     }
 
     async function enviar(texto) {
@@ -616,7 +488,7 @@ function initLiveDemo() {
         }
     }
 
-    function limpiar(etiqueta, preservarCitaEnAgenda) {
+    function limpiar(etiqueta) {
         sesion = 'landing-' + Math.random().toString(36).slice(2, 10);
         count = 0;
         turnos = 0;
@@ -637,7 +509,6 @@ function initLiveDemo() {
         typing.hidden = true;
         appointment.hidden = true;
         appointment.classList.remove('is-new');
-        if (calendarLive && !preservarCitaEnAgenda) calendarLive.hidden = true;
         sendBtn.disabled = false;
         input.value = '';
 
@@ -669,8 +540,6 @@ function initLiveDemo() {
 
     function arrancarShowreel() {
         pararShowreel();
-        restaurarConversacionShowreel();
-        mostrarVista('inbox');
         root.classList.add('is-showreel');
         input.disabled = true;
         takeover.hidden = true;
@@ -710,10 +579,10 @@ function initLiveDemo() {
         typing.hidden = true;
         root.classList.remove('is-showreel');
         input.disabled = false;
-        mostrarVista('inbox');
-        abrirNuevaConversacion();
+        appointment.hidden = true;
+        appointment.classList.remove('is-new');
         setNote(sector.nota, false);
-        limpiar('Agente real · escríbele tú', true);
+        limpiar('Agente real · escríbele tú');
         rowBadge.textContent = 'Agente';
         rowBadge.classList.remove('is-hot');
         actionEl.textContent = 'Intervenir';
@@ -743,7 +612,6 @@ function initLiveDemo() {
         if (panelNombre) panelNombre.textContent = sector.negocio;
         if (panelMarca) panelMarca.textContent = sector.iniciales;
         input.placeholder = sector.placeholder;
-        actualizarPreviewSector();
 
         botonesSector.forEach((boton) => {
             const activo = boton.dataset.demoSector === id;
@@ -771,8 +639,6 @@ function initLiveDemo() {
     resetBtn.addEventListener('click', arrancarShowreel);
 
     // Arranca el reclamo la primera vez que la sección entra en pantalla.
-    actualizarPreviewSector();
-    mostrarVista('inbox');
     limpiar('Clínica Cobalto');
     input.disabled = true;
     root.classList.add('is-showreel');

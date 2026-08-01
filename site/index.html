@@ -36,13 +36,13 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css?v=20260801-dashboard-1">
+    <link rel="stylesheet" href="styles.css?v=20260801-claro-5">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     <script src="https://unpkg.com/split-type@0.3.4" defer></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js" defer></script>
-    <script src="script.js?v=20260801-dashboard-1" defer></script>
+    <script src="script.js?v=20260801-claro-5" defer></script>
 
     <!-- Red de seguridad del preloader: si un CDN falla o el JS principal
          no llega a retirarlo, lo forzamos para no dejar la web en negro. -->
@@ -445,42 +445,23 @@
                         </div>
                     </div>
                     <div class="dashboard-shell">
-                        <aside class="dashboard-nav" role="tablist" aria-label="Navegación de la vista previa del panel">
-                            <button type="button" class="is-active" role="tab" aria-selected="true"
-                                aria-controls="dashboard-view-inbox" data-dashboard-tab="inbox">
-                                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 4.5h13v11h-13zM3.5 11h3l1.5 2h4l1.5-2h3"/></svg>
-                                <span>Inbox</span>
-                            </button>
-                            <button type="button" role="tab" aria-selected="false" aria-controls="dashboard-view-citas"
-                                data-dashboard-tab="citas">
-                                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 5.5h12v11H4zM4 8.5h12M7 3.5v4M13 3.5v4"/></svg>
-                                <span>Citas</span><i aria-hidden="true"></i>
-                            </button>
-                            <button type="button" role="tab" aria-selected="false"
-                                aria-controls="dashboard-view-servicios" data-dashboard-tab="servicios">
-                                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4.5h12v4H4zM4 11.5h12v4H4zM7 6.5h6M7 13.5h6"/></svg>
-                                <span>Servicios</span>
-                            </button>
-                            <button type="button" role="tab" aria-selected="false" aria-controls="dashboard-view-agente"
-                                data-dashboard-tab="agente">
-                                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 7.5a4 4 0 0 1 8 0v3a4 4 0 0 1-8 0zM3.5 10h2.5M14 10h2.5M8 15.5v1h4v-1"/></svg>
-                                <span>Agente</span>
-                            </button>
+                        <aside class="dashboard-nav" aria-label="Navegación simulada del panel">
+                            <span class="is-active">Inbox</span>
+                            <span data-demo-nav-citas>Citas</span>
+                            <span>Servicios</span>
+                            <span>Agente</span>
                         </aside>
                         <div class="dashboard-workspace">
-                            <section class="dashboard-view is-active" id="dashboard-view-inbox" role="tabpanel"
-                                data-dashboard-view="inbox">
-                                <div class="dashboard-heading">
-                                    <div>
-                                        <small>INBOX</small>
-                                        <strong>Conversaciones</strong>
-                                    </div>
-                                    <span class="dashboard-live">Agente activo</span>
+                            <div class="dashboard-heading">
+                                <div>
+                                    <small>INBOX</small>
+                                    <strong>Conversaciones</strong>
                                 </div>
-                                <div class="dashboard-columns">
-                                    <div class="conversation-list" data-demo-conversation-list tabindex="0"
-                                        aria-label="Conversaciones recientes. Desliza para ver más.">
-                                    <article class="conversation-row is-selected" data-demo-active-row data-demo-showreel-row>
+                                <span class="dashboard-live">Agente activo</span>
+                            </div>
+                            <div class="dashboard-columns">
+                                <div class="conversation-list">
+                                    <article class="conversation-row is-selected">
                                         <span class="conversation-avatar">?</span>
                                         <div>
                                             <strong data-demo-row-name>Nuevo contacto</strong>
@@ -498,146 +479,35 @@
                                         <div><strong>Ana Pérez</strong><small>Cambio de cita · 18:15</small></div>
                                         <em>Resuelta</em>
                                     </article>
-                                    <article class="conversation-row">
-                                        <span class="conversation-avatar">MR</span>
-                                        <div><strong>Marcos Ruiz</strong><small>Consulta pendiente · ayer</small></div>
-                                        <em>Agente</em>
-                                    </article>
-                                    <article class="conversation-row">
-                                        <span class="conversation-avatar">LC</span>
-                                        <div><strong>Lucía Cano</strong><small>Recordatorio enviado · ayer</small></div>
-                                        <em>Automático</em>
-                                    </article>
-                                    <article class="conversation-row">
-                                        <span class="conversation-avatar">JS</span>
-                                        <div><strong>Jorge Sanz</strong><small>Consulta resuelta · jueves</small></div>
-                                        <em>Resuelta</em>
-                                    </article>
-                                    <article class="conversation-row">
-                                        <span class="conversation-avatar">EC</span>
-                                        <div><strong>Elena Costa</strong><small>Nueva cita · miércoles</small></div>
-                                        <em>Agente</em>
-                                    </article>
-                                    <article class="conversation-row">
-                                        <span class="conversation-avatar">NB</span>
-                                        <div><strong>Nuria Blanco</strong><small>Información enviada · martes</small></div>
-                                        <em>Automático</em>
-                                    </article>
-                                    <article class="conversation-row">
-                                        <span class="conversation-avatar">RO</span>
-                                        <div><strong>Raúl Ortega</strong><small>Conversación cerrada · lunes</small></div>
-                                        <em>Resuelta</em>
-                                    </article>
-                                    <article class="conversation-row">
-                                        <span class="conversation-avatar">CM</span>
-                                        <div><strong>Carla Martín</strong><small>Consulta recibida · lunes</small></div>
-                                        <em>Equipo</em>
-                                    </article>
+                                </div>
+                                <div class="conversation-detail">
+                                    <div class="detail-top">
+                                        <div>
+                                            <strong data-demo-detail-name>Nuevo contacto</strong>
+                                            <small>WhatsApp · conversación activa</small>
+                                        </div>
+                                        <span class="detail-action" data-demo-action>Intervenir</span>
                                     </div>
-                                    <div class="conversation-detail">
-                                        <div class="detail-top">
-                                            <div>
-                                                <strong data-demo-detail-name>Nuevo contacto</strong>
-                                                <small>WhatsApp · conversación activa</small>
-                                            </div>
-                                            <span class="detail-action" data-demo-action>Intervenir</span>
-                                        </div>
-                                        <div class="detail-history">
-                                            <span>Hoy</span>
-                                            <span data-demo-count>0 mensajes</span>
-                                        </div>
-                                        <section class="detail-messages" data-demo-mirror
-                                            aria-label="Historial visible de la conversación">
-                                            <p class="detail-message detail-message--empty">Aquí aparecerá la conversación
-                                                en cuanto escribas.</p>
-                                        </section>
-                                        <div class="appointment-card" data-demo-appointment hidden>
-                                            <span>PRÓXIMA CITA</span>
-                                            <strong data-demo-appointment-slot>Sin cita</strong>
-                                            <small data-demo-appointment-note>Todavía no hay ninguna reservada</small>
-                                        </div>
-                                        <div class="detail-status">
-                                            <span></span>
-                                            <span data-demo-status>Esperando el primer mensaje</span>
-                                        </div>
+                                    <div class="detail-history">
+                                        <span>Hoy</span>
+                                        <span data-demo-count>0 mensajes</span>
+                                    </div>
+                                    <section class="detail-messages" data-demo-mirror
+                                        aria-label="Historial visible de la conversación">
+                                        <p class="detail-message detail-message--empty">Aquí aparecerá la conversación
+                                            en cuanto escribas.</p>
+                                    </section>
+                                    <div class="appointment-card" data-demo-appointment hidden>
+                                        <span>PRÓXIMA CITA</span>
+                                        <strong data-demo-appointment-slot>Sin cita</strong>
+                                        <small data-demo-appointment-note>Todavía no hay ninguna reservada</small>
+                                    </div>
+                                    <div class="detail-status">
+                                        <span></span>
+                                        <span data-demo-status>Esperando el primer mensaje</span>
                                     </div>
                                 </div>
-                            </section>
-
-                            <section class="dashboard-view" id="dashboard-view-citas" role="tabpanel" hidden
-                                data-dashboard-view="citas">
-                                <div class="dashboard-heading">
-                                    <div><small>AGENDA</small><strong>Citas</strong></div>
-                                    <span class="dashboard-view-meta">Agosto · 2026</span>
-                                </div>
-                                <div class="appointments-preview">
-                                    <div class="calendar-card">
-                                        <div class="calendar-toolbar">
-                                            <strong>Agosto 2026</strong><span>Hoy</span>
-                                        </div>
-                                        <div class="calendar-weekdays" aria-hidden="true">
-                                            <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>
-                                        </div>
-                                        <div class="calendar-grid" aria-label="Calendario ilustrativo de agosto de 2026">
-                                            <span class="is-out">27</span><span class="is-out">28</span><span class="is-out">29</span><span class="is-out">30</span><span class="is-out">31</span><span class="is-today">1</span><span>2</span>
-                                            <span>3</span><span class="has-appointments">4<i>3</i></span><span>5</span><span class="has-appointments">6<i>2</i></span><span>7</span><span>8</span><span>9</span>
-                                            <span class="has-appointments">10<i>4</i></span><span>11</span><span>12</span><span>13</span><span class="has-appointments">14<i>2</i></span><span>15</span><span>16</span>
-                                            <span>17</span><span>18</span><span class="has-appointments">19<i>3</i></span><span>20</span><span>21</span><span>22</span><span>23</span>
-                                            <span>24</span><span class="has-appointments">25<i>2</i></span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
-                                            <span>31</span><span class="is-out">1</span><span class="is-out">2</span><span class="is-out">3</span><span class="is-out">4</span><span class="is-out">5</span><span class="is-out">6</span>
-                                        </div>
-                                    </div>
-                                    <aside class="agenda-day">
-                                        <small>PRÓXIMAS</small>
-                                        <strong>Hoy</strong>
-                                        <article><time>09:30</time><div><b>David López</b><span data-preview-service>Primera visita</span></div></article>
-                                        <article><time>11:00</time><div><b>Ana Pérez</b><span>Revisión</span></div></article>
-                                        <article><time>16:30</time><div><b>Elena Costa</b><span>Higiene</span></div></article>
-                                        <article class="agenda-live" data-demo-calendar-live hidden>
-                                            <time>Ahora</time><div><b>Nueva reserva</b><span data-demo-calendar-slot>Confirmada por el agente</span></div>
-                                        </article>
-                                    </aside>
-                                </div>
-                            </section>
-
-                            <section class="dashboard-view" id="dashboard-view-servicios" role="tabpanel" hidden
-                                data-dashboard-view="servicios">
-                                <div class="dashboard-heading">
-                                    <div><small>CATÁLOGO</small><strong>Servicios</strong></div>
-                                    <span class="dashboard-view-meta">Todo actualizado</span>
-                                </div>
-                                <div class="services-preview">
-                                    <div class="services-summary"><span>4 activos</span><span>El agente los conoce</span></div>
-                                    <article><span class="service-icon">01</span><div><strong data-preview-service-name>Primera visita</strong><small data-preview-service-meta>30 min · Sin coste</small></div><em>Activo</em></article>
-                                    <article><span class="service-icon">02</span><div><strong data-preview-service-name>Higiene dental</strong><small data-preview-service-meta>45 min · Con cita</small></div><em>Activo</em></article>
-                                    <article><span class="service-icon">03</span><div><strong data-preview-service-name>Urgencia dental</strong><small data-preview-service-meta>Huecos prioritarios</small></div><em>Activo</em></article>
-                                    <article><span class="service-icon">04</span><div><strong data-preview-service-name>Revisión</strong><small data-preview-service-meta>30 min · Seguimiento</small></div><em>Activo</em></article>
-                                    <p class="services-footnote">Precios, duración y reglas disponibles para el agente en cada conversación.</p>
-                                </div>
-                            </section>
-
-                            <section class="dashboard-view" id="dashboard-view-agente" role="tabpanel" hidden
-                                data-dashboard-view="agente">
-                                <div class="dashboard-heading">
-                                    <div><small>CONFIGURACIÓN</small><strong>Agente</strong></div>
-                                    <span class="dashboard-live">Operativo</span>
-                                </div>
-                                <div class="agent-preview">
-                                    <div class="agent-status-card">
-                                        <span class="agent-orb" aria-hidden="true">32</span>
-                                        <div><small>AGENTE DE RECEPCIÓN</small><strong>Atendiendo ahora</strong><p>WhatsApp conectado · Respuesta automática activa</p></div>
-                                    </div>
-                                    <div class="agent-preview-grid">
-                                        <article><small>CONOCIMIENTO</small><strong data-preview-knowledge>Servicios, horarios y políticas</strong><span>Actualizado hoy</span></article>
-                                        <article><small>HORARIO</small><strong>24 horas</strong><span>Con relevo humano</span></article>
-                                    </div>
-                                    <div class="agent-rules">
-                                        <article><div><strong>Gestionar citas</strong><small>Consulta la agenda antes de confirmar</small></div><span class="fake-switch is-on" aria-label="Activado"></span></article>
-                                        <article><div><strong>Detectar urgencias</strong><small>Prioriza y avisa al equipo cuando hace falta</small></div><span class="fake-switch is-on" aria-label="Activado"></span></article>
-                                        <article><div><strong>Relevo a una persona</strong><small>Conserva todo el contexto de la conversación</small></div><span class="fake-switch is-on" aria-label="Activado"></span></article>
-                                    </div>
-                                </div>
-                            </section>
+                            </div>
                         </div>
                     </div>
                     <figcaption>Demostración de producto · datos ficticios</figcaption>
