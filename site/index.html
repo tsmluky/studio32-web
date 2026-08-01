@@ -487,12 +487,24 @@
                             <strong>Clínica Cobalto</strong>
                             <span class="chat-status">Agente activo · responde al momento</span>
                         </div>
-                        <button type="button" class="live-reset" data-demo-reset hidden>Reiniciar</button>
+                        <button type="button" class="live-reset" data-demo-reset>Ver de nuevo</button>
                     </div>
 
-                    <div class="live-chat-body" data-demo-log role="log" aria-live="polite"
-                        aria-label="Conversación de la demostración">
-                        <span class="chat-day">Demostración · escribe tú</span>
+                    <div class="live-chat-stage">
+                        <div class="live-chat-body" data-demo-log role="log" aria-live="polite"
+                            aria-label="Conversación de la demostración">
+                            <span class="chat-day">Demostración</span>
+                        </div>
+
+                        <div class="live-takeover" data-demo-takeover hidden>
+                            <p class="live-takeover-eyebrow">[ ESTO HA PASADO SOLO ]</p>
+                            <p class="live-takeover-title">Ahora <em>pruébalo tú</em>.</p>
+                            <p class="live-takeover-text">Escríbele lo que quieras: precios, horarios, miedo al
+                                dentista. Es el mismo agente que atendería a tus clientes, y la cita que reserves
+                                aparecerá de verdad en el panel.</p>
+                            <button type="button" class="live-takeover-btn" data-demo-takeover-btn>Pruébalo tú
+                                mismo</button>
+                        </div>
                     </div>
 
                     <div class="live-typing" data-demo-typing hidden aria-hidden="true">
@@ -576,8 +588,8 @@
                                     </section>
                                     <div class="appointment-card" data-demo-appointment hidden>
                                         <span>PRÓXIMA CITA</span>
-                                        <strong data-demo-appointment-slot></strong>
-                                        <small data-demo-appointment-note></small>
+                                        <strong data-demo-appointment-slot>Sin cita</strong>
+                                        <small data-demo-appointment-note>Todavía no hay ninguna reservada</small>
                                     </div>
                                     <div class="detail-status">
                                         <span></span>

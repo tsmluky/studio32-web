@@ -1566,15 +1566,103 @@ body.menu-open .mobile-menu {
     background: rgba(201, 168, 106, 0.12);
 }
 
+/* Contenedor de posicionamiento del relevo: la conversación corre debajo y el
+   panel de "pruébalo tú" aparece encima cuando el guion de reclamo termina. */
+.live-chat-stage {
+    position: relative;
+}
+
+/* Altura FIJA, no min/max: con un rango, la caja crecía y encogía a cada mensaje
+   y el bloque entero daba saltos. Una ventana de chat no cambia de tamaño. */
 .live-chat-body {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    min-height: 330px;
-    max-height: 430px;
+    height: 430px;
     padding: 20px;
     overflow-y: auto;
+    overscroll-behavior: contain;
     scrollbar-width: thin;
+}
+
+.live-takeover {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 26px 24px 24px;
+    background: linear-gradient(to top, rgba(9, 9, 8, 0.97) 42%, rgba(9, 9, 8, 0.86) 68%, rgba(9, 9, 8, 0));
+    animation: takeoverIn 0.5s var(--transition);
+}
+
+.live-takeover[hidden] {
+    display: none;
+}
+
+@keyframes takeoverIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.live-takeover-eyebrow {
+    color: var(--accent-color);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.live-takeover-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 2.4vw, 1.95rem);
+    line-height: 1.08;
+}
+
+.live-takeover-title em {
+    color: var(--accent-color);
+}
+
+.live-takeover-text {
+    max-width: 34ch;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.live-takeover-btn {
+    margin-top: 6px;
+    padding: 13px 26px;
+    border: 1px solid var(--accent-color);
+    border-radius: 999px;
+    background: var(--accent-color);
+    color: var(--bg-color);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: transform 0.3s var(--transition), box-shadow 0.3s var(--transition);
+}
+
+.live-takeover-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(201, 168, 106, 0.28);
+}
+
+.live-takeover-btn:focus-visible {
+    outline: 2px solid var(--text-color);
+    outline-offset: 3px;
+}
+
+/* Durante el guion de reclamo el compositor está inerte pero visible: se ve que
+   ahí se puede escribir, que es justo el gancho. */
+.live-demo.is-showreel .live-input,
+.live-demo.is-showreel .live-send {
+    opacity: 0.45;
+    pointer-events: none;
 }
 
 .live-chat-body .chat-msg {
@@ -1596,8 +1684,11 @@ body.menu-open .mobile-menu {
     padding: 0 26px 14px;
 }
 
+/* Reserva su hueco: si entrara y saliera del flujo, la columna del chat se
+   movería con cada respuesta. */
 .live-typing[hidden] {
-    display: none;
+    display: flex;
+    visibility: hidden;
 }
 
 .live-typing span {
@@ -1690,7 +1781,10 @@ body.menu-open .mobile-menu {
     cursor: default;
 }
 
+/* Altura reservada para dos líneas: el texto cambia según el estado de la demo
+   y sin esto el pie empujaba el bloque arriba y abajo. */
 .live-note {
+    min-height: 2lh;
     padding: 0 20px 18px;
     color: var(--text-subtle);
     font-size: 0.68rem;
@@ -1706,6 +1800,14 @@ body.menu-open .mobile-menu {
     align-self: stretch;
 }
 
+/* El espejo de la conversación crecía con cada mensaje y estiraba el panel
+   entero. Ventana fija que hace scroll, igual que el panel real. */
+.live-dashboard .detail-messages {
+    height: 232px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
 .detail-message--empty {
     align-self: center;
     margin: auto 0;
@@ -1713,8 +1815,11 @@ body.menu-open .mobile-menu {
     text-align: center;
 }
 
+/* La tarjeta reserva su hueco desde el principio. Si apareciera de la nada, el
+   panel crecería y el bloque entero daría un salto al confirmarse la cita. */
 .appointment-card[hidden] {
-    display: none;
+    display: block;
+    visibility: hidden;
 }
 
 .appointment-card.is-new {
@@ -3136,10 +3241,9 @@ body.menu-open .mobile-menu {
         padding: 22px;
     }
 
-    /* Sin conversación todavía, 330px de hueco vacío es demasiado en móvil. */
+    /* En móvil la ventana es más baja, pero sigue siendo fija. */
     .live-chat-body {
-        min-height: 210px;
-        max-height: 340px;
+        height: 340px;
         padding: 16px;
     }
 

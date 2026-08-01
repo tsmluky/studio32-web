@@ -225,6 +225,26 @@ const DEMO_AGENT = {
     maxTurnos: 25
 };
 
+// Guion de reclamo: se reproduce solo la primera vez que la sección entra en
+// pantalla, para que el visitante vea la demo con vida antes de decidir si
+// participa. No toca el backend. Es una conversación REAL de las que resuelve el
+// agente: triage de dolor, sin precio por chat, cita cerrada y aviso al equipo.
+const SHOWREEL = [
+    { kind: 'in', texto: 'Buenas noches, llevo dos días con dolor en una muela y no sé si aguantar hasta el lunes.', estado: 'Conversación entrante · fuera de horario' },
+    { kind: 'out', texto: 'Vaya, lo siento. ¿Te duele todo el rato o solo al morder?', estado: 'El agente está valorando la urgencia' },
+    { kind: 'in', texto: 'Todo el rato, y por la noche va a peor.' },
+    { kind: 'out', texto: 'Con ese dolor mejor no esperar al lunes. Mañana me queda a las 9:30 o a las 12. ¿Cuál te encaja?', estado: 'Urgencia detectada · consultando agenda real' },
+    { kind: 'in', texto: 'A las 9:30. ¿Cuánto me va a costar?' },
+    { kind: 'out', texto: 'La primera visita es solo mirar y contarte qué hay, sin coste. El presupuesto sale por escrito antes de tocar nada.' },
+    { kind: 'in', texto: 'Perfecto. Marta García.', contacto: 'Marta García' },
+    {
+        kind: 'out',
+        texto: 'Hecho, Marta: mañana a las 9:30. Si esta noche va a peor, escríbeme y aviso al equipo.',
+        estado: 'Cita confirmada · agenda actualizada',
+        cita: { slot: 'Mañana · 9:30', nota: 'Primera visita · Confirmada' }
+    }
+];
+
 function initLiveDemo() {
     const root = document.querySelector('[data-live-demo]');
 
@@ -251,6 +271,8 @@ function initLiveDemo() {
     const appointmentSlot = pick('[data-demo-appointment-slot]');
     const appointmentNote = pick('[data-demo-appointment-note]');
     const avatar = pick('.conversation-row.is-selected .conversation-avatar');
+    const takeover = pick('[data-demo-takeover]');
+    const takeoverBtn = pick('[data-demo-takeover-btn]');
 
     if (!log || !form || !input) return;
 
@@ -318,31 +340,34 @@ function initLiveDemo() {
             const cita = (data.citas || [])[0];
             if (!cita) return;
 
-            appointmentSlot.textContent = cita.fecha + ' · ' + cita.hora;
-            appointmentNote.textContent = (cita.servicio || 'Cita') + ' · Confirmada';
-
-            if (appointment.hidden) {
-                appointment.hidden = false;
-                appointment.classList.remove('is-new');
-                void appointment.offsetWidth; // reinicia la animación al reprogramar
-                appointment.classList.add('is-new');
-            }
-
-            if (cita.nombre) {
-                rowName.textContent = cita.nombre;
-                detailName.textContent = cita.nombre;
-                avatar.textContent = cita.nombre.split(' ').map((p) => p[0]).join('').slice(0, 2).toUpperCase();
-            }
+            pintarCita(cita.fecha + ' · ' + cita.hora, (cita.servicio || 'Cita') + ' · Confirmada');
+            if (cita.nombre) marcarContacto(cita.nombre);
         } catch (_) { /* el panel simplemente no se actualiza; el chat sigue */ }
     }
 
-    function marcarContacto() {
-        if (rowName.textContent !== 'Nuevo contacto') return;
+    function iniciales(nombre) {
+        return nombre.split(' ').map((parte) => parte[0]).join('').slice(0, 2).toUpperCase();
+    }
 
-        rowName.textContent = 'Visitante web';
-        detailName.textContent = 'Visitante web';
-        avatar.textContent = 'VW';
+    function marcarContacto(nombre) {
+        if (!nombre && rowName.textContent !== 'Nuevo contacto') return;
+
+        const quien = nombre || 'Visitante web';
+        rowName.textContent = quien;
+        detailName.textContent = quien;
+        avatar.textContent = nombre ? iniciales(nombre) : 'VW';
         rowMeta.textContent = 'Demostración · ' + stamp();
+    }
+
+    function pintarCita(slot, nota) {
+        appointmentSlot.textContent = slot;
+        appointmentNote.textContent = nota;
+
+        if (!appointment.hidden) return;
+        appointment.hidden = false;
+        appointment.classList.remove('is-new');
+        void appointment.offsetWidth; // reinicia la animación al reprogramar
+        appointment.classList.add('is-new');
     }
 
     async function enviar(texto) {
@@ -357,7 +382,6 @@ function initLiveDemo() {
         turnos += 1;
         input.value = '';
         sendBtn.disabled = true;
-        resetBtn.hidden = false;
 
         appendMessage('in', texto);
         marcarContacto();
@@ -398,7 +422,7 @@ function initLiveDemo() {
         }
     }
 
-    function reset() {
+    function limpiar(etiqueta) {
         sesion = 'landing-' + Math.random().toString(36).slice(2, 10);
         count = 0;
         turnos = 0;
@@ -407,7 +431,7 @@ function initLiveDemo() {
         log.innerHTML = '';
         const day = document.createElement('span');
         day.className = 'chat-day';
-        day.textContent = 'Agente real · escríbele tú';
+        day.textContent = etiqueta;
         log.appendChild(day);
 
         mirror.innerHTML = '';
@@ -419,7 +443,6 @@ function initLiveDemo() {
         typing.hidden = true;
         appointment.hidden = true;
         appointment.classList.remove('is-new');
-        resetBtn.hidden = true;
         sendBtn.disabled = false;
         input.value = '';
 
@@ -438,14 +461,91 @@ function initLiveDemo() {
         setNote(NOTA_INICIAL, false);
     }
 
+    // ── Guion de reclamo ────────────────────────────────────────────────────
+    // Al entrar en pantalla, la demo se rellena sola: conversación, panel y cita.
+    // No toca el backend (coste cero, sin espera) y sirve para captar la mirada.
+    // Al terminar, el relevo invita a hablar con el agente REAL.
+    let showreelTimers = [];
+
+    function pararShowreel() {
+        showreelTimers.forEach(clearTimeout);
+        showreelTimers = [];
+    }
+
+    function arrancarShowreel() {
+        pararShowreel();
+        root.classList.add('is-showreel');
+        input.disabled = true;
+        takeover.hidden = true;
+        limpiar('Clínica Cobalto · ayer por la noche');
+        setNote('Mira lo que hace por sí solo. En un momento podrás probarlo tú.', false);
+        statusEl.textContent = 'Conversación entrante';
+
+        let t = 400;
+
+        SHOWREEL.forEach((paso, indice) => {
+            if (paso.kind === 'out') {
+                showreelTimers.push(setTimeout(() => {
+                    typing.hidden = false;
+                    log.scrollTop = log.scrollHeight;
+                }, t));
+                t += 900;
+            }
+
+            showreelTimers.push(setTimeout(() => {
+                typing.hidden = true;
+                appendMessage(paso.kind, paso.texto);
+                if (paso.contacto) marcarContacto(paso.contacto);
+                if (paso.estado) statusEl.textContent = paso.estado;
+                if (paso.cita) pintarCita(paso.cita.slot, paso.cita.nota);
+                if (indice === SHOWREEL.length - 1) {
+                    showreelTimers.push(setTimeout(() => { takeover.hidden = false; }, 900));
+                }
+            }, t));
+
+            t += paso.kind === 'out' ? 700 : 1100;
+        });
+    }
+
+    function tomarControl() {
+        pararShowreel();
+        takeover.hidden = true;
+        typing.hidden = true;
+        root.classList.remove('is-showreel');
+        input.disabled = false;
+        appointment.hidden = true;
+        appointment.classList.remove('is-new');
+        limpiar('Agente real · escríbele tú');
+        rowBadge.textContent = 'Agente';
+        rowBadge.classList.remove('is-hot');
+        actionEl.textContent = 'Intervenir';
+        actionEl.classList.remove('is-hot');
+        input.focus({ preventScroll: true });
+    }
+
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         const texto = input.value.trim();
         if (texto) enviar(texto);
     });
 
-    resetBtn.addEventListener('click', reset);
-    reset();
+    takeoverBtn.addEventListener('click', tomarControl);
+    resetBtn.addEventListener('click', arrancarShowreel);
+
+    // Arranca el reclamo la primera vez que la sección entra en pantalla.
+    limpiar('Clínica Cobalto');
+    input.disabled = true;
+    root.classList.add('is-showreel');
+
+    const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+            if (!entrada.isIntersecting) return;
+            observador.disconnect();
+            arrancarShowreel();
+        });
+    }, { threshold: 0.35 });
+
+    observador.observe(root);
 }
 
 function initSectorDemo() {
