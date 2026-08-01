@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una noche · Studio32</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /* ─────────────────────────────────────────────────────────────────────
+           UNA NOCHE · una sola toma continua. El scroll es la línea de tiempo.
+           Todo lo que se mueve lo hace con transform/opacity: nada provoca
+           recálculo de layout dentro del bucle de animación.
+           --p       progreso global 0→1
+           --luz-pantalla  intensidad del móvil (única luz de la noche)
+           --luz-dia       intensidad del amanecer (la luz que la releva)
+           ──────────────────────────────────────────────────────────────────── */
+        :root {
+            --p: 0;
+            --luz-pantalla: 0;
+            --luz-dia: 0;
+
+            --ambar: #f2c572;
+            --tinta: #f2f2ef;
+            --tinta-tenue: rgba(242, 242, 239, .56);
+            --narracion: "Instrument Serif", Georgia, serif;
+            --maquina: "Archivo", system-ui, sans-serif;
+        }
+
+        html,
+        body {
+            margin: 0;
+            background: #04050a;
+        }
+
+        body {
+            color: var(--tinta);
+            font-family: var(--maquina);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .pelicula {
+            height: 700vh;
+        }
+
+        .toma {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        /* ── Mundo: recibe el movimiento de cámara ────────────────────────── */
+        .mundo {
+            position: absolute;
+            inset: -6%;
+            transform-origin: 52% 62%;
+            will-change: transform;
+        }
+
+        #escenario {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ── La habitación: marco de ventana + oscuridad en primer término ── */
+        .ventana {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* Montantes de la ventana: dan escala y dicen "estás dentro". */
+        .montante {
+            position: absolute;
+            background: #05060a;
+            box-shadow: 0 0 22px rgba(0, 0, 0, .8);
+        }
+
+        .montante--v {
+            top: -10%;
+            bottom: 34%;
+            width: 12px;
+        }
+
+        .montante--h {
+            left: -10%;
+            right: -10%;
+            height: 12px;
+        }
+
+        .alfeizar {
+            position: absolute;
+            left: -10%;
+            right: -10%;
+            bottom: 0;
+            height: 34%;
+            background:
+                linear-gradient(to bottom, #07080d 0%, #05060a 42%, #030407 100%);
+            box-shadow: 0 -30px 60px rgba(0, 0, 0, .75);
+        }
+
+        /* Luz que el móvil derrama sobre la mesilla */
+        .derrame {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 78vmin;
+            height: 34vmin;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            background: radial-gradient(closest-side, rgba(242, 197, 114, .5), transparent 70%);
+            opacity: calc(var(--luz-pantalla) * .8);
+            filter: blur(14px);
+            pointer-events: none;
+        }
+
+        /* Viñeta y grano: textura de película, no de página web */
+        .vineta {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(120% 92% at 50% 46%, transparent 42%, rgba(0, 0, 0, .82) 100%);
+            pointer-events: none;
+        }
+
+        .grano {
+            position: absolute;
+            inset: -120%;
+            opacity: .16;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+            animation: tiembla .9s steps(3) infinite;
+        }
+
+        @keyframes tiembla {
+            0% { transform: translate(0, 0); }
+            33% { transform: translate(-2%, 1%); }
+            66% { transform: translate(1%, -2%); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* ── El móvil: objeto físico en la escena, no tarjeta flotante ────── */
+        .movil {
+            position: absolute;
+            left: 50%;
+            bottom: 4vmin;
+            width: min(340px, 74vmin);
+            transform: translateX(-50%) translateY(var(--movil-y, 0)) rotateX(52deg) rotateZ(-3deg);
+            transform-style: preserve-3d;
+            border-radius: 26px;
+            border: 1px solid rgba(242, 197, 114, calc(.10 + var(--luz-pantalla) * .3));
+            background: rgba(9, 11, 17, .92);
+            box-shadow:
+                0 0 60px rgba(242, 197, 114, calc(var(--luz-pantalla) * .3)),
+                0 30px 80px rgba(0, 0, 0, .8);
+            opacity: calc(.25 + var(--luz-pantalla) * .75);
+            overflow: hidden;
+            will-change: transform, opacity;
+        }
+
+        .movil-top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 16px;
+            border-bottom: 1px solid rgba(242, 242, 239, .09);
+        }
+
+        .avatar {
+            display: grid;
+            place-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(242, 197, 114, .16);
+            color: var(--ambar);
+            font-family: var(--narracion);
+            font-size: .84rem;
+        }
+
+        .movil-nombre {
+            font-size: .78rem;
+            font-weight: 600;
+        }
+
+        .movil-estado {
+            margin-top: 1px;
+            color: var(--tinta-tenue);
+            font-size: .62rem;
+        }
+
+        .hilo {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            height: 178px;
+            padding: 15px 16px;
+            overflow: hidden;
+        }
+
+        .burbuja {
+            max-width: 88%;
+            padding: 9px 12px;
+            border-radius: 13px;
+            font-size: .74rem;
+            line-height: 1.42;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+
+        .burbuja.is-on {
+            opacity: 1;
+            transform: none;
+        }
+
+        .burbuja--in {
+            align-self: flex-start;
+            background: rgba(242, 242, 239, .08);
+        }
+
+        .burbuja--out {
+            align-self: flex-end;
+            border: 1px solid rgba(242, 197, 114, .24);
+            background: rgba(242, 197, 114, .12);
+        }
+
+        .movil-pie {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 11px 16px;
+            border-top: 1px solid rgba(242, 242, 239, .09);
+            color: var(--tinta-tenue);
+            font-size: .62rem;
+        }
+
+        .movil-pie strong {
+            color: var(--ambar);
+            font-weight: 600;
+        }
+
+        /* ── Rótulos: entran y salen como títulos de película ─────────────── */
+        .rotulos {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            padding: 0 6vw;
+            pointer-events: none;
+        }
+
+        .rotulo {
+            position: absolute;
+            max-width: 17ch;
+            margin: 0;
+            font-family: var(--narracion);
+            font-size: clamp(2.6rem, 7.4vw, 6.6rem);
+            font-weight: 400;
+            line-height: 1.0;
+            letter-spacing: -0.02em;
+            text-align: center;
+            text-wrap: balance;
+            text-shadow: 0 10px 60px rgba(0, 0, 0, .9);
+            opacity: 0;
+            transform: translateY(26px) scale(.985);
+            /* Sale rápido y sin esperar. Los rótulos comparten posición: si
+               entrara uno mientras el otro aún se va, se leería como texto
+               duplicado, no como fundido. */
+            transition: opacity .34s ease, transform .34s ease;
+            will-change: opacity, transform;
+        }
+
+        .rotulo.is-on {
+            opacity: 1;
+            transform: none;
+            /* Entra cuando el anterior ya se ha ido del todo. */
+            transition: opacity .8s cubic-bezier(.2, .7, .2, 1) .38s,
+                        transform .8s cubic-bezier(.2, .7, .2, 1) .38s;
+        }
+
+        .rotulo em {
+            font-style: italic;
+            color: var(--ambar);
+        }
+
+        /* Rótulos altos para no taparse con el móvil en la parte baja */
+        .rotulo {
+            align-self: start;
+            margin-top: 13vh;
+        }
+
+        /* ── Reloj y marca ────────────────────────────────────────────────── */
+        .hud {
+            position: absolute;
+            inset: 26px 30px auto 30px;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 20px;
+            pointer-events: none;
+        }
+
+        .marca {
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .2em;
+        }
+
+        .reloj {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .reloj-hora {
+            font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+            font-weight: 500;
+            letter-spacing: -.03em;
+            font-variant-numeric: tabular-nums;
+            color: var(--ambar);
+        }
+
+        .reloj-dia {
+            color: var(--tinta-tenue);
+            font-size: .62rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        .pista {
+            position: absolute;
+            left: 50%;
+            bottom: 22px;
+            transform: translateX(-50%);
+            color: var(--tinta-tenue);
+            font-size: .6rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            opacity: calc(1 - var(--p) * 5);
+            pointer-events: none;
+        }
+
+        /* ── Cierre: ya es de día y hay que actuar ────────────────────────── */
+        .cierre {
+            position: absolute;
+            inset: auto 0 0 0;
+            display: grid;
+            justify-items: center;
+            gap: 18px;
+            padding: 0 6vw 8vh;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .8s ease, transform .8s ease;
+            pointer-events: none;
+        }
+
+        .cierre.is-on {
+            opacity: 1;
+            transform: none;
+            pointer-events: auto;
+        }
+
+        .cierre p {
+            max-width: 46ch;
+            margin: 0;
+            color: rgba(255, 255, 255, .82);
+            font-size: .95rem;
+            line-height: 1.55;
+            text-align: center;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, .8);
+        }
+
+        .cta {
+            padding: 15px 32px;
+            border: 0;
+            border-radius: 999px;
+            background: var(--ambar);
+            color: #16110a;
+            font-family: var(--maquina);
+            font-size: .87rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 14px 40px rgba(242, 197, 114, .3);
+        }
+
+        @media (max-width: 860px) {
+            .movil { width: 78vmin; bottom: 3vmin; }
+            .hilo { height: 150px; }
+            .rotulo { margin-top: 10vh; font-size: clamp(2.1rem, 9vw, 3.6rem); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .grano { animation: none; }
+            .rotulo, .burbuja { transition-duration: .2s; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="toma">
+        <div class="mundo" id="mundo">
+            <canvas id="escenario"></canvas>
+
+            <div class="ventana">
+                <div class="montante montante--v" id="montante1"></div>
+                <div class="montante montante--v" id="montante2"></div>
+                <div class="montante montante--h" style="top:-2%"></div>
+                <div class="alfeizar"></div>
+                <div class="derrame"></div>
+            </div>
+        </div>
+
+        <div class="vineta"></div>
+        <div class="grano"></div>
+
+        <div class="hud">
+            <span class="marca">STUDIO32</span>
+            <span class="reloj">
+                <span class="reloj-hora" id="hora">23:41</span>
+                <span class="reloj-dia" id="dia">Martes</span>
+            </span>
+        </div>
+
+        <div class="rotulos" id="rotulos">
+            <h1 class="rotulo">A esta hora ya no contesta <em>nadie</em>.</h1>
+            <p class="rotulo">Y alguien acaba de escribir con dolor.</p>
+            <p class="rotulo">Pero esta vez sí contestan.</p>
+            <p class="rotulo">Le dan hora para <em>mañana a las 9:30</em>.</p>
+            <p class="rotulo">Tú llevabas cuatro horas <em>durmiendo</em>.</p>
+            <p class="rotulo">Y cuando abres, ya está <em>resuelto</em>.</p>
+        </div>
+
+        <div class="movil" id="movil">
+            <div class="movil-top">
+                <span class="avatar">CC</span>
+                <div>
+                    <div class="movil-nombre">Clínica Cobalto</div>
+                    <div class="movil-estado" id="estado">Mensaje sin leer</div>
+                </div>
+            </div>
+            <div class="hilo" id="hilo">
+                <p class="burbuja burbuja--in">Buenas noches. Llevo dos días con dolor en una muela y no sé si
+                    aguantar hasta el lunes.</p>
+                <p class="burbuja burbuja--out">Vaya, lo siento. ¿Te duele todo el rato o solo al morder?</p>
+                <p class="burbuja burbuja--in">Todo el rato, y por la noche va a peor.</p>
+                <p class="burbuja burbuja--out">Con ese dolor mejor no esperar. Mañana me queda a las 9:30 o a las
+                    12.</p>
+                <p class="burbuja burbuja--in">A las 9:30.</p>
+                <p class="burbuja burbuja--out">Hecho. Si esta noche va a peor, escríbeme y aviso al equipo.</p>
+            </div>
+            <div class="movil-pie">
+                <span id="pie-txt">Sin citas nuevas</span>
+                <strong id="pie-cita"></strong>
+            </div>
+        </div>
+
+        <p class="pista">Baja despacio</p>
+
+        <div class="cierre" id="cierre">
+            <p>Esto es una conversación de las que resuelve el agente cada noche. Ahora escríbele tú y mira cómo la
+                cita aparece de verdad en el panel.</p>
+            <button class="cta" type="button">Pruébalo tú mismo</button>
+        </div>
+    </div>
+
+    <div class="pelicula"></div>
+
+    <script>
+        (() => {
+            const raiz = document.documentElement;
+            const cv = document.getElementById('escenario');
+            const cx = cv.getContext('2d');
+            const mundo = document.getElementById('mundo');
+            const movil = document.getElementById('movil');
+            const hilo = document.getElementById('hilo');
+            const rotulos = [...document.querySelectorAll('.rotulo')];
+            const burbujas = [...document.querySelectorAll('.burbuja')];
+            const cierre = document.getElementById('cierre');
+            const elHora = document.getElementById('hora');
+            const elDia = document.getElementById('dia');
+            const elEstado = document.getElementById('estado');
+            const piePanel = document.getElementById('pie-txt');
+            const pieCita = document.getElementById('pie-cita');
+            const m1 = document.getElementById('montante1');
+            const m2 = document.getElementById('montante2');
+
+            const suave = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // ── Guion. Un solo relato: entra el dolor, se resuelve, amanece. ──
+            const PLANOS = [
+                { hasta: 0.13, hora: '23:41', dia: 'Martes', rotulo: 0, msgs: 0, estado: 'En línea' },
+                { hasta: 0.30, hora: '23:41', dia: 'Martes', rotulo: 1, msgs: 1, estado: 'Mensaje sin leer' },
+                { hasta: 0.46, hora: '23:42', dia: 'Martes', rotulo: 2, msgs: 3, estado: 'Escribiendo…' },
+                { hasta: 0.62, hora: '23:45', dia: 'Martes', rotulo: 3, msgs: 6, estado: 'Cita creada' },
+                { hasta: 0.80, hora: '04:20', dia: 'Miércoles', rotulo: 4, msgs: 6, estado: 'Cita creada' },
+                { hasta: 1.01, hora: '07:58', dia: 'Miércoles', rotulo: 5, msgs: 6, estado: 'Cita creada' }
+            ];
+
+            const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+            const suavizar = (t) => t * t * (3 - 2 * t);
+            const rampa = (v, a, b) => clamp((v - a) / (b - a));
+
+            // ── Escenario: cielo, ciudad y sol. Semilla fija para que no se
+            //    recomponga en cada redimensionado. ─────────────────────────
+            let estrellas = [], edificios = [], an = 0, al = 0;
+
+            function azar(s) { return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+
+            function sembrar() {
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                an = cv.clientWidth; al = cv.clientHeight;
+                cv.width = an * dpr; cv.height = al * dpr;
+                cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                const r = azar(20260801);
+                estrellas = Array.from({ length: Math.round(an * al / 4000) }, () => ({
+                    x: r() * an, y: r() * al * 0.66, rad: r() * 1.25 + 0.28,
+                    base: r() * .5 + .32, vel: r() * .8 + .25, fase: r() * 6.28
+                }));
+
+                edificios = [];
+                const horizonte = al * 0.66;
+                [{ z: .45, alto: al * .10, ancho: 92 }, { z: 1, alto: al * .17, ancho: 132 }].forEach(capa => {
+                    let x = -80;
+                    while (x < an + 80) {
+                        const w = capa.ancho * (.4 + r() * .9);
+                        const h = capa.alto * (.4 + r() * 1.1);
+                        const vent = [];
+                        for (let f = 0; f < Math.floor(h / 20); f++)
+                            for (let c = 0; c < Math.floor(w / 18); c++)
+                                if (r() < .06) vent.push({ x: x + 8 + c * 18, y: horizonte - h + 11 + f * 20, fase: r() * 6.28, vel: .2 + r() * .5 });
+                        edificios.push({ x, y: horizonte - h, w, h, z: capa.z, vent });
+                        x += w + 2 + r() * 14;
+                    }
+                });
+
+                // Montantes proporcionales al ancho: la ventana escala con la toma.
+                m1.style.left = (an * 0.26) + 'px';
+                m2.style.left = (an * 0.74) + 'px';
+            }
+
+            // Paleta del cielo interpolada por hora de la noche.
+            function mezclar(a, b, t) {
+                return [0, 1, 2].map(i => Math.round(a[i] + (b[i] - a[i]) * t));
+            }
+            const rgb = c => `rgb(${c[0]},${c[1]},${c[2]})`;
+
+            const NOCHE_ALTA = [4, 6, 14], NOCHE_BAJA = [10, 14, 28];
+            const ALBA_ALTA = [26, 22, 48], ALBA_BAJA = [96, 58, 62];
+            const DIA_ALTA = [86, 122, 178], DIA_BAJA = [236, 156, 104];
+
+            let p = 0, pintado = 0;
+
+            function pintar(t) {
+                const dia = parseFloat(raiz.style.getPropertyValue('--luz-dia')) || 0;
+
+                // Dos tramos: noche→alba (0-.5) y alba→día (.5-1).
+                const alta = dia < .5
+                    ? mezclar(NOCHE_ALTA, ALBA_ALTA, dia * 2)
+                    : mezclar(ALBA_ALTA, DIA_ALTA, (dia - .5) * 2);
+                const baja = dia < .5
+                    ? mezclar(NOCHE_BAJA, ALBA_BAJA, dia * 2)
+                    : mezclar(ALBA_BAJA, DIA_BAJA, (dia - .5) * 2);
+
+                const g = cx.createLinearGradient(0, 0, 0, al);
+                g.addColorStop(0, rgb(alta));
+                g.addColorStop(1, rgb(baja));
+                cx.fillStyle = g;
+                cx.fillRect(0, 0, an, al);
+
+                // Sol: nace bajo el horizonte y sube.
+                if (dia > .12) {
+                    const sy = al * 0.66 + al * .16 - dia * al * .30;
+                    const halo = cx.createRadialGradient(an * .72, sy, 0, an * .72, sy, al * .62);
+                    halo.addColorStop(0, `rgba(255,196,128,${.5 * dia})`);
+                    halo.addColorStop(.4, `rgba(255,140,90,${.22 * dia})`);
+                    halo.addColorStop(1, 'rgba(255,120,80,0)');
+                    cx.fillStyle = halo;
+                    cx.fillRect(0, 0, an, al);
+                }
+
+                // Estrellas: se apagan pronto.
+                const visEstrellas = clamp(1 - dia * 2.2);
+                if (visEstrellas > .01) {
+                    for (const e of estrellas) {
+                        cx.globalAlpha = Math.max(0, (e.base + Math.sin(t / 1000 * e.vel + e.fase) * .18) * visEstrellas);
+                        cx.fillStyle = '#e9edff';
+                        cx.beginPath();
+                        cx.arc(e.x, e.y, e.rad, 0, 6.283);
+                        cx.fill();
+                    }
+                }
+
+                // Ciudad recortada. Al amanecer se aclara y las ventanas se apagan.
+                for (const b of edificios) {
+                    cx.globalAlpha = 1;
+                    const n = 5 + b.z * 4 + dia * 26;
+                    cx.fillStyle = `rgb(${Math.round(n * 1.35)},${Math.round(n * 1.12)},${Math.round(n * 1.3)})`;
+                    cx.fillRect(b.x, b.y, b.w, b.h);
+                    const visVent = clamp(1 - dia * 1.6) * b.z;
+                    if (visVent > .02) {
+                        for (const v of b.vent) {
+                            cx.globalAlpha = (.55 + Math.sin(t / 1000 * v.vel + v.fase) * .17) * visVent;
+                            cx.fillStyle = '#f2c572';
+                            cx.fillRect(v.x, v.y, 3.5, 6);
+                        }
+                    }
+                }
+                cx.globalAlpha = 1;
+            }
+
+            // ── Bucle. Lee el scroll una vez por fotograma. ────────────────
+            function fotograma(t) {
+                const recorrido = document.body.scrollHeight - window.innerHeight;
+                p = recorrido > 0 ? clamp(window.scrollY / recorrido) : 0;
+
+                // La luz de la pantalla entra pronto y se retira al amanecer:
+                // las dos luces se relevan, que es el momento de la pieza.
+                const luzPantalla = rampa(p, .10, .26) * (1 - rampa(p, .70, .92));
+                const luzDia = suavizar(rampa(p, .58, 1));
+
+                raiz.style.setProperty('--p', p.toFixed(4));
+                raiz.style.setProperty('--luz-pantalla', luzPantalla.toFixed(4));
+                raiz.style.setProperty('--luz-dia', luzDia.toFixed(4));
+
+                // Cámara: empuje hacia el móvil durante la noche, retirada y
+                // ascenso al amanecer para descubrir la ciudad.
+                const empuje = suavizar(rampa(p, 0, .58));
+                const retirada = suavizar(rampa(p, .58, 1));
+                const escala = 1 + empuje * .16 - retirada * .19;
+                const desliz = empuje * 3.2 - retirada * 8.4;
+                mundo.style.transform = `scale(${escala.toFixed(4)}) translate3d(0, ${desliz.toFixed(2)}%, 0)`;
+                movil.style.setProperty('--movil-y', `${(retirada * 26).toFixed(2)}vh`);
+
+                // Plano actual
+                const plano = PLANOS.find(x => p < x.hasta) || PLANOS[PLANOS.length - 1];
+                if (plano !== fotograma._ultimo) {
+                    fotograma._ultimo = plano;
+                    elHora.textContent = plano.hora;
+                    elDia.textContent = plano.dia;
+                    elEstado.textContent = plano.estado;
+                    rotulos.forEach((r, i) => r.classList.toggle('is-on', i === plano.rotulo));
+                    burbujas.forEach((b, i) => b.classList.toggle('is-on', i < plano.msgs));
+                    const ult = burbujas[plano.msgs - 1];
+                    if (ult) hilo.scrollTop = Math.max(0, ult.offsetTop + ult.offsetHeight - hilo.clientHeight + 15);
+                    if (plano.msgs >= 6) { piePanel.textContent = 'Cita creada en el panel'; pieCita.textContent = 'Mañana · 9:30'; }
+                    else { piePanel.textContent = 'Sin citas nuevas'; pieCita.textContent = ''; }
+                }
+
+                cierre.classList.toggle('is-on', p > .93);
+
+                pintar(t);
+                requestAnimationFrame(fotograma);
+            }
+
+            window.addEventListener('resize', sembrar);
+            sembrar();
+            requestAnimationFrame(fotograma);
+        })();
+    </script>
+</body>
+
+</html>
