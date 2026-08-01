@@ -22,51 +22,75 @@ document.addEventListener('click', (evento) => {
     window.S32W.open();
 });
 
-gsap.registerPlugin(ScrollTrigger);
+// Las páginas por vertical NO cargan GSAP, Lenis ni SplitType: son páginas de
+// posicionamiento y cuatro librerías de CDN penalizarían Core Web Vitals, que sí
+// es factor de ranking. Solo necesitan la demo, que es DOM plano.
+// Este archivo, por tanto, tiene que funcionar con y sin ellas.
+const TIENE_GSAP = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+const TIENE_LENIS = typeof Lenis !== 'undefined';
 
-// 1. Lenis Smooth Scroll Setup
-const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-});
+if (TIENE_GSAP) {
+    gsap.registerPlugin(ScrollTrigger);
 
-// Integrate Lenis with GSAP ScrollTrigger
-lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-});
-gsap.ticker.lagSmoothing(0, 0);
+    // 1. Lenis Smooth Scroll Setup
+    if (TIENE_LENIS) {
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+
+        // Integrate Lenis with GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0, 0);
+    }
+}
 
 
 // 2. Preloader Animation
-const tlPreload = gsap.timeline();
+// Solo la portada tiene preloader. Las páginas por vertical no, y su arranque
+// colgaba de este onComplete: sin esta bifurcación, en ellas la demo no se
+// inicializaba nunca. Como el script va con `defer`, el DOM ya está listo aquí.
+if (document.querySelector('.preloader') && TIENE_GSAP) {
+    const tlPreload = gsap.timeline();
 
-// Animamos las letras del preloader
-tlPreload.to('.preloader-text span', {
-    y: 0,
-    stagger: 0.05,
-    duration: 0.8,
-    ease: "power4.out"
-})
-    // Barra de progreso
-    .to('.progress-bar', {
-        width: '100%',
-        duration: 1.5,
-        ease: "power2.inOut"
-    }, "-=0.2")
-    // Desaparecer preloader y revelar Hero
-    .to('.preloader', {
-        yPercent: -100,
-        duration: 1,
-        ease: "power4.inOut",
-        onComplete: () => {
-            // Marca el preloader como resuelto (la red de seguridad de index.html
-            // comprueba esta clase) y arranca la animación principal.
-            const p = document.querySelector('.preloader');
-            if (p) p.classList.add('is-done');
-            initHeroAnimations();
-        }
-    });
+    // Animamos las letras del preloader
+    tlPreload.to('.preloader-text span', {
+        y: 0,
+        stagger: 0.05,
+        duration: 0.8,
+        ease: "power4.out"
+    })
+        // Barra de progreso
+        .to('.progress-bar', {
+            width: '100%',
+            duration: 1.5,
+            ease: "power2.inOut"
+        }, "-=0.2")
+        // Desaparecer preloader y revelar Hero
+        .to('.preloader', {
+            yPercent: -100,
+            duration: 1,
+            ease: "power4.inOut",
+            onComplete: () => {
+                // Marca el preloader como resuelto (la red de seguridad de
+                // index.html comprueba esta clase) y arranca la animación.
+                const p = document.querySelector('.preloader');
+                if (p) p.classList.add('is-done');
+                initHeroAnimations();
+            }
+        });
+} else {
+    // OJO: no llamar aquí de forma síncrona. Este bloque se evalúa antes que las
+    // constantes que hay más abajo (SECTORES, DEMO_AGENT), así que una llamada
+    // directa revienta con "Cannot access 'SECTORES' before initialization" por
+    // la zona muerta temporal de `const`. En la portada no se notaba porque la
+    // llamada llegaba desde el onComplete del preloader, ya asíncrono.
+    // El microtask espera a que termine de evaluarse el archivo.
+    queueMicrotask(initHeroAnimations);
+}
 
 
 // 3. Hero Animations (Runs after preloader)
@@ -79,6 +103,14 @@ let heroAnimationsStarted = false;
 function initHeroAnimations() {
     if (heroAnimationsStarted) return;
     heroAnimationsStarted = true;
+
+    // Sin GSAP (paginas por vertical) se salta la animacion del hero y se pasa
+    // directo a inicializar lo que si tienen: la demo en vivo.
+    if (!TIENE_GSAP) {
+        initLiveDemo();
+        return;
+    }
+
     const tlHero = gsap.timeline();
 
     // Revelar líneas del hero ("Studio32 / Digital Systems")
@@ -103,6 +135,7 @@ function initHeroAnimations() {
 function initScrollAnimations() {
     // Respeta reduced-motion: deja el texto visible sin animación.
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!TIENE_GSAP || typeof SplitType === 'undefined') return;
 
     // Romper textos en lineas para animarlos
     const splitTexts = document.querySelectorAll('.split-lines');
@@ -160,6 +193,7 @@ function initScrollAnimations() {
 const chatTimelines = new Map();
 
 function initChatDemo() {
+    if (!TIENE_GSAP) return;
     const mockups = Array.from(document.querySelectorAll('[data-chat-demo]'));
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -314,10 +348,145 @@ const SECTORES = {
 // decidir si participa. No toca el backend: coste cero y sin espera. Al terminar,
 // el relevo invita a hablar con el agente REAL de ese mismo sector.
 
+// Marcado de la demo. Vive aquí y no en el HTML para tener UNA sola fuente:
+// las páginas por vertical solo necesitan un contenedor vacío
+// `<div class="live-demo" data-live-demo="restaurante"></div>`, y el sector de
+// partida lo fija ese mismo atributo. Es INTERFAZ, no contenido indexable, así
+// que generarlo en cliente no cuesta SEO — el texto que posiciona está en el
+// HTML de cada página.
+function plantillaDemo() {
+    return `
+<div class="live-chat">
+    <div class="chat-header">
+        <span class="chat-avatar" aria-hidden="true">CC</span>
+        <div class="chat-header-meta">
+            <strong>Clínica Cobalto</strong>
+            <span class="chat-status">Agente activo · responde al momento</span>
+        </div>
+        <button type="button" class="live-reset" data-demo-reset>Ver de nuevo</button>
+    </div>
+
+    <div class="live-chat-stage">
+        <div class="live-chat-body" data-demo-log role="log" aria-live="polite"
+            aria-label="Conversación de la demostración">
+            <span class="chat-day">Demostración</span>
+        </div>
+
+        <div class="live-takeover" data-demo-takeover hidden>
+            <p class="live-takeover-eyebrow">[ ESTO HA PASADO SOLO ]</p>
+            <p class="live-takeover-title">Ahora <em>pruébalo tú</em>.</p>
+            <p class="live-takeover-text">Escríbele lo que quieras: precios, horarios, miedo al
+                dentista. Es el mismo agente que atendería a tus clientes, y la cita que reserves
+                aparecerá de verdad en el panel.</p>
+            <button type="button" class="live-takeover-btn" data-demo-takeover-btn>Pruébalo tú
+                mismo</button>
+        </div>
+    </div>
+
+    <div class="live-typing" data-demo-typing hidden aria-hidden="true">
+        <span></span><span></span><span></span>
+    </div>
+
+    <form class="live-composer" data-demo-form>
+        <label class="visually-hidden" for="demo-input">Escribe tu mensaje al agente</label>
+        <input class="live-input" id="demo-input" type="text" autocomplete="off" maxlength="400"
+            placeholder="Escribe lo que quieras preguntarle…" data-demo-input>
+        <button class="live-send" type="submit" aria-label="Enviar mensaje" data-demo-send>
+            <span aria-hidden="true">→</span>
+        </button>
+    </form>
+    <p class="live-note" data-demo-note>Agente real conectado. Pregúntale lo que se te ocurra: precios,
+        horarios, miedo al dentista, o pídele cita de verdad.</p>
+</div>
+
+<figure class="dashboard-mockup live-dashboard"
+    aria-label="Panel de control del negocio, actualizándose con la conversación de la demostración.">
+    <div class="dashboard-bar">
+        <div class="dashboard-brand"><span>32</span> Studio32 Agent</div>
+        <div class="dashboard-business">
+            <span class="dashboard-business-mark" aria-hidden="true">CC</span>
+            <span class="dashboard-business-name">Clínica Cobalto</span>
+            <span class="dashboard-chevron" aria-hidden="true"></span>
+        </div>
+    </div>
+    <div class="dashboard-shell">
+        <aside class="dashboard-nav" aria-label="Navegación simulada del panel">
+            <span class="is-active">Inbox</span>
+            <span data-demo-nav-citas>Citas</span>
+            <span>Servicios</span>
+            <span>Agente</span>
+        </aside>
+        <div class="dashboard-workspace">
+            <div class="dashboard-heading">
+                <div>
+                    <small>INBOX</small>
+                    <strong>Conversaciones</strong>
+                </div>
+                <span class="dashboard-live">Agente activo</span>
+            </div>
+            <div class="dashboard-columns">
+                <div class="conversation-list">
+                    <article class="conversation-row is-selected">
+                        <span class="conversation-avatar">?</span>
+                        <div>
+                            <strong data-demo-row-name>Nuevo contacto</strong>
+                            <small data-demo-row-meta>Sin mensajes todavía</small>
+                        </div>
+                        <em data-demo-row-badge>Agente</em>
+                    </article>
+                    <article class="conversation-row">
+                        <span class="conversation-avatar">DL</span>
+                        <div><strong>David López</strong><small>Primera consulta · 20:32</small></div>
+                        <em>Equipo</em>
+                    </article>
+                    <article class="conversation-row">
+                        <span class="conversation-avatar">AP</span>
+                        <div><strong>Ana Pérez</strong><small>Cambio de cita · 18:15</small></div>
+                        <em>Resuelta</em>
+                    </article>
+                </div>
+                <div class="conversation-detail">
+                    <div class="detail-top">
+                        <div>
+                            <strong data-demo-detail-name>Nuevo contacto</strong>
+                            <small>WhatsApp · conversación activa</small>
+                        </div>
+                        <span class="detail-action" data-demo-action>Intervenir</span>
+                    </div>
+                    <div class="detail-history">
+                        <span>Hoy</span>
+                        <span data-demo-count>0 mensajes</span>
+                    </div>
+                    <section class="detail-messages" data-demo-mirror
+                        aria-label="Historial visible de la conversación">
+                        <p class="detail-message detail-message--empty">Aquí aparecerá la conversación
+                            en cuanto escribas.</p>
+                    </section>
+                    <div class="appointment-card" data-demo-appointment hidden>
+                        <span>PRÓXIMA CITA</span>
+                        <strong data-demo-appointment-slot>Sin cita</strong>
+                        <small data-demo-appointment-note>Todavía no hay ninguna reservada</small>
+                    </div>
+                    <div class="detail-status">
+                        <span></span>
+                        <span data-demo-status>Esperando el primer mensaje</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <figcaption>Demostración de producto · datos ficticios</figcaption>
+</figure>
+`;
+}
+
 function initLiveDemo() {
     const root = document.querySelector('[data-live-demo]');
 
     if (!root) return;
+
+    // Las páginas por vertical traen el contenedor vacío: se rellena aquí.
+    if (!root.children.length) root.innerHTML = plantillaDemo();
 
     const pick = (selector) => root.querySelector(selector);
 
@@ -353,7 +522,11 @@ function initLiveDemo() {
     const panelNombre = pick('.dashboard-business-name');
     const panelMarca = pick('.dashboard-business-mark');
 
-    let sector = SECTORES.clinica;
+    // El sector de partida lo fija la página: `data-live-demo="restaurante"`.
+    // Así las páginas por vertical abren ya hablando con SU negocio, sin que el
+    // visitante tenga que elegir. Sin atributo, arranca en clínica.
+    let sector = SECTORES[root.dataset.liveDemo] || SECTORES.clinica;
+    DEMO_AGENT.tenant = sector.tenant;
 
     let sesion = '';
     let count = 0;
@@ -649,8 +822,23 @@ function initLiveDemo() {
     takeoverBtn.addEventListener('click', tomarControl);
     resetBtn.addEventListener('click', arrancarShowreel);
 
+    // Rótulos iniciales según el sector de la página (no siempre es clínica).
+    chatNombre.textContent = sector.negocio;
+    chatAvatar.textContent = sector.iniciales;
+    if (panelNombre) panelNombre.textContent = sector.negocio;
+    if (panelMarca) panelMarca.textContent = sector.iniciales;
+    input.placeholder = sector.placeholder;
+    setNote(sector.nota, false);
+
+    botonesSector.forEach((boton) => {
+        const activo = SECTORES[boton.dataset.demoSector] === sector;
+        boton.classList.toggle('is-active', activo);
+        boton.setAttribute('aria-selected', activo ? 'true' : 'false');
+        boton.tabIndex = activo ? 0 : -1;
+    });
+
     // Arranca el reclamo la primera vez que la sección entra en pantalla.
-    limpiar('Clínica Cobalto');
+    limpiar(sector.negocio);
     input.disabled = true;
     root.classList.add('is-showreel');
 

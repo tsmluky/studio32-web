@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agente de WhatsApp para restaurantes · Reservas y alérgenos | Studio32</title>
+    <meta name="description" content="Un agente de IA que coge el WhatsApp de tu restaurante en pleno servicio: reserva sobre tu aforo real por turno, responde de la carta y los alérgenos, y pasa los grupos grandes a una persona.">
+    <meta name="theme-color" content="#f7f4ee">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Studio32">
+    <meta property="og:title" content="Agente de WhatsApp para restaurantes · Reservas y alérgenos | Studio32">
+    <meta property="og:description" content="Un agente de IA que coge el WhatsApp de tu restaurante en pleno servicio: reserva sobre tu aforo real por turno, responde de la carta y los alérgenos, y pasa los grupos grandes a una persona.">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:url" content="https://www.studio32.es/agente-whatsapp-restaurantes/">
+    <meta property="og:image" content="https://www.studio32.es/assets/og-cover.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="canonical" href="https://www.studio32.es/agente-whatsapp-restaurantes/">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23f7f4ee'/><text x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='18' fill='%238a6421'>32</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles.css?v=20260801-verticales-5">
+    <link rel="stylesheet" href="../vertical.css?v=20260801-verticales-5">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": "https://www.studio32.es/agente-whatsapp-restaurantes/#servicio",
+      "name": "Agente de WhatsApp para restaurantes · Reservas y alérgenos",
+      "serviceType": "Agente de recepción por WhatsApp",
+      "description": "Un agente de IA que coge el WhatsApp de tu restaurante en pleno servicio: reserva sobre tu aforo real por turno, responde de la carta y los alérgenos, y pasa los grupos grandes a una persona.",
+      "provider": {
+        "@type": "ProfessionalService",
+        "name": "Studio32",
+        "url": "https://www.studio32.es/",
+        "telephone": "+34 694 29 31 66",
+        "email": "info@studio32.es"
+      },
+      "areaServed": { "@type": "Country", "name": "España" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://www.studio32.es/agente-whatsapp-restaurantes/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Sabe cuántas mesas tengo libres?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí, trabaja con tu aforo real por turno. Pregunta el número de comensales antes de confirmar y no acepta reservas que no caben." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puede responder dudas de la carta?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Consulta tu carta antes de contestar: platos, precios y alérgenos. Si la carta no resuelve la duda, avisa a una persona en lugar de improvisar." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Y los alérgenos? Me da miedo delegar eso.",
+          "acceptedAnswer": { "@type": "Answer", "text": "Y hace bien en darle miedo. Por eso el agente solo dice lo que está por escrito en tu carta, anota la alergia en la reserva y, ante cualquier duda que la carta no cubra, deriva a cocina." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué hace con una reserva de quince personas?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No la cierra por chat. Recoge nombre, contacto y fecha, y avisa al equipo para que cuadre menú y hora contigo. El límite lo pones tú." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puede cancelar y cambiar reservas?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí, crea, mueve y cancela sobre la misma agenda. Si el cliente tiene más de una reserva, pregunta cuál antes de tocar nada." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Funciona con el número que ya tenemos?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí, o con uno nuevo. Si migras el vuestro, los clientes siguen escribiendo al mismo sitio pero el número pasa a atenderse desde el panel." }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body class="pagina-vertical">
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <a href="../" class="logo" aria-label="Studio32 · Digital Systems">
+                <span class="logo-mark">STUDIO32</span>
+                <span class="logo-sub">Digital Systems</span>
+            </a>
+            <div class="nav-right">
+                <a href="#demo" class="nav-link">Pruébalo</a>
+                <a href="#hace" class="nav-link">Qué hace</a>
+                <a href="#faq" class="nav-link">Preguntas</a>
+                <a href="../#tarifas" class="nav-link">Tarifas</a>
+                <a href="https://wa.me/34694293166?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20el%20agente%20de%20WhatsApp%20para%20restaurantes" target="_blank" rel="noopener" class="nav-btn">Hablemos</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="vertical-hero">
+        <div class="container">
+            <nav class="migas" aria-label="Ruta">
+                <a href="../">Studio32</a> <span aria-hidden="true">/</span> <span>Restaurantes</span>
+            </nav>
+            <p class="section-label">[ RESTAURANTES ]</p>
+            <h1>Las reservas entran<br><em>cuando la sala</em><br>está llena.</h1>
+            <p class="vertical-entrada">Justo cuando nadie puede coger el teléfono. Este agente atiende ese mensaje con tu aforo real por turno, conoce tu carta y sus alérgenos, y deja la mesa reservada con lo que cocina necesita saber ya anotado.</p>
+            <div class="hero-actions">
+                <a href="#demo" class="hero-cta">Hablar con el agente</a>
+                <a href="https://wa.me/34694293166?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20el%20agente%20de%20WhatsApp%20para%20restaurantes" target="_blank" rel="noopener" class="hero-link">Pedir
+                    presupuesto</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="contenido">
+        <section class="section">
+            <div class="container">
+                <div class="verticals-header">
+                    <p class="section-label">[ EL COSTE INVISIBLE ]</p>
+                    <h2 class="headline-med">Lo que no atiendes<br>también <em>cuesta</em>.</h2>
+                    <p>Ninguna de estas consultas aparece en la contabilidad. Todas tienen coste.</p>
+                </div>
+                <div class="signal-list">
+                <div>
+                    <span>Señal 01</span>
+                    <strong>En pleno servicio</strong>
+                    <p>Nadie va a soltar una bandeja para coger el teléfono a las nueve y media de la noche.</p>
+                </div>
+                <div>
+                    <span>Señal 02</span>
+                    <strong>La alergia que se pierde</strong>
+                    <p>Se avisa al reservar y no llega a cocina. Es la queja que más caro sale.</p>
+                </div>
+                <div>
+                    <span>Señal 03</span>
+                    <strong>El grupo que no cabe</strong>
+                    <p>Doce personas un sábado no es una reserva, es una negociación. Y hay que responderla igual.</p>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="demo">
+            <div class="container">
+                <div class="verticals-header">
+                    <p class="section-label">[ PRUÉBALO AQUÍ ]</p>
+                    <h2 class="headline-med">No te lo contamos.<br>Te lo <em>enseñamos</em>.</h2>
+                    <p>Esto no es un vídeo ni una captura. Escribe como lo haría un cliente tuyo y mira en el panel
+                        lo que vería el negocio: la conversación entrando, la cita creándose y el momento en que una
+                        persona toma el relevo.</p>
+                </div>
+                <div class="live-demo" data-live-demo="restaurante"></div>
+            </div>
+        </section>
+
+        <section class="section" id="hace">
+            <div class="container">
+                <div class="verticals-header">
+                    <p class="section-label">[ EN CONCRETO ]</p>
+                    <h2 class="headline-med">Lo que hace<br>en <em>un restaurante</em>.</h2>
+                </div>
+                <div class="bloque-hace">
+                <article>
+                    <h3>Reserva sobre tu aforo real</h3>
+                    <p>Sabe cuántas mesas tienes por turno y no acepta más de las que caben. Pregunta siempre el número de comensales.</p>
+                </article>
+                <article>
+                    <h3>Responde de tu carta, no de una genérica</h3>
+                    <p>Consulta tus platos y sus alérgenos antes de contestar. Lo que no está en la carta, no existe: no se lo inventa.</p>
+                </article>
+                <article>
+                    <h3>Pasa la alergia a cocina por escrito</h3>
+                    <p>La anota en la reserva y se lo dice al cliente, para que sepa que ha quedado registrada.</p>
+                </article>
+                <article>
+                    <h3>Deriva los grupos grandes</h3>
+                    <p>A partir del número que tú marques, no cierra por chat: recoge datos y avisa al equipo para cuadrar menú y hora.</p>
+                </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section seccion-limites">
+            <div class="container">
+                <div class="verticals-header">
+                    <p class="section-label">[ LÍMITES ]</p>
+                    <h2 class="headline-med">Y lo que no hace, porque aquí un error se paga caro</h2>
+                    <p>Un agente que se inventa cosas no te ahorra trabajo: te lo multiplica. Estas reglas son parte
+                        de la configuración, no una promesa.</p>
+                </div>
+                <div class="bloque-limites">
+                <article>
+                    <h3>No improvisa con los alérgenos</h3>
+                    <p>Si la carta no resuelve la duda, no deduce: la pasa a cocina. Una respuesta de más aquí manda a alguien al hospital.</p>
+                </article>
+                <article>
+                    <h3>No confirma grupos por su cuenta</h3>
+                    <p>Los grupos grandes cambian el servicio. Los cierra una persona.</p>
+                </article>
+                <article>
+                    <h3>No inventa platos ni disponibilidad</h3>
+                    <p>Ni sugiere lo que no está en carta ni acepta mesas que no tienes.</p>
+                </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section faq" id="faq">
+            <div class="container">
+                <div class="faq-layout">
+                    <div class="faq-header">
+                        <p class="section-label">[ PREGUNTAS FRECUENTES ]</p>
+                        <h2 class="headline-med">Antes de ponerlo<br><em>en marcha</em>.</h2>
+                        <p>Lo que suele preguntarse quien está a punto de delegar su WhatsApp.</p>
+                        <a class="faq-contact" href="https://wa.me/34694293166?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20el%20agente%20de%20WhatsApp%20para%20restaurantes" target="_blank"
+                            rel="noopener">¿Otra pregunta? Hablemos <span>↗</span></a>
+                    </div>
+                    <div class="faq-list">
+                <details class="faq-item" open>
+                    <summary>
+                        <span class="faq-q">¿Sabe cuántas mesas tengo libres?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Sí, trabaja con tu aforo real por turno. Pregunta el número de comensales antes de confirmar y no acepta reservas que no caben.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-q">¿Puede responder dudas de la carta?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Consulta tu carta antes de contestar: platos, precios y alérgenos. Si la carta no resuelve la duda, avisa a una persona en lugar de improvisar.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-q">¿Y los alérgenos? Me da miedo delegar eso.</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Y hace bien en darle miedo. Por eso el agente solo dice lo que está por escrito en tu carta, anota la alergia en la reserva y, ante cualquier duda que la carta no cubra, deriva a cocina.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-q">¿Qué hace con una reserva de quince personas?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>No la cierra por chat. Recoge nombre, contacto y fecha, y avisa al equipo para que cuadre menú y hora contigo. El límite lo pones tú.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-q">¿Puede cancelar y cambiar reservas?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Sí, crea, mueve y cancela sobre la misma agenda. Si el cliente tiene más de una reserva, pregunta cuál antes de tocar nada.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-q">¿Funciona con el número que ya tenemos?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Sí, o con uno nuevo. Si migras el vuestro, los clientes siguen escribiendo al mismo sitio pero el número pasa a atenderse desde el panel.</p>
+                    </div>
+                </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="section footer-cta" id="contact">
+        <div class="container">
+            <div class="cta-panel">
+                <p class="section-label centered">[ HABLEMOS DE TU NEGOCIO ]</p>
+                <h2 class="huge-text">Lo montamos con tu información.<br>Y te lo <em>enseñamos funcionando.</em></h2>
+                <p class="cta-sub">Antes de que decidas nada, verás tu propio agente respondiendo con tus servicios,
+                    tus horarios y tus normas.</p>
+                <div class="cta-wrapper">
+                    <a href="https://wa.me/34694293166?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20el%20agente%20de%20WhatsApp%20para%20restaurantes" target="_blank" rel="noopener"
+                        class="btn-massive">Pedir una demo con mis datos ↗</a>
+                </div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="footer-marca">
+                    <p class="section-label">[ STUDIO32 ]</p>
+                    <h3>Sistemas digitales que atienden y dejan el control en el negocio.</h3>
+                    <p>Studio32 Agent Platform es el producto principal: agente de recepción por WhatsApp, citas,
+                        panel e intervención humana.</p>
+                </div>
+                <nav class="footer-col" aria-label="Otros sectores">
+                    <p class="footer-col-titulo">Por sector</p>
+                    <a href="../agente-whatsapp-clinicas-dentales/">Clínicas dentales</a>
+                    <a href="../agente-whatsapp-restaurantes/">Restaurantes</a>
+                    <a href="../agente-whatsapp-servicios-locales/">Servicios locales</a>
+                </nav>
+                <nav class="footer-col" aria-label="La web">
+                    <p class="footer-col-titulo">La web</p>
+                    <a href="../#control">Probar el agente</a>
+                    <a href="../#process">Implantación</a>
+                    <a href="../#tarifas">Tarifas</a>
+                    <a href="../#faq">Preguntas frecuentes</a>
+                </nav>
+                <div class="footer-col">
+                    <p class="footer-col-titulo">Contacto</p>
+                    <a href="mailto:info@studio32.es">info@studio32.es</a>
+                    <a href="https://wa.me/34694293166" target="_blank" rel="noopener">+34 694 29 31 66</a>
+                    <a href="../legal/aviso-legal.html">Aviso legal</a>
+                    <a href="../legal/privacidad.html">Privacidad</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="brand">Studio32 · Digital Systems ©2026</div>
+                <div class="footer-services">Agent Platform · Presence · Systems</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js?v=20260801-verticales-5" defer></script>
+</body>
+
+</html>

@@ -3948,8 +3948,8 @@ body::before {
    grande abajo a la derecha. Ahora el titular baja de tamaño y el espacio se
    usa para navegación real, que además crea enlazado interno. */
 .contact-grid {
-    grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 0.8fr));
-    gap: clamp(32px, 4vw, 64px);
+    grid-template-columns: minmax(0, 1.5fr) repeat(4, minmax(0, 0.72fr));
+    gap: clamp(26px, 3vw, 52px);
     align-items: start;
 }
 
@@ -4053,4 +4053,13 @@ body::before {
     background: var(--surface-strong) !important;
     border: 1px solid var(--border-strong) !important;
     color: var(--text-color) !important;
+}
+
+/* Los bloques a sangre completa usan `calc(50% - 50vw)`, y `50vw` incluye el
+   ancho de la barra de scroll mientras que `50%` no: se pasan exactamente esos
+   píxeles y aparece scroll horizontal. Se recorta aquí con `clip` —no `hidden`,
+   que rompería el `position: sticky` de la cabecera de la FAQ. */
+html,
+body {
+    overflow-x: clip;
 }

@@ -2,9 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.studio32.es/</loc>
-    <lastmod>2026-07-18</lastmod>
+    <lastmod>2026-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <!-- Páginas por vertical: cada una responde a una intención de búsqueda
+       distinta y lleva la demo ya apuntando a su sector. -->
+  <url>
+    <loc>https://www.studio32.es/agente-whatsapp-clinicas-dentales/</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.studio32.es/agente-whatsapp-restaurantes/</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.studio32.es/agente-whatsapp-servicios-locales/</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.studio32.es/Landing1-L%27Obscur/restaurant_landing.html</loc>

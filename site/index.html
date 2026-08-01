@@ -36,13 +36,13 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css?v=20260801-ritmo-1">
+    <link rel="stylesheet" href="styles.css?v=20260801-verticales-5">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     <script src="https://unpkg.com/split-type@0.3.4" defer></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js" defer></script>
-    <script src="script.js?v=20260801-ritmo-1" defer></script>
+    <script src="script.js?v=20260801-verticales-5" defer></script>
 
     <!-- Red de seguridad del preloader: si un CDN falla o el JS principal
          no llega a retirarlo, lo forzamos para no dejar la web en negro. -->
@@ -411,129 +411,7 @@
                     data-demo-sector="servicios">Servicio local</button>
             </div>
 
-            <div class="live-demo" data-live-demo>
-                <div class="live-chat">
-                    <div class="chat-header">
-                        <span class="chat-avatar" aria-hidden="true">CC</span>
-                        <div class="chat-header-meta">
-                            <strong>Clínica Cobalto</strong>
-                            <span class="chat-status">Agente activo · responde al momento</span>
-                        </div>
-                        <button type="button" class="live-reset" data-demo-reset>Ver de nuevo</button>
-                    </div>
-
-                    <div class="live-chat-stage">
-                        <div class="live-chat-body" data-demo-log role="log" aria-live="polite"
-                            aria-label="Conversación de la demostración">
-                            <span class="chat-day">Demostración</span>
-                        </div>
-
-                        <div class="live-takeover" data-demo-takeover hidden>
-                            <p class="live-takeover-eyebrow">[ ESTO HA PASADO SOLO ]</p>
-                            <p class="live-takeover-title">Ahora <em>pruébalo tú</em>.</p>
-                            <p class="live-takeover-text">Escríbele lo que quieras: precios, horarios, miedo al
-                                dentista. Es el mismo agente que atendería a tus clientes, y la cita que reserves
-                                aparecerá de verdad en el panel.</p>
-                            <button type="button" class="live-takeover-btn" data-demo-takeover-btn>Pruébalo tú
-                                mismo</button>
-                        </div>
-                    </div>
-
-                    <div class="live-typing" data-demo-typing hidden aria-hidden="true">
-                        <span></span><span></span><span></span>
-                    </div>
-
-                    <form class="live-composer" data-demo-form>
-                        <label class="visually-hidden" for="demo-input">Escribe tu mensaje al agente</label>
-                        <input class="live-input" id="demo-input" type="text" autocomplete="off" maxlength="400"
-                            placeholder="Escribe lo que quieras preguntarle…" data-demo-input>
-                        <button class="live-send" type="submit" aria-label="Enviar mensaje" data-demo-send>
-                            <span aria-hidden="true">→</span>
-                        </button>
-                    </form>
-                    <p class="live-note" data-demo-note>Agente real conectado. Pregúntale lo que se te ocurra: precios,
-                        horarios, miedo al dentista, o pídele cita de verdad.</p>
-                </div>
-
-                <figure class="dashboard-mockup live-dashboard"
-                    aria-label="Panel de control del negocio, actualizándose con la conversación de la demostración.">
-                    <div class="dashboard-bar">
-                        <div class="dashboard-brand"><span>32</span> Studio32 Agent</div>
-                        <div class="dashboard-business">
-                            <span class="dashboard-business-mark" aria-hidden="true">CC</span>
-                            <span class="dashboard-business-name">Clínica Cobalto</span>
-                            <span class="dashboard-chevron" aria-hidden="true"></span>
-                        </div>
-                    </div>
-                    <div class="dashboard-shell">
-                        <aside class="dashboard-nav" aria-label="Navegación simulada del panel">
-                            <span class="is-active">Inbox</span>
-                            <span data-demo-nav-citas>Citas</span>
-                            <span>Servicios</span>
-                            <span>Agente</span>
-                        </aside>
-                        <div class="dashboard-workspace">
-                            <div class="dashboard-heading">
-                                <div>
-                                    <small>INBOX</small>
-                                    <strong>Conversaciones</strong>
-                                </div>
-                                <span class="dashboard-live">Agente activo</span>
-                            </div>
-                            <div class="dashboard-columns">
-                                <div class="conversation-list">
-                                    <article class="conversation-row is-selected">
-                                        <span class="conversation-avatar">?</span>
-                                        <div>
-                                            <strong data-demo-row-name>Nuevo contacto</strong>
-                                            <small data-demo-row-meta>Sin mensajes todavía</small>
-                                        </div>
-                                        <em data-demo-row-badge>Agente</em>
-                                    </article>
-                                    <article class="conversation-row">
-                                        <span class="conversation-avatar">DL</span>
-                                        <div><strong>David López</strong><small>Primera consulta · 20:32</small></div>
-                                        <em>Equipo</em>
-                                    </article>
-                                    <article class="conversation-row">
-                                        <span class="conversation-avatar">AP</span>
-                                        <div><strong>Ana Pérez</strong><small>Cambio de cita · 18:15</small></div>
-                                        <em>Resuelta</em>
-                                    </article>
-                                </div>
-                                <div class="conversation-detail">
-                                    <div class="detail-top">
-                                        <div>
-                                            <strong data-demo-detail-name>Nuevo contacto</strong>
-                                            <small>WhatsApp · conversación activa</small>
-                                        </div>
-                                        <span class="detail-action" data-demo-action>Intervenir</span>
-                                    </div>
-                                    <div class="detail-history">
-                                        <span>Hoy</span>
-                                        <span data-demo-count>0 mensajes</span>
-                                    </div>
-                                    <section class="detail-messages" data-demo-mirror
-                                        aria-label="Historial visible de la conversación">
-                                        <p class="detail-message detail-message--empty">Aquí aparecerá la conversación
-                                            en cuanto escribas.</p>
-                                    </section>
-                                    <div class="appointment-card" data-demo-appointment hidden>
-                                        <span>PRÓXIMA CITA</span>
-                                        <strong data-demo-appointment-slot>Sin cita</strong>
-                                        <small data-demo-appointment-note>Todavía no hay ninguna reservada</small>
-                                    </div>
-                                    <div class="detail-status">
-                                        <span></span>
-                                        <span data-demo-status>Esperando el primer mensaje</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <figcaption>Demostración de producto · datos ficticios</figcaption>
-                </figure>
-            </div>
+            <div class="live-demo" data-live-demo="clinica"></div>
 
             <div class="control-points">
                 <article>
@@ -936,6 +814,13 @@
                         panel e intervención humana. El estudio también diseña presencia digital y sistemas a medida
                         cuando forman parte del mismo problema.</p>
                 </div>
+
+                <nav class="footer-col" aria-label="Páginas por sector">
+                    <p class="footer-col-titulo">Por sector</p>
+                    <a href="agente-whatsapp-clinicas-dentales/">Clínicas dentales</a>
+                    <a href="agente-whatsapp-restaurantes/">Restaurantes</a>
+                    <a href="agente-whatsapp-servicios-locales/">Servicios locales</a>
+                </nav>
 
                 <nav class="footer-col" aria-label="Secciones de la web">
                     <p class="footer-col-titulo">La web</p>

@@ -227,3 +227,55 @@ perjudicar por peso (Core Web Vitals). Donde vive el SEO aquí es en el JSON-LD 
 puesto, en **más páginas** (una por vertical) y en **enlaces internos** — de ahí
 que el pie nuevo sume. No añadir fotografía de stock: hunde la percepción de
 calidad justo después de haberla ganado.
+
+## 2026-08-01 · Páginas por vertical (SEO + venta)
+
+studio32.es era **una sola página**: cero cobertura de búsqueda long-tail y nada
+concreto que enviarle a un prospecto. Se añaden tres:
+
+- `/agente-whatsapp-clinicas-dentales/`
+- `/agente-whatsapp-restaurantes/`
+- `/agente-whatsapp-servicios-locales/`
+
+Cada una abre con **la demo ya apuntando a su tenant** (`data-live-demo="…"`),
+así que el visitante habla con un negocio de su sector sin elegir nada.
+
+**Diferenciación deliberada.** El vertical dental está saturado (ConverPilot dice
+180 clínicas, ChatBotDental 70, Clientisima vende a 19 €/mes). Competir en
+"chatbot 24/7" es competir en commodity. Estas páginas se apoyan en lo único que
+ninguno ofrece: **poder hablar con el agente configurado ahí mismo**, más un
+bloque de **límites** ("lo que NO hace") que en verticales regulados genera más
+confianza que la lista de funciones.
+
+### Decisiones técnicas
+
+**El marcado de la demo pasó a plantilla en JS** (`plantillaDemo()`). Antes vivía
+en `index.html`; replicarlo en cuatro páginas eran ~130 líneas duplicadas que
+divergen a la tercera edición. Es INTERFAZ, no contenido indexable, así que
+generarlo en cliente no cuesta posicionamiento.
+
+**Las páginas por vertical NO cargan GSAP, Lenis ni SplitType.** Son páginas de
+posicionamiento y cuatro librerías de CDN penalizan Core Web Vitals, que sí es
+factor de ranking. `script.js` detecta su ausencia (`TIENE_GSAP`) y salta las
+animaciones. La demo es DOM plano y funciona igual.
+
+**Generador en `_plantillas/generar-verticales.py`** (fuera de `site/`, no se
+despliega). Las tres páginas comparten cabecera, navegación, pie y demo: a mano
+divergirían. El HTML generado se commitea, así que no hay paso de build.
+
+### Trampas encontradas
+
+- **Zona muerta temporal.** Sin preloader, `initHeroAnimations()` se llamaba de
+  forma síncrona durante la evaluación del script, antes de que se inicializara
+  `const SECTORES` → "Cannot access 'SECTORES' before initialization". Se resuelve
+  con `queueMicrotask`. En la portada no se veía porque la llamada venía del
+  `onComplete` del preloader, ya asíncrono.
+- **La barra de navegación de la portada da por hecho el menú hamburguesa**: en
+  móvil oculta enlaces Y botón. Sin toggle, estas páginas se quedaban sin acciones
+  y la barra desbordaba.
+- **`.huge-text` está calibrado para frases muy cortas** ("Puede verse mejor.").
+  Con un titular más largo se salía del panel y arrastraba scroll horizontal.
+- **Sangre completa y barra de scroll**: `calc(50% - 50vw)` desborda exactamente
+  el ancho de la barra, porque `50vw` la incluye y `50%` no. Se recorta con
+  `overflow-x: clip` en `html, body` — nunca `hidden`, que rompería el
+  `position: sticky` de la cabecera de la FAQ.
