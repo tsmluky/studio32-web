@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luz · Studio32</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /* ─────────────────────────────────────────────────────────────────────
+           LUZ · Nada representa nada. Solo un campo oscuro, una línea de
+           horizonte, luz y tipografía.
+
+           La idea: cada mensaje que el agente resuelve aporta luz al campo, y
+           esa luz acumulada acaba siendo el amanecer. El trabajo de la noche se
+           convierte en la salida del sol.
+
+           --p    progreso 0→1
+           --luz  luz acumulada por la conversación 0→1
+           ──────────────────────────────────────────────────────────────────── */
+        :root {
+            --p: 0;
+            --luz: 0;
+
+            --fondo: #05060a;
+            --tinta: #f4f3f0;
+            --tenue: rgba(244, 243, 240, .42);
+            --ambar: #f5c983;
+
+            --serif: "Instrument Serif", Georgia, serif;
+            --sans: "Archivo", system-ui, sans-serif;
+
+            /* Escala tipográfica fija: nada fuera de ella. */
+            --t-xs: .625rem;
+            --t-s: .78rem;
+            --t-m: .95rem;
+            --t-xl: clamp(2.4rem, 6.6vw, 5.6rem);
+        }
+
+        html,
+        body {
+            margin: 0;
+            background: var(--fondo);
+        }
+
+        body {
+            color: var(--tinta);
+            font-family: var(--sans);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .recorrido {
+            height: 760vh;
+        }
+
+        .campo {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            background: var(--fondo);
+        }
+
+        /* ── La luz. Tres capas suaves, ninguna con forma reconocible. ────── */
+        .halo {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            will-change: opacity;
+        }
+
+        /* Resplandor bajo, el que acabará siendo el amanecer */
+        .halo--base {
+            background:
+                radial-gradient(120% 62% at 50% 104%, rgba(245, 201, 131, .5), transparent 62%),
+                radial-gradient(80% 44% at 66% 100%, rgba(255, 138, 92, .34), transparent 66%);
+            opacity: calc(var(--luz) * var(--luz));
+        }
+
+        /* Frío alto: la noche que se retira */
+        .halo--noche {
+            background: radial-gradient(96% 66% at 24% -8%, rgba(72, 96, 168, .3), transparent 64%);
+            opacity: calc(1 - var(--luz) * .82);
+        }
+
+        /* Punto cálido que aparece con cada mensaje resuelto */
+        .halo--pulso {
+            background: radial-gradient(38% 30% at 50% 62%, rgba(245, 201, 131, .22), transparent 70%);
+            opacity: calc(var(--luz) * (1 - var(--luz)) * 2.6);
+        }
+
+        /* ── El disco. Único elemento geométrico de toda la pieza. ────────── */
+        .disco {
+            position: absolute;
+            left: 50%;
+            bottom: 22vh;
+            width: min(64vh, 62vw);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle at 50% 42%, #fff6e2, var(--ambar) 52%, rgba(245, 201, 131, 0) 72%);
+            transform: translate(-50%, calc(58vh - var(--luz) * 62vh)) scale(calc(.72 + var(--luz) * .28));
+            opacity: calc(var(--luz) * 1.25 - .12);
+            filter: blur(calc(26px - var(--luz) * 18px));
+            will-change: transform, opacity;
+        }
+
+        /* El horizonte recorta el disco: una sola línea, a un píxel. */
+        .horizonte {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 22vh;
+            height: 1px;
+            background: linear-gradient(to right,
+                    transparent,
+                    rgba(244, 243, 240, calc(.1 + var(--luz) * .34)) 22%,
+                    rgba(244, 243, 240, calc(.14 + var(--luz) * .46)) 50%,
+                    rgba(244, 243, 240, calc(.1 + var(--luz) * .34)) 78%,
+                    transparent);
+        }
+
+        /* Suelo: mata el disco por debajo del horizonte y da peso al encuadre */
+        .suelo {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 22vh;
+            background: linear-gradient(to bottom,
+                    color-mix(in oklab, var(--fondo), #241a16 calc(var(--luz) * 62%)),
+                    var(--fondo));
+        }
+
+        .grano {
+            position: absolute;
+            inset: -60%;
+            opacity: .1;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ── Tipografía. Es el sujeto de la pieza. ─────────────────────────── */
+        .lienzo {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, .84fr);
+            gap: 8vw;
+            align-items: center;
+            height: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 6vw;
+        }
+
+        .rotulos {
+            position: relative;
+            min-height: 3.2em;
+        }
+
+        .rotulo {
+            position: absolute;
+            inset: 0;
+            margin: 0;
+            font-family: var(--serif);
+            font-size: var(--t-xl);
+            font-weight: 400;
+            line-height: .98;
+            letter-spacing: -.022em;
+            text-wrap: balance;
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity .3s ease, transform .3s ease;
+        }
+
+        .rotulo.is-on {
+            opacity: 1;
+            transform: none;
+            transition: opacity .85s cubic-bezier(.2, .7, .2, 1) .34s,
+                        transform .85s cubic-bezier(.2, .7, .2, 1) .34s;
+        }
+
+        .rotulo em {
+            font-style: italic;
+            color: var(--ambar);
+        }
+
+        /* La conversación: sin burbujas, sin marco. Solo voces. */
+        .voces {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-left: 26px;
+            border-left: 1px solid rgba(244, 243, 240, .12);
+        }
+
+        .voz {
+            max-width: 34ch;
+            font-size: var(--t-m);
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .voz.is-on {
+            opacity: 1;
+            transform: none;
+        }
+
+        .voz::before {
+            display: block;
+            margin-bottom: 5px;
+            font-family: var(--sans);
+            font-size: var(--t-xs);
+            font-weight: 500;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+        }
+
+        .voz--ella {
+            color: var(--tenue);
+        }
+
+        .voz--ella::before {
+            content: "23:41 · ella";
+            color: rgba(244, 243, 240, .3);
+        }
+
+        .voz--el {
+            margin-left: 3.4ch;
+            color: var(--tinta);
+        }
+
+        .voz--el::before {
+            content: "el agente";
+            color: var(--ambar);
+        }
+
+        /* ── HUD ──────────────────────────────────────────────────────────── */
+        .hud {
+            position: absolute;
+            z-index: 3;
+            inset: 30px 6vw auto 6vw;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+
+        .marca {
+            font-size: var(--t-xs);
+            font-weight: 500;
+            letter-spacing: .28em;
+        }
+
+        .hora {
+            font-size: var(--t-s);
+            letter-spacing: .1em;
+            font-variant-numeric: tabular-nums;
+            color: var(--ambar);
+        }
+
+        .pista {
+            position: absolute;
+            z-index: 3;
+            left: 6vw;
+            bottom: 30px;
+            color: var(--tenue);
+            font-size: var(--t-xs);
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            opacity: calc(1 - var(--p) * 6);
+        }
+
+        /* ── Cierre ───────────────────────────────────────────────────────── */
+        .cierre {
+            position: absolute;
+            z-index: 3;
+            left: 6vw;
+            right: 6vw;
+            bottom: 8vh;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 22px;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity .7s ease, transform .7s ease;
+            pointer-events: none;
+        }
+
+        .cierre.is-on {
+            opacity: 1;
+            transform: none;
+            pointer-events: auto;
+        }
+
+        .cierre p {
+            flex: 1 1 22ch;
+            max-width: 42ch;
+            margin: 0;
+            color: rgba(244, 243, 240, .74);
+            font-size: var(--t-s);
+            line-height: 1.6;
+        }
+
+        .cta {
+            padding: 14px 30px;
+            border: 1px solid var(--ambar);
+            border-radius: 999px;
+            background: transparent;
+            color: var(--ambar);
+            font-family: var(--sans);
+            font-size: var(--t-s);
+            font-weight: 500;
+            letter-spacing: .02em;
+            cursor: pointer;
+            transition: background .3s ease, color .3s ease;
+        }
+
+        .cta:hover {
+            background: var(--ambar);
+            color: #14100a;
+        }
+
+        @media (max-width: 900px) {
+            .lienzo {
+                grid-template-columns: 1fr;
+                align-content: center;
+                gap: 46px;
+            }
+
+            .voces { gap: 15px; }
+            .voz { font-size: var(--t-s); }
+            .disco { bottom: 26vh; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .rotulo, .voz { transition-duration: .2s; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="campo">
+        <div class="halo halo--noche"></div>
+        <div class="halo halo--base"></div>
+        <div class="halo halo--pulso"></div>
+        <div class="disco"></div>
+        <div class="horizonte"></div>
+        <div class="suelo"></div>
+        <div class="grano"></div>
+
+        <div class="hud">
+            <span class="marca">STUDIO32</span>
+            <span class="hora" id="hora">23:41</span>
+        </div>
+
+        <div class="lienzo">
+            <div class="rotulos" id="rotulos">
+                <h1 class="rotulo">A esta hora ya no contesta <em>nadie</em>.</h1>
+                <p class="rotulo">Y alguien acaba de escribir con dolor.</p>
+                <p class="rotulo">Esta vez <em>sí</em> contestan.</p>
+                <p class="rotulo">Y le dan hora para <em>mañana a las 9:30</em>.</p>
+                <p class="rotulo">Tú llevabas cuatro horas <em>durmiendo</em>.</p>
+                <p class="rotulo">Cuando abres, ya está <em>resuelto</em>.</p>
+            </div>
+
+            <div class="voces" id="voces">
+                <p class="voz voz--ella">Llevo dos días con dolor en una muela y no sé si aguantar hasta el lunes.</p>
+                <p class="voz voz--el">Vaya, lo siento. ¿Te duele todo el rato o solo al morder?</p>
+                <p class="voz voz--ella">Todo el rato, y por la noche va a peor.</p>
+                <p class="voz voz--el">Con ese dolor mejor no esperar. Mañana me queda a las 9:30 o a las 12.</p>
+                <p class="voz voz--ella">A las 9:30.</p>
+                <p class="voz voz--el">Hecho. Si esta noche va a peor, escríbeme y aviso al equipo.</p>
+            </div>
+        </div>
+
+        <p class="pista">Baja despacio</p>
+
+        <div class="cierre" id="cierre">
+            <p>Toda esa luz la ha hecho una conversación que ocurrió mientras dormías. Escríbele tú y mira cómo la
+                cita aparece de verdad en el panel.</p>
+            <button class="cta" type="button">Pruébalo tú mismo</button>
+        </div>
+    </div>
+
+    <div class="recorrido"></div>
+
+    <script>
+        (() => {
+            const raiz = document.documentElement;
+            const rotulos = [...document.querySelectorAll('.rotulo')];
+            const voces = [...document.querySelectorAll('.voz')];
+            const elHora = document.getElementById('hora');
+            const cierre = document.getElementById('cierre');
+
+            const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+            const suave = t => t * t * (3 - 2 * t);
+
+            // Un plano por rótulo. Las voces se van encendiendo con ellos: cada
+            // una suma luz al campo, y la suma acaba siendo el amanecer.
+            const PLANOS = [
+                { hasta: .12, hora: '23:41', rotulo: 0, voces: 0 },
+                { hasta: .28, hora: '23:41', rotulo: 1, voces: 1 },
+                { hasta: .45, hora: '23:42', rotulo: 2, voces: 3 },
+                { hasta: .62, hora: '23:45', rotulo: 3, voces: 6 },
+                { hasta: .80, hora: '04:20', rotulo: 4, voces: 6 },
+                { hasta: 1.01, hora: '07:58', rotulo: 5, voces: 6 }
+            ];
+
+            let ultimo = null;
+
+            function fotograma() {
+                const recorrido = document.body.scrollHeight - window.innerHeight;
+                const p = recorrido > 0 ? clamp(window.scrollY / recorrido) : 0;
+
+                // La luz no crece lineal: arranca con el primer mensaje resuelto
+                // y se dispara al final, cuando ya es amanecer.
+                const luz = suave(clamp((p - .18) / .78));
+
+                raiz.style.setProperty('--p', p.toFixed(4));
+                raiz.style.setProperty('--luz', luz.toFixed(4));
+
+                const plano = PLANOS.find(x => p < x.hasta) || PLANOS[PLANOS.length - 1];
+                if (plano !== ultimo) {
+                    ultimo = plano;
+                    elHora.textContent = plano.hora;
+                    rotulos.forEach((r, i) => r.classList.toggle('is-on', i === plano.rotulo));
+                    voces.forEach((v, i) => v.classList.toggle('is-on', i < plano.voces));
+                }
+
+                cierre.classList.toggle('is-on', p > .92);
+                requestAnimationFrame(fotograma);
+            }
+
+            requestAnimationFrame(fotograma);
+        })();
+    </script>
+</body>
+
+</html>
