@@ -15,7 +15,7 @@ import os
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(RAIZ, "site")
-VERSION = "20260801-verticales-5"
+VERSION = "20260801-verticales-6"
 
 # ── Datos por vertical ───────────────────────────────────────────────────────
 VERTICALES = [
@@ -447,12 +447,12 @@ PAGINA = """<!DOCTYPE html>
                     <a href="../agente-whatsapp-restaurantes/">Restaurantes</a>
                     <a href="../agente-whatsapp-servicios-locales/">Servicios locales</a>
                 </nav>
-                <nav class="footer-col" aria-label="La web">
-                    <p class="footer-col-titulo">La web</p>
+                <nav class="footer-col" aria-label="El agente">
+                    <p class="footer-col-titulo">El agente</p>
                     <a href="../#control">Probar el agente</a>
                     <a href="../panel-de-control/">El panel de control</a>
+                    <a href="../precio-agente-whatsapp/">Cuánto cuesta</a>
                     <a href="../#process">Implantación</a>
-                    <a href="../#tarifas">Tarifas</a>
                     <a href="../#faq">Preguntas frecuentes</a>
                 </nav>
                 <div class="footer-col">
