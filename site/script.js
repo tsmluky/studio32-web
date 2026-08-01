@@ -239,10 +239,10 @@ const SECTORES = {
         preview: {
             knowledge: 'Servicios, horarios y políticas de la clínica',
             services: [
-                ['Primera visita', '30 min · Gratis', 'Valoración inicial para entender el caso y explicar los siguientes pasos.', '30', 'Gratis'],
-                ['Higiene dental', '45 min · Consultar', 'Limpieza profesional y revisión del estado general de encías y dientes.', '45', 'Consultar'],
-                ['Urgencia dental', '30 min · Consultar', 'Atención prioritaria para dolor, inflamación o una incidencia que no puede esperar.', '30', 'Consultar'],
-                ['Revisión', '30 min · Consultar', 'Seguimiento periódico y valoración de cualquier cambio desde la última visita.', '30', 'Consultar']
+                ['Primera visita', '30 min · Sin coste'],
+                ['Higiene dental', '45 min · Con cita'],
+                ['Urgencia dental', 'Huecos prioritarios'],
+                ['Revisión', '30 min · Seguimiento']
             ]
         },
         showreel: [
@@ -272,10 +272,10 @@ const SECTORES = {
         preview: {
             knowledge: 'Carta, alérgenos, horarios y políticas de reserva',
             services: [
-                ['Reserva de mesa', '90 min · Gratis', 'Reserva de mesa para comidas y cenas, con confirmación de horario y comensales.', '90', 'Gratis'],
-                ['Menú de grupos', '120 min · Consultar', 'Menú cerrado para grupos desde seis personas, adaptado a alergias avisadas.', '120', 'Consultar'],
-                ['Opciones sin gluten', '90 min · Consultar', 'Selección de platos aptos y aviso previo a cocina para preparar el servicio.', '90', 'Consultar'],
-                ['Celebraciones', '180 min · Consultar', 'Propuesta personalizada para celebraciones y comidas especiales.', '180', 'Consultar']
+                ['Reserva de mesa', 'Sin coste · 2–12 personas'],
+                ['Menú de grupos', 'Disponible desde 6 personas'],
+                ['Opciones sin gluten', 'Cocina informada'],
+                ['Celebraciones', 'Consulta previa']
             ]
         },
         showreel: [
@@ -303,10 +303,10 @@ const SECTORES = {
         preview: {
             knowledge: 'Servicios, coberturas, zonas y criterios técnicos',
             services: [
-                ['Visita técnica', '60 min · Gratis', 'Visita de valoración para revisar la instalación y preparar un presupuesto ajustado.', '60', 'Gratis'],
-                ['Cambio de caldera', '120 min · Consultar', 'Evaluación del equipo actual, potencia necesaria y alternativas de sustitución.', '120', 'Consultar'],
-                ['Reparación urgente', '60 min · Consultar', 'Atención prioritaria de averías que dejan la vivienda sin calefacción o agua caliente.', '60', 'Consultar'],
-                ['Mantenimiento', '90 min · Consultar', 'Revisión preventiva de la instalación y puesta a punto anual.', '90', 'Consultar']
+                ['Visita técnica', 'Gratuita · Con cita'],
+                ['Cambio de caldera', 'Valoración previa'],
+                ['Reparación urgente', 'Prioridad 24 h'],
+                ['Mantenimiento', 'Plan anual']
             ]
         },
         showreel: [
@@ -366,13 +366,6 @@ function initLiveDemo() {
     const calendarSlot = pick('[data-demo-calendar-slot]');
     const serviceNames = [...root.querySelectorAll('[data-preview-service-name]')];
     const serviceMetas = [...root.querySelectorAll('[data-preview-service-meta]')];
-    const serviceButtons = [...root.querySelectorAll('[data-preview-service-button]')];
-    const editorNames = [...root.querySelectorAll('[data-preview-editor-name]')];
-    const editorDescription = pick('[data-preview-editor-description]');
-    const editorDuration = pick('[data-preview-editor-duration]');
-    const editorPrice = pick('[data-preview-editor-price]');
-    const previewBusinesses = [...root.querySelectorAll('[data-preview-business]')];
-    const appointmentService = pick('[data-preview-service]');
     const knowledgePreview = pick('[data-preview-knowledge]');
 
     if (!log || !form || !input) return;
@@ -421,23 +414,6 @@ function initLiveDemo() {
         tab.addEventListener('click', () => mostrarVista(tab.dataset.dashboardTab));
     });
 
-    function seleccionarServicioPreview(index) {
-        const service = sector.preview?.services[index];
-        if (!service) return;
-
-        serviceButtons.forEach((button, buttonIndex) => {
-            button.classList.toggle('is-active', buttonIndex === index);
-        });
-        editorNames.forEach((name) => { name.textContent = service[0]; });
-        if (editorDescription) editorDescription.textContent = service[2];
-        if (editorDuration) editorDuration.textContent = service[3];
-        if (editorPrice) editorPrice.textContent = service[4];
-    }
-
-    serviceButtons.forEach((button, index) => {
-        button.addEventListener('click', () => seleccionarServicioPreview(index));
-    });
-
     function actualizarPreviewSector() {
         const preview = sector.preview;
         if (!preview) return;
@@ -448,9 +424,6 @@ function initLiveDemo() {
         });
 
         if (knowledgePreview) knowledgePreview.textContent = preview.knowledge;
-        if (appointmentService) appointmentService.textContent = preview.services[0][0] + ' · 612 345 678';
-        previewBusinesses.forEach((label) => { label.textContent = sector.negocio.toUpperCase(); });
-        seleccionarServicioPreview(0);
     }
 
     function restaurarConversacionShowreel() {

@@ -17,7 +17,7 @@ Contexto del ecosistema completo: repo `Studio32` → `notes/CONTEXTO.md`.
   migración no es urgente.
 - Local: `python -m http.server 8080 --directory site`.
 - Al tocar `styles.css` o `script.js`, subir ambos `?v=` en `index.html`.
-  Versión actual: `20260801-dashboard-2`.
+  Versión actual: `20260801-dashboard-1`.
 - Repo compartido entre dos máquinas: `git pull --rebase` al empezar y commit +
   push de `.ai/` al cerrar.
 
@@ -63,15 +63,12 @@ agenda del agente está aislada por sesión en tenants demo.
 
 ## Dashboard demostrativo dentro de `#control`
 
-El mockup ya funciona como preview navegable y replica la estructura de las
-vistas reales de `studio32-panel`:
+El mockup ya funciona como preview navegable:
 
-- **Inbox:** conversación viva, historial espejado y tres filas explicativas.
-- **Citas:** selector Calendario/Lista, navegación mensual, celdas con chips y
-  panel de día seleccionado.
-- **Servicios:** catálogo seleccionable + editor de nombre, descripción,
-  duración y precio.
-- **Agente:** vista de solo lectura con capacidades, FAQ y solicitud de cambio.
+- **Inbox:** conversación viva, historial espejado y lista con scroll.
+- **Citas:** calendario mensual, agenda del día y reserva generada por el agente.
+- **Servicios:** catálogo adaptado al sector seleccionado.
+- **Agente:** estado, conocimiento y reglas operativas.
 
 Al pulsar “Pruébalo tú mismo” no se borra el showreel: queda archivado como
 conversación atendida, se inserta “Nuevo contacto” arriba y el resto baja. Al
@@ -79,9 +76,9 @@ reiniciar o cambiar de sector se restaura la pila inicial.
 
 Verificado en navegador interno:
 
-- 1280 × 900 y 390 × 844: sin scroll horizontal ni errores de composición.
-- La lista pasa de 3 a 4 conversaciones al tomar el control y conserva la cita.
-- Servicios cambia catálogo y editor con cada sector y permite seleccionar fila.
+- 1280 × 900: las cuatro vistas mantienen 712,6 px de alto.
+- 390 × 844: sin scroll horizontal de página; nav y conversaciones deslizan.
+- La lista pasa de 10 a 11 conversaciones al tomar el control y conserva la cita.
 - Sin errores ni avisos de consola; `node --check` y `git diff --check` limpios.
 
 ## Deuda y siguiente foco

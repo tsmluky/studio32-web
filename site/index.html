@@ -36,13 +36,13 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css?v=20260801-dashboard-2">
+    <link rel="stylesheet" href="styles.css?v=20260801-dashboard-1">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     <script src="https://unpkg.com/split-type@0.3.4" defer></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js" defer></script>
-    <script src="script.js?v=20260801-dashboard-2" defer></script>
+    <script src="script.js?v=20260801-dashboard-1" defer></script>
 
     <!-- Red de seguridad del preloader: si un CDN falla o el JS principal
          no llega a retirarlo, lo forzamos para no dejar la web en negro. -->
@@ -478,8 +478,8 @@
                                     <span class="dashboard-live">Agente activo</span>
                                 </div>
                                 <div class="dashboard-columns">
-                                    <div class="conversation-list" data-demo-conversation-list
-                                        aria-label="Conversaciones recientes">
+                                    <div class="conversation-list" data-demo-conversation-list tabindex="0"
+                                        aria-label="Conversaciones recientes. Desliza para ver más.">
                                     <article class="conversation-row is-selected" data-demo-active-row data-demo-showreel-row>
                                         <span class="conversation-avatar">?</span>
                                         <div>
@@ -497,6 +497,41 @@
                                         <span class="conversation-avatar">AP</span>
                                         <div><strong>Ana Pérez</strong><small>Cambio de cita · 18:15</small></div>
                                         <em>Resuelta</em>
+                                    </article>
+                                    <article class="conversation-row">
+                                        <span class="conversation-avatar">MR</span>
+                                        <div><strong>Marcos Ruiz</strong><small>Consulta pendiente · ayer</small></div>
+                                        <em>Agente</em>
+                                    </article>
+                                    <article class="conversation-row">
+                                        <span class="conversation-avatar">LC</span>
+                                        <div><strong>Lucía Cano</strong><small>Recordatorio enviado · ayer</small></div>
+                                        <em>Automático</em>
+                                    </article>
+                                    <article class="conversation-row">
+                                        <span class="conversation-avatar">JS</span>
+                                        <div><strong>Jorge Sanz</strong><small>Consulta resuelta · jueves</small></div>
+                                        <em>Resuelta</em>
+                                    </article>
+                                    <article class="conversation-row">
+                                        <span class="conversation-avatar">EC</span>
+                                        <div><strong>Elena Costa</strong><small>Nueva cita · miércoles</small></div>
+                                        <em>Agente</em>
+                                    </article>
+                                    <article class="conversation-row">
+                                        <span class="conversation-avatar">NB</span>
+                                        <div><strong>Nuria Blanco</strong><small>Información enviada · martes</small></div>
+                                        <em>Automático</em>
+                                    </article>
+                                    <article class="conversation-row">
+                                        <span class="conversation-avatar">RO</span>
+                                        <div><strong>Raúl Ortega</strong><small>Conversación cerrada · lunes</small></div>
+                                        <em>Resuelta</em>
+                                    </article>
+                                    <article class="conversation-row">
+                                        <span class="conversation-avatar">CM</span>
+                                        <div><strong>Carla Martín</strong><small>Consulta recibida · lunes</small></div>
+                                        <em>Equipo</em>
                                     </article>
                                     </div>
                                     <div class="conversation-detail">
@@ -531,35 +566,35 @@
 
                             <section class="dashboard-view" id="dashboard-view-citas" role="tabpanel" hidden
                                 data-dashboard-view="citas">
-                                <div class="dashboard-heading dashboard-heading--view">
-                                    <div><small data-preview-business>CLÍNICA COBALTO</small><strong>Citas</strong><p>Calendario y próximas citas.</p></div>
-                                    <span class="dashboard-live">En directo</span>
+                                <div class="dashboard-heading">
+                                    <div><small>AGENDA</small><strong>Citas</strong></div>
+                                    <span class="dashboard-view-meta">Agosto · 2026</span>
                                 </div>
-                                <div class="preview-modebar"><span class="is-active">Calendario</span><span>Lista</span></div>
-                                <div class="preview-cal-toolbar">
-                                    <div><button type="button" tabindex="-1">‹</button><button type="button" tabindex="-1">›</button><span>Hoy</span></div>
-                                    <strong>Agosto 2026</strong>
-                                </div>
-                                <div class="preview-cal-layout">
-                                    <section class="preview-card preview-cal-month">
-                                        <div class="preview-weekdays" aria-hidden="true">
-                                            <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+                                <div class="appointments-preview">
+                                    <div class="calendar-card">
+                                        <div class="calendar-toolbar">
+                                            <strong>Agosto 2026</strong><span>Hoy</span>
                                         </div>
-                                        <div class="preview-cal-grid" aria-label="Vista previa del calendario de agosto de 2026">
-                                            <span class="is-out"><b>27</b></span><span class="is-out"><b>28</b></span><span class="is-out"><b>29</b></span><span class="is-out"><b>30</b></span><span class="is-out"><b>31</b></span><span class="is-today is-selected"><b>1</b><i>09:30</i><i>11:00</i></span><span><b>2</b></span>
-                                            <span><b>3</b></span><span><b>4</b><i>10:30</i></span><span><b>5</b></span><span><b>6</b></span><span><b>7</b></span><span><b>8</b></span><span><b>9</b></span>
-                                            <span><b>10</b><i>09:00</i></span><span><b>11</b></span><span><b>12</b></span><span><b>13</b></span><span><b>14</b></span><span><b>15</b></span><span><b>16</b></span>
-                                            <span><b>17</b></span><span><b>18</b></span><span><b>19</b><i>12:00</i></span><span><b>20</b></span><span><b>21</b></span><span><b>22</b></span><span><b>23</b></span>
-                                            <span><b>24</b></span><span><b>25</b></span><span><b>26</b></span><span><b>27</b></span><span><b>28</b></span><span><b>29</b></span><span><b>30</b></span>
-                                            <span><b>31</b></span><span class="is-out"><b>1</b></span><span class="is-out"><b>2</b></span><span class="is-out"><b>3</b></span><span class="is-out"><b>4</b></span><span class="is-out"><b>5</b></span><span class="is-out"><b>6</b></span>
+                                        <div class="calendar-weekdays" aria-hidden="true">
+                                            <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>
                                         </div>
-                                    </section>
-                                    <aside class="preview-card preview-cal-day">
-                                        <header><small>DÍA SELECCIONADO</small><strong>Sábado, 1 de agosto</strong><span>2 citas</span></header>
-                                        <article><time>09:30</time><div><b>David López</b><span data-preview-service>Primera visita · 612 345 678</span><em>Confirmada</em></div></article>
-                                        <article><time>11:00</time><div><b>Ana Pérez</b><span>Revisión · 622 456 789</span><em>Confirmada</em></div></article>
-                                        <article class="preview-cal-live" data-demo-calendar-live hidden>
-                                            <time>Ahora</time><div><b>Nueva reserva</b><span data-demo-calendar-slot>Confirmada por el agente</span><em>Confirmada</em></div>
+                                        <div class="calendar-grid" aria-label="Calendario ilustrativo de agosto de 2026">
+                                            <span class="is-out">27</span><span class="is-out">28</span><span class="is-out">29</span><span class="is-out">30</span><span class="is-out">31</span><span class="is-today">1</span><span>2</span>
+                                            <span>3</span><span class="has-appointments">4<i>3</i></span><span>5</span><span class="has-appointments">6<i>2</i></span><span>7</span><span>8</span><span>9</span>
+                                            <span class="has-appointments">10<i>4</i></span><span>11</span><span>12</span><span>13</span><span class="has-appointments">14<i>2</i></span><span>15</span><span>16</span>
+                                            <span>17</span><span>18</span><span class="has-appointments">19<i>3</i></span><span>20</span><span>21</span><span>22</span><span>23</span>
+                                            <span>24</span><span class="has-appointments">25<i>2</i></span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
+                                            <span>31</span><span class="is-out">1</span><span class="is-out">2</span><span class="is-out">3</span><span class="is-out">4</span><span class="is-out">5</span><span class="is-out">6</span>
+                                        </div>
+                                    </div>
+                                    <aside class="agenda-day">
+                                        <small>PRÓXIMAS</small>
+                                        <strong>Hoy</strong>
+                                        <article><time>09:30</time><div><b>David López</b><span data-preview-service>Primera visita</span></div></article>
+                                        <article><time>11:00</time><div><b>Ana Pérez</b><span>Revisión</span></div></article>
+                                        <article><time>16:30</time><div><b>Elena Costa</b><span>Higiene</span></div></article>
+                                        <article class="agenda-live" data-demo-calendar-live hidden>
+                                            <time>Ahora</time><div><b>Nueva reserva</b><span data-demo-calendar-slot>Confirmada por el agente</span></div>
                                         </article>
                                     </aside>
                                 </div>
@@ -567,44 +602,40 @@
 
                             <section class="dashboard-view" id="dashboard-view-servicios" role="tabpanel" hidden
                                 data-dashboard-view="servicios">
-                                <div class="dashboard-heading dashboard-heading--view">
-                                    <div><small data-preview-business>CLÍNICA COBALTO</small><strong>Servicios</strong><p>Lo guardado aquí alimenta la siguiente conversación.</p></div>
-                                    <span class="dashboard-live">En directo</span>
+                                <div class="dashboard-heading">
+                                    <div><small>CATÁLOGO</small><strong>Servicios</strong></div>
+                                    <span class="dashboard-view-meta">Todo actualizado</span>
                                 </div>
-                                <div class="preview-settings-grid">
-                                    <article class="preview-card preview-service-list">
-                                        <header><small>CATÁLOGO</small><strong>4 servicios</strong></header>
-                                        <button type="button" class="is-active" data-preview-service-button="0"><span><strong data-preview-service-name>Primera visita</strong><small data-preview-service-meta>30 min · Gratis</small></span><i></i></button>
-                                        <button type="button" data-preview-service-button="1"><span><strong data-preview-service-name>Higiene dental</strong><small data-preview-service-meta>45 min · Consultar</small></span><i></i></button>
-                                        <button type="button" data-preview-service-button="2"><span><strong data-preview-service-name>Urgencia dental</strong><small data-preview-service-meta>30 min · Consultar</small></span><i></i></button>
-                                        <button type="button" data-preview-service-button="3"><span><strong data-preview-service-name>Revisión</strong><small data-preview-service-meta>30 min · Consultar</small></span><i></i></button>
-                                    </article>
-                                    <article class="preview-card preview-service-editor">
-                                        <header><div><small>EDICIÓN</small><strong data-preview-editor-name>Primera visita</strong></div><span><i></i>Activo</span></header>
-                                        <label>Nombre<span data-preview-editor-name>Primera visita</span></label>
-                                        <label>Descripción para clientes<span class="is-textarea" data-preview-editor-description>Valoración inicial para entender el caso y explicar los siguientes pasos.</span></label>
-                                        <div><label>Duración (min)<span data-preview-editor-duration>30</span></label><label>Precio orientativo<span data-preview-editor-price>Gratis</span></label></div>
-                                        <footer><span>Los cambios quedan auditados.</span><em>Guardar servicio</em></footer>
-                                    </article>
+                                <div class="services-preview">
+                                    <div class="services-summary"><span>4 activos</span><span>El agente los conoce</span></div>
+                                    <article><span class="service-icon">01</span><div><strong data-preview-service-name>Primera visita</strong><small data-preview-service-meta>30 min · Sin coste</small></div><em>Activo</em></article>
+                                    <article><span class="service-icon">02</span><div><strong data-preview-service-name>Higiene dental</strong><small data-preview-service-meta>45 min · Con cita</small></div><em>Activo</em></article>
+                                    <article><span class="service-icon">03</span><div><strong data-preview-service-name>Urgencia dental</strong><small data-preview-service-meta>Huecos prioritarios</small></div><em>Activo</em></article>
+                                    <article><span class="service-icon">04</span><div><strong data-preview-service-name>Revisión</strong><small data-preview-service-meta>30 min · Seguimiento</small></div><em>Activo</em></article>
+                                    <p class="services-footnote">Precios, duración y reglas disponibles para el agente en cada conversación.</p>
                                 </div>
                             </section>
 
                             <section class="dashboard-view" id="dashboard-view-agente" role="tabpanel" hidden
                                 data-dashboard-view="agente">
-                                <div class="dashboard-heading dashboard-heading--view">
-                                    <div><small data-preview-business>CLÍNICA COBALTO</small><strong>Tu asistente</strong><p>Así atiende. Studio32 mantiene la configuración.</p></div>
+                                <div class="dashboard-heading">
+                                    <div><small>CONFIGURACIÓN</small><strong>Agente</strong></div>
+                                    <span class="dashboard-live">Operativo</span>
                                 </div>
-                                <div class="preview-agent-readonly">
-                                    <article class="preview-card preview-agent-block">
-                                        <small>QUÉ HACE TU ASISTENTE</small>
-                                        <ul><li>Atiende por WhatsApp con el tono del negocio.</li><li>Resuelve dudas frecuentes al momento.</li><li>Agenda, confirma y gestiona citas.</li><li>Cede la conversación cuando hace falta una persona.</li></ul>
-                                    </article>
-                                    <article class="preview-card preview-agent-block preview-agent-faq">
-                                        <small>PREGUNTAS QUE SABE RESPONDER</small>
-                                        <div><strong>¿Qué información utiliza?</strong><p data-preview-knowledge>Servicios, horarios y políticas de la clínica.</p></div>
-                                        <div><strong>¿Cuándo avisa al equipo?</strong><p>Cuando detecta una urgencia o el cliente pide hablar con una persona.</p></div>
-                                    </article>
-                                    <footer class="preview-agent-help"><span>¿Quieres cambiar algo? Lo actualizamos por ti.</span><em>Solicitar un cambio</em></footer>
+                                <div class="agent-preview">
+                                    <div class="agent-status-card">
+                                        <span class="agent-orb" aria-hidden="true">32</span>
+                                        <div><small>AGENTE DE RECEPCIÓN</small><strong>Atendiendo ahora</strong><p>WhatsApp conectado · Respuesta automática activa</p></div>
+                                    </div>
+                                    <div class="agent-preview-grid">
+                                        <article><small>CONOCIMIENTO</small><strong data-preview-knowledge>Servicios, horarios y políticas</strong><span>Actualizado hoy</span></article>
+                                        <article><small>HORARIO</small><strong>24 horas</strong><span>Con relevo humano</span></article>
+                                    </div>
+                                    <div class="agent-rules">
+                                        <article><div><strong>Gestionar citas</strong><small>Consulta la agenda antes de confirmar</small></div><span class="fake-switch is-on" aria-label="Activado"></span></article>
+                                        <article><div><strong>Detectar urgencias</strong><small>Prioriza y avisa al equipo cuando hace falta</small></div><span class="fake-switch is-on" aria-label="Activado"></span></article>
+                                        <article><div><strong>Relevo a una persona</strong><small>Conserva todo el contexto de la conversación</small></div><span class="fake-switch is-on" aria-label="Activado"></span></article>
+                                    </div>
                                 </div>
                             </section>
                         </div>

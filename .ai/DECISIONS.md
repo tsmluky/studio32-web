@@ -205,23 +205,3 @@ Servicios y Conocimiento cambian con el sector seleccionado.
 obligar al visitante a entrar en un dashboard externo. Los datos ilustrativos se
 mantienen dentro del mockup marcado como “datos ficticios”; conversación y cita
 siguen conectadas al agente real cuando el visitante toma el control.
-
-## 2026-08-01 · El preview debe reducir el dashboard real, no inventar otro
-
-La primera versión navegable añadió diez conversaciones y diseñó Citas,
-Servicios y Agente como superficies nuevas. Funcionaban, pero sobreexplicaban el
-Inbox y no respetaban la arquitectura visual ni funcional de `studio32-panel`.
-En particular, Agente mostraba interruptores editables cuando el panel real es
-deliberadamente de solo lectura.
-
-**Decisión:** tres conversaciones iniciales y una cuarta al tomar el control.
-Las vistas se derivan directamente del producto real:
-
-- Citas conserva selector Calendario/Lista, toolbar, celdas redondeadas con chips
-  y panel de día seleccionado.
-- Servicios conserva catálogo a la izquierda y editor a la derecha.
-- Agente conserva capacidades, preguntas frecuentes y solicitud de cambio.
-
-**Por qué:** el objetivo del mockup es explicar el producto, no llenar espacio.
-Cuando existe una interfaz real, la landing debe comprimirla con fidelidad en vez
-de crear una interpretación paralela más decorativa.
