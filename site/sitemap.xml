@@ -9,6 +9,12 @@
   <!-- Páginas por vertical: cada una responde a una intención de búsqueda
        distinta y lleva la demo ya apuntando a su sector. -->
   <url>
+    <loc>https://www.studio32.es/panel-de-control/</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.studio32.es/agente-whatsapp-clinicas-dentales/</loc>
     <lastmod>2026-08-01</lastmod>
     <changefreq>monthly</changefreq>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El panel de control · Todo lo que hace el agente, a la vista | Studio32</title>
+    <meta name="description"
+        content="Recorre el panel de Studio32: conversaciones, citas sobre la agenda real, servicios editables e intervención humana. El sitio donde tu equipo ve y controla lo que hace el agente.">
+    <meta name="theme-color" content="#f7f4ee">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Studio32">
+    <meta property="og:title" content="El panel de control de Studio32 · Tour de producto">
+    <meta property="og:description"
+        content="Conversaciones, citas, servicios e intervención humana. Recórrelo sección por sección.">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:url" content="https://www.studio32.es/panel-de-control/">
+    <meta property="og:image" content="https://www.studio32.es/assets/og-cover.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="canonical" href="https://www.studio32.es/panel-de-control/">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23f7f4ee'/><text x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='18' fill='%238a6421'>32</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles.css?v=20260801-verticales-5">
+    <link rel="stylesheet" href="../vertical.css?v=20260801-verticales-5">
+    <link rel="stylesheet" href="../panel.css?v=20260801-verticales-5">
+</head>
+
+<body class="pagina-vertical">
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <a href="../" class="logo" aria-label="Studio32 · Digital Systems">
+                <span class="logo-mark">STUDIO32</span>
+                <span class="logo-sub">Digital Systems</span>
+            </a>
+            <div class="nav-right">
+                <a href="#panel" class="nav-link">El panel</a>
+                <a href="../#control" class="nav-link">Probar el agente</a>
+                <a href="../#tarifas" class="nav-link">Tarifas</a>
+                <a href="https://wa.me/34694293166?text=Hola,%20quiero%20ver%20el%20panel%20de%20Studio32%20con%20mi%20negocio."
+                    target="_blank" rel="noopener" class="nav-btn">Hablemos</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="tour-hero">
+        <div class="container">
+            <nav class="migas" aria-label="Ruta">
+                <a href="../">Studio32</a> <span aria-hidden="true">/</span> <span>El panel de control</span>
+            </nav>
+            <p class="section-label">[ EL PANEL ]</p>
+            <h1>El agente atiende. Aquí lo <em>ves todo</em>.</h1>
+            <p class="tour-entrada">Delegar la atención sin poder mirar lo que pasa no es delegar, es cruzar los
+                dedos. Este es el panel que recibe cada negocio: conversaciones, citas sobre la agenda real,
+                servicios editables y un botón para tomar el relevo cuando haga falta. Puedes recorrerlo entero
+                aquí abajo.</p>
+        </div>
+    </header>
+
+    <main id="contenido">
+        <section class="section" id="panel">
+            <div class="container">
+                <div class="panel-app" data-panel>
+                    <div class="panel-topbar">
+                        <div class="panel-marca"><span>32</span> Studio32 Agent</div>
+                        <div class="panel-org">Negocio <b>Clínica Cobalto</b></div>
+                    </div>
+
+                    <div class="panel-cuerpo">
+                        <nav class="panel-nav" aria-label="Secciones del panel">
+                            <button type="button" data-vista-btn="resumen" class="is-active">Resumen</button>
+                            <button type="button" data-vista-btn="inbox">Inbox</button>
+                            <button type="button" data-vista-btn="citas">Citas</button>
+                            <button type="button" data-vista-btn="servicios">Servicios</button>
+                            <button type="button" data-vista-btn="asistente">Asistente</button>
+                            <p class="panel-nav-nota">Recorrido de producto con datos de ejemplo. El panel real vive
+                                en dashboard.studio32.es y requiere acceso.</p>
+                        </nav>
+
+                        <div class="panel-workspace">
+                            <!-- ── Resumen ──────────────────────────────────── -->
+                            <section class="panel-vista is-active" data-vista="resumen" aria-label="Resumen operativo">
+                                <p class="panel-eyebrow">Resumen operativo</p>
+                                <h2 class="panel-titulo">Cómo va el día</h2>
+
+                                <div class="panel-metricas">
+                                    <div class="panel-metrica">
+                                        <small>Conversaciones abiertas</small>
+                                        <strong>7</strong>
+                                        <em>Atención en curso</em>
+                                    </div>
+                                    <div class="panel-metrica">
+                                        <small>En control humano</small>
+                                        <strong>1</strong>
+                                        <em>Responde el equipo</em>
+                                    </div>
+                                    <div class="panel-metrica">
+                                        <small>Citas de hoy</small>
+                                        <strong>5</strong>
+                                        <em>Sin canceladas</em>
+                                    </div>
+                                    <div class="panel-metrica is-alerta">
+                                        <small>Atención requerida</small>
+                                        <strong>1</strong>
+                                        <em>Presupuesto pendiente de responder</em>
+                                    </div>
+                                </div>
+
+                                <div class="panel-doble">
+                                    <div class="panel-bloque">
+                                        <h3>Próximas citas</h3>
+                                        <ul class="panel-lista">
+                                            <li><span>Marta García · Primera visita</span><time>Mañana 9:30</time></li>
+                                            <li><span>Sergio Ruiz · Higiene dental</span><time>Mañana 12:00</time></li>
+                                            <li><span>Ana Pérez · Revisión</span><time>Martes 10:00</time></li>
+                                            <li><span>Elena Vidal · Ortodoncia</span><time>Miércoles 16:30</time></li>
+                                        </ul>
+                                    </div>
+                                    <div class="panel-bloque">
+                                        <h3>Sistema</h3>
+                                        <p class="panel-estado">Recepción bajo control</p>
+                                        <ul class="panel-lista" style="margin-top:12px">
+                                            <li><span>Agente y panel conectados</span><time>OK</time></li>
+                                            <li><span>Agenda sincronizada</span><time>OK</time></li>
+                                            <li><span>Avisos por correo</span><time>OK</time></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- ── Inbox ────────────────────────────────────── -->
+                            <section class="panel-vista" data-vista="inbox" aria-label="Conversaciones">
+                                <p class="panel-eyebrow">Conversaciones</p>
+                                <h2 class="panel-titulo">Inbox</h2>
+                                <div class="panel-inbox">
+                                    <div class="panel-convs" data-conversaciones></div>
+                                    <div class="panel-detalle" data-detalle></div>
+                                </div>
+                            </section>
+
+                            <!-- ── Citas ────────────────────────────────────── -->
+                            <section class="panel-vista" data-vista="citas" aria-label="Citas">
+                                <p class="panel-eyebrow">Vista de la agenda</p>
+                                <h2 class="panel-titulo">Citas</h2>
+                                <div class="panel-cal-top">
+                                    <div class="panel-cal-mes" data-mes>Agosto 2026</div>
+                                    <div class="panel-cal-nav">
+                                        <button type="button" aria-label="Mes anterior">‹</button>
+                                        <button type="button" aria-label="Mes siguiente">›</button>
+                                    </div>
+                                </div>
+                                <div class="panel-cal-wrap">
+                                    <div class="panel-cal" data-calendario></div>
+                                </div>
+                            </section>
+
+                            <!-- ── Servicios ────────────────────────────────── -->
+                            <section class="panel-vista" data-vista="servicios" aria-label="Servicios">
+                                <p class="panel-eyebrow">Lo que ofrece el negocio</p>
+                                <h2 class="panel-titulo">Servicios</h2>
+                                <table class="panel-tabla">
+                                    <thead>
+                                        <tr>
+                                            <th>Servicio</th>
+                                            <th>Precio</th>
+                                            <th>Duración</th>
+                                            <th>Activo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-servicios></tbody>
+                                </table>
+                                <p class="panel-nota">Lo que cambies aquí es lo que el agente responde a partir de ese
+                                    momento. Un precio sin rellenar significa "se valora en consulta", no cero.</p>
+                            </section>
+
+                            <!-- ── Asistente ────────────────────────────────── -->
+                            <section class="panel-vista" data-vista="asistente" aria-label="Tu asistente">
+                                <p class="panel-eyebrow">Tu asistente</p>
+                                <h2 class="panel-titulo">Qué hace y qué no</h2>
+                                <div class="panel-asistente">
+                                    <div class="panel-bloque">
+                                        <h3>Qué hace tu asistente</h3>
+                                        <p>Atiende WhatsApp con la información real de la clínica, filtra urgencias
+                                            según vuestro criterio, ofrece huecos de la agenda de verdad y cierra la
+                                            cita. Cuando la conversación lo pide, avisa al equipo con todo el contexto.</p>
+                                    </div>
+                                    <div class="panel-bloque">
+                                        <h3>Preguntas que sabe responder</h3>
+                                        <ul class="panel-preguntas">
+                                            <li>Horarios y cómo llegar</li>
+                                            <li>Qué incluye la primera visita</li>
+                                            <li>Precios de lo que está en catálogo</li>
+                                            <li>Cambios y cancelaciones de cita</li>
+                                            <li>Qué hacer ante un dolor fuerte</li>
+                                        </ul>
+                                    </div>
+                                    <div class="panel-bloque">
+                                        <h3>Solicitar un cambio</h3>
+                                        <p>¿Cambia un precio, un horario o una norma? Se pide desde aquí y Studio32 lo
+                                            aplica. Entra en el acompañamiento mensual, no se factura aparte.</p>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="panel-nota">Recorrido de producto con datos de ejemplo · El panel real vive en
+                    dashboard.studio32.es</p>
+            </div>
+        </section>
+
+        <section class="section seccion-limites">
+            <div class="container">
+                <div class="verticals-header">
+                    <p class="section-label">[ POR QUÉ IMPORTA ]</p>
+                    <h2 class="headline-med">Delegar sin ver<br>no es <em>delegar</em>.</h2>
+                    <p>La diferencia entre un agente que te quita trabajo y uno que te lo añade está en si puedes
+                        comprobar lo que ha hecho sin llamar a nadie.</p>
+                </div>
+                <div class="bloque-limites">
+                    <article>
+                        <h3>Todo queda escrito</h3>
+                        <p>Cada conversación, cada cita y cada acción del agente. Si un paciente dice que le dijeron
+                            otra cosa, se comprueba en diez segundos.</p>
+                    </article>
+                    <article>
+                        <h3>El relevo es de verdad</h3>
+                        <p>Mientras el agente lleva la conversación, el equipo no escribe. Al tomar el relevo, el
+                            agente calla. Nunca hay dos voces respondiendo a la vez.</p>
+                    </article>
+                    <article>
+                        <h3>Lo cambias tú</h3>
+                        <p>Precios, duraciones y qué servicios están activos se editan en el panel. El agente responde
+                            con eso desde ese momento.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="verticals-header">
+                    <p class="section-label">[ EN CONCRETO ]</p>
+                    <h2 class="headline-med">Lo que resuelve<br>cada <em>sección</em>.</h2>
+                </div>
+                <div class="bloque-hace">
+                    <article>
+                        <h3>Resumen</h3>
+                        <p>De un vistazo: cuántas conversaciones hay abiertas, cuántas lleva el equipo, las citas del
+                            día y qué necesita atención. Es la pantalla que se mira al abrir por la mañana.</p>
+                    </article>
+                    <article>
+                        <h3>Inbox</h3>
+                        <p>Las conversaciones completas, con quién las lleva en cada momento. Desde aquí se toma el
+                            relevo y se devuelve al agente.</p>
+                    </article>
+                    <article>
+                        <h3>Citas</h3>
+                        <p>El mes entero sobre la agenda real, no una lista paralela. Lo que aparece aquí es lo que
+                            hay reservado de verdad.</p>
+                    </article>
+                    <article>
+                        <h3>Servicios y Asistente</h3>
+                        <p>Lo que ofrece el negocio y cómo se comporta el agente. Cambiar un precio aquí cambia lo que
+                            responde en el siguiente mensaje.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="section footer-cta" id="contact">
+        <div class="container">
+            <div class="cta-panel">
+                <p class="section-label centered">[ HABLEMOS DE TU NEGOCIO ]</p>
+                <h2 class="huge-text">Con tus servicios.<br>Con tu <em>agenda de verdad.</em></h2>
+                <p class="cta-sub">Montamos el agente con tu información y te damos acceso al panel para que lo veas
+                    funcionando antes de decidir nada.</p>
+                <div class="cta-wrapper">
+                    <a href="https://wa.me/34694293166?text=Hola,%20quiero%20ver%20el%20panel%20de%20Studio32%20con%20mi%20negocio."
+                        target="_blank" rel="noopener" class="btn-massive">Pedir una demo con mis datos ↗</a>
+                </div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="footer-marca">
+                    <p class="section-label">[ STUDIO32 ]</p>
+                    <h3>Sistemas digitales que atienden y dejan el control en el negocio.</h3>
+                    <p>Studio32 Agent Platform es el producto principal: agente de recepción por WhatsApp, citas,
+                        panel e intervención humana.</p>
+                </div>
+                <nav class="footer-col" aria-label="Por sector">
+                    <p class="footer-col-titulo">Por sector</p>
+                    <a href="../agente-whatsapp-clinicas-dentales/">Clínicas dentales</a>
+                    <a href="../agente-whatsapp-restaurantes/">Restaurantes</a>
+                    <a href="../agente-whatsapp-servicios-locales/">Servicios locales</a>
+                </nav>
+                <nav class="footer-col" aria-label="La web">
+                    <p class="footer-col-titulo">La web</p>
+                    <a href="../#control">Probar el agente</a>
+                    <a href="../#process">Implantación</a>
+                    <a href="../#tarifas">Tarifas</a>
+                    <a href="../#faq">Preguntas frecuentes</a>
+                </nav>
+                <div class="footer-col">
+                    <p class="footer-col-titulo">Contacto</p>
+                    <a href="mailto:info@studio32.es">info@studio32.es</a>
+                    <a href="https://wa.me/34694293166" target="_blank" rel="noopener">+34 694 29 31 66</a>
+                    <a href="../legal/aviso-legal.html">Aviso legal</a>
+                    <a href="../legal/privacidad.html">Privacidad</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="brand">Studio32 · Digital Systems ©2026</div>
+                <div class="footer-services">Agent Platform · Presence · Systems</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../panel.js?v=20260801-verticales-5" defer></script>
+</body>
+
+</html>

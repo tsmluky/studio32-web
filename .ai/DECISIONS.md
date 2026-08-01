@@ -279,3 +279,32 @@ divergirían. El HTML generado se commitea, así que no hay paso de build.
   el ancho de la barra, porque `50vw` la incluye y `50%` no. Se recorta con
   `overflow-x: clip` en `html, body` — nunca `hidden`, que rompería el
   `position: sticky` de la cabecera de la FAQ.
+
+## 2026-08-01 · Página "El panel de control" (tour de producto)
+
+`/panel-de-control/`. El panel es la mitad de la oferta —el agente atiende, el
+panel es donde el negocio ve y controla lo que hizo— y en la web solo aparecía
+en miniatura dentro de la demo.
+
+**Fidelidad al producto real, no invención.** Se leyó `studio32-panel` antes de
+escribir nada. La página reproduce sus **cinco** secciones reales (Resumen ·
+Inbox · Citas · Servicios · Asistente), sus métricas ("Conversaciones abiertas",
+"En control humano", "Citas de hoy", "Atención requerida"), su calendario
+mensual y sus servicios editables con activo/inactivo.
+
+**Ojo:** el mockup pequeño de la demo de la portada muestra solo cuatro secciones
+y llama "Agente" a lo que en el panel real es "Asistente". Queda pendiente
+igualarlo.
+
+**Regla:** si el panel real cambia, esta página hay que actualizarla. Un tour de
+producto que enseña algo que no existe es peor que no tener tour — es el mismo
+error que el chat demo que daba precios que el agente no da.
+
+Los datos son de Clínica Cobalto, el mismo negocio ficticio de la demo, para que
+quien venga de la portada reconozca las conversaciones. Marcado como
+demostración en la propia página, dos veces.
+
+**Nota sobre el capturador del navegador:** al hacer capturas con la página
+desplazada, coloca mal los elementos `position: fixed` (la barra aparece a mitad
+de página). El DOM y el hit-testing dicen lo correcto. No perseguir ese fantasma:
+verificar con `getBoundingClientRect` y `elementFromPoint`, no con la captura.
