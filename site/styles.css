@@ -1,16 +1,40 @@
+/* Registro CLARO (01/08/2026). El oscuro-editorial anterior exigía un nivel de
+   acabado —imagen, profundidad, iluminación— que no teníamos: con solo
+   tipografía y filetes de un píxel quedaba austero y vacío. En claro la
+   profundidad la da la SOMBRA, no el contraste, y el panel del producto se lee
+   como software en vez de como maqueta. Ver DECISIONS.md. */
+/* La capa de fondo fija (`body::before`, más abajo) llevaba el negro escrito a
+   pelo, así que asomaba en toda sección sin fondo propio. Se reescribe con
+   tokens en el bloque de registro claro, al final del archivo. */
 :root {
-    --bg-color: #090908;
-    --bg-soft: #11100e;
-    --bg-warm: #171410;
-    --surface: rgba(246, 240, 229, 0.055);
-    --surface-strong: rgba(246, 240, 229, 0.105);
-    --border: rgba(246, 240, 229, 0.14);
-    --border-strong: rgba(246, 240, 229, 0.26);
-    --text-color: #f6f0e5;
-    --text-muted: #b5aa9c;
-    --text-subtle: #786f64;
-    --accent-color: #c9a86a;
-    --accent-deep: #8b6c3d;
+    /* Papel cálido, nunca blanco puro: el blanco puro es duro en pantalla. */
+    --bg-color: #f7f4ee;
+    --bg-soft: #ffffff;
+    --bg-warm: #f1ece2;
+    --surface: #ffffff;
+    --surface-strong: #f1ece2;
+
+    /* Bordes a un susurro: si dibujan caja, compiten con la sombra. */
+    --border: rgba(28, 24, 18, 0.10);
+    --border-strong: rgba(28, 24, 18, 0.18);
+
+    --text-color: #1c1812;
+    --text-muted: #5d564b;
+    --text-subtle: #8b8377;
+
+    /* El oro de marca no tiene contraste sobre papel: se conserva como RELLENO
+       (botones, chips, panel de tarifas) y baja a bronce cuando hace de tinta. */
+    --accent-color: #8a6421;
+    --accent-fill: #c9a86a;
+    --accent-deep: #5f440f;
+
+    --sombra-1: 0 1px 2px rgba(28, 24, 18, .04), 0 4px 12px rgba(28, 24, 18, .05);
+    --sombra-2: 0 2px 4px rgba(28, 24, 18, .05), 0 12px 32px rgba(28, 24, 18, .08);
+    --sombra-3: 0 4px 8px rgba(28, 24, 18, .06), 0 24px 60px rgba(28, 24, 18, .11);
+
+    /* Tinta del hero, que sigue siendo oscuro a propósito. */
+    --hero-tinta: #f6f0e5;
+
     --font-heading: 'Playfair Display', serif;
     --font-display: 'Syne', 'Inter', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -3467,4 +3491,336 @@ body.menu-open .mobile-menu {
     .cursor-follower {
         display: none !important;
     }
+}
+
+
+/* =============================================================================
+   REGISTRO CLARO · ajustes de componente
+   =============================================================================
+   Estos bloques adaptan componentes que se escribieron para fondo oscuro
+   (filete de un píxel sobre negro) al registro claro (papel + sombra).
+   Van al final a propósito: ganan la cascada sin tener que reescribir cada
+   componente hoy. PENDIENTE: plegarlos dentro de su componente y borrar este
+   bloque, para no dejar el mismo componente definido en dos sitios.
+   ========================================================================== */
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* El grano y el ruido son recursos de fondo oscuro: en claro ensucian. */
+.grain,
+.noise {
+    display: none !important;
+}
+
+/* ── Navegación ─────────────────────────────────────────────────────────── */
+.navbar {
+    background: rgba(247, 244, 238, .82);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-btn {
+    background: var(--text-color);
+    border-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+.mobile-menu {
+    background: var(--bg-color);
+}
+
+/* ── Hero ───────────────────────────────────────────────────────────────── */
+/* Se queda oscuro: abre con fuerza y hace de contraste con el resto. Es el
+   patrón de las piezas que funcionan — apertura dramática, cuerpo legible. */
+.hero {
+    background: linear-gradient(165deg, #14120f 0%, #090908 62%, #14100a 100%);
+    color: #f6f0e5;
+}
+
+.hero .hero-title,
+.hero .hero-desc,
+.hero .hero-meta,
+.hero .system-rail strong {
+    color: #f6f0e5;
+}
+
+.hero .hero-subtitle,
+.hero .hero-assurance,
+.hero .system-rail p,
+.hero .system-rail-label {
+    color: rgba(246, 240, 229, .66);
+}
+
+.hero .hero-title em {
+    color: var(--accent-fill);
+}
+
+.hero .hero-cta {
+    background: var(--accent-fill);
+    border-color: var(--accent-fill);
+    color: #14100a;
+}
+
+.hero .hero-link {
+    color: #f6f0e5;
+}
+
+.hero .system-rail,
+.hero .system-rail-grid > div {
+    border-color: rgba(246, 240, 229, .16);
+}
+
+.hero .system-rail span {
+    color: var(--accent-fill);
+}
+
+/* ── Tarjetas: de filete sobre negro a papel con sombra ─────────────────── */
+.fit-card,
+.service-mini,
+.process-step,
+.signal-list > div,
+.commercial-model,
+.sector-panel,
+.chat-frame,
+.live-chat,
+.dashboard-mockup,
+.demo-showcase > *,
+.cta-panel {
+    background: var(--surface);
+    border-color: var(--border);
+    box-shadow: var(--sombra-1);
+}
+
+.chat-frame,
+.live-chat,
+.dashboard-mockup {
+    box-shadow: var(--sombra-3);
+}
+
+.fit-card:hover,
+.service-mini:hover {
+    box-shadow: var(--sombra-2);
+    border-color: var(--border-strong);
+    background: var(--surface);
+}
+
+.process-grid {
+    border-color: var(--border);
+}
+
+/* ── Etiquetas y acentos ────────────────────────────────────────────────── */
+.section-label,
+.fit-card > span,
+.fit-card > small,
+.commercial-model article > span,
+.model-includes li::before,
+.sector-detail-label,
+.control-points article > span,
+.signal-list span,
+.faq-contact {
+    color: var(--accent-color);
+}
+
+.headline-med em,
+.huge-text em,
+.hero-meta em {
+    color: var(--accent-color);
+}
+
+/* ── Demo: el chat y el panel ───────────────────────────────────────────── */
+.chat-header,
+.live-chat .chat-header,
+.dashboard-bar {
+    background: var(--bg-warm);
+    border-color: var(--border);
+}
+
+.chat-msg--in,
+.msg-in,
+.detail-message--client {
+    background: var(--surface-strong);
+    color: var(--text-color);
+}
+
+.chat-msg--out,
+.detail-message--agent {
+    background: rgba(201, 168, 106, .18);
+    border-color: rgba(138, 100, 33, .28);
+    color: var(--text-color);
+}
+
+.conversation-row.is-selected {
+    background: var(--surface-strong);
+}
+
+.appointment-card {
+    background: rgba(201, 168, 106, .14);
+    border-color: rgba(138, 100, 33, .3);
+}
+
+.live-input {
+    background: var(--surface-strong);
+    border-color: var(--border-strong);
+    color: var(--text-color);
+}
+
+.live-send {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #fff;
+}
+
+/* El chat tenía fondo oscuro propio: en claro se quedaba a medias y chocaba
+   con el panel de al lado. */
+.live-chat,
+.live-chat-body,
+.live-chat-stage {
+    background: var(--surface);
+}
+
+.chat-day {
+    background: var(--surface-strong);
+    color: var(--text-muted);
+}
+
+.live-takeover {
+    background: linear-gradient(to top, rgba(255, 255, 255, .98) 42%, rgba(255, 255, 255, .86));
+    color: var(--text-color);
+}
+
+.live-takeover-title,
+.live-takeover-text {
+    color: var(--text-color);
+}
+
+.live-takeover-eyebrow {
+    color: var(--accent-color);
+}
+
+.live-takeover-btn {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #fff;
+}
+
+.live-note {
+    color: var(--text-subtle);
+}
+
+.live-reset {
+    border-color: var(--border-strong);
+    color: var(--accent-color);
+}
+
+.demo-sector {
+    background: var(--surface);
+    box-shadow: var(--sombra-1);
+}
+
+.demo-sector.is-active {
+    background: var(--text-color);
+    border-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* El bloque dorado de tarifas seguía siendo el ancla de color: se mantiene. */
+.commercial-model-note {
+    background: var(--accent-fill);
+    color: #14100a;
+}
+
+.commercial-model-note > span,
+.commercial-model-note p {
+    color: #14100a;
+}
+
+/* ── FAQ ────────────────────────────────────────────────────────────────── */
+.faq-item {
+    background: var(--surface);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: var(--sombra-1);
+    margin-bottom: 10px;
+    padding: 0 20px;
+}
+
+.faq-item summary {
+    padding: 18px 0;
+}
+
+/* ── Cierre ─────────────────────────────────────────────────────────────── */
+.footer-cta {
+    background: var(--bg-warm);
+}
+
+.cta-panel {
+    box-shadow: var(--sombra-2);
+}
+
+/* ── Cursor personalizado: en claro no se ve ────────────────────────────── */
+.cursor,
+.cursor-follower {
+    mix-blend-mode: normal;
+    border-color: var(--accent-color);
+    background: transparent;
+}
+
+/* Capa de fondo fija: llevaba el negro escrito a pelo, así que asomaba por
+   detrás de toda sección sin fondo propio (tarifas, servicios…). Es la causa de
+   que media página siguiera oscura tras el cambio de registro. */
+body::before {
+    background:
+        radial-gradient(circle at 20% 0%, rgba(201, 168, 106, 0.10), transparent 544px),
+        radial-gradient(circle at 80% 18%, rgba(255, 255, 255, 0.55), transparent 480px),
+        linear-gradient(var(--bg-color) 0%, var(--bg-soft) 48%, var(--bg-color) 100%);
+}
+
+/* La FAQ también traía un gris casi negro literal en su degradado. */
+.faq {
+    background:
+        radial-gradient(circle at 12% 24%, rgba(201, 168, 106, 0.12), transparent 25rem),
+        linear-gradient(180deg, var(--bg-color), var(--bg-soft) 58%, var(--bg-color));
+}
+
+/* Texto crema escrito a pelo en componentes que ahora viven sobre papel. Se
+   detectaron buscando `color: rgba(246, 240, 229` en el archivo: en registro
+   oscuro eran correctos, en claro son texto invisible. Los del hero NO entran
+   aquí — ese sigue siendo oscuro a propósito. */
+.nav-link,
+.faq-a p,
+.contact-grid p,
+.footer-bottom {
+    color: var(--text-muted);
+}
+
+.footer-services,
+.footer-legal a {
+    color: var(--text-subtle);
+}
+
+.faq-item:hover {
+    border-color: var(--border-strong);
+}
+
+/* El botón grande usaba `background: var(--text-color)` con texto oscuro: en
+   registro oscuro era crema sobre negro, y al invertir los tokens quedó negro
+   sobre negro. Se le fija la tinta clara explícitamente. */
+.btn-massive {
+    background: var(--text-color);
+    border-color: var(--text-color);
+    color: var(--bg-soft);
+}
+
+.btn-massive:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #fff;
+}
+
+/* Subrayados que seguían en crema sobre papel. */
+.btn-secondary,
+.contact-grid a {
+    border-bottom-color: var(--border-strong);
 }

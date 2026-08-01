@@ -144,3 +144,46 @@ que no se tocaba desde el 19/07, así que la URL cacheada nunca cambiaba.
 **Regla:** al tocar `styles.css` o `script.js`, **subir el sufijo `?v=`** de
 `index.html`. Si no, Cloudflare y el navegador siguen sirviendo lo viejo y el
 despliegue parece no haber ocurrido.
+
+## 2026-08-01 · Cambio de registro: la web pasa a claro
+
+Tras cinco intentos de dirección visual (comparador de 7 variantes, "turno de
+noche", "una noche", "luz", shader WebGL), el usuario seguía viendo la web
+"cutre y barata" y señalaba que la landing generada por Polsia —siendo una
+plantilla genérica— le resultaba más atractiva.
+
+**Diagnóstico:** el problema no era la paleta ni la tipografía. El registro
+oscuro-editorial es de los más difíciles de ejecutar: una página negra con solo
+tipografía y filetes de un píxel está a un paso de parecer una página sin
+estilar, porque toda la profundidad depende del contraste. El registro claro es
+**indulgente**: la profundidad la da la sombra, y se ve decente con mucho menos
+acabado. Eso, y no el turquesa, es lo que hacía atractiva a la de Polsia.
+
+**Decisión:** cambiar el registro a claro conservando la marca.
+- Papel cálido `#f7f4ee`, nunca blanco puro. Superficies blancas con sombra en
+  tres niveles (`--sombra-1/2/3`) en lugar de filetes sobre negro.
+- **El hero se queda oscuro** a propósito: apertura dramática, cuerpo legible.
+  Es el patrón habitual de las piezas que funcionan, y deja sitio al concepto
+  de la noche si se retoma.
+- El oro no tiene contraste sobre papel: se conserva como **relleno**
+  (`--accent-fill`, botones y panel de tarifas) y baja a bronce `#8a6421`
+  cuando hace de tinta.
+
+**Trampas encontradas al invertir** (todas por colores escritos a pelo que se
+saltaban los tokens):
+- `body::before` es una capa **fija a pantalla completa** con el negro literal.
+  Las secciones con fondo propio la tapaban y las que no —tarifas, servicios—
+  la dejaban asomar: media página seguía oscura.
+- `.faq` llevaba `#0d0c0a` dentro de su degradado.
+- `.nav-link`, `.faq-a p`, `.contact-grid p` y el pie llevaban crema literal.
+- `.btn-massive` usaba `background: var(--text-color)` con texto oscuro: al
+  invertir los tokens quedó negro sobre negro.
+
+Se verificó con un detector de contraste recorriendo `main`, `footer`, `nav` y
+`.hero`. Cuidado: comprobar solo `background-color` da falsos positivos en el
+hero, cuyo fondo es un degradado (`background-image`).
+
+**Pendiente:** los ajustes de componente están al final de `styles.css` como
+bloque aparte para ganar la cascada sin reescribir cada componente hoy. Hay que
+plegarlos dentro de su componente y borrar el bloque, o el mismo componente
+queda definido en dos sitios.
