@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turno de noche · prototipo Studio32</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /* ── Sistema ──────────────────────────────────────────────────────────
+           El cielo y la luz se interpolan con --amanecer (0 = medianoche,
+           1 = mañana). Lo mueve el scroll: es el hilo narrativo entero.
+           El ámbar es la luz de una pantalla encendida en una casa a oscuras.  */
+        :root {
+            --amanecer: 0;
+
+            --noche-alta: #05070d;
+            --noche-baja: #0a0d16;
+            --alba-alta: #1d1a22;
+            --alba-baja: #3a2a24;
+
+            --luz: #f0c46e;
+            --luz-tenue: rgba(240, 196, 110, .14);
+            --tinta: #eef0f5;
+            --tinta-tenue: rgba(238, 240, 245, .58);
+            --linea: rgba(238, 240, 245, .12);
+
+            --narracion: "Instrument Serif", Georgia, serif;
+            --maquina: "Archivo", system-ui, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--noche-alta);
+            color: var(--tinta);
+            font-family: var(--maquina);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Escena fija que el scroll va transformando ────────────────────── */
+        .noche {
+            position: relative;
+            height: 460vh;
+        }
+
+        .escena {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+            background:
+                linear-gradient(to bottom,
+                    color-mix(in oklab, var(--noche-alta), var(--alba-alta) calc(var(--amanecer) * 100%)),
+                    color-mix(in oklab, var(--noche-baja), var(--alba-baja) calc(var(--amanecer) * 100%)));
+        }
+
+        /* Resplandor del amanecer: nace abajo y crece */
+        .escena::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -34vh;
+            width: 130vw;
+            height: 68vh;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            background: radial-gradient(closest-side, rgba(255, 168, 92, .5), transparent 72%);
+            opacity: calc(var(--amanecer) * var(--amanecer));
+            pointer-events: none;
+        }
+
+        /* El canvas gestiona su propio desvanecido (las estrellas se apagan pero
+           la ciudad se queda y se tiñe), así que aquí no se toca la opacidad. */
+        #cielo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        /* Bruma sobre el horizonte: separa la ciudad del primer plano y da aire. */
+        .escena::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 42vh;
+            z-index: 1;
+            background: linear-gradient(to top,
+                    color-mix(in oklab, var(--noche-baja), var(--alba-baja) calc(var(--amanecer) * 100%)) 12%,
+                    transparent);
+            pointer-events: none;
+        }
+
+        .escena-inner {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(300px, 372px);
+            gap: 6vw;
+            align-items: center;
+            height: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 34px;
+        }
+
+        /* ── Reloj: la narración temporal ─────────────────────────────────── */
+        .reloj {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+
+        .reloj-hora {
+            font-family: var(--maquina);
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            font-weight: 500;
+            letter-spacing: -0.04em;
+            font-variant-numeric: tabular-nums;
+            color: var(--luz);
+        }
+
+        .reloj-nota {
+            color: var(--tinta-tenue);
+            font-size: .7rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        /* ── Frases: la voz narradora ─────────────────────────────────────── */
+        /* Las frases se apilan en el mismo hueco para poder fundirse entre sí, así
+           que el hueco lo reserva el contenedor: la más larga ocupa tres líneas. */
+        .frases {
+            position: relative;
+            min-height: 3.5em;
+        }
+
+        .frase {
+            position: absolute;
+            inset: 0;
+            margin: 0;
+            font-family: var(--narracion);
+            font-size: clamp(2.4rem, 5.2vw, 4.4rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.015em;
+            text-wrap: balance;
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+
+        .frase.is-on {
+            opacity: 1;
+            transform: none;
+        }
+
+        .frase em {
+            font-style: italic;
+            color: var(--luz);
+        }
+
+        .pie {
+            max-width: 44ch;
+            margin-top: 34px;
+            color: var(--tinta-tenue);
+            font-size: .93rem;
+            line-height: 1.6;
+            min-height: 3.2em;
+        }
+
+        /* ── El teléfono: la única luz encendida ──────────────────────────── */
+        .telefono {
+            position: relative;
+            border: 1px solid var(--linea);
+            border-radius: 26px;
+            background: rgba(10, 13, 22, .72);
+            backdrop-filter: blur(8px);
+            box-shadow:
+                0 0 0 1px rgba(240, 196, 110, .06),
+                0 40px 90px rgba(0, 0, 0, .6),
+                0 0 90px -20px rgba(240, 196, 110, calc(.35 - var(--amanecer) * .22));
+            overflow: hidden;
+            transition: box-shadow .6s ease;
+        }
+
+        .telefono-top {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 16px 19px;
+            border-bottom: 1px solid var(--linea);
+        }
+
+        .avatar {
+            display: grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--luz-tenue);
+            color: var(--luz);
+            font-family: var(--narracion);
+            font-size: .92rem;
+        }
+
+        .telefono-nombre {
+            font-size: .86rem;
+            font-weight: 600;
+        }
+
+        .telefono-estado {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 2px;
+            color: var(--tinta-tenue);
+            font-size: .68rem;
+        }
+
+        .punto {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--luz);
+            animation: latido 2.6s infinite;
+        }
+
+        @keyframes latido {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(240, 196, 110, .5); }
+            60% { box-shadow: 0 0 0 8px rgba(240, 196, 110, 0); }
+        }
+
+        .hilo {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            height: 290px;
+            padding: 19px;
+            overflow: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .burbuja {
+            max-width: 88%;
+            padding: 11px 14px;
+            border-radius: 14px;
+            font-size: .84rem;
+            line-height: 1.45;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity .45s ease, transform .45s ease;
+        }
+
+        .burbuja.is-on {
+            opacity: 1;
+            transform: none;
+        }
+
+        .burbuja--in {
+            align-self: flex-start;
+            background: rgba(238, 240, 245, .07);
+        }
+
+        .burbuja--out {
+            align-self: flex-end;
+            border: 1px solid rgba(240, 196, 110, .22);
+            background: rgba(240, 196, 110, .11);
+        }
+
+        .telefono-pie {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 19px;
+            border-top: 1px solid var(--linea);
+            color: var(--tinta-tenue);
+            font-size: .69rem;
+        }
+
+        .telefono-pie strong {
+            color: var(--luz);
+            font-weight: 600;
+        }
+
+        /* ── Marca y pista de scroll ──────────────────────────────────────── */
+        .marca {
+            position: fixed;
+            top: 26px;
+            left: 34px;
+            z-index: 5;
+            font-size: .78rem;
+            font-weight: 600;
+            letter-spacing: .18em;
+        }
+
+        .pista {
+            position: fixed;
+            bottom: 26px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            color: var(--tinta-tenue);
+            font-size: .66rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            opacity: calc(1 - var(--amanecer) * 1.6);
+        }
+
+        /* ── Cierre: ya es de día ─────────────────────────────────────────── */
+        .manana {
+            position: relative;
+            padding: 120px 34px 140px;
+            background: linear-gradient(to bottom, var(--alba-baja), #0b0a09);
+            text-align: center;
+        }
+
+        .manana h2 {
+            max-width: 18ch;
+            margin: 0 auto 22px;
+            font-family: var(--narracion);
+            font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+            font-weight: 400;
+            line-height: 1.08;
+        }
+
+        .manana h2 em {
+            font-style: italic;
+            color: var(--luz);
+        }
+
+        .manana p {
+            max-width: 52ch;
+            margin: 0 auto 34px;
+            color: var(--tinta-tenue);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .cta {
+            padding: 15px 30px;
+            border: 0;
+            border-radius: 999px;
+            background: var(--luz);
+            color: #14100a;
+            font-family: var(--maquina);
+            font-size: .87rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            .escena-inner {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                align-content: center;
+                padding-top: 84px;
+            }
+
+            .hilo { height: 190px; }
+            .frases { min-height: 4.6em; }
+            .pie { display: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .frase, .burbuja { transition: none; }
+            .punto { animation: none; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="marca">STUDIO32</div>
+    <p class="pista">Sigue bajando · amanece</p>
+
+    <div class="noche" id="noche">
+        <div class="escena">
+            <canvas id="cielo"></canvas>
+
+            <div class="escena-inner">
+                <div>
+                    <div class="reloj">
+                        <span class="reloj-hora" id="hora">23:41</span>
+                        <span class="reloj-nota" id="dia">Martes</span>
+                    </div>
+
+                    <div class="frases" id="frases">
+                        <h1 class="frase is-on">A esta hora ya no coge el teléfono <em>nadie</em>.</h1>
+                        <p class="frase">Pero alguien acaba de escribir con dolor de muelas.</p>
+                        <p class="frase">Y alguien le ha contestado.</p>
+                        <p class="frase">Le ha dado hora para <em>mañana a las 9:30</em>.</p>
+                        <p class="frase">Tú llevabas cuatro horas <em>durmiendo</em>.</p>
+                    </div>
+
+                    <p class="pie" id="pie">La mitad de las urgencias de una clínica llegan cuando no hay nadie
+                        detrás del mostrador. No se pierden porque nadie quiera atenderlas: se pierden porque son
+                        las once y media de la noche.</p>
+                </div>
+
+                <div class="telefono">
+                    <div class="telefono-top">
+                        <span class="avatar">CC</span>
+                        <div>
+                            <div class="telefono-nombre">Clínica Cobalto</div>
+                            <div class="telefono-estado"><span class="punto"></span> <span id="estado">En
+                                    línea</span></div>
+                        </div>
+                    </div>
+
+                    <div class="hilo" id="hilo">
+                        <p class="burbuja burbuja--in">Buenas noches. Llevo dos días con dolor en una muela y no sé
+                            si aguantar hasta el lunes.</p>
+                        <p class="burbuja burbuja--out">Vaya, lo siento. ¿Te duele todo el rato o solo al morder?</p>
+                        <p class="burbuja burbuja--in">Todo el rato, y por la noche va a peor.</p>
+                        <p class="burbuja burbuja--out">Con ese dolor mejor no esperar. Mañana me queda a las 9:30 o a
+                            las 12.</p>
+                        <p class="burbuja burbuja--in">A las 9:30.</p>
+                        <p class="burbuja burbuja--out">Hecho. Si esta noche va a peor, escríbeme y aviso al equipo.</p>
+                    </div>
+
+                    <div class="telefono-pie">
+                        <span id="pie-panel">Sin citas nuevas</span>
+                        <strong id="pie-cita"></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="manana">
+        <h2>Cuando abres, la agenda <em>ya está hecha</em>.</h2>
+        <p>Esto no es una animación: es una conversación de las que resuelve el agente cada noche. Ahora escríbele
+            tú y mira cómo la cita aparece de verdad en el panel.</p>
+        <button class="cta" type="button">Pruébalo tú mismo</button>
+    </section>
+
+    <script>
+        // ── Cielo y ciudad ───────────────────────────────────────────────────
+        // Canvas en vez de cientos de nodos: barato de pintar y de animar.
+        // La ciudad da horizonte y profundidad — sin ella esto es un degradado
+        // oscuro, no una noche. Las pocas ventanas encendidas son el concepto:
+        // a esa hora casi todo está apagado, y algo sigue trabajando.
+        const cv = document.getElementById('cielo');
+        const cx = cv.getContext('2d');
+        let estrellas = [];
+        let edificios = [];
+
+        // Aleatorio con semilla: la ciudad no puede recomponerse en cada resize.
+        function azar(semilla) {
+            let s = semilla;
+            return () => (s = (s * 16807) % 2147483647) / 2147483647;
+        }
+
+        function sembrarCielo() {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const an = cv.clientWidth;
+            const al = cv.clientHeight;
+            cv.width = an * dpr;
+            cv.height = al * dpr;
+            cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+            const n = Math.round((an * al) / 4200);
+            const rndE = azar(9176);
+            estrellas = Array.from({ length: n }, () => ({
+                x: rndE() * an,
+                y: rndE() * al * 0.7,
+                r: rndE() * 1.3 + 0.3,
+                base: rndE() * 0.55 + 0.3,
+                vel: rndE() * 0.9 + 0.3,
+                fase: rndE() * Math.PI * 2
+            }));
+
+            // Dos filas de edificios: la del fondo más baja y más apagada.
+            const rnd = azar(4211);
+            edificios = [];
+            [{ z: 0.55, base: al * 0.90, alto: al * 0.13, ancho: 78 },
+             { z: 1.00, base: al * 1.00, alto: al * 0.20, ancho: 116 }].forEach(capa => {
+                let x = -60;
+                while (x < an + 60) {
+                    const w = capa.ancho * (0.45 + rnd() * 0.85);
+                    const h = capa.alto * (0.42 + rnd() * 1.05);
+                    const ventanas = [];
+                    // Muy pocas encendidas: es de madrugada.
+                    const filas = Math.max(1, Math.floor(h / 22));
+                    const cols = Math.max(1, Math.floor(w / 20));
+                    for (let f = 0; f < filas; f++) {
+                        for (let c = 0; c < cols; c++) {
+                            if (rnd() > 0.055) continue;
+                            ventanas.push({
+                                x: x + 9 + c * 20,
+                                y: capa.base - h + 12 + f * 22,
+                                fase: rnd() * Math.PI * 2,
+                                vel: 0.25 + rnd() * 0.5
+                            });
+                        }
+                    }
+                    edificios.push({ x, y: capa.base - h, w: w, h, z: capa.z, ventanas });
+                    x += w + 3 + rnd() * 16;
+                }
+            });
+        }
+
+        function pintarCielo(t) {
+            const an = cv.clientWidth;
+            const al = cv.clientHeight;
+            const amanecer = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--amanecer')) || 0;
+            cx.clearRect(0, 0, an, al);
+
+            for (const e of estrellas) {
+                const brillo = (e.base + Math.sin(t / 1000 * e.vel + e.fase) * 0.2) * (1 - amanecer);
+                if (brillo <= 0) continue;
+                cx.globalAlpha = brillo;
+                cx.fillStyle = '#e8ecff';
+                cx.beginPath();
+                cx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
+                cx.fill();
+            }
+
+            // La ciudad se recorta en negro y se va tiñendo al amanecer.
+            for (const b of edificios) {
+                cx.globalAlpha = 1;
+                const tinte = 6 + b.z * 5 + amanecer * 16;
+                cx.fillStyle = `rgb(${Math.round(tinte * 1.5)}, ${Math.round(tinte * 1.2)}, ${Math.round(tinte * 1.4)})`;
+                cx.fillRect(b.x, b.y, b.w, b.h);
+
+                for (const v of b.ventanas) {
+                    const parpadeo = 0.55 + Math.sin(t / 1000 * v.vel + v.fase) * 0.18;
+                    cx.globalAlpha = parpadeo * (1 - amanecer * 0.85) * b.z;
+                    cx.fillStyle = '#f0c46e';
+                    cx.fillRect(v.x, v.y, 4, 7);
+                }
+            }
+
+            cx.globalAlpha = 1;
+            requestAnimationFrame(pintarCielo);
+        }
+
+        // ── Narrativa dirigida por el scroll ────────────────────────────────
+        const noche = document.getElementById('noche');
+        const hilo = document.getElementById('hilo');
+        const frases = [...document.querySelectorAll('.frase')];
+        const burbujas = [...document.querySelectorAll('.burbuja')];
+        const hora = document.getElementById('hora');
+        const dia = document.getElementById('dia');
+        const estado = document.getElementById('estado');
+        const piePanel = document.getElementById('pie-panel');
+        const pieCita = document.getElementById('pie-cita');
+        const pie = document.getElementById('pie');
+
+        // Cada momento: hora, qué frase manda, cuántos mensajes se ven.
+        // El primer momento YA tiene el mensaje dentro: un teléfono vacío no se
+        // lee como "todavía no ha pasado nada", se lee como que algo ha fallado.
+        const MOMENTOS = [
+            { hora: '23:41', dia: 'Martes', frase: 0, msgs: 1, estado: 'Mensaje sin leer', pie: 'La mitad de las urgencias de una clínica entran cuando ya no hay nadie detrás del mostrador. No se pierden porque nadie quiera atenderlas: se pierden porque son las once y media de la noche.' },
+            { hora: '23:42', dia: 'Martes', frase: 1, msgs: 2, estado: 'Escribiendo…', pie: 'Ese mensaje no lo va a leer nadie hasta mañana. Para entonces ya habrá llamado a otra clínica.' },
+            { hora: '23:43', dia: 'Martes', frase: 2, msgs: 4, estado: 'En línea', pie: 'Salvo que haya alguien. No un contestador ni un menú de opciones: alguien que entiende qué le pasa y sabe qué preguntar antes de dar una hora.' },
+            { hora: '23:45', dia: 'Martes', frase: 3, msgs: 6, estado: 'Cita creada', pie: 'Hueco real, sobre la agenda real. Sin llamadas cruzadas y sin citar a dos pacientes a la misma hora.' },
+            { hora: '07:58', dia: 'Miércoles', frase: 4, msgs: 6, estado: 'Cita creada', pie: 'Y cuando llegas por la mañana, la conversación entera está en el panel: qué le dolía, qué se le dijo, y a qué hora viene.' }
+        ];
+
+        function aplicar(indice, progreso) {
+            const m = MOMENTOS[indice];
+
+            hora.textContent = m.hora;
+            dia.textContent = m.dia;
+            estado.textContent = m.estado;
+            pie.textContent = m.pie;
+
+            frases.forEach((f, i) => f.classList.toggle('is-on', i === m.frase));
+            burbujas.forEach((b, i) => b.classList.toggle('is-on', i < m.msgs));
+
+            // El hilo sigue al último mensaje: si no, el desenlace queda cortado
+            // fuera de la ventana justo cuando es lo que hay que ver.
+            const ultimo = burbujas[m.msgs - 1];
+            if (ultimo) hilo.scrollTop = Math.max(0, ultimo.offsetTop + ultimo.offsetHeight - hilo.clientHeight + 19);
+
+            if (m.msgs >= 6) {
+                piePanel.textContent = 'Cita creada en el panel';
+                pieCita.textContent = 'Mañana · 9:30';
+            } else {
+                piePanel.textContent = 'Sin citas nuevas';
+                pieCita.textContent = '';
+            }
+
+            document.documentElement.style.setProperty('--amanecer', progreso.toFixed(3));
+        }
+
+        function alScroll() {
+            const caja = noche.getBoundingClientRect();
+            const recorrido = noche.offsetHeight - window.innerHeight;
+            const bruto = recorrido > 0 ? (-caja.top) / recorrido : 0;
+            const p = Math.min(1, Math.max(0, bruto));
+
+            // El amanecer solo empieza en el último tercio: la noche tiene que durar.
+            // Empieza antes y sube más rápido: con 0.68 el amanecer no llegaba
+            // a percibirse dentro del recorrido.
+            const amanecer = Math.min(1, Math.max(0, (p - 0.5) / 0.42));
+            const indice = Math.min(MOMENTOS.length - 1, Math.floor(p * MOMENTOS.length));
+
+            aplicar(indice, amanecer);
+        }
+
+        window.addEventListener('scroll', alScroll, { passive: true });
+        window.addEventListener('resize', () => { sembrarCielo(); alScroll(); });
+
+        sembrarCielo();
+        alScroll();
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(pintarCielo);
+    </script>
+</body>
+
+</html>
