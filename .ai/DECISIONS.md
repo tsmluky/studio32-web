@@ -308,3 +308,28 @@ demostración en la propia página, dos veces.
 desplazada, coloca mal los elementos `position: fixed` (la barra aparece a mitad
 de página). El DOM y el hit-testing dicen lo correcto. No perseguir ese fantasma:
 verificar con `getBoundingClientRect` y `elementFromPoint`, no con la captura.
+
+## 2026-08-01 · Página de precio (`/precio-agente-whatsapp/`)
+
+"Cuánto cuesta" es la pregunta número uno y una intención de búsqueda muy clara,
+y no había página. Studio32 no publica cifras propias, así que la página explica
+**el modelo** en vez de dar un número: los dos tramos, qué mueve el precio y
+cinco preguntas que conviene hacerle a cualquier proveedor antes de firmar
+(nosotros incluidos).
+
+**El bloque diferenciador es el de Meta**, y sale de datos verificados:
+- Meta **no cobra** cuando el cliente inicia la conversación y se responde dentro
+  de 24 h. En una recepción eso es casi todo el volumen.
+- Las primeras **1.000 conversaciones de servicio al mes** son gratuitas.
+- Lo que se paga son los mensajes que **inicia el negocio** (campañas).
+
+Casi todo el sector presenta ese coste como una incógnita vaga. Explicarlo bien
+posiciona a Studio32 como el proveedor que no esconde nada, y de paso quita la
+objeción antes de que aparezca.
+
+Se evita dar una cifra cerrada de las tarifas de Meta: las revisa
+periódicamente. La página lo dice explícitamente y remite a su página oficial.
+
+**No se nombran competidores.** El rango de mercado (80–400 €/mes de
+mantenimiento, ofertas de 19 €/mes que son plantillas) se da como contexto, sin
+señalar a nadie.

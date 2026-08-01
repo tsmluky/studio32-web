@@ -256,3 +256,15 @@
         padding-top: 118px;
     }
 }
+
+/* Nota de procedencia bajo un bloque de datos: pequeña, pero visible. Es lo que
+   separa un dato de una cifra inventada. */
+.nota-fuente {
+    max-width: 62ch;
+    margin-top: 30px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    color: var(--text-subtle);
+    font-size: 0.78rem;
+    line-height: 1.6;
+}

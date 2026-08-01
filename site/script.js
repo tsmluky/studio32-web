@@ -411,10 +411,11 @@ function plantillaDemo() {
     </div>
     <div class="dashboard-shell">
         <aside class="dashboard-nav" aria-label="Navegación simulada del panel">
+            <span>Resumen</span>
             <span class="is-active">Inbox</span>
             <span data-demo-nav-citas>Citas</span>
             <span>Servicios</span>
-            <span>Agente</span>
+            <span>Asistente</span>
         </aside>
         <div class="dashboard-workspace">
             <div class="dashboard-heading">
