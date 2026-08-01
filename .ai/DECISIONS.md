@@ -333,3 +333,25 @@ periódicamente. La página lo dice explícitamente y remite a su página oficia
 **No se nombran competidores.** El rango de mercado (80–400 €/mes de
 mantenimiento, ofertas de 19 €/mes que son plantillas) se da como contexto, sin
 señalar a nadie.
+
+## 2026-08-01 · CSS huérfano: analizado, NO borrado
+
+`_plantillas/css-huerfano.py` compara las clases definidas en las hojas propias
+contra todas las referenciadas, incluidas las que viven dentro de plantillas de
+JavaScript (la demo en vivo se genera desde `script.js`, así que hay clases que
+no aparecen en ningún `.html` y sí se usan).
+
+**Se decidió no borrar.** El ahorro son unos kilobytes y el riesgo es romper la
+web en producción. La salida tiene falsos positivos conocidos que están
+documentados en el propio script: `.s32w-*` las inyecta el widget desde el otro
+repo, las clases construidas por interpolación (`class="panel-conv${...}"`) se
+cortan al leerlas, y trozos de URL (`.jpg`, `.webp`) se cuelan como clases.
+
+**Muertas de verdad** (verificadas a mano, del layout anterior): `.agent-grid`,
+`.agent-copy`, `.control-grid`, `.control-copy`, `.fit-grid`, `.fit-card`,
+`.fit-card--primary`, `.fit-card--tab`, `.sector-panel`, `.sector-points`,
+`.sector-detail`, `.sector-detail-label`, `.chat-frame`, `.chat-mockup`,
+`.chat-body`, `.chat-note`, `.chat-typing`, `.live-replies`, `.msg-in`.
+
+Ojo: `.chat-header`, `.chat-avatar`, `.chat-status`, `.chat-day`, `.chat-msg` y
+`.detail-message*` SÍ se usan — las crea la plantilla de la demo.
