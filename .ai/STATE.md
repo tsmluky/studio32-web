@@ -2,176 +2,96 @@
 
 > **Se sobrescribe, no se acumula.** Refleja dónde está el repo AHORA.
 > Lo histórico va a `DECISIONS.md`. Tope: ~100 líneas.
-> Última actualización: **2026-07-21**
+> Última actualización: **2026-08-01**
 
 ## Qué es este repo
 
 Web pública comercial de Studio32 → **studio32.es**. Superficie **estática**:
 HTML/CSS/JS sin framework ni build. Es la cara comercial, no el producto.
 
-Contexto del ecosistema completo (repos, dominios, infra, cliente activo):
-**repo `Studio32` → `notes/CONTEXTO.md`**. No dupliques ese contenido aquí.
+Contexto del ecosistema completo: **repo `Studio32` → `notes/CONTEXTO.md`** y el
+traspaso `Studio32 → reportes/2026-08-01-traspaso.md`.
 
-## Estructura real
+## Estructura publicada
 
 ```
-site/                        ← ÚNICO directorio publicado (netlify.toml: publish = "site")
-  index.html                 ← landing principal de Studio32
-  styles.css · script.js
-  Agencia-Portfolio/         ← landing anterior
-  legal/                     ← aviso-legal.html · privacidad.html
-  Landing1-L'Obscur/         ← demo restauración · entrada: restaurant_landing.html (NO index.html)
-  Landing2-PrimeBurger/      ← demo food brand ("PRIME")
-  Landing3-Clinic/           ← demo clínica ("NORD")
-  Landing4-Habitat/          ← demo arquitectura ("HÁBITAT")
-  Demos-Clientes/la-taberna-de-ruzafa/   ← demo conceptual, NO cliente real
-  assets/ · robots.txt · sitemap.xml · _redirects
-docs/ · Tools/ · clientes/ · _backups/   ← internos, fuera del deploy
+site/                                   ← ÚNICO directorio publicado
+  index.html                            ← portada
+  styles.css · script.js                ← base, las cargan todas las páginas
+  vertical.css                          ← páginas interiores
+  panel.css · panel.js                  ← tour del panel
+  agente-whatsapp-clinicas-dentales/    ┐
+  agente-whatsapp-restaurantes/         ├ páginas por vertical
+  agente-whatsapp-servicios-locales/    ┘
+  precio-agente-whatsapp/               ← "cuánto cuesta"
+  panel-de-control/                     ← tour de producto del panel
+  legal/ · assets/ · robots.txt · sitemap.xml · _redirects
+  Landing1-L'Obscur/ … Landing4-Habitat/  ← demos de diseño web (estilo antiguo)
+  Demos-Clientes/la-taberna-de-ruzafa/    ← plantilla SIN TERMINAR, en noindex
+_plantillas/                            ← fuera del deploy
+  generar-verticales.py                 ← genera las 3 páginas por vertical
+  revisar-enlaces.py                    ← auditoría de enlaces internos
 ```
 
-Cada landing es autocontenida (HTML + CSS + JS). No hay componentes compartidos.
+## Cómo se trabaja
 
-## Deploy
-
-- **Cloudflare Pages** — `studio32-web.pages.dev` → `www.studio32.es`. Canónico.
-- **Netlify** — sitio `studio-32`, publish `site`, rama `main`. **Sigue activo**: el
-  apex desnudo `studio32.es` todavía apunta a Netlify (A `75.2.60.5`).
-- Migración Netlify→Pages: cerrada para www/hub/dashboard. **Pendiente: cortar el
-  apex.** No urgente, pero es lo único que queda de Netlify.
+- **Las 3 páginas por vertical se GENERAN**: editar
+  `_plantillas/generar-verticales.py` y ejecutarlo. Editar el HTML a mano se
+  pierde en la siguiente regeneración.
+- **El marcado de la demo vive en `script.js`** (`plantillaDemo()`), no en el
+  HTML. Cualquier página con `<div class="live-demo" data-live-demo="SECTOR">`
+  la recibe entera. Sectores: `clinica`, `restaurante`, `servicios`.
+- **Auditar enlaces antes de dar por buena una reorganización**:
+  `python _plantillas/revisar-enlaces.py` (17 páginas, 220 enlaces).
 - Probar en local: `python -m http.server 8080 --directory site`
 
-## Trampas del repo (verificado 2026-07-21)
+## 🚨 Reglas que se rompen solas si no se miran
 
-- **Código duplicado embebido:** la raíz contiene copias antiguas de
-  `studio32-agent/`, `Templates/`, `bot-atencion-leads/`, `clientes/`.
-  **No editar ahí.** La fuente del agente es el repo `studio32-agent`.
-- `.gitignore` excluye `studio32-agent/tenants/*` y `studio32-agent/data/*`
-  (llevan `owner.token` y WhatsApp reales). No forzar su inclusión.
-- El worktree raíz puede estar limpio con submódulos/ignorados sucios: revisar
-  cada frontera git por separado.
-- Hay scripts sueltos de arreglo de encoding en la raíz (`fix-*.ps1`, `fix-*.py`,
-  `fix-encoding-node.js`) y ficheros de inventario. Legado; no ejecutar a ciegas.
+1. **Subir el `?v=` al tocar `styles.css` o `script.js`.** Está en `index.html` y
+   en el generador (constante `VERSION`). Si no se sube, Cloudflare y el
+   navegador siguen sirviendo lo viejo y parece que el despliegue no ocurrió.
+2. **Nunca `overflow: hidden` en un contenedor con hijos `sticky`.** Rompió la
+   cabecera de la FAQ. Usar `clip`.
+3. **Los bloques a sangre completa** (`calc(50% - 50vw)`) desbordan el ancho de
+   la barra de scroll. Por eso hay `overflow-x: clip` en `html, body`.
+4. **Las páginas por vertical NO cargan GSAP/Lenis/SplitType** (Core Web Vitals).
+   `script.js` lo detecta con `TIENE_GSAP`. No dar por hecho que existen.
+5. **Sin preloader, `initHeroAnimations()` va en `queueMicrotask`**, o revienta
+   por zona muerta temporal de las `const` de más abajo.
 
-## Riesgos ya resueltos (no volver a documentarlos como vivos)
+## Registro visual
 
-- ~~`.git` anidado en `Landing2-PrimeBurger/`~~ → ya no existe (2026-07-21).
-- ~~Legales en `Agencia-Portfolio/`~~ → están en `site/legal/`.
-- ~~`index.html` raíz redirige~~ → la raíz publicada es `site/index.html`;
-  `index.redirect.backup.html` guarda el redirect viejo.
+**Claro** desde el 01/08. Papel cálido `#f7f4ee`, tinta `#1c1812`, bronce
+`#8a6421` para texto y el oro de marca `#c9a86a` como relleno. Profundidad por
+sombra (`--sombra-1/2/3`), no por contraste. Playfair Display + Inter.
 
-## Git y sincronía entre máquinas
+⚠️ Los ajustes de componente del cambio de registro están **al final de
+`styles.css`** como bloque aparte. Pendiente plegarlos dentro de cada componente
+y borrar el bloque, o el mismo componente queda definido en dos sitios.
 
-Este repo se trabaja desde **portátil y sobremesa**. Regla obligatoria:
+## Lo que hay en la portada
 
-1. **`git pull --rebase` al empezar** una sesión.
-2. **Commit + push de `.ai/` al cerrar** una tarea.
+`#problema` (con banda de cifras) → `#control` (demo en vivo con el agente REAL,
+selector de 3 sectores) → `#agente` → `#process` → `#tarifas` → `#services` →
+`#faq` → `#contact`.
 
-Si te la saltas, `STATE.md` entra en conflicto. Rama de trabajo: `main`.
+La demo habla con `POST /chat` del agente en Railway. El widget propio sigue
+cargado pero **su burbuja está oculta**: lo abre el botón "Hablemos" del menú.
 
-## Pendiente · a confirmar por el usuario
+## Deuda conocida
 
-- ⚠️ **NORTE / prioridad "Agent Platform"** — el `CLAUDE.md` anterior ordenaba leer
-  `NORTE-AGENT-PLATFORM-2026-07.md` antes de tocar producto. **Ese archivo no
-  existe en ningún repo**: era de la estructura numerada del sobremesa
-  (`00-direccion-y-operaciones/`), que nunca llegó a GitHub y puede estar perdida.
-  El usuario **no ha confirmado** si esa dirección sigue vigente.
-  → **No asumir que sigue vigente ni que ya no lo está.** Preguntar antes de
-  tomar decisiones de producto o arquitectura basadas en ella.
-  → Si sigue vigente, reconstruir el contenido aquí y no volver a depender de un
-  archivo fuera de GitHub.
+- Código huérfano del selector anterior: `.fit-card--tab`, `.sector-panel`,
+  `.sector-points`, `.agent-grid`, `.control-grid` en CSS; `initSectorDemo()` e
+  `initChatDemo()` en JS (ya no hay `[data-chat-demo]`).
+- Las demos `Landing1-4` siguen en el **estilo oscuro antiguo**: quien llega
+  desde el pie se encuentra otro sitio. Sin decidir si se rediseñan o se retiran.
+- `Demos-Clientes/la-taberna-de-ruzafa/` es una plantilla sin terminar (faltan
+  3 imágenes, quedan marcadores `{{...}}`). Está en `noindex` y no enlazada.
+- El apex desnudo `studio32.es` todavía apunta a Netlify (A `75.2.60.5`); lo
+  canónico es Cloudflare Pages. Pendiente cortar el apex.
 
 ## Foco actual
 
-Sesión del **2026-07-31**: se revisó la landing contra la que generó Polsia
-(agente de terceros) y se decidió **no** migrar a su diseño — ver `DECISIONS.md`.
-Se portaron solo las ganancias comerciales. Hecho en `site/`:
-
-- **Chat demo corregido** (`index.html`, sección `#agente`): daba precio por
-  WhatsApp, comportamiento que el agente real NO tiene. Ahora hace triage,
-  ofrece valoración gratuita, cierra cita y ofrece escalar a humano.
-- **Sección de tarifas propia** (`#tarifas`): el bloque `.commercial-model` sale
-  de dentro de `#process`, gana cabecera propia (reutiliza `.verticals-header`) y
-  una lista de incluidos por tramo (`.model-includes`, nueva en `styles.css`).
-  Añadida al nav de escritorio y al menú móvil (índices móviles renumerados).
-- **FAQ ampliada** de 6 a 10 preguntas: número nuevo, cambios de precio/horario,
-  datos y RGPD, plazo de puesta en marcha.
-
-- **`#portfolio` eliminada** (2026-08-01). Llegó a tener un selector por sector
-  con tres conversaciones maquetadas; junto al mockup de `#agente` sumaban
-  **cuatro chats falsos más la demo real en la misma página**. Desde que la demo
-  es real, enseñar maquetas de conversación sobra. Ver `DECISIONS.md`.
-  → Quedan sin uso en `styles.css`: `.fit-card--tab`, `.sector-panel`,
-  `.sector-points`, `.agent-grid`, `.agent-copy`; y en `script.js`,
-  `initSectorDemo()` y `initChatDemo()` (ya no hay `[data-chat-demo]`).
-  Pendiente decidir si se retiran o se reaprovechan para el selector por sector
-  **sobre la demo real** (un tenant por vertical), que es el plan acordado.
-- **Demo interactiva** en `#control` (`[data-live-demo]`): el visitante elige sus
-  respuestas y el panel del negocio se actualiza en vivo — conversación espejada,
-  contador, contacto, tarjeta de cita y relevo humano. El mockup estático de panel
-  que había en esa sección **se eliminó**: ahora sólo existe el vivo.
-
-### Dos fases: reclamo y agente real
-
-1. **Guion de reclamo** (`SHOWREEL` en `script.js`). Al entrar la sección en
-   pantalla (IntersectionObserver, umbral 0.35) la demo se rellena sola:
-   conversación, panel y cita. **No toca el backend**: coste cero y sin espera.
-   Sirve para captar la mirada antes de que el visitante decida participar.
-2. **Relevo** (`.live-takeover`): al acabar aparece "Pruébalo tú mismo" sobre el
-   chat. Al pulsarlo, `tomarControl()` limpia todo, abre sesión nueva y habilita
-   el compositor contra el agente real. El botón de cabecera ("Ver de nuevo")
-   relanza el guion.
-
-**El bloque no se mueve ni un píxel** (verificado: 1388 px constantes en
-escritorio, 1403 en móvil). Costó cinco arreglos y conviene no deshacerlos:
-altura fija en `.live-chat-body` (tenía min/max y crecía), ventana con scroll en
-`.live-dashboard .detail-messages` (crecía y estiraba la columna), hueco
-reservado para `.live-typing` y para `.appointment-card` (entraban y salían del
-flujo) y `min-height: 2lh` en `.live-note` (cambia de texto según la fase).
-
-### Cómo funciona la demo en vivo
-
-**Habla con el agente REAL desplegado, sin guion** (decisión del usuario, 31/07).
-Se probó primero con guion cerrado y se descartó: los botones de respuesta
-predefinida delataban el mockup.
-
-- `DEMO_AGENT` (`script.js`) → `POST https://web-production-d722c.up.railway.app/chat`
-  con `{ tenant: 'clinica-cobalto', sesion, mensaje }`. Mismo backend y mismas
-  herramientas que atienden WhatsApp. Verificado E2E el 31/07.
-- La sesión es aleatoria por visita (`landing-xxxxxxxx`) y se renueva al reiniciar.
-  En el agente, esa sesión hace de "teléfono": el tenant de demo tiene **agenda
-  por sesión**, así que cada visitante ve la agenda limpia y solo sus reservas.
-- **Ping de calentamiento** (`calentarAgente()`, arriba del todo en `script.js`):
-  un GET al healthcheck en cuanto carga la página. Railway duerme el contenedor y
-  el arranque en frío se comía ~15 s del primer mensaje; con el ping baja a ~10 s
-  (el resto ya es el modelo). No gasta modelo ni consume rate limit.
-- ⚠️ El tono del agente **no se edita aquí ni en `tenants/<id>/`**: Supabase pisa
-  al archivo. Hay que ejecutar `node scripts/import-tenants-to-supabase.js <id>`
-  en el repo `studio32-agent`. Ver su `DECISIONS.md` (2026-07-31).
-- `CORS_ORIGINS` en el agente vale `*` por defecto, así que no hizo falta tocarlo.
-- Tope de 25 turnos **en cliente** (`maxTurnos`) — es cosmético, se salta desde
-  consola. El límite que cuenta es el `rateLimit` del servidor (30 req / 5 min
-  por IP).
-
-**Pendiente para que el panel sea del todo real:** la tarjeta de cita no se
-rellena porque no hay endpoint público que devuelva el estado de una sesión. Hace
-falta añadir en `studio32-agent` algo tipo `GET /demo/estado?sesion=` (sólo
-lectura, acotado a esa sesión). Hoy el panel espeja la conversación real, pero la
-cita no aparece aunque el agente la cree.
-- `initChatDemo()` ahora maneja **varios** mockups (antes uno solo) y guarda las
-  líneas de tiempo en `chatTimelines` para que el selector relance la animación
-  de la pestaña que se abre.
-- `.detail-status span` se acotó a `:first-child`: antes convertía en punto
-  cualquier span hijo, y el marcado nuevo mete un segundo span con el texto.
-
-**Pendiente decidir con el usuario:**
-- Copy del `<h1>` del hero: hoy habla al negocio ("Tu negocio atiende aunque esté
-  cerrado"), no al dueño. Cambiar el H1 es decisión de marca — no tocar sin visto
-  bueno.
-- Conectar la demo al agente real (`studio32-agent`) con tenant de demo y límite
-  de uso. Sería fase 2 y **no vive en este repo**.
-
-**Limpieza menor pendiente:** `.control-grid` quedó como CSS muerto (3 bloques:
-`styles.css` ~1128, ~2725, ~3047). Ya no lo usa ningún HTML.
-
-Nada de esto está commiteado todavía. El foco del ecosistema sigue siendo el
-**Agent Platform / GH Dent** (`studio32-agent`, `studio32-panel`), no este repo.
+La web está en buen estado. **El cuello de botella del negocio no está aquí**:
+es GH Dent, bloqueado en verificar el número en Meta y conectar Google Calendar
+(repo `studio32-agent`). Ninguna de las dos cosas es programar.
