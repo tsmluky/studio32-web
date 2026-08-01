@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dirección visual · Studio32</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600&family=Archivo:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /* ── Cromo del comparador: gris neutro, deliberadamente callado para no
+           competir con las variantes que muestra. ───────────────────────────── */
+        :root {
+            --lab-bg: #111214;
+            --lab-panel: #17181b;
+            --lab-line: #26282d;
+            --lab-text: #e6e7ea;
+            --lab-dim: #8b8f98;
+            --lab-mono: "IBM Plex Mono", ui-monospace, monospace;
+        }
+
+        body {
+            margin: 0;
+            background: var(--lab-bg);
+            color: var(--lab-text);
+            font-family: "Archivo", system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .lab-head {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px 40px;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 26px 32px;
+            border-bottom: 1px solid var(--lab-line);
+        }
+
+        .lab-head h1 {
+            margin: 0 0 6px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .lab-head p {
+            max-width: 62ch;
+            margin: 0;
+            color: var(--lab-dim);
+            font-size: 0.82rem;
+            line-height: 1.55;
+        }
+
+        .lab-kbd {
+            font-family: var(--lab-mono);
+            font-size: 0.68rem;
+            color: var(--lab-dim);
+            white-space: nowrap;
+        }
+
+        .lab-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 18px 32px;
+            border-bottom: 1px solid var(--lab-line);
+        }
+
+        .lab-chip {
+            padding: 9px 15px;
+            border: 1px solid var(--lab-line);
+            border-radius: 999px;
+            background: var(--lab-panel);
+            color: var(--lab-dim);
+            font-family: var(--lab-mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: color .2s, border-color .2s, background .2s;
+        }
+
+        .lab-chip:hover {
+            color: var(--lab-text);
+            border-color: #3a3d44;
+        }
+
+        .lab-chip[aria-pressed="true"] {
+            background: var(--lab-text);
+            border-color: var(--lab-text);
+            color: #111;
+        }
+
+        .lab-chip:focus-visible {
+            outline: 2px solid #6f7480;
+            outline-offset: 2px;
+        }
+
+        .lab-note {
+            display: grid;
+            grid-template-columns: 132px minmax(0, 1fr);
+            gap: 18px;
+            padding: 18px 32px;
+            border-bottom: 1px solid var(--lab-line);
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+
+        .lab-note dt {
+            color: var(--lab-dim);
+            font-family: var(--lab-mono);
+            font-size: 0.66rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding-top: 2px;
+        }
+
+        .lab-note dd {
+            margin: 0;
+            max-width: 78ch;
+            color: var(--lab-text);
+        }
+
+        .lab-note dd em {
+            color: var(--lab-dim);
+            font-style: normal;
+        }
+
+        /* ── Escenario: cada variante define sus tokens y el mismo marcado se
+           reinterpreta entero. ───────────────────────────────────────────────── */
+        .stage {
+            --ink: #f6f0e5;
+            --ink-dim: rgba(246, 240, 229, .62);
+            --ground: #090908;
+            --accent: #c9a86a;
+            --accent-soft: rgba(201, 168, 106, .14);
+            --line: rgba(246, 240, 229, .13);
+            --display: "Playfair Display", Georgia, serif;
+            --body: "Inter", system-ui, sans-serif;
+            --display-weight: 500;
+            --display-spacing: -0.01em;
+            --display-transform: none;
+            --radius: 14px;
+            --glow: none;
+            --card-bg: rgba(246, 240, 229, .025);
+
+            position: relative;
+            padding: 74px 32px 84px;
+            background: var(--ground);
+            color: var(--ink);
+            font-family: var(--body);
+            overflow: hidden;
+        }
+
+        /* Variante 2 · misma paleta, con luz */
+        .stage[data-v="encendida"] {
+            --glow: radial-gradient(58% 46% at 22% 8%, rgba(201, 168, 106, .17), transparent 68%),
+                radial-gradient(42% 40% at 88% 78%, rgba(201, 168, 106, .1), transparent 70%);
+            --card-bg: rgba(246, 240, 229, .045);
+            --accent-soft: rgba(201, 168, 106, .2);
+        }
+
+        /* Variantes de registro moderno */
+        .stage[data-v^="mod"] {
+            --display: "Archivo", system-ui, sans-serif;
+            --body: "Archivo", system-ui, sans-serif;
+            --display-weight: 600;
+            --display-spacing: -0.035em;
+            --radius: 10px;
+        }
+
+        .stage[data-v="mod-verde"] {
+            --ground: #0a0b0a;
+            --ink: #eef2ec;
+            --ink-dim: rgba(238, 242, 236, .6);
+            --accent: #b6f24a;
+            --accent-soft: rgba(182, 242, 74, .13);
+            --line: rgba(238, 242, 236, .12);
+            --glow: radial-gradient(52% 42% at 18% 4%, rgba(182, 242, 74, .13), transparent 66%);
+        }
+
+        .stage[data-v="mod-cian"] {
+            --ground: #08090c;
+            --ink: #e9eef5;
+            --ink-dim: rgba(233, 238, 245, .6);
+            --accent: #4fd6ff;
+            --accent-soft: rgba(79, 214, 255, .13);
+            --line: rgba(233, 238, 245, .12);
+            --glow: radial-gradient(52% 42% at 18% 4%, rgba(79, 214, 255, .14), transparent 66%);
+        }
+
+        .stage[data-v="mod-blanco"] {
+            --ground: #0b0b0c;
+            --ink: #ffffff;
+            --ink-dim: rgba(255, 255, 255, .55);
+            --accent: #ffffff;
+            --accent-soft: rgba(255, 255, 255, .1);
+            --line: rgba(255, 255, 255, .14);
+            --glow: radial-gradient(50% 40% at 20% 2%, rgba(255, 255, 255, .07), transparent 68%);
+        }
+
+        .stage[data-v="mod-oro"] {
+            --ground: #0a0908;
+            --accent: #f0c674;
+            --accent-soft: rgba(240, 198, 116, .15);
+            --glow: radial-gradient(52% 42% at 18% 4%, rgba(240, 198, 116, .15), transparent 66%);
+        }
+
+        /* Variante 7 · serif contemporánea, no de herencia */
+        .stage[data-v="serif-mod"] {
+            --display: "Instrument Serif", Georgia, serif;
+            --body: "Archivo", system-ui, sans-serif;
+            --display-weight: 400;
+            --display-spacing: -0.015em;
+            --ground: #0a0a0b;
+            --ink: #f4f3f1;
+            --ink-dim: rgba(244, 243, 241, .58);
+            --accent: #ff5c35;
+            --accent-soft: rgba(255, 92, 53, .13);
+            --line: rgba(244, 243, 241, .13);
+            --glow: radial-gradient(54% 44% at 20% 4%, rgba(255, 92, 53, .12), transparent 68%);
+            --radius: 4px;
+        }
+
+        .stage::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--glow);
+            pointer-events: none;
+        }
+
+        .stage-inner {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(300px, 380px);
+            gap: 5vw;
+            align-items: center;
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            margin: 0 0 26px;
+            color: var(--accent);
+            font-family: var(--body);
+            font-size: 0.66rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .display {
+            margin: 0 0 24px;
+            font-family: var(--display);
+            font-weight: var(--display-weight);
+            font-size: clamp(2.6rem, 5.4vw, 4.15rem);
+            line-height: 1.02;
+            letter-spacing: var(--display-spacing);
+            text-wrap: balance;
+        }
+
+        .display em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .stage[data-v^="mod"] .display em {
+            font-style: normal;
+        }
+
+        .lede {
+            max-width: 46ch;
+            margin: 0 0 32px;
+            color: var(--ink-dim);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 14px 26px;
+            border: 1px solid var(--accent);
+            border-radius: 999px;
+            background: var(--accent);
+            color: var(--ground);
+            font-family: var(--body);
+            font-size: 0.83rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .stage[data-v="mod-blanco"] .btn {
+            color: #0b0b0c;
+        }
+
+        .btn-ghost {
+            padding: 14px 4px;
+            border: 0;
+            border-bottom: 1px solid var(--line);
+            background: none;
+            color: var(--ink);
+            font-family: var(--body);
+            font-size: 0.83rem;
+            cursor: pointer;
+        }
+
+        /* Tarjeta del agente: la pieza que tiene que parecer VIVA */
+        .agent {
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--card-bg);
+            overflow: hidden;
+            backdrop-filter: blur(2px);
+        }
+
+        .agent-top {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 15px 18px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .agent-mark {
+            display: grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-family: var(--display);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .agent-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .agent-state {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 2px;
+            color: var(--ink-dim);
+            font-size: 0.68rem;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 0 var(--accent);
+            animation: pulse 2.4s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 var(--accent-soft); }
+            70% { box-shadow: 0 0 0 9px transparent; }
+            100% { box-shadow: 0 0 0 0 transparent; }
+        }
+
+        .agent-body {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 18px;
+        }
+
+        .msg {
+            max-width: 86%;
+            padding: 10px 13px;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            line-height: 1.45;
+        }
+
+        .msg-in {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, .06);
+        }
+
+        .msg-out {
+            align-self: flex-end;
+            border: 1px solid var(--accent-soft);
+            background: var(--accent-soft);
+        }
+
+        .agent-foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 13px 18px;
+            border-top: 1px solid var(--line);
+            color: var(--ink-dim);
+            font-size: 0.68rem;
+        }
+
+        .agent-foot strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .stage-inner { grid-template-columns: 1fr; gap: 42px; }
+            .lab-note { grid-template-columns: 1fr; gap: 6px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .dot { animation: none; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="lab-head">
+        <div>
+            <h1>Dirección visual · Studio32</h1>
+            <p>El mismo hero y la misma tarjeta de agente, reinterpretados. Compara el <strong>registro</strong>, no el
+                color: lo que decide si parece un restaurante caro o un producto de tecnología es sobre todo la
+                tipografía.</p>
+        </div>
+        <p class="lab-kbd">← → para cambiar de variante</p>
+    </header>
+
+    <nav class="lab-chips" id="chips" aria-label="Variantes"></nav>
+
+    <dl class="lab-note">
+        <dt>Qué dice</dt>
+        <dd id="nota"></dd>
+    </dl>
+
+    <section class="stage" id="stage" data-v="actual">
+        <div class="stage-inner">
+            <div>
+                <p class="eyebrow">Agente de recepción por WhatsApp</p>
+                <h2 class="display">Tu negocio <em>atiende</em> aunque esté cerrado.</h2>
+                <p class="lede">Un agente que atiende, informa y gestiona citas por WhatsApp, incluso fuera de horario.
+                    Con panel de control, historial e intervención humana cuando tu equipo la necesite.</p>
+                <div class="actions">
+                    <button class="btn" type="button">Pruébalo tú mismo</button>
+                    <button class="btn-ghost" type="button">Ver cómo funciona</button>
+                </div>
+            </div>
+
+            <div class="agent">
+                <div class="agent-top">
+                    <span class="agent-mark">CC</span>
+                    <div>
+                        <div class="agent-name">Clínica Cobalto</div>
+                        <div class="agent-state"><span class="dot"></span> Respondiendo · 02:41</div>
+                    </div>
+                </div>
+                <div class="agent-body">
+                    <p class="msg msg-in">Llevo dos días con dolor y no sé si aguantar al lunes.</p>
+                    <p class="msg msg-out">Con ese dolor mejor no esperar. Mañana me queda a las 9:30 o a las 12.</p>
+                    <p class="msg msg-in">A las 9:30.</p>
+                </div>
+                <div class="agent-foot">
+                    <span>Cita creada en el panel</span>
+                    <strong>Mañana · 9:30</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const VARIANTES = [
+            {
+                id: 'actual',
+                nombre: 'Actual',
+                nota: 'Playfair Display + oro apagado. <em>Es la referencia: lo que hay hoy en studio32.es.</em> Serif de alto contraste y oro de anticuario. Es el lenguaje del lujo con herencia — bodega, restaurante con estrella, estudio de arquitectura.'
+            },
+            {
+                id: 'encendida',
+                nombre: 'Encendida',
+                nota: 'Misma paleta y misma tipografía, con luz, profundidad y un indicador que respira. <em>Prueba si el problema era solo la falta de vida.</em> Si esta ya te convence, no hace falta tocar la identidad.'
+            },
+            {
+                id: 'mod-verde',
+                nombre: 'Grotesca · verde señal',
+                nota: 'Archivo, negra y compacta, con verde de estado activo. <em>El registro cambia por completo:</em> deja de leerse como marca de lujo y pasa a leerse como producto. El verde es el color de "está vivo, está respondiendo".'
+            },
+            {
+                id: 'mod-cian',
+                nombre: 'Grotesca · cian',
+                nota: 'Mismo cambio tipográfico, acento cian. Tecnología y confianza, pero <em>es justo donde están Polsia y media competencia</em>, así que diferencia menos que el verde.'
+            },
+            {
+                id: 'mod-blanco',
+                nombre: 'Grotesca · blanco',
+                nota: 'Sin color de acento: negro, blanco y jerarquía. <em>Lo más sobrio y lo más contemporáneo.</em> Exige precisión en espaciado y tipografía porque no hay color donde esconderse.'
+            },
+            {
+                id: 'mod-oro',
+                nombre: 'Grotesca · oro vivo',
+                nota: 'Conserva tu oro, subido de luminosidad, pero con tipografía moderna. <em>El camino de menor pérdida de identidad:</em> mantiene el color de marca y cambia solo lo que lo ancla al pasado.'
+            },
+            {
+                id: 'serif-mod',
+                nombre: 'Serif contemporánea',
+                nota: 'Instrument Serif + naranja. <em>La opción que no habíamos considerado:</em> mantener un serif — para no caer en el SaaS genérico — pero uno contemporáneo en vez de uno de herencia. Sigue teniendo carácter editorial sin sonar antiguo.'
+            }
+        ];
+
+        const stage = document.getElementById('stage');
+        const chips = document.getElementById('chips');
+        const nota = document.getElementById('nota');
+        let actual = 0;
+
+        VARIANTES.forEach((v, i) => {
+            const b = document.createElement('button');
+            b.className = 'lab-chip';
+            b.type = 'button';
+            b.textContent = v.nombre;
+            b.setAttribute('aria-pressed', String(i === 0));
+            b.addEventListener('click', () => aplicar(i));
+            chips.appendChild(b);
+        });
+
+        function aplicar(i) {
+            actual = (i + VARIANTES.length) % VARIANTES.length;
+            const v = VARIANTES[actual];
+            stage.dataset.v = v.id;
+            nota.innerHTML = v.nota;
+            [...chips.children].forEach((c, n) => c.setAttribute('aria-pressed', String(n === actual)));
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') aplicar(actual + 1);
+            if (e.key === 'ArrowLeft') aplicar(actual - 1);
+        });
+
+        aplicar(0);
+    </script>
+</body>
+
+</html>
