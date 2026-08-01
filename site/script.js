@@ -225,25 +225,83 @@ const DEMO_AGENT = {
     maxTurnos: 25
 };
 
-// Guion de reclamo: se reproduce solo la primera vez que la sección entra en
-// pantalla, para que el visitante vea la demo con vida antes de decidir si
-// participa. No toca el backend. Es una conversación REAL de las que resuelve el
-// agente: triage de dolor, sin precio por chat, cita cerrada y aviso al equipo.
-const SHOWREEL = [
-    { kind: 'in', texto: 'Buenas noches, llevo dos días con dolor en una muela y no sé si aguantar hasta el lunes.', estado: 'Conversación entrante · fuera de horario' },
-    { kind: 'out', texto: 'Vaya, lo siento. ¿Te duele todo el rato o solo al morder?', estado: 'El agente está valorando la urgencia' },
-    { kind: 'in', texto: 'Todo el rato, y por la noche va a peor.' },
-    { kind: 'out', texto: 'Con ese dolor mejor no esperar al lunes. Mañana me queda a las 9:30 o a las 12. ¿Cuál te encaja?', estado: 'Urgencia detectada · consultando agenda real' },
-    { kind: 'in', texto: 'A las 9:30. ¿Cuánto me va a costar?' },
-    { kind: 'out', texto: 'La primera visita es solo mirar y contarte qué hay, sin coste. El presupuesto sale por escrito antes de tocar nada.' },
-    { kind: 'in', texto: 'Perfecto. Marta García.', contacto: 'Marta García' },
-    {
-        kind: 'out',
-        texto: 'Hecho, Marta: mañana a las 9:30. Si esta noche va a peor, escríbeme y aviso al equipo.',
-        estado: 'Cita confirmada · agenda actualizada',
-        cita: { slot: 'Mañana · 9:30', nota: 'Primera visita · Confirmada' }
+// Un sector = un tenant REAL del agente. Al cambiar de pestaña se cambia el
+// negocio con el que se habla, no el decorado: cada uno tiene su propia
+// personalidad, sus servicios y sus políticas en `studio32-agent`.
+const SECTORES = {
+    clinica: {
+        tenant: 'clinica-cobalto',
+        negocio: 'Clínica Cobalto',
+        iniciales: 'CC',
+        marcador: 'Clínica Cobalto · ayer por la noche',
+        nota: 'Agente real conectado. Pregúntale lo que se te ocurra: precios, horarios, miedo al dentista, o pídele cita de verdad.',
+        placeholder: 'Escribe lo que quieras preguntarle…',
+        showreel: [
+            { kind: 'in', texto: 'Buenas noches, llevo dos días con dolor en una muela y no sé si aguantar hasta el lunes.', estado: 'Conversación entrante · fuera de horario' },
+            { kind: 'out', texto: 'Vaya, lo siento. ¿Te duele todo el rato o solo al morder?', estado: 'El agente está valorando la urgencia' },
+            { kind: 'in', texto: 'Todo el rato, y por la noche va a peor.' },
+            { kind: 'out', texto: 'Con ese dolor mejor no esperar al lunes. Mañana me queda a las 9:30 o a las 12. ¿Cuál te encaja?', estado: 'Urgencia detectada · consultando agenda real' },
+            { kind: 'in', texto: 'A las 9:30. ¿Cuánto me va a costar?' },
+            { kind: 'out', texto: 'La primera visita es solo mirar y contarte qué hay, sin coste. El presupuesto sale por escrito antes de tocar nada.' },
+            { kind: 'in', texto: 'Perfecto. Marta García.', contacto: 'Marta García' },
+            {
+                kind: 'out',
+                texto: 'Hecho, Marta: mañana a las 9:30. Si esta noche va a peor, escríbeme y aviso al equipo.',
+                estado: 'Cita confirmada · agenda actualizada',
+                cita: { slot: 'Mañana · 9:30', nota: 'Primera visita · Confirmada' }
+            }
+        ]
+    },
+
+    restaurante: {
+        tenant: 'restaurante-demo',
+        negocio: 'Casa Duarte',
+        iniciales: 'CD',
+        marcador: 'Casa Duarte · anoche, en pleno servicio',
+        nota: 'Agente real conectado. Pregúntale por la carta, por alérgenos o pídele mesa de verdad.',
+        placeholder: 'Pregúntale por la carta o pide mesa…',
+        showreel: [
+            { kind: 'in', texto: '¿Tenéis mesa para 6 el sábado sobre las 21:30?', estado: 'Conversación entrante · sala llena' },
+            { kind: 'out', texto: 'El sábado a las 21:30 me queda mesa de 6 en el salón. ¿Hay alguna alergia o intolerancia en el grupo?', estado: 'El agente consulta el aforo real del turno' },
+            { kind: 'in', texto: 'Sí, una es celíaca.' },
+            { kind: 'out', texto: 'Lo dejo anotado para cocina. Tenemos arroz de verduras y alcachofas a la brasa sin gluten. ¿A nombre de quién la pongo?', estado: 'Alergia registrada para cocina' },
+            { kind: 'in', texto: 'Laura Sanz.', contacto: 'Laura Sanz' },
+            {
+                kind: 'out',
+                texto: 'Reservado: sábado a las 21:30, 6 personas, una comensal celíaca. Si al final sois uno más o uno menos, escríbeme y lo ajusto.',
+                estado: 'Reserva confirmada · sala avisada',
+                cita: { slot: 'Sábado · 21:30', nota: '6 personas · 1 celíaca' }
+            }
+        ]
+    },
+
+    servicios: {
+        tenant: 'servicios-demo',
+        negocio: 'Instalaciones Vera',
+        iniciales: 'IV',
+        marcador: 'Instalaciones Vera · antes de abrir el taller',
+        nota: 'Agente real conectado. Pídele presupuesto y fíjate en lo que pregunta antes de pasarte al técnico.',
+        placeholder: 'Cuéntale qué necesitas…',
+        showreel: [
+            { kind: 'in', texto: 'Buenos días, quería presupuesto para cambiar la caldera.', estado: 'Conversación entrante · 07:58' },
+            { kind: 'out', texto: 'Te lo prepara el técnico. Para que salga ajustado, ¿es piso o unifamiliar, y sabes qué caldera tienes ahora?', estado: 'El agente está cualificando la petición' },
+            { kind: 'in', texto: 'Piso, una Junkers vieja.' },
+            { kind: 'out', texto: 'Bien. ¿Es solo calefacción o también agua caliente?' },
+            { kind: 'in', texto: 'Las dos cosas. Soy Javier Ortiz.', contacto: 'Javier Ortiz' },
+            {
+                kind: 'out',
+                texto: 'Gracias, Javier. Con eso ya puede prepararte número: mañana entre las 9 y las 11 te llama Sergio, con tus datos delante. No vas a repetir nada.',
+                estado: 'Llamada agendada · técnico con contexto',
+                cita: { slot: 'Mañana · 9:00–11:00', nota: 'Llamada del técnico · Sergio' }
+            }
+        ]
     }
-];
+};
+
+// El guion de reclamo (`showreel`) se reproduce solo la primera vez que la
+// sección entra en pantalla, para que el visitante vea la demo con vida antes de
+// decidir si participa. No toca el backend: coste cero y sin espera. Al terminar,
+// el relevo invita a hablar con el agente REAL de ese mismo sector.
 
 function initLiveDemo() {
     const root = document.querySelector('[data-live-demo]');
@@ -276,7 +334,15 @@ function initLiveDemo() {
 
     if (!log || !form || !input) return;
 
-    const NOTA_INICIAL = note.textContent;
+    // Rótulos del negocio: se reescriben al cambiar de sector, en el chat y en
+    // el panel, para que ambos hablen siempre del mismo negocio.
+    const botonesSector = [...document.querySelectorAll('[data-demo-sector]')];
+    const chatNombre = pick('.chat-header-meta strong');
+    const chatAvatar = pick('.chat-avatar');
+    const panelNombre = pick('.dashboard-business-name');
+    const panelMarca = pick('.dashboard-business-mark');
+
+    let sector = SECTORES.clinica;
 
     let sesion = '';
     let count = 0;
@@ -408,7 +474,7 @@ function initLiveDemo() {
             } else {
                 appendMessage('out', data.respuesta);
                 statusEl.textContent = 'El agente lleva la conversación';
-                setNote(NOTA_INICIAL, false);
+                setNote(sector.nota, false);
                 refrescarPanel();
             }
         } catch (err) {
@@ -458,7 +524,7 @@ function initLiveDemo() {
         actionEl.textContent = 'Intervenir';
         actionEl.classList.remove('is-hot');
 
-        setNote(NOTA_INICIAL, false);
+        setNote(sector.nota, false);
     }
 
     // ── Guion de reclamo ────────────────────────────────────────────────────
@@ -477,13 +543,13 @@ function initLiveDemo() {
         root.classList.add('is-showreel');
         input.disabled = true;
         takeover.hidden = true;
-        limpiar('Clínica Cobalto · ayer por la noche');
+        limpiar(sector.marcador);
         setNote('Mira lo que hace por sí solo. En un momento podrás probarlo tú.', false);
         statusEl.textContent = 'Conversación entrante';
 
         let t = 400;
 
-        SHOWREEL.forEach((paso, indice) => {
+        sector.showreel.forEach((paso, indice) => {
             if (paso.kind === 'out') {
                 showreelTimers.push(setTimeout(() => {
                     typing.hidden = false;
@@ -498,7 +564,7 @@ function initLiveDemo() {
                 if (paso.contacto) marcarContacto(paso.contacto);
                 if (paso.estado) statusEl.textContent = paso.estado;
                 if (paso.cita) pintarCita(paso.cita.slot, paso.cita.nota);
-                if (indice === SHOWREEL.length - 1) {
+                if (indice === sector.showreel.length - 1) {
                     showreelTimers.push(setTimeout(() => { takeover.hidden = false; }, 900));
                 }
             }, t));
@@ -515,6 +581,7 @@ function initLiveDemo() {
         input.disabled = false;
         appointment.hidden = true;
         appointment.classList.remove('is-new');
+        setNote(sector.nota, false);
         limpiar('Agente real · escríbele tú');
         rowBadge.textContent = 'Agente';
         rowBadge.classList.remove('is-hot');
@@ -527,6 +594,45 @@ function initLiveDemo() {
         event.preventDefault();
         const texto = input.value.trim();
         if (texto) enviar(texto);
+    });
+
+    // Cambiar de sector cambia el NEGOCIO con el que se habla, no el decorado:
+    // otro tenant real del agente, con su propia personalidad y sus políticas.
+    // `limpiar()` (dentro de arrancarShowreel) ya renueva sesión y panel, así que
+    // aquí solo se reescriben los rótulos y se relanza.
+    function aplicarSector(id) {
+        const nuevo = SECTORES[id];
+        if (!nuevo || nuevo === sector) return;
+
+        sector = nuevo;
+        DEMO_AGENT.tenant = sector.tenant;
+
+        chatNombre.textContent = sector.negocio;
+        chatAvatar.textContent = sector.iniciales;
+        if (panelNombre) panelNombre.textContent = sector.negocio;
+        if (panelMarca) panelMarca.textContent = sector.iniciales;
+        input.placeholder = sector.placeholder;
+
+        botonesSector.forEach((boton) => {
+            const activo = boton.dataset.demoSector === id;
+            boton.classList.toggle('is-active', activo);
+            boton.setAttribute('aria-selected', activo ? 'true' : 'false');
+            boton.tabIndex = activo ? 0 : -1;
+        });
+
+        arrancarShowreel();
+    }
+
+    botonesSector.forEach((boton, i) => {
+        boton.addEventListener('click', () => aplicarSector(boton.dataset.demoSector));
+        boton.addEventListener('keydown', (evento) => {
+            const paso = evento.key === 'ArrowRight' ? 1 : evento.key === 'ArrowLeft' ? -1 : 0;
+            if (!paso) return;
+            evento.preventDefault();
+            const destino = botonesSector[(i + paso + botonesSector.length) % botonesSector.length];
+            aplicarSector(destino.dataset.demoSector);
+            destino.focus();
+        });
     });
 
     takeoverBtn.addEventListener('click', tomarControl);

@@ -114,3 +114,33 @@ traslada — clínica / restaurante / servicio local **sobre la demo real**, un
 tenant por vertical. Hoy solo existe `clinica-cobalto`; hacen falta los otros dos
 en `studio32-agent`. Eso es trabajo de arquetipos, reutilizable en producto, no
 solo en la web.
+
+## 2026-08-01 · El selector por sector habla con tenants REALES
+
+`#portfolio` se eliminó porque sus tres conversaciones eran maquetas. La idea de
+enseñar sectores no se pierde: se traslada **encima de la demo en vivo**.
+
+**Decisión:** las tres pestañas (clínica / restaurante / servicio local) cambian
+el **tenant** con el que se conversa, no el decorado. Cada una es un negocio real
+del agente con su propia personalidad, servicios y políticas:
+`clinica-cobalto`, `restaurante-demo` (Casa Duarte) y `servicios-demo`
+(Instalaciones Vera). Al cambiar se reescriben los rótulos del chat y del panel,
+se renueva la sesión y se relanza el guion de reclamo de ese sector.
+
+**Por qué:** una maqueta por vertical dice "esto podría hacerse". Un tenant real
+por vertical deja que el visitante lo compruebe — y de paso el trabajo sirve para
+vender a cualquier restaurante, no solo para la landing.
+
+**Efecto lateral valioso:** `restaurante-demo` es el primer tenant con
+`menu.json`, así que la herramienta `getMenu` (carta, precios y alérgenos) pasa a
+estar ejercitada en producción, no solo escrita.
+
+## 2026-08-01 · Versión de assets congelada desde julio
+
+Los cambios en `script.js` no llegaban al navegador ni con recarga dura. Causa:
+`index.html` referencia `styles.css?v=…` y `script.js?v=…` con una versión fija
+que no se tocaba desde el 19/07, así que la URL cacheada nunca cambiaba.
+
+**Regla:** al tocar `styles.css` o `script.js`, **subir el sufijo `?v=`** de
+`index.html`. Si no, Cloudflare y el navegador siguen sirviendo lo viejo y el
+despliegue parece no haber ocurrido.

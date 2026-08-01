@@ -1520,6 +1520,44 @@ body.menu-open .mobile-menu {
     background: var(--accent-color);
 }
 
+/* ---------- Selector de sector de la demo ---------- */
+/* Cada pestaña es un tenant real del agente, no una vista distinta del mismo. */
+.demo-sectores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 26px;
+}
+
+.demo-sector {
+    padding: 11px 22px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: rgba(246, 240, 229, 0.03);
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: color 0.3s var(--transition), border-color 0.3s var(--transition), background 0.3s var(--transition);
+}
+
+.demo-sector:hover {
+    color: var(--text-color);
+    border-color: var(--accent-color);
+}
+
+.demo-sector.is-active {
+    border-color: var(--accent-color);
+    background: var(--accent-color);
+    color: var(--bg-color);
+}
+
+.demo-sector:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 3px;
+}
+
 /* ---------- Demo interactiva (chat del visitante + panel en vivo) ---------- */
 .live-demo {
     display: grid;
