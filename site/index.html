@@ -36,13 +36,13 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css?v=20260801-claro-6">
+    <link rel="stylesheet" href="styles.css?v=20260801-ritmo-1">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     <script src="https://unpkg.com/split-type@0.3.4" defer></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js" defer></script>
-    <script src="script.js?v=20260801-claro-6" defer></script>
+    <script src="script.js?v=20260801-ritmo-1" defer></script>
 
     <!-- Red de seguridad del preloader: si un CDN falla o el JS principal
          no llega a retirarlo, lo forzamos para no dejar la web en negro. -->
@@ -368,6 +368,27 @@
                     <p>En WhatsApp, la primera respuesta marca la diferencia entre una cita y un silencio.</p>
                 </div>
             </div>
+
+            <!-- Cifras de terceros, cada una con su fuente a la vista. No son
+                 resultados de Studio32 y no se presentan como tales. -->
+            <aside class="cifras" aria-label="Datos del mercado español">
+                <article>
+                    <strong>94<span>%</span></strong>
+                    <p>de los internautas en España usa WhatsApp cada mes. Es donde ya está tu cliente.</p>
+                    <cite>IAB Spain y Elogia · Estudio de Redes Sociales 2026</cite>
+                </article>
+                <article>
+                    <strong>21,1<span>%</span></strong>
+                    <p>de las empresas de más de diez trabajadores usa IA en sus procesos. Venía del 12,4% el año
+                        anterior.</p>
+                    <cite>INE · Encuesta sobre el uso de TIC en las empresas</cite>
+                </article>
+                <article>
+                    <strong>35<span>%</span></strong>
+                    <p>de las pymes españolas invertirá en IA este año, frente al 22% del año pasado.</p>
+                    <cite>IONOS · Estudio europeo de pymes, enero–marzo 2026</cite>
+                </article>
+            </aside>
         </div>
     </section>
 
@@ -908,18 +929,37 @@
             </div>
 
             <div class="contact-grid">
-                <div>
+                <div class="footer-marca">
                     <p class="section-label">[ STUDIO32 ]</p>
-                    <h3>Sistemas digitales que atienden, conectan y dejan el control en el negocio.</h3>
-                </div>
-                <div>
-                    <p>Studio32 Agent Platform es nuestro producto principal: agente de recepción por WhatsApp, citas,
+                    <h3>Sistemas digitales que atienden y dejan el control en el negocio.</h3>
+                    <p>Studio32 Agent Platform es el producto principal: agente de recepción por WhatsApp, citas,
                         panel e intervención humana. El estudio también diseña presencia digital y sistemas a medida
                         cuando forman parte del mismo problema.</p>
-                    <div class="contact-links">
-                        <a href="mailto:info@studio32.es">info@studio32.es</a>
-                        <a href="https://wa.me/34694293166" target="_blank" rel="noopener">+34 694 29 31 66</a>
-                    </div>
+                </div>
+
+                <nav class="footer-col" aria-label="Secciones de la web">
+                    <p class="footer-col-titulo">La web</p>
+                    <a href="#control">Probar el agente</a>
+                    <a href="#agente">Qué hay por detrás</a>
+                    <a href="#process">Implantación</a>
+                    <a href="#tarifas">Tarifas</a>
+                    <a href="#faq">Preguntas frecuentes</a>
+                </nav>
+
+                <nav class="footer-col" aria-label="Demos por sector">
+                    <p class="footer-col-titulo">Demos</p>
+                    <a href="Landing3-Clinic/index.html">Clínica</a>
+                    <a href="Landing1-L%27Obscur/restaurant_landing.html">Restaurante</a>
+                    <a href="Landing2-PrimeBurger/index.html">Marca de comida</a>
+                    <a href="Landing4-Habitat/index.html">Arquitectura</a>
+                </nav>
+
+                <div class="footer-col">
+                    <p class="footer-col-titulo">Contacto</p>
+                    <a href="mailto:info@studio32.es">info@studio32.es</a>
+                    <a href="https://wa.me/34694293166" target="_blank" rel="noopener">+34 694 29 31 66</a>
+                    <a href="legal/aviso-legal.html">Aviso legal</a>
+                    <a href="legal/privacidad.html">Privacidad</a>
                 </div>
             </div>
 
@@ -929,8 +969,13 @@
             </div>
         </div>
     </footer>
+    <!-- Widget del agente propio de Studio32 (tenant `studio32`, no el de la demo).
+         Su burbuja flotante se oculta por CSS: con la demo en el centro de la
+         página, dos chats a la vez confunden y la burbuja tapaba contenido. La
+         función se conserva y la abre el botón "Hablemos" del menú, vía
+         `window.S32W.open()`. -->
     <script src="https://web-production-d722c.up.railway.app/widget.js" data-tenant="studio32" data-title="Habla con Studio32"
-        data-accent="#c9a86a" defer></script>
+        data-accent="#8a6421" defer></script>
 </body>
 
 </html>

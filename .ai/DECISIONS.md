@@ -187,3 +187,43 @@ hero, cuyo fondo es un degradado (`background-image`).
 bloque aparte para ganar la cascada sin reescribir cada componente hoy. Hay que
 plegarlos dentro de su componente y borrar el bloque, o el mismo componente
 queda definido en dos sitios.
+
+## 2026-08-01 · Ritmo, cifras, pie y retirada del widget
+
+**Diagnóstico visual:** cinco secciones seguidas con la misma forma (etiqueta
+entre corchetes → titular Playfair con cursiva dorada → fila de tarjetas con
+filete). Al bajar, la página repetía en vez de avanzar. El problema no era el
+color ni el contenido: era la **falta de variación de compás**.
+
+**Cifras del mercado** (`.cifras`, en `#problema`): banda cálida a sangre
+completa, sin tarjetas, con la cifra a tamaño de titular. Rompe el compás a
+propósito.
+
+**Regla dura sobre los datos:** cada cifra lleva su **fuente a la vista** en el
+propio bloque. Son datos de terceros, nunca resultados de Studio32:
+- 94% usa WhatsApp cada mes · IAB Spain y Elogia, Estudio de Redes Sociales 2026
+- 21,1% de empresas de 10+ trabajadores usa IA (venía del 12,4%) · INE
+- 35% de pymes invertirá en IA en 2026 (22% en 2025) · estudio IONOS
+
+**Descartado:** "reducción de no-shows del 40–65%". Era una cifra **declarada por
+competidores**, no un resultado propio ni verificable. Ponerla habría violado la
+regla de no inventar métricas.
+
+**Pie reconstruido:** antes tenía dos cierres seguidos —el panel de CTA y, justo
+debajo, un titular de misión a cinco líneas— que se anulaban entre sí, más un
+vacío grande abajo a la derecha. Ahora el titular baja de tamaño y el espacio se
+usa para cuatro columnas de navegación real (13 enlaces internos, que además
+ayudan al enlazado interno).
+
+**Widget retirado de la vista:** su burbuja flotante se oculta por CSS. Con la
+demo en el centro de la página había **dos chats a la vez hablando con tenants
+distintos** (`studio32` vs. el de demo), lo que confunde, y la burbuja tapaba
+contenido en la FAQ y el pie. La función se conserva: la abre el botón "Hablemos"
+del menú vía `window.S32W.open()`, con vuelta a `#contact` si el widget no carga.
+Su panel se adapta al registro claro desde `styles.css`, sin tocar el otro repo.
+
+**Nota sobre SEO:** las imágenes no posicionan en una página así y pueden
+perjudicar por peso (Core Web Vitals). Donde vive el SEO aquí es en el JSON-LD ya
+puesto, en **más páginas** (una por vertical) y en **enlaces internos** — de ahí
+que el pie nuevo sume. No añadir fotografía de stock: hunde la percepción de
+calidad justo después de haberla ganado.

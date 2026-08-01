@@ -11,6 +11,17 @@ const AGENT_BASE = 'https://web-production-d722c.up.railway.app';
     } catch (_) { /* sin red: la demo ya avisa al fallar el primer mensaje */ }
 })();
 
+// El botón "Hablemos" abre el chat del agente propio de Studio32. Antes esa
+// función colgaba de una burbuja flotante que se ha retirado: con la demo en el
+// centro de la página, dos chats a la vez confundían. Si el widget no ha cargado
+// (CDN caído, bloqueador), el enlace hace lo de siempre e ir a #contact.
+document.addEventListener('click', (evento) => {
+    const boton = evento.target.closest('.nav-btn');
+    if (!boton || !window.S32W || typeof window.S32W.open !== 'function') return;
+    evento.preventDefault();
+    window.S32W.open();
+});
+
 gsap.registerPlugin(ScrollTrigger);
 
 // 1. Lenis Smooth Scroll Setup

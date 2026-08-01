@@ -3856,3 +3856,201 @@ body::before {
         transform: none;
     }
 }
+
+/* ── Widget propio de Studio32 ──────────────────────────────────────────── */
+/* Se oculta la burbuja flotante: con la demo en el centro de la página, dos
+   chats a la vez confunden (además hablan con tenants distintos) y la burbuja
+   tapaba contenido en FAQ y pie. La función se conserva y la abre el botón
+   "Hablemos" del menú. */
+.s32w-btn {
+    display: none !important;
+}
+
+/* Sin burbuja de la que colgar, el panel se ancla por sí mismo a la esquina. */
+.s32w-panel {
+    right: 24px;
+    bottom: 24px;
+}
+
+/* ── Cifras del mercado ─────────────────────────────────────────────────── */
+/* Rompe deliberadamente el compás de la página: banda cálida a sangre completa,
+   sin tarjetas ni filetes, con la cifra a tamaño de titular. Cinco secciones
+   seguidas con la misma forma (etiqueta → titular → fila de tarjetas) hacían que
+   al bajar la página repitiera en vez de avanzar. */
+.cifras {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(32px, 5vw, 76px);
+    margin: clamp(64px, 8vw, 110px) calc(50% - 50vw) 0;
+    padding: clamp(48px, 6vw, 76px) max(6vw, calc(50vw - 620px));
+    background: var(--bg-warm);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.cifras article {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.cifras strong {
+    font-family: var(--font-heading);
+    font-size: clamp(3.4rem, 6.4vw, 5.6rem);
+    font-weight: 600;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--text-color);
+    font-variant-numeric: tabular-nums;
+}
+
+/* El símbolo, más pequeño y en bronce: la cifra manda. */
+.cifras strong span {
+    font-size: 0.42em;
+    color: var(--accent-color);
+    margin-left: 0.06em;
+}
+
+.cifras p {
+    max-width: 30ch;
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    line-height: 1.55;
+}
+
+/* La fuente a la vista es lo que separa un dato de una cifra inventada. */
+.cifras cite {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    color: var(--text-subtle);
+    font-size: 0.66rem;
+    font-style: normal;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+    .cifras {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .cifras p {
+        max-width: none;
+    }
+}
+
+/* ── Pie ────────────────────────────────────────────────────────────────── */
+/* Antes: el titular de misión a tamaño gigante (cinco líneas) compitiendo con
+   el CTA que tiene justo encima —dos cierres seguidos se anulan— y un vacío
+   grande abajo a la derecha. Ahora el titular baja de tamaño y el espacio se
+   usa para navegación real, que además crea enlazado interno. */
+.contact-grid {
+    grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 0.8fr));
+    gap: clamp(32px, 4vw, 64px);
+    align-items: start;
+}
+
+.footer-marca h3 {
+    max-width: 20ch;
+    margin: 18px 0 20px;
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 2.4vw, 2.3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+}
+
+.footer-marca p {
+    max-width: 46ch;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.footer-col-titulo {
+    margin-bottom: 5px;
+    color: var(--accent-color);
+    font-size: 0.64rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.footer-col a {
+    width: fit-content;
+    border: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.3s var(--transition);
+}
+
+.footer-col a:hover {
+    color: var(--accent-color);
+}
+
+@media (max-width: 900px) {
+    .contact-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .footer-marca {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 540px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* El panel del widget viene con estilos oscuros propios (los inyecta widget.js
+   desde el repo del agente). Ahora que es la superficie principal para hablar
+   con Studio32, se adapta al registro claro sin tocar el otro repo. */
+.s32w-panel {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: var(--sombra-3) !important;
+    color: var(--text-color) !important;
+}
+
+.s32w-head {
+    background: var(--bg-warm) !important;
+    border-bottom: 1px solid var(--border) !important;
+    color: var(--text-color) !important;
+}
+
+.s32w-x {
+    color: var(--text-subtle) !important;
+}
+
+.s32w-bot {
+    background: var(--surface-strong) !important;
+    color: var(--text-color) !important;
+}
+
+.s32w-user {
+    background: rgba(201, 168, 106, .18) !important;
+    color: var(--text-color) !important;
+}
+
+.s32w-foot {
+    background: var(--surface) !important;
+    border-top: 1px solid var(--border) !important;
+}
+
+.s32w-foot input {
+    background: var(--surface-strong) !important;
+    border: 1px solid var(--border-strong) !important;
+    color: var(--text-color) !important;
+}
