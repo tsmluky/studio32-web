@@ -187,3 +187,21 @@ hero, cuyo fondo es un degradado (`background-image`).
 bloque aparte para ganar la cascada sin reescribir cada componente hoy. Hay que
 plegarlos dentro de su componente y borrar el bloque, o el mismo componente
 queda definido en dos sitios.
+
+## 2026-08-01 · El mockup del dashboard se convierte en preview navegable
+
+La demo ya mostraba una conversación real, pero “Pruébalo tú mismo” vaciaba el
+panel y reutilizaba la primera fila. Además, Inbox, Citas, Servicios y Agente se
+dibujaban como navegación inerte. El resultado enseñaba menos producto del que
+existe y hacía desaparecer justo la prueba que acababa de completar el showreel.
+
+**Decisión:** conservar el showreel como conversación atendida e insertar una
+conversación nueva encima cuando entra el visitante. La lista gana suficientes
+filas para tener scroll propio. La navegación lateral pasa a ser interactiva y
+abre previews de agenda, catálogo y configuración del agente; los contenidos de
+Servicios y Conocimiento cambian con el sector seleccionado.
+
+**Por qué:** la landing debe demostrar el sistema completo —no sólo el chat— sin
+obligar al visitante a entrar en un dashboard externo. Los datos ilustrativos se
+mantienen dentro del mockup marcado como “datos ficticios”; conversación y cita
+siguen conectadas al agente real cuando el visitante toma el control.
