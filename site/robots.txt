@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# OJO: no anadir Disallow para paginas que ya llevan <meta robots noindex>.
+# Bloquear el rastreo impide que Google LEA ese noindex, asi que la pagina puede
+# acabar indexada igualmente sin descripcion. Una cosa o la otra, nunca las dos.
+
 Sitemap: https://www.studio32.es/sitemap.xml
