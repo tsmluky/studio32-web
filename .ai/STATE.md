@@ -105,6 +105,24 @@ Se portaron solo las ganancias comerciales. Hecho en `site/`:
   contador, contacto, tarjeta de cita y relevo humano. El mockup estático de panel
   que había en esa sección **se eliminó**: ahora sólo existe el vivo.
 
+### Dos fases: reclamo y agente real
+
+1. **Guion de reclamo** (`SHOWREEL` en `script.js`). Al entrar la sección en
+   pantalla (IntersectionObserver, umbral 0.35) la demo se rellena sola:
+   conversación, panel y cita. **No toca el backend**: coste cero y sin espera.
+   Sirve para captar la mirada antes de que el visitante decida participar.
+2. **Relevo** (`.live-takeover`): al acabar aparece "Pruébalo tú mismo" sobre el
+   chat. Al pulsarlo, `tomarControl()` limpia todo, abre sesión nueva y habilita
+   el compositor contra el agente real. El botón de cabecera ("Ver de nuevo")
+   relanza el guion.
+
+**El bloque no se mueve ni un píxel** (verificado: 1388 px constantes en
+escritorio, 1403 en móvil). Costó cinco arreglos y conviene no deshacerlos:
+altura fija en `.live-chat-body` (tenía min/max y crecía), ventana con scroll en
+`.live-dashboard .detail-messages` (crecía y estiraba la columna), hueco
+reservado para `.live-typing` y para `.appointment-card` (entraban y salían del
+flujo) y `min-height: 2lh` en `.live-note` (cambia de texto según la fase).
+
 ### Cómo funciona la demo en vivo
 
 **Habla con el agente REAL desplegado, sin guion** (decisión del usuario, 31/07).
