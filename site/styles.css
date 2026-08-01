@@ -3832,3 +3832,27 @@ body::before {
 .contact-grid a {
     border-bottom-color: var(--border-strong);
 }
+
+/* `.faq` llevaba `overflow: hidden` para recortar su degradado, y eso ROMPE el
+   `position: sticky` de `.faq-header`: la cabecera se iba con el scroll aunque
+   estuviera declarada como sticky. `clip` recorta igual pero no crea contenedor
+   de desplazamiento, así que el sticky vuelve a funcionar. */
+.faq {
+    overflow: clip;
+}
+
+/* Centrada en el alto de la ventana en vez de pegada arriba, que es como se
+   pidió: el bloque izquierdo se queda quieto y solo bajan las preguntas. */
+.faq-header {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Si la cabecera no cabe en la ventana, centrarla la recortaría por arriba.
+   En pantallas bajas vuelve a comportarse como sticky normal. */
+@media (max-height: 760px) {
+    .faq-header {
+        top: 110px;
+        transform: none;
+    }
+}
