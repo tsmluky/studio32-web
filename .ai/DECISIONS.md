@@ -90,3 +90,27 @@ desperdiciaba la mejor baza comercial — el criterio del oficio es justo lo que
 Meta Business Agent (nativo, global desde el 03/06/2026 y gratis por ahora) no
 sabe hacer. Regla para futuros mockups: toda conversación demo debe ser
 comportamiento que el agente ejecute de verdad, y debe cerrar el bucle.
+
+## 2026-08-01 · Una sola prueba del agente en la página, y que sea real
+
+La página había acumulado **cinco interfaces de chat**: el mockup de `#agente`,
+las tres conversaciones maquetadas del selector de `#portfolio`, y la demo en
+vivo de `#control`. Se añadieron en sesiones sucesivas sin retirar lo anterior.
+
+**Decisión:** dejar **una sola** y que sea la real.
+- Se elimina el mockup de `#agente`, que pasa a explicar qué hay por detrás.
+- Se elimina la sección `#portfolio` entera.
+- La demo en vivo **sube** justo detrás de `#problema` y es el centro de la
+  página. El menú pasa a "Pruébalo · El agente · …" y el CTA del hero apunta a
+  ella.
+
+**Por qué:** desde que el visitante puede hablar con el agente de verdad, una
+captura de conversación no aporta — resta. Compiten entre sí por la misma
+atención y diluyen la única prueba que de verdad convence. Repetir el mismo
+argumento tres veces no lo refuerza, lo abarata.
+
+**Siguiente paso acordado:** el selector por sector no desaparece como idea, se
+traslada — clínica / restaurante / servicio local **sobre la demo real**, un
+tenant por vertical. Hoy solo existe `clinica-cobalto`; hacen falta los otros dos
+en `studio32-agent`. Eso es trabajo de arquetipos, reutilizable en producto, no
+solo en la web.

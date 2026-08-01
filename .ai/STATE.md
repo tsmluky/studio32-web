@@ -96,10 +96,15 @@ Se portaron solo las ganancias comerciales. Hecho en `site/`:
 - **FAQ ampliada** de 6 a 10 preguntas: número nuevo, cambios de precio/horario,
   datos y RGPD, plazo de puesta en marcha.
 
-- **Selector por sector** en `#portfolio`: las tres `.fit-card` pasan a ser
-  pestañas (`role="tablist"`, flechas ←/→), cada una con su panel y una
-  conversación completa distinta. Nuevo: `.fit-card--tab`, `.sector-panel`,
-  `.sector-points`; en JS, `initSectorDemo()`.
+- **`#portfolio` eliminada** (2026-08-01). Llegó a tener un selector por sector
+  con tres conversaciones maquetadas; junto al mockup de `#agente` sumaban
+  **cuatro chats falsos más la demo real en la misma página**. Desde que la demo
+  es real, enseñar maquetas de conversación sobra. Ver `DECISIONS.md`.
+  → Quedan sin uso en `styles.css`: `.fit-card--tab`, `.sector-panel`,
+  `.sector-points`, `.agent-grid`, `.agent-copy`; y en `script.js`,
+  `initSectorDemo()` y `initChatDemo()` (ya no hay `[data-chat-demo]`).
+  Pendiente decidir si se retiran o se reaprovechan para el selector por sector
+  **sobre la demo real** (un tenant por vertical), que es el plan acordado.
 - **Demo interactiva** en `#control` (`[data-live-demo]`): el visitante elige sus
   respuestas y el panel del negocio se actualiza en vivo — conversación espejada,
   contador, contacto, tarjeta de cita y relevo humano. El mockup estático de panel

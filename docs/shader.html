@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luz · shader · Studio32</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after { box-sizing: border-box; }
+
+        :root {
+            --p: 0;
+            --tinta: #f4f3f0;
+            --tenue: rgba(244, 243, 240, .44);
+            --ambar: #f7cd8a;
+            --serif: "Instrument Serif", Georgia, serif;
+            --sans: "Archivo", system-ui, sans-serif;
+            --t-xs: .625rem;
+            --t-s: .78rem;
+            --t-m: .95rem;
+            --t-xl: clamp(2.4rem, 6.6vw, 5.6rem);
+        }
+
+        html, body { margin: 0; background: #04050a; }
+
+        body {
+            color: var(--tinta);
+            font-family: var(--sans);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .recorrido { height: 760vh; }
+
+        .campo { position: fixed; inset: 0; overflow: hidden; }
+
+        /* El shader ocupa el fondo entero. La tipografía va en HTML encima:
+           texto real, nítido, seleccionable y accesible. */
+        #lienzo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .aviso {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: 14px;
+            background: rgba(0, 0, 0, .6);
+            color: rgba(255, 255, 255, .8);
+            font-size: var(--t-s);
+            text-align: center;
+        }
+
+        /* ── Tipografía ───────────────────────────────────────────────────── */
+        .lienzo-texto {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, .84fr);
+            gap: 8vw;
+            align-items: center;
+            height: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 6vw;
+        }
+
+        .rotulos { position: relative; min-height: 3.2em; }
+
+        .rotulo {
+            position: absolute;
+            inset: 0;
+            margin: 0;
+            font-family: var(--serif);
+            font-size: var(--t-xl);
+            font-weight: 400;
+            line-height: .98;
+            letter-spacing: -.022em;
+            text-wrap: balance;
+            text-shadow: 0 8px 44px rgba(0, 0, 0, .55);
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity .3s ease, transform .3s ease;
+        }
+
+        .rotulo.is-on {
+            opacity: 1;
+            transform: none;
+            transition: opacity .85s cubic-bezier(.2, .7, .2, 1) .34s,
+                        transform .85s cubic-bezier(.2, .7, .2, 1) .34s;
+        }
+
+        .rotulo em { font-style: italic; color: var(--ambar); }
+
+        .voces {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-left: 26px;
+            border-left: 1px solid rgba(244, 243, 240, .14);
+        }
+
+        .voz {
+            max-width: 34ch;
+            font-size: var(--t-m);
+            line-height: 1.5;
+            text-shadow: 0 4px 26px rgba(0, 0, 0, .6);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .voz.is-on { opacity: 1; transform: none; }
+
+        .voz::before {
+            display: block;
+            margin-bottom: 5px;
+            font-size: var(--t-xs);
+            font-weight: 500;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+        }
+
+        .voz--ella { color: var(--tenue); }
+        .voz--ella::before { content: "23:41 · ella"; color: rgba(244, 243, 240, .32); }
+        .voz--el { margin-left: 3.4ch; color: var(--tinta); }
+        .voz--el::before { content: "el agente"; color: var(--ambar); }
+
+        .hud {
+            position: absolute;
+            z-index: 3;
+            inset: 30px 6vw auto 6vw;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+
+        .marca { font-size: var(--t-xs); font-weight: 500; letter-spacing: .28em; }
+
+        .hora {
+            font-size: var(--t-s);
+            letter-spacing: .1em;
+            font-variant-numeric: tabular-nums;
+            color: var(--ambar);
+        }
+
+        .pista {
+            position: absolute;
+            z-index: 3;
+            left: 6vw;
+            bottom: 30px;
+            color: var(--tenue);
+            font-size: var(--t-xs);
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            opacity: calc(1 - var(--p) * 6);
+        }
+
+        .cierre {
+            position: absolute;
+            z-index: 3;
+            left: 6vw;
+            right: 6vw;
+            bottom: 8vh;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 22px;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity .7s ease, transform .7s ease;
+            pointer-events: none;
+        }
+
+        .cierre.is-on { opacity: 1; transform: none; pointer-events: auto; }
+
+        .cierre p {
+            flex: 1 1 22ch;
+            max-width: 42ch;
+            margin: 0;
+            color: rgba(20, 12, 6, .78);
+            font-size: var(--t-s);
+            line-height: 1.6;
+        }
+
+        .cta {
+            padding: 14px 30px;
+            border: 1px solid rgba(20, 12, 6, .5);
+            border-radius: 999px;
+            background: rgba(255, 250, 240, .9);
+            color: #14100a;
+            font-family: var(--sans);
+            font-size: var(--t-s);
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            .lienzo-texto { grid-template-columns: 1fr; align-content: center; gap: 46px; }
+            .voces { gap: 15px; }
+            .voz { font-size: var(--t-s); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .rotulo, .voz { transition-duration: .2s; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="campo">
+        <canvas id="lienzo"></canvas>
+
+        <div class="hud">
+            <span class="marca">STUDIO32</span>
+            <span class="hora" id="hora">23:41</span>
+        </div>
+
+        <div class="lienzo-texto">
+            <div class="rotulos">
+                <h1 class="rotulo">A esta hora ya no contesta <em>nadie</em>.</h1>
+                <p class="rotulo">Y alguien acaba de escribir con dolor.</p>
+                <p class="rotulo">Esta vez <em>sí</em> contestan.</p>
+                <p class="rotulo">Y le dan hora para <em>mañana a las 9:30</em>.</p>
+                <p class="rotulo">Tú llevabas cuatro horas <em>durmiendo</em>.</p>
+                <p class="rotulo">Cuando abres, ya está <em>resuelto</em>.</p>
+            </div>
+
+            <div class="voces">
+                <p class="voz voz--ella">Llevo dos días con dolor en una muela y no sé si aguantar hasta el lunes.</p>
+                <p class="voz voz--el">Vaya, lo siento. ¿Te duele todo el rato o solo al morder?</p>
+                <p class="voz voz--ella">Todo el rato, y por la noche va a peor.</p>
+                <p class="voz voz--el">Con ese dolor mejor no esperar. Mañana me queda a las 9:30 o a las 12.</p>
+                <p class="voz voz--ella">A las 9:30.</p>
+                <p class="voz voz--el">Hecho. Si esta noche va a peor, escríbeme y aviso al equipo.</p>
+            </div>
+        </div>
+
+        <p class="pista">Baja despacio</p>
+
+        <div class="cierre" id="cierre">
+            <p>Toda esa luz la ha hecho una conversación que ocurrió mientras dormías. Escríbele tú y mira cómo la
+                cita aparece de verdad en el panel.</p>
+            <button class="cta" type="button">Pruébalo tú mismo</button>
+        </div>
+    </div>
+
+    <div class="recorrido"></div>
+
+    <script id="vs" type="x-shader/x-vertex">
+        attribute vec2 pos;
+        void main() { gl_Position = vec4(pos, 0.0, 1.0); }
+    </script>
+
+    <script id="fs" type="x-shader/x-fragment">
+        precision highp float;
+
+        uniform vec2  u_res;
+        uniform float u_time;
+        uniform float u_p;      // progreso del scroll, 0 = medianoche, 1 = amanecido
+
+        // ── Ruido ────────────────────────────────────────────────────────────
+        float hash(vec2 p) {
+            return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+
+        float ruido(vec2 p) {
+            vec2 i = floor(p), f = fract(p);
+            vec2 u = f * f * (3.0 - 2.0 * f);
+            return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),
+                       mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y);
+        }
+
+        // Ruido fractal: es lo que da textura de aire. Sin esto el degradado
+        // queda plano y se lee como CSS.
+        float fbm(vec2 p) {
+            float v = 0.0, a = 0.5;
+            for (int i = 0; i < 5; i++) {
+                v += a * ruido(p);
+                p = p * 2.03 + vec2(1.7, 9.2);
+                a *= 0.5;
+            }
+            return v;
+        }
+
+        void main() {
+            vec2 uv = gl_FragCoord.xy / u_res;          // 0 abajo, 1 arriba
+            float aspecto = u_res.x / u_res.y;
+            vec2 q = vec2((uv.x - 0.5) * aspecto, uv.y);
+
+            float p = clamp(u_p, 0.0, 1.0);
+            float alba = smoothstep(0.0, 1.0, p);
+
+            // ── Cielo ────────────────────────────────────────────────────────
+            vec3 nocheAlta = vec3(0.016, 0.020, 0.038);
+            vec3 nocheBaja = vec3(0.038, 0.052, 0.104);
+            vec3 albaAlta  = vec3(0.098, 0.084, 0.190);
+            vec3 albaBaja  = vec3(0.400, 0.220, 0.230);
+            vec3 diaAlta   = vec3(0.330, 0.470, 0.700);
+            vec3 diaBaja   = vec3(0.940, 0.620, 0.400);
+
+            vec3 alta = alba < 0.5
+                ? mix(nocheAlta, albaAlta, alba * 2.0)
+                : mix(albaAlta, diaAlta, (alba - 0.5) * 2.0);
+            vec3 baja = alba < 0.5
+                ? mix(nocheBaja, albaBaja, alba * 2.0)
+                : mix(albaBaja, diaBaja, (alba - 0.5) * 2.0);
+
+            // Curva en el degradado: un lerp recto se lee artificial.
+            float g = pow(uv.y, 1.35);
+            vec3 col = mix(baja, alta, g);
+
+            // ── Sol ──────────────────────────────────────────────────────────
+            float horizonte = 0.30;
+            float solY = horizonte - 0.34 + alba * 0.52;
+            vec2  solPos = vec2((0.68 - 0.5) * aspecto, solY);
+            float d = length(q - solPos);
+
+            // Halo amplio, dispersión atmosférica.
+            float halo = exp(-d * 3.4) * (0.35 + alba * 0.85);
+            // Núcleo, solo cuando ya asoma.
+            float nucleo = exp(-d * 26.0) * smoothstep(0.12, 0.55, alba);
+
+            vec3 colorSol = mix(vec3(1.0, 0.62, 0.34), vec3(1.0, 0.88, 0.70), alba);
+            col += colorSol * (halo * 0.42 + nucleo * 1.5);
+
+            // ── Bruma volumétrica ────────────────────────────────────────────
+            // Dos capas a distinta velocidad: da profundidad y evita el patrón.
+            vec2 deriva = vec2(u_time * 0.011, u_time * 0.004);
+            float niebla = fbm(q * 2.1 + deriva) * 0.65
+                         + fbm(q * 4.7 - deriva * 1.8) * 0.35;
+
+            // Se concentra cerca del horizonte y se tiñe con la luz del sol.
+            float bandaH = exp(-abs(uv.y - horizonte) * 4.2);
+            float cercaSol = exp(-d * 1.9);
+            vec3  colorNiebla = mix(vec3(0.30, 0.36, 0.52), vec3(1.0, 0.72, 0.48), alba * 0.85 + cercaSol * 0.4);
+            col += colorNiebla * niebla * bandaH * (0.10 + alba * 0.20);
+
+            // ── Estrellas ────────────────────────────────────────────────────
+            float visEstrellas = clamp(1.0 - alba * 2.1, 0.0, 1.0);
+            if (visEstrellas > 0.001 && uv.y > horizonte) {
+                vec2 celda = floor(gl_FragCoord.xy / 3.0);
+                float s = hash(celda);
+                if (s > 0.9975) {
+                    float parpadeo = 0.55 + 0.45 * sin(u_time * 1.6 + s * 100.0);
+                    float alturaFade = smoothstep(horizonte, horizonte + 0.35, uv.y);
+                    col += vec3(0.86, 0.90, 1.0) * parpadeo * visEstrellas * alturaFade * 0.9;
+                }
+            }
+
+            // ── Suelo ────────────────────────────────────────────────────────
+            // Por debajo del horizonte cae la luz: da peso y asienta el encuadre.
+            float bajoH = smoothstep(horizonte, horizonte - 0.16, uv.y);
+            col = mix(col, col * vec3(0.24, 0.22, 0.26), bajoH * 0.92);
+
+            // Línea del horizonte, apenas insinuada.
+            float linea = exp(-abs(uv.y - horizonte) * 900.0);
+            col += vec3(0.9, 0.85, 0.8) * linea * (0.05 + alba * 0.16);
+
+            // ── Acabado ──────────────────────────────────────────────────────
+            // Viñeta
+            float vineta = 1.0 - smoothstep(0.42, 1.18, length((uv - 0.5) * vec2(aspecto, 1.0)) * 1.5);
+            col *= mix(0.42, 1.0, vineta);
+
+            // Grano fino: rompe la perfección digital.
+            float grano = hash(gl_FragCoord.xy + u_time * 60.0) - 0.5;
+            col += grano * 0.014;
+
+            // Tramado: MATA EL BANDING. Es la diferencia real entre esto y un
+            // degradado CSS en un fondo oscuro.
+            float tramado = (hash(gl_FragCoord.xy * 1.7) - 0.5) / 255.0;
+            col += tramado;
+
+            gl_FragColor = vec4(max(col, 0.0), 1.0);
+        }
+    </script>
+
+    <script>
+        (() => {
+            const raiz = document.documentElement;
+            const cv = document.getElementById('lienzo');
+            const gl = cv.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance' });
+
+            const rotulos = [...document.querySelectorAll('.rotulo')];
+            const voces = [...document.querySelectorAll('.voz')];
+            const elHora = document.getElementById('hora');
+            const cierre = document.getElementById('cierre');
+
+            const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+            const suave = t => t * t * (3 - 2 * t);
+
+            const PLANOS = [
+                { hasta: .12, hora: '23:41', rotulo: 0, voces: 0 },
+                { hasta: .28, hora: '23:41', rotulo: 1, voces: 1 },
+                { hasta: .45, hora: '23:42', rotulo: 2, voces: 3 },
+                { hasta: .62, hora: '23:45', rotulo: 3, voces: 6 },
+                { hasta: .80, hora: '04:20', rotulo: 4, voces: 6 },
+                { hasta: 1.01, hora: '07:58', rotulo: 5, voces: 6 }
+            ];
+
+            let ultimo = null;
+
+            function narrativa(p) {
+                const plano = PLANOS.find(x => p < x.hasta) || PLANOS[PLANOS.length - 1];
+                if (plano === ultimo) return;
+                ultimo = plano;
+                elHora.textContent = plano.hora;
+                rotulos.forEach((r, i) => r.classList.toggle('is-on', i === plano.rotulo));
+                voces.forEach((v, i) => v.classList.toggle('is-on', i < plano.voces));
+            }
+
+            // Sin WebGL la pieza sigue siendo legible: degradado plano y a correr.
+            if (!gl) {
+                cv.style.background = 'linear-gradient(to top, #2a1d18, #05060a)';
+                const aviso = document.createElement('p');
+                aviso.className = 'aviso';
+                aviso.textContent = 'Tu navegador no admite WebGL: se muestra una versión simplificada.';
+                document.querySelector('.campo').appendChild(aviso);
+                (function bucle() {
+                    const rec = document.body.scrollHeight - window.innerHeight;
+                    const p = rec > 0 ? clamp(window.scrollY / rec) : 0;
+                    raiz.style.setProperty('--p', p.toFixed(4));
+                    narrativa(p);
+                    cierre.classList.toggle('is-on', p > .92);
+                    requestAnimationFrame(bucle);
+                })();
+                return;
+            }
+
+            function compilar(tipo, fuente) {
+                const sh = gl.createShader(tipo);
+                gl.shaderSource(sh, fuente);
+                gl.compileShader(sh);
+                if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+                    console.error('Shader:', gl.getShaderInfoLog(sh));
+                    return null;
+                }
+                return sh;
+            }
+
+            const prog = gl.createProgram();
+            gl.attachShader(prog, compilar(gl.VERTEX_SHADER, document.getElementById('vs').textContent));
+            gl.attachShader(prog, compilar(gl.FRAGMENT_SHADER, document.getElementById('fs').textContent));
+            gl.linkProgram(prog);
+            gl.useProgram(prog);
+
+            // Un solo triángulo que cubre la pantalla: más barato que dos.
+            const buf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+            const aPos = gl.getAttribLocation(prog, 'pos');
+            gl.enableVertexAttribArray(aPos);
+            gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+            const uRes = gl.getUniformLocation(prog, 'u_res');
+            const uTime = gl.getUniformLocation(prog, 'u_time');
+            const uP = gl.getUniformLocation(prog, 'u_p');
+
+            function redimensionar() {
+                // Tope de 1.5x: en pantallas 4K el coste por píxel se dispara y
+                // la diferencia visual en un fondo difuso es nula.
+                const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+                const an = Math.floor(cv.clientWidth * dpr);
+                const al = Math.floor(cv.clientHeight * dpr);
+                if (cv.width === an && cv.height === al) return;
+                cv.width = an;
+                cv.height = al;
+                gl.viewport(0, 0, an, al);
+            }
+
+            const quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const t0 = performance.now();
+
+            function fotograma(ahora) {
+                redimensionar();
+
+                const rec = document.body.scrollHeight - window.innerHeight;
+                const p = rec > 0 ? clamp(window.scrollY / rec) : 0;
+                // La luz arranca con el primer mensaje resuelto, no antes.
+                const luz = suave(clamp((p - .16) / .8));
+
+                raiz.style.setProperty('--p', p.toFixed(4));
+                gl.uniform2f(uRes, cv.width, cv.height);
+                gl.uniform1f(uTime, quieto ? 0 : (ahora - t0) / 1000);
+                gl.uniform1f(uP, luz);
+                gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+                narrativa(p);
+                cierre.classList.toggle('is-on', p > .92);
+                requestAnimationFrame(fotograma);
+            }
+
+            requestAnimationFrame(fotograma);
+        })();
+    </script>
+</body>
+
+</html>

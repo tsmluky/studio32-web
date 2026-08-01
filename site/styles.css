@@ -1881,6 +1881,20 @@ body.menu-open .mobile-menu {
     font-size: 1.05rem;
 }
 
+/* #agente perdió su mockup de chat (lo demuestra la demo en vivo de #control),
+   así que su cabecera reutiliza esta rejilla con dos párrafos en la columna
+   derecha en vez de un solo texto. */
+.agent-intro {
+    display: grid;
+    gap: 16px;
+}
+
+.agent-intro p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
 .fit-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
