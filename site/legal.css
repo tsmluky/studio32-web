@@ -1,0 +1,151 @@
+/* =============================================================================
+   Páginas legales · studio32.es/legal/
+   =============================================================================
+   Antes cada página traía ~110 líneas de CSS embebido con la paleta OSCURA
+   antigua: al cambiar el registro de la web se quedaron desfasadas y encima
+   había que mantener el estilo en tres sitios. Ahora usan el CSS compartido y
+   esto solo añade lo propio de un documento legal: medida de lectura corta,
+   jerarquía de apartados y el marcador de lo que falta rellenar.
+   ========================================================================== */
+
+.legal-hero {
+    padding: clamp(118px, 14vh, 170px) 0 clamp(32px, 4vh, 52px);
+    background: linear-gradient(170deg, var(--bg-soft) 0%, var(--bg-color) 100%);
+    border-bottom: 1px solid var(--border);
+}
+
+.legal-hero h1 {
+    margin: 18px 0 12px;
+    font-family: var(--font-heading);
+    font-size: clamp(2.3rem, 4.6vw, 3.6rem);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+}
+
+.legal-fecha {
+    color: var(--text-subtle);
+    font-size: 0.8rem;
+}
+
+/* Medida de lectura: un texto legal se lee en columna estrecha o no se lee. */
+.legal-cuerpo .container {
+    max-width: 760px;
+}
+
+.legal-cuerpo h2 {
+    margin: 52px 0 16px;
+    font-family: var(--font-heading);
+    font-size: clamp(1.3rem, 2vw, 1.65rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+.legal-cuerpo h2:first-child {
+    margin-top: 0;
+}
+
+.legal-cuerpo h3 {
+    margin: 30px 0 10px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.legal-cuerpo p,
+.legal-cuerpo li {
+    color: var(--text-muted);
+    font-size: 0.96rem;
+    line-height: 1.75;
+}
+
+.legal-cuerpo p + p {
+    margin-top: 14px;
+}
+
+.legal-cuerpo strong {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.legal-cuerpo ul,
+.legal-cuerpo ol {
+    margin: 14px 0 14px 20px;
+    display: grid;
+    gap: 8px;
+}
+
+.legal-cuerpo a {
+    color: var(--accent-color);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(138, 100, 33, 0.35);
+}
+
+.legal-cuerpo a:hover {
+    border-bottom-color: var(--accent-color);
+}
+
+/* Bloque de datos del titular: se lee como ficha, no como párrafo. */
+.legal-cuerpo .data-block {
+    margin: 18px 0;
+    padding: 20px 22px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    box-shadow: var(--sombra-1);
+    font-size: 0.92rem;
+    line-height: 2;
+}
+
+/* Tabla de tratamientos de datos (RGPD). Con scroll propio para que nunca
+   arrastre scroll horizontal a la página en móvil. */
+.legal-tabla-wrap {
+    overflow-x: auto;
+    margin: 18px 0;
+}
+
+.legal-cuerpo table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+.legal-cuerpo th {
+    padding: 11px 13px;
+    border-bottom: 1px solid var(--border-strong);
+    color: var(--text-subtle);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.legal-cuerpo td {
+    padding: 13px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+    vertical-align: top;
+}
+
+/* ── Marcador de dato pendiente ─────────────────────────────────────────── */
+/* Deliberadamente visible: son datos que exige la ley (LSSI-CE art. 10) y que
+   solo puede aportar el titular. Si se disimulan, se publican en blanco y la
+   página incumple sin que nadie lo note. */
+.placeholder {
+    padding: 1px 7px;
+    border: 1px dashed rgba(138, 100, 33, 0.55);
+    border-radius: 5px;
+    background: rgba(201, 168, 106, 0.14);
+    color: var(--accent-deep);
+    font-size: 0.88em;
+    font-weight: 600;
+}
+
+
+@media (max-width: 720px) {
+    .legal-cuerpo h2 {
+        margin-top: 40px;
+    }
+}
