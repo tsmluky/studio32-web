@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boceto · Landing elevada · Studio32</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /* ── Cromo del laboratorio: gris neutro y callado, igual que
+           direccion-visual.html, para no competir con lo que enseña. ───────── */
+        :root {
+            --lab-bg: #111214;
+            --lab-panel: #17181b;
+            --lab-line: #26282d;
+            --lab-text: #e6e7ea;
+            --lab-dim: #8b8f98;
+            --lab-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+            /* Paleta de marca, portada tal cual de site/styles.css */
+            --bg-color: #f7f4ee;
+            --bg-warm: #f1ece2;
+            --surface: #ffffff;
+            --border: rgba(28, 24, 18, 0.10);
+            --border-strong: rgba(28, 24, 18, 0.18);
+            --text-color: #1c1812;
+            --text-muted: #5d564b;
+            --text-subtle: #8b8377;
+            --accent-color: #8a6421;
+            --accent-fill: #c9a86a;
+            --accent-deep: #5f440f;
+            --sombra-1: 0 1px 2px rgba(28, 24, 18, .04), 0 4px 12px rgba(28, 24, 18, .05);
+            --sombra-2: 0 2px 4px rgba(28, 24, 18, .05), 0 12px 32px rgba(28, 24, 18, .08);
+            --sombra-3: 0 4px 8px rgba(28, 24, 18, .06), 0 24px 60px rgba(28, 24, 18, .11);
+        }
+
+        body {
+            margin: 0;
+            background: var(--lab-bg);
+            color: var(--lab-text);
+            font-family: "Inter", system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .lab-head {
+            border-bottom: 1px solid var(--lab-line);
+            padding: 28px 32px;
+        }
+
+        .lab-kicker {
+            font-family: var(--lab-mono);
+            font-size: 11px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--lab-dim);
+            margin: 0 0 10px;
+        }
+
+        .lab-head h1 {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0 0 8px;
+        }
+
+        .lab-head p {
+            margin: 0;
+            max-width: 70ch;
+            color: var(--lab-dim);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .lab-section {
+            border-bottom: 1px solid var(--lab-line);
+            padding: 28px 32px;
+        }
+
+        .lab-section h2 {
+            font-size: 13px;
+            font-family: var(--lab-mono);
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--lab-dim);
+            font-weight: 500;
+            margin: 0 0 16px;
+        }
+
+        .diag {
+            display: grid;
+            gap: 10px;
+            max-width: 100ch;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .diag li {
+            display: grid;
+            grid-template-columns: 26px 1fr;
+            gap: 12px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--lab-text);
+        }
+
+        .diag b {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .diag .n {
+            font-family: var(--lab-mono);
+            color: var(--lab-dim);
+            font-size: 12px;
+            padding-top: 3px;
+        }
+
+        .lab-frame-label {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            padding: 20px 32px 14px;
+        }
+
+        .lab-frame-label span {
+            font-family: var(--lab-mono);
+            font-size: 11px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--lab-dim);
+        }
+
+        .lab-frame-label em {
+            font-style: normal;
+            font-size: 13px;
+            color: var(--lab-dim);
+        }
+
+        /* ── El lienzo: aquí dentro manda la marca, no el laboratorio ──────── */
+        .canvas {
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: "Inter", sans-serif;
+            padding: 0;
+            margin: 0 32px 32px;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+        }
+
+        .wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Nav */
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 74px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+            gap: 4px;
+        }
+
+        .logo b {
+            font-family: "Playfair Display", serif;
+            font-size: 17px;
+            letter-spacing: .06em;
+            font-weight: 700;
+        }
+
+        .logo i {
+            font-style: normal;
+            font-size: 9px;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--text-subtle);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            font-size: 13.5px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .nav-btn {
+            background: var(--text-color);
+            color: var(--bg-color) !important;
+            padding: 9px 18px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        /* ── HERO: dos columnas. Izquierda dice, derecha demuestra. ────────── */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            align-items: center;
+            padding: 56px 0 40px;
+        }
+
+        .label {
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            margin: 0 0 18px;
+        }
+
+        .hero h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(40px, 4.4vw, 58px);
+            line-height: 1.04;
+            font-weight: 700;
+            margin: 0 0 20px;
+            letter-spacing: -.015em;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent-color);
+        }
+
+        .hero p.entrada {
+            font-size: 16.5px;
+            line-height: 1.62;
+            color: var(--text-muted);
+            margin: 0 0 26px;
+            max-width: 44ch;
+        }
+
+        .hero-cta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            background: var(--text-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14.5px;
+            padding: 14px 26px;
+            border-radius: 999px;
+            box-shadow: var(--sombra-2);
+        }
+
+        .btn-ghost {
+            color: var(--accent-color);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(138, 100, 33, .3);
+            padding-bottom: 2px;
+        }
+
+        /* ── El teléfono: la demo deja de estar enterrada y pasa al hero ──── */
+        .demo-stack {
+            position: relative;
+            display: grid;
+            gap: 14px;
+            justify-items: end;
+        }
+
+        .phone {
+            width: 100%;
+            max-width: 380px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            box-shadow: var(--sombra-3);
+            overflow: hidden;
+        }
+
+        .phone-top {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 14px 16px;
+            background: var(--bg-warm);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--accent-fill);
+            color: var(--accent-deep);
+            display: grid;
+            place-items: center;
+            font-family: "Playfair Display", serif;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .phone-top b {
+            display: block;
+            font-size: 13.5px;
+            font-weight: 600;
+        }
+
+        .phone-top span {
+            display: block;
+            font-size: 11px;
+            color: var(--text-subtle);
+            margin-top: 1px;
+        }
+
+        .live-dot {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .live-dot i {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .25;
+            }
+        }
+
+        .thread {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            min-height: 296px;
+            justify-content: flex-end;
+        }
+
+        .msg {
+            max-width: 84%;
+            font-size: 13.4px;
+            line-height: 1.5;
+            padding: 10px 13px;
+            border-radius: 15px;
+            animation: rise .34s cubic-bezier(.19, 1, .22, 1) both;
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(7px);
+            }
+        }
+
+        .msg.in {
+            align-self: flex-start;
+            background: var(--bg-warm);
+            border-bottom-left-radius: 5px;
+        }
+
+        .msg.out {
+            align-self: flex-end;
+            background: var(--text-color);
+            color: var(--bg-color);
+            border-bottom-right-radius: 5px;
+        }
+
+        .msg-note {
+            align-self: flex-end;
+            font-size: 10.5px;
+            color: var(--text-subtle);
+            padding-right: 4px;
+            animation: rise .3s ease both;
+        }
+
+        .msg-note.left {
+            align-self: flex-start;
+            padding-left: 4px;
+        }
+
+        .typing {
+            align-self: flex-end;
+            background: var(--text-color);
+            padding: 12px 15px;
+            border-radius: 15px;
+            border-bottom-right-radius: 5px;
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing i {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            opacity: .55;
+            animation: blink 1.1s infinite;
+        }
+
+        .typing i:nth-child(2) {
+            animation-delay: .18s;
+        }
+
+        .typing i:nth-child(3) {
+            animation-delay: .36s;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: .25;
+                transform: translateY(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateY(-2px);
+            }
+        }
+
+        .phone-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .phone-input div {
+            flex: 1;
+            font-size: 13px;
+            color: var(--text-subtle);
+            background: var(--bg-warm);
+            padding: 10px 14px;
+            border-radius: 999px;
+        }
+
+        .phone-input b {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--accent-fill);
+            color: var(--accent-deep);
+            display: grid;
+            place-items: center;
+            font-size: 14px;
+        }
+
+        /* La agenda: la prueba de que es un sistema y no un chatbot. Está
+           siempre visible —si solo apareciera al final, la mitad de las visitas
+           no llegarían a verla— y lo que cambia es su contenido. */
+        .agenda {
+            width: 100%;
+            max-width: 380px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: var(--sombra-2);
+            padding: 14px 16px;
+        }
+
+        .agenda-vacia {
+            font-size: 12px;
+            color: var(--text-subtle);
+            background: var(--bg-warm);
+            border-radius: 9px;
+            padding: 14px 13px;
+            border: 1px dashed var(--border-strong);
+        }
+
+        .slot {
+            animation: rise .45s cubic-bezier(.19, 1, .22, 1) both;
+        }
+
+        .agenda-head em {
+            opacity: .35;
+            transition: opacity .4s ease;
+        }
+
+        .agenda.on .agenda-head em {
+            opacity: 1;
+        }
+
+        .agenda-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .agenda-head span {
+            font-size: 9.5px;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--text-subtle);
+            font-weight: 600;
+        }
+
+        .agenda-head em {
+            font-style: normal;
+            font-size: 10px;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .slot {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-warm);
+            border-radius: 9px;
+            padding: 11px 13px;
+        }
+
+        .slot b {
+            font-family: "Playfair Display", serif;
+            font-size: 17px;
+        }
+
+        .slot div {
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .slot div i {
+            font-style: normal;
+            color: var(--text-subtle);
+            display: block;
+            font-size: 11px;
+        }
+
+        /* ── Banda de especificidad: sustituye al testimonio que no tenemos ── */
+        .band {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-warm);
+        }
+
+        .band-inner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .band-item {
+            padding: 22px 26px;
+            border-right: 1px solid var(--border);
+        }
+
+        .band-item:last-child {
+            border-right: 0;
+        }
+
+        .band-item b {
+            display: block;
+            font-family: "Playfair Display", serif;
+            font-size: 25px;
+            line-height: 1;
+            margin-bottom: 7px;
+        }
+
+        .band-item span {
+            font-size: 12.5px;
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+
+        /* ── "Lo que no hace": de tres tarjetas planas a bloque de firma ──── */
+        .limites {
+            background: var(--text-color);
+            color: var(--bg-color);
+            padding: 62px 0;
+        }
+
+        .limites .label {
+            color: var(--accent-fill);
+        }
+
+        .limites h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(29px, 3vw, 40px);
+            line-height: 1.12;
+            font-weight: 700;
+            margin: 0 0 14px;
+            max-width: 18ch;
+        }
+
+        .limites h2 em {
+            font-style: italic;
+            color: var(--accent-fill);
+        }
+
+        .limites > .wrap > p {
+            max-width: 52ch;
+            color: rgba(247, 244, 238, .62);
+            font-size: 15.5px;
+            line-height: 1.6;
+            margin: 0 0 40px;
+        }
+
+        .lim-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            border-top: 1px solid rgba(247, 244, 238, .15);
+        }
+
+        .lim-grid article {
+            padding: 26px 26px 0 0;
+            border-right: 1px solid rgba(247, 244, 238, .15);
+            padding-left: 26px;
+        }
+
+        .lim-grid article:first-child {
+            padding-left: 0;
+        }
+
+        .lim-grid article:last-child {
+            border-right: 0;
+        }
+
+        .lim-grid .no {
+            font-family: "Playfair Display", serif;
+            font-size: 13px;
+            font-style: italic;
+            color: var(--accent-fill);
+            display: block;
+            margin-bottom: 9px;
+        }
+
+        .lim-grid h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 9px;
+            line-height: 1.3;
+        }
+
+        .lim-grid p {
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: rgba(247, 244, 238, .58);
+            margin: 0;
+        }
+
+        .foot-note {
+            padding: 26px 0 40px;
+            font-size: 12.5px;
+            color: var(--text-subtle);
+        }
+
+        @media (max-width: 900px) {
+
+            .hero,
+            .band-inner,
+            .lim-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-stack {
+                justify-items: stretch;
+            }
+
+            .band-item {
+                border-right: 0;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .lim-grid article {
+                border-right: 0;
+                padding-left: 0;
+                border-bottom: 1px solid rgba(247, 244, 238, .15);
+                padding-bottom: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="lab-head">
+        <p class="lab-kicker">Laboratorio · 08/09/2026</p>
+        <h1>Boceto: la landing que enseña en vez de contar</h1>
+        <p>Propuesta de dirección para las páginas por vertical. El copy es el que ya estaba
+            escrito y aprobado — aquí no se toca ni una frase. Lo que cambia es qué se ve primero,
+            cuánto se tarda en creerlo y dónde cae el peso visual.</p>
+    </header>
+
+    <section class="lab-section">
+        <h2>Diagnóstico de lo que hay hoy</h2>
+        <ul class="diag">
+            <li><span class="n">01</span>
+                <div><b>La demo, que es lo único que prueba algo, está en la sección tres.</b>
+                    Studio32 no tiene clientes, así que no tiene testimonios, ni logos, ni casos.
+                    La investigación de conversión dice que la prueba social es la palanca más fuerte
+                    — y es justo la que no se puede usar. Lo que sí se tiene es un agente que funciona
+                    de verdad. Esa es la prueba, y está enterrada.</div>
+            </li>
+            <li><span class="n">02</span>
+                <div><b>La mitad derecha del hero está vacía.</b> Vendiendo un producto que se ve y
+                    se toca, la primera pantalla no enseña producto: es un ensayo bien escrito sobre
+                    papel crema.</div>
+            </li>
+            <li><span class="n">03</span>
+                <div><b>Tres llamadas a la acción compiten</b> (Hablemos arriba, Hablar con el
+                    agente, Pedir presupuesto). La recomendación estándar es una principal y clara.</div>
+            </li>
+            <li><span class="n">04</span>
+                <div><b>El ritmo vertical es muy holgado.</b> Los huecos entre secciones son enormes;
+                    scrollear se siente lento. La densidad se lee como seguridad, el vacío como duda.</div>
+            </li>
+            <li><span class="n">05</span>
+                <div><b>Cero especificidad antes del scroll.</b> Ni una cifra, ni un dato concreto,
+                    ni señal de que esto lo lleva alguien de aquí.</div>
+            </li>
+        </ul>
+    </section>
+
+    <section class="lab-section">
+        <h2>La idea que ordena todo lo demás</h2>
+        <ul class="diag">
+            <li><span class="n">→</span>
+                <div><b>Sin clientes que hablen por ti, la demostración ocupa el lugar de la prueba.</b>
+                    No es un apaño: para este producto es más fuerte. Con un testimonio se discute;
+                    con una cosa que funciona delante, no. La frase que ya tenéis escrita —
+                    <em style="color:#fff">«No te lo contamos. Te lo enseñamos.»</em> — deja de ser
+                    el título de una sección y pasa a ser cómo está montada la página entera.
+                    Dato que lo respalda: UpperHand cambió su botón de «pedir demo» por una demo
+                    abierta sin formulario y subió un 127% los leads cualificados.</div>
+            </li>
+        </ul>
+    </section>
+
+    <div class="lab-frame-label"><span>Boceto 01</span> <em>— hero nuevo, banda de concreción y bloque de límites</em></div>
+
+    <div class="canvas">
+        <div class="wrap">
+            <nav class="nav">
+                <div class="logo"><b>STUDIO32</b><i>Digital Systems</i></div>
+                <div class="nav-links">
+                    <a href="#">Qué hace</a>
+                    <a href="#">Límites</a>
+                    <a href="#">Preguntas</a>
+                    <a href="#" class="nav-btn">Hablemos</a>
+                </div>
+            </nav>
+
+            <section class="hero">
+                <div>
+                    <p class="label">[ Centros de estética ]</p>
+                    <h1>Para pedir hora<br><em>hay que saber</em><br>qué pedir.</h1>
+                    <p class="entrada">Quien escribe no llega con el nombre del tratamiento. Llega
+                        con un problema —manchas, la piel apagada— y con la duda del precio. Esto es
+                        lo que contesta, ahora mismo, con el criterio de tu centro.</p>
+                    <div class="hero-cta">
+                        <a href="#" class="btn-primary">Escríbele tú mismo →</a>
+                        <a href="#" class="btn-ghost">Ver qué pasa por dentro</a>
+                    </div>
+                </div>
+
+                <div class="demo-stack">
+                    <div class="phone">
+                        <div class="phone-top">
+                            <div class="avatar">EA</div>
+                            <div>
+                                <b>Estudio Áurea</b>
+                                <span>domingo · 23:41 · centro cerrado</span>
+                            </div>
+                            <div class="live-dot"><i></i> En vivo</div>
+                        </div>
+                        <div class="thread" id="thread"></div>
+                        <div class="phone-input">
+                            <div>Cuéntale qué te preocupa…</div>
+                            <b>↑</b>
+                        </div>
+                    </div>
+
+                    <div class="agenda" id="agenda">
+                        <div class="agenda-head">
+                            <span>Agenda del centro · sábado</span>
+                            <em>● Actualizada sola</em>
+                        </div>
+                        <div id="agenda-cuerpo">
+                            <div class="agenda-vacia">Sin citas nuevas. El agente escribe aquí en cuanto cierra una.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="band">
+            <div class="wrap">
+                <div class="band-inner">
+                    <div class="band-item"><b>23:41</b><span>La hora a la que entró esa consulta.
+                            El centro llevaba cerrado seis horas.</span></div>
+                    <div class="band-item"><b>0</b><span>Precios inventados. Los del catálogo los da
+                            cerrados; el resto lo lleva a valoración.</span></div>
+                    <div class="band-item"><b>1</b><span>Agenda. La tuya. No apunta en una lista
+                            aparte que luego haya que cuadrar.</span></div>
+                    <div class="band-item"><b>Carmen</b><span>Reserva con la profesional que piden,
+                            no con «el centro».</span></div>
+                </div>
+            </div>
+        </div>
+
+        <section class="limites">
+            <div class="wrap">
+                <p class="label">[ Límites ]</p>
+                <h2>Y lo que <em>no hace</em>, que aquí importa más.</h2>
+                <p>Un agente que promete resultados no te ahorra trabajo: te llena la agenda de gente
+                    con la expectativa equivocada. Estas reglas son parte de la configuración, no una
+                    promesa comercial.</p>
+                <div class="lim-grid">
+                    <article>
+                        <span class="no">no promete</span>
+                        <h3>Ni resultados ni número de sesiones</h3>
+                        <p>Cuántas hacen falta se ve con la piel delante. Decirlo antes crea una
+                            reclamación, no una venta.</p>
+                    </article>
+                    <article>
+                        <span class="no">no decide</span>
+                        <h3>Nada sobre contraindicaciones</h3>
+                        <p>Embarazo, lactancia, medicación fotosensibilizante. No dice ni sí ni no:
+                            lo anota y lo lleva a valoración.</p>
+                    </article>
+                    <article>
+                        <span class="no">no entra</span>
+                        <h3>En médico-estética</h3>
+                        <p>Bótox, rellenos, hilos. Eso lo valora un médico, no una recepción. Lo pasa
+                            a una persona con el contexto recogido.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <div class="wrap">
+            <p class="foot-note">↑ A partir de aquí seguiría el resto de la página tal como está hoy:
+                qué hace en un centro, preguntas frecuentes y cierre.</p>
+        </div>
+    </div>
+
+    <section class="lab-section">
+        <h2>Qué cambia, movimiento a movimiento</h2>
+        <ul class="diag">
+            <li><span class="n">01</span>
+                <div><b>La demo sube al hero.</b> Deja de ser una sección que hay que encontrar y
+                    pasa a ser lo primero que se ve, funcionando sola. El visitante entiende el
+                    producto en cinco segundos sin hacer nada, y puede escribirle él si quiere.</div>
+            </li>
+            <li><span class="n">02</span>
+                <div><b>Debajo del teléfono aparece la agenda.</b> Es la diferencia real frente al
+                    agente gratuito de Meta y frente a cualquier chatbot: no solo contesta, mira la
+                    agenda de verdad y deja la cita puesta. Enseñarlo cuesta una tarjeta pequeña;
+                    contarlo cuesta un párrafo que nadie lee.</div>
+            </li>
+            <li><span class="n">03</span>
+                <div><b>Una sola acción principal.</b> «Escríbele tú mismo» — que no lleva a un
+                    formulario, lleva a usar el producto. El presupuesto por WhatsApp queda como
+                    acción secundaria, sin competir.</div>
+            </li>
+            <li><span class="n">04</span>
+                <div><b>Banda de concreción en lugar de testimonios.</b> Cuatro datos verdaderos y
+                    verificables (23:41, 0, 1, Carmen) que hacen el trabajo que harían las reseñas
+                    si existieran. Nada inventado: todo sale de la conversación que está justo
+                    encima.</div>
+            </li>
+            <li><span class="n">05</span>
+                <div><b>«Lo que no hace» pasa a bloque oscuro de firma.</b> Es el contenido más
+                    difícil de copiar que tenéis, porque a casi nadie le sale decir lo que su
+                    producto no hace. Ahora mismo son tres tarjetas planas iguales al resto; debería
+                    ser el momento en que la página baja la voz y se la cree más.</div>
+            </li>
+            <li><span class="n">06</span>
+                <div><b>Ritmo más apretado.</b> Los espacios en blanco bajan alrededor de un tercio.
+                    Menos scroll muerto entre ideas.</div>
+            </li>
+        </ul>
+    </section>
+
+    <section class="lab-section">
+        <h2>Cómo se monta — recomendación</h2>
+        <ul class="diag">
+            <li><span class="n">→</span>
+                <div><b>A mano, en HTML/CSS, sobre el sistema que ya existe.</b> Silex vale para
+                    tantear ideas rápido, pero esta página concreta se juega en tipografía, ritmo
+                    vertical y una demo con JavaScript propio hablando con el agente real — que es
+                    exactamente donde un constructor visual estorba en lugar de ayudar. El sitio ya
+                    tiene un sistema de diseño con decisiones razonadas detrás (profundidad por
+                    sombra y no por contraste, el oro como relleno y nunca como tinta). Tirarlo para
+                    empezar en un lienzo en blanco sería perder lo bueno que ya está hecho.</div>
+            </li>
+        </ul>
+    </section>
+
+    <script>
+        // El hilo se reproduce solo y en bucle: la página tiene que estar viva
+        // cuando alguien aterriza, sin pedirle que haga nada primero.
+        const GUION = [
+            { t: 'in', txt: 'Hola, me están saliendo manchas en la cara y no sé muy bien qué me haría falta.', nota: 'Entra un domingo, con el centro cerrado' },
+            { t: 'out', txt: 'Te leo. ¿Desde cuándo lo notas, y has hecho antes algún tratamiento facial?' },
+            { t: 'in', txt: 'Desde el verano, y nunca me he hecho nada.' },
+            { t: 'out', txt: 'Entonces yo empezaría por la valoración: es gratuita y sales sabiendo qué se puede hacer y cuánto cuesta.' },
+            { t: 'in', txt: '¿Y no me puedes decir un precio ahora?' },
+            { t: 'out', txt: 'De un facial personalizado no, porque cambia según lo que se vea, y prefiero no darte una cifra que luego no sea.', nota: 'Sostiene tu política de precios' },
+            { t: 'in', txt: 'Vale. ¿Puede ser con Carmen el sábado? Soy Lucía Ferrer.' },
+            { t: 'out', txt: 'Hecho, Lucía: el sábado a las 10:30 con Carmen. Los sábados cerramos a las 14:00.', nota: 'Cita creada en la agenda del centro', agenda: true }
+        ];
+
+        const thread = document.getElementById('thread');
+        const agenda = document.getElementById('agenda');
+        const agendaCuerpo = document.getElementById('agenda-cuerpo');
+        const espera = ms => new Promise(r => setTimeout(r, ms));
+
+        const AGENDA_VACIA = '<div class="agenda-vacia">Sin citas nuevas. El agente escribe aquí en cuanto cierra una.</div>';
+        const AGENDA_CITA = '<div class="slot"><b>10:30</b><div>Valoración facial · Carmen<i>Lucía Ferrer · sábado · gratuita</i></div></div>';
+
+        function burbuja(m) {
+            const d = document.createElement('div');
+            d.className = 'msg ' + m.t;
+            d.textContent = m.txt;
+            thread.appendChild(d);
+            if (m.nota) {
+                const n = document.createElement('div');
+                n.className = 'msg-note' + (m.t === 'in' ? ' left' : '');
+                n.textContent = m.nota;
+                thread.appendChild(n);
+            }
+            // Solo dejamos a la vista las últimas: el hilo no debe crecer sin fin.
+            while (thread.children.length > 7) thread.removeChild(thread.firstChild);
+        }
+
+        async function escribiendo(ms) {
+            const t = document.createElement('div');
+            t.className = 'typing';
+            t.innerHTML = '<i></i><i></i><i></i>';
+            thread.appendChild(t);
+            await espera(ms);
+            t.remove();
+        }
+
+        async function ciclo() {
+            while (true) {
+                thread.innerHTML = '';
+                agenda.classList.remove('on');
+                agendaCuerpo.innerHTML = AGENDA_VACIA;
+                await espera(700);
+                for (const m of GUION) {
+                    if (m.t === 'out') await escribiendo(820);
+                    burbuja(m);
+                    if (m.agenda) {
+                        await espera(420);
+                        agendaCuerpo.innerHTML = AGENDA_CITA;
+                        agenda.classList.add('on');
+                    }
+                    await espera(m.t === 'out' ? 1500 : 1050);
+                }
+                await espera(5200);
+            }
+        }
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) ciclo();
+        else {
+            GUION.forEach(burbuja);
+            agendaCuerpo.innerHTML = AGENDA_CITA;
+            agenda.classList.add('on');
+        }
+    </script>
+</body>
+
+</html>

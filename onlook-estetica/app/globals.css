@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+/* Tokens portados de studio32-web/site/styles.css — registro claro (01/08/2026).
+   Papel cálido, nunca blanco puro; el oro de marca se usa como relleno, no como
+   tinta (baja a bronce cuando hace de texto). */
+:root {
+  --bg-color: #f7f4ee;
+  --bg-soft: #ffffff;
+  --bg-warm: #f1ece2;
+  --surface: #ffffff;
+  --surface-strong: #f1ece2;
+
+  --border: rgba(28, 24, 18, 0.10);
+  --border-strong: rgba(28, 24, 18, 0.18);
+
+  --text-color: #1c1812;
+  --text-muted: #5d564b;
+  --text-subtle: #8b8377;
+
+  --accent-color: #8a6421;
+  --accent-fill: #c9a86a;
+  --accent-deep: #5f440f;
+
+  --sombra-1: 0 1px 2px rgba(28, 24, 18, .04), 0 4px 12px rgba(28, 24, 18, .05);
+  --sombra-2: 0 2px 4px rgba(28, 24, 18, .05), 0 12px 32px rgba(28, 24, 18, .08);
+  --sombra-3: 0 4px 8px rgba(28, 24, 18, .06), 0 24px 60px rgba(28, 24, 18, .11);
+
+  --hero-tinta: #f6f0e5;
+}
+
+@theme inline {
+  --color-bg: var(--bg-color);
+  --color-bg-soft: var(--bg-soft);
+  --color-bg-warm: var(--bg-warm);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ink: var(--text-color);
+  --color-ink-muted: var(--text-muted);
+  --color-ink-subtle: var(--text-subtle);
+  --color-accent: var(--accent-color);
+  --color-accent-fill: var(--accent-fill);
+  --color-accent-deep: var(--accent-deep);
+  --shadow-1: var(--sombra-1);
+  --shadow-2: var(--sombra-2);
+  --shadow-3: var(--sombra-3);
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-inter);
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+}

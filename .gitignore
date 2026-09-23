@@ -40,3 +40,8 @@ Thumbs.db
 # ── Carpeta generada solo para arrastrar a Netlify (duplicado del sitio) ──
 netlify-deploy-seguro/
 studio32-agent-deploy/
+
+# ── Experimentos de herramienta visual (Onlook / Silex) — no son el sitio publicado ──
+onlook-estetica/.next/
+silex-data/
+silex-output/

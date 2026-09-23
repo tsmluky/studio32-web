@@ -340,6 +340,30 @@ const SECTORES = {
                 cita: { slot: 'Mañana · 9:00–11:00', nota: 'Llamada del técnico · Sergio' }
             }
         ]
+    },
+
+    estetica: {
+        tenant: 'estetica-demo',
+        negocio: 'Estudio Áurea',
+        iniciales: 'EA',
+        marcador: 'Estudio Áurea · domingo, con el centro cerrado',
+        nota: 'Agente real conectado. Cuéntale un problema sin saber cómo se llama el tratamiento, pregúntale el precio o pide hora con una profesional concreta.',
+        placeholder: 'Cuéntale qué te preocupa…',
+        showreel: [
+            { kind: 'in', texto: 'Hola, me están saliendo manchas en la cara y no sé muy bien qué me haría falta.', estado: 'Conversación entrante · domingo, centro cerrado' },
+            { kind: 'out', texto: 'Te leo. ¿Desde cuándo lo notas, y has hecho antes algún tratamiento facial?', estado: 'El agente está entendiendo el caso' },
+            { kind: 'in', texto: 'Desde el verano, y nunca me he hecho nada.' },
+            { kind: 'out', texto: 'Entonces yo empezaría por la valoración, que es gratuita y sales sabiendo qué se puede hacer y cuánto cuesta.' },
+            { kind: 'in', texto: '¿Y no me puedes decir un precio ahora?' },
+            { kind: 'out', texto: 'De un facial personalizado no, porque cambia según lo que se vea, y prefiero no darte una cifra que luego no sea. La valoración no cuesta nada.', estado: 'Política de precios del centro respetada' },
+            { kind: 'in', texto: 'Vale. ¿Puede ser con Carmen el sábado? Soy Lucía Ferrer.', contacto: 'Lucía Ferrer' },
+            {
+                kind: 'out',
+                texto: 'Hecho, Lucía: el sábado a las 10:30 con Carmen. Ojo que los sábados cerramos a las 14:00.',
+                estado: 'Cita confirmada · agenda actualizada',
+                cita: { slot: 'Sábado · 10:30', nota: 'Valoración con Carmen · Gratuita' }
+            }
+        ]
     }
 };
 
