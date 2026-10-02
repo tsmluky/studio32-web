@@ -14,3 +14,7 @@
 | Limpieza de demos antiguas | P2 | Favicon corregido; dos avisos eran comentarios. Sin enlaces rotos. Rediseño histórico fuera del alcance |
 
 No publicar por volumen. Cada nueva URL necesita intención, aporte operativo, fuente cuando corresponda, responsable y conexión con el producto.
+
+## Pendiente verificado tras publicación de portada
+
+PSI productivo 91 rendimiento, LCP 3,0 s (objetivo <2,5), FCP 1,4 s; contraste/SEO/buenas prácticas 100. Analizar arranque y dependencias CDN sin degradar demo/animaciones. No presentar preview 2,6 s como resultado productivo.

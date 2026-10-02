@@ -423,3 +423,6 @@ footer-services. Aplicar en una hoja exclusiva home-foundation.css los mismos
 font-face Inter/Playfair/Syne, licencias OFL y preload de Playfair normal/italic.
 Mantener archivos base y demo intactos; texto pequeño cambia solo a text-muted.
 No generalizar Syne a verticales: allí la familia existente cae a Inter.
+
+Contraste adicional detectado al renderizar la demo: avatar, estado, nota, label
+Inbox y figcaption. Usar el mismo text-muted, sin cambiar interacción o identidad.

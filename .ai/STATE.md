@@ -71,7 +71,7 @@ No ejecutar una regeneración de verticales como sustituto de revisar cambios
 manuales anteriores. Sitemap mantiene hashes y fechas estables en SITEMAP_STATE.
 
 QA: 21 páginas principales, 24 URL sitemap, cero errores SEO; 34 HTML y 757 enlaces,
-cero enlaces rotos; auditor HTMLParser excluye ejemplos comentados y detecta comillas simples. Navegador: 14 rutas en
+cero enlaces rotos; auditor HTMLParser excluye ejemplos comentados y detecta comillas simples. Navegador: 15 rutas en
 1440/390 px, tablas móviles corregidas, calculadora con ejemplo y cero verificados.
 Capturas locales ignoradas en `docs/seo/qa/`. Rich Results oficial productivo válido para guía API; CWV de campo sin datos.
 
@@ -80,7 +80,7 @@ Capturas locales ignoradas en `docs/seo/qa/`. Rich Results oficial productivo v�
 Apex → www corregido mediante Single Redirect activo en Cloudflare, 301 con
 path/query conservados. HTTP y HTTPS comprobados; sin cambio de DNS. URL inexistente en www devuelve 404 correcto tras publicar.
 DNS verificado: www CNAME a Pages; apex A proxied a 75.2.60.5 y cabecera Netlify.
-Preview Cloudflare devuelve noindex/404 correcto; repetir tras publicar. Python local
+Preview Cloudflare devuelve noindex/404 correcto; producción ya comprobada. Python local
 no interpreta `_headers` ni `_redirects`. No modificar DNS por una nota vieja.
 
 Producto canónico en repo `studio32-agent`: piloto pendiente, sin evidencia de
@@ -104,9 +104,12 @@ GSC/Bing y baseline de adquisición. Apex/404 y publicación inicial cerrados.
 Seguimiento y criterios: `docs/seo/MEASUREMENT.md`, `BACKLOG.md`, `EXPERIMENTS.md`.
 
 
-## Corrección localizada de portada en preparación
+## Corrección localizada de portada publicada
 
-Rama fix/home-loading-contrast: PSI detecta LCP 3,2 s y 4 textos de bajo contraste.
-Mismas fuentes originales desde assets/fonts, preload y home-foundation.css con
-text-muted para citas/footer-services. Mantener demo, animaciones y CSS/JS base.
-Registrar resultado medido antes de cerrar.
+PR #4 fusionado en `8dd3e00`: mismas Inter/Playfair/Syne originales y pesos,
+licencias OFL, preload y home-foundation.css exclusivo. Texto pequeno de citas,
+footer y demo usa text-muted. Archivos base, estructura y animaciones conservados.
+Portada + 14 rutas a 1440/390 px: 30 checks sin overflow, dimensiones reales
+verificadas. Preview final: 97 rendimiento, 100 accesibilidad, LCP 2,6 s;
+Producción: 91 rendimiento y 100 accesibilidad/SEO/buenas prácticas; FCP 1,4 s,
+LCP 3,0 s. Objetivo LCP 2,5 s aún pendiente. Evidencia en docs/seo/QA.md.
