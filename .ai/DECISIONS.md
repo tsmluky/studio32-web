@@ -402,3 +402,15 @@ ausente: HTMLParser sustituye regex, retorno no cero ante fallos, favicon SVG
 local coherente con la demo. 34 páginas, 740 referencias, cero fallos.
 Publicar la primera colección tras checks permite corregir el soft 404 real;
 no ampliar el número de recursos hasta contar con medición.
+
+
+## 2026-10-02 · Fuentes de recursos desde el mismo origen
+
+PSI móvil real: rendimiento 92, LCP 2,7 s, TBT 0 ms, CLS 0,001; SEO,
+accesibilidad y buenas prácticas 100. Google Fonts CSS bloquea 750 ms en
+modelo de laboratorio. Mantener las mismas familias y pesos con WOFF2
+originales, Latin/Latin-ext, source manifest + hashes y licencias OFL. Solo
+recursos/problemas/herramientas: @font-face en discovery.css y preload de
+Playfair normal Latin; quitar CSS externo de esas páginas. No modificar
+styles.css, vertical.css, script.js ni demo. Verificar marca y PSI antes de
+atribuir una mejora. No interpretar TBT como INP ni laboratorio como CWV real.
