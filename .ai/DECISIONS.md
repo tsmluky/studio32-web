@@ -452,3 +452,13 @@ ni CTA. Red de seguridad desde DOMContentLoaded, independiente del widget.
 Cambio localizado en script.js: demo, agente y sectores intactos. Baseline
 histórica se conserva; PERFORMANCE_APPROVED registra excepción de hash revisable.
 Cache busting del script también en verticales y su generador.
+
+## 2026-10-02 · Consolidación de estilos de portada
+
+home-bundle.css generado desde styles.css y home-foundation.css, en ese orden,
+sin minificar ni cambiar sus fuentes/URLs/cascada. Portada reduce una solicitud
+CSS bloqueante y precarga Inter original; demás páginas mantienen sus hojas.
+Regenerar con python _plantillas/generar-home-css.py tras cambiar cualquiera
+de las fuentes CSS. Las fuentes WOFF2 y licencias originales no cambian.
+Hash aprobado del script conserva variante CRLF y LF porque Git normaliza
+saltos al fusionar; no se modifica baseline histórica ni se permite otro código.
