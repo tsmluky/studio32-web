@@ -14,6 +14,10 @@
 
 Capturas locales en `qa/` (ignoradas por Git): recursos en escritorio, guía en móvil y cálculo en móvil. La vista de recursos queda abierta en el navegador de Codex.
 
+## Vista previa del PR
+
+[PR #2](https://github.com/tsmluky/studio32-web/pull/2), en borrador. [Vista previa](https://deploy-preview-2--studio-32.netlify.app/recursos/) disponible. Cloudflare Pages y checks Netlify de headers, redirects y preview pasaron. HTTP de preview: recursos, calculadora y sitemap responden 200 con `X-Robots-Tag: noindex`; una URL inexistente responde 404. Canonical apunta a producción. Lectura de www confirma que el código nuevo todavía no está en producción. Evidencia local `qa/preview-http.json`.
+
 ## Comandos reproducibles
 
 ```text
