@@ -29,6 +29,14 @@ class Parser(HTMLParser):
 
 def main():
     errors=[]
+    import importlib.util
+    import subprocess
+    guard_spec = importlib.util.spec_from_file_location('publication_safety', ROOT/'_plantillas/publication-safety.py')
+    guard = importlib.util.module_from_spec(guard_spec)
+    guard_spec.loader.exec_module(guard)
+    errors.extend(guard.check_site(SITE))
+    security_test = subprocess.run([sys.executable, str(ROOT/'_plantillas/test-content-security.py')])
+    if security_test.returncode: errors.append('pruebas de seguridad editorial fallan')
     files={f.relative_to(SITE).as_posix():f for f in SITE.rglob('*.html')}
     parsed={}
     for name,file in files.items():
