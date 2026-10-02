@@ -1,73 +1,35 @@
-# Medición y lanzamiento
+# Medición de Studio32 · estado 02/10/2026
 
-Estado 02/10/2026: el usuario confirmó que GA4, Search Console y Bing todavía no están configurados. Primera colección publicada y validada; no hay tráfico o leads atribuidos a esta entrega. Propietario confirmado por el usuario: info@studio32.es para Google y Microsoft.
+## Cuenta real
 
-## Antes de publicar
+El usuario indicó info@studio32.es y después autorizó usar su Google personal tras no existir una identidad Google para el buzón. Cuenta Analytics **Studio32** (410468845), propiedad **Studio32 · Web** (557087225), flujo **Studio32 · sitio web** (15942157248), URL https://www.studio32.es, ID **G-ZKX0QLRZ47**. España, hora peninsular y EUR; objetivos tráfico y oportunidades de venta. Condiciones aceptadas con confirmación explícita del usuario. KittyCorner conserva su historial separado y ya no es la propiedad activa.
 
-1. Revisar siete guías, tres problemas y una calculadora en la vista previa de Cloudflare enlazada en QA.md. El registro tiene estado `published`; evidencia HTTP y commits en QA e IMPLEMENTATION_PROGRESS.
-2. Resolver en el proveedor la redirección de `studio32.es` a `https://www.studio32.es`, conservando path y query y comprobando HTTPS. Cerrado: apex HTTP/HTTPS 301 a www y path/query conservados. No cambiar DNS a partir de la nota histórica sin verificar su estado.
-3. Verificar que previews están protegidas de indexación mediante cabecera noindex o acceso. Cloudflare confirmado: preview `e100bb0b` sirve cabecera noindex. Repetir al cambiar de despliegue. El canonical por sí solo no es una protección de staging.
-4. Validar Rich Results y comprobar el diseño de marca. JSON-LD parseable no equivale a validación oficial ni a resultados enriquecidos garantizados.
-5. Revisar el modelo de consentimiento y actualizar la política antes de activar analytics. La entrega no carga GA4 y no modifica el texto vigente de privacidad.
+## Integración
 
-## Google Search Console
+measurement-consent.js y CSS propios en las 21 páginas comerciales/discovery y privacidad. Modo básico: sin etiqueta/pings de Google antes de aceptar. Igual prominencia para aceptar/rechazar; preferencias accesibles al pie de página. Solo finalidad analítica; Ads, personalización y señales de Google desactivados. Medición mejorada desactivada en GA4: no captura automática de búsquedas/formularios/enlaces.
 
-Crear propiedad de dominio para `studio32.es` con la cuenta que controla el negocio. Verificar mediante el método ofrecido por Google, conservando los registros DNS existentes. Registrar propietario, fecha y acceso. Enviar `https://www.studio32.es/sitemap.xml` tras publicar.
+Preferencia local de aceptación/rechazo con 180 días de caducidad. No contiene ID de visitante. Cookies _ga y _ga_ZKX0QLRZ47 hasta 180 días, solo tras aceptar. Retirada bloquea adaptador, borra cookies accesibles y recarga si la etiqueta se había ejecutado. URLs canónicas sin query/hash; referrer reducido a origen. **No atribuye campañas UTM**, para no enviar valores libres de URL; sí puede observar referentes de búsqueda/ChatGPT. Configurar campañas con etiquetas permitidas y verificadas como trabajo posterior.
 
-Tomar baseline antes del lanzamiento: rendimiento por página y consulta, marca/no marca, país y dispositivo; indexación, acciones manuales y CWV. Revisar unas pocas URLs principales con inspección de URL. No hay cifras iniciales disponibles en este repo.
+Eventos: calculator_view/start/input_change/complete/result_view/cta_click, demo_start/cta_click, whatsapp_click, budget_request_click. Parámetros exclusivamente enumerados page_type, sector y cta_type. No mensajes, correos, teléfonos, importes o consultas. Los eventos previos a aceptar se descartan, no se reproducen.
 
-## Bing Webmaster Tools
+Referencias: [modo básico de Google](https://developers.google.com/tag-platform/security/concepts/consent-mode), [implementación de consentimiento](https://developers.google.com/tag-platform/security/guides/consent), [criterio AEPD sobre aceptar/rechazar](https://www.aepd.es/preguntas-frecuentes/17-internet-y-redes-sociales/FAQ-1707-importancia-de-las-cookies-en-la-proteccion-de-datos). Estas comprobaciones describen la implementación; no son una auditoría legal integral del negocio.
 
-Crear/verificar el sitio bajo la cuenta del negocio, o importar la propiedad de GSC cuando proceda. Enviar el mismo sitemap. Revisar rastreo e indexación. No implementar IndexNow para esta pequeña colección estática sin una necesidad demostrada.
+## Validación y pendientes
 
-## GA4 y contrato de eventos
+node _plantillas/test-measurement.cjs verifica espera/rechazo, aceptación, retirada, caducidad, staging, URL/PII y almacenamiento bloqueado. Test de calculadora y SEO correctos. PR #6 publicado en Cloudflare; preview móvil/escritorio sin overflow. Producción comprobada: 0 etiquetas antes de aceptar, 1 tras aceptar con G-ZKX0QLRZ47; sin salto de lectura. Analytics tiempo real confirma vistas de recursos y calculadora: es QA propio, no adquisición. Se corrigió orden de scripts para calculator_view con consentimiento guardado.
 
-Crear una propiedad y flujo web con la cuenta del negocio. Obtener un ID real `G-…`; no introducir uno ficticio ni cargar scripts de analytics sin integración de consentimiento revisada. La instrumentación usa:
+Search Console ya tenía propiedad de dominio studio32.es accesible bajo Google personal. Sitemap www enviado y procesado correctamente: 24 páginas descubiertas. Historial previo: 7 clics, 6 páginas indexadas, 9 sin indexar; no atribuir a esta colección. Bing www.studio32.es verificado con meta publicada y Google personal autorizado; sitemap procesado correctamente, 24 URL descubiertas.
 
-```js
-// Lo debe definir la integración de analytics solo cuando corresponda.
-window.Studio32Analytics = {
-  consent: 'granted',
-  send: (name, params) => window.gtag('event', name, params)
-};
-// Al retirar consentimiento: consent = 'denied'; detener también el tracker.
-```
+Clics en WhatsApp o presupuesto son microconversiones, no leads cualificados. La confirmación comercial y su origen requieren proceso operativo. No ampliar la primera colección antes de medir. Revisiones a 30/60/90 días desde baseline real; separar tráfico propio de QA.
 
-Este adaptador no instala GA4 ni sustituye una CMP. Por defecto los eventos son `CustomEvent` locales (`studio32:discovery`), sin red, cookies, persistencia o reproducción posterior. El adaptador se comprueba al emitir cada evento.
+Analytics tiempo real también confirma calculator_view, calculator_start, calculator_complete y calculator_result_view. Retirada en producción comprobada: recarga sin etiqueta de Google y preferencias disponibles.
 
-| Evento | Qué significa |
-|---|---|
-| calculator_view | El código de la calculadora está cargado |
-| calculator_start | Primera interacción o cálculo |
-| calculator_input_change | Edición de un supuesto, sin enviar su valor |
-| calculator_complete | Cálculo válido solicitado |
-| calculator_result_view | Resultado mostrado en DOM; no implica tiempo de lectura |
-| calculator_cta_click | Clic en la demo desde el resultado |
-| demo_cta_click | Clic en un enlace que lleva a la demo |
-| demo_start | Primera solicitud no vacía en la demo; no garantiza respuesta del backend |
-| whatsapp_click | Clic de salida hacia WhatsApp |
-| budget_request_click | Clic hacia WhatsApp cuyo enlace solicita presupuesto |
+## Informes configurados · 02/10/2026
 
-Parámetros: `page_type`, `sector`, y `cta_type` cuando corresponde. No se incluyen cifras de calculadora, teléfono, email, texto de consulta, referrer, URL completa ni query. La URL de landing y adquisición se deben configurar en el tracker con política de exclusión de datos personales. La web conserva los UTM del enlace entrante; no necesita guardarlos para que el tracker pueda atribuirlos tras activación.
+Colección publicada **Studio32 · Captación y uso** (15944308601): adquisición de usuarios/tráfico y, en Interacción, páginas/pantallas, página de destino, eventos y **Studio32 · Uso y contacto** (15944465033). Informe propio guardado con Nombre del evento y dimensiones Tipo de página (page_type), Sector (sector), Tipo de contacto (cta_type), ámbito Evento. Métricas: número de eventos, total de usuarios y eventos por usuario activo. Sin ingresos ficticios ni clics etiquetados como leads confirmados.
 
-Crear segmentos de Google organic, Bing organic y referrals de ChatGPT por fuente/campaña observada. Los clics en WhatsApp o presupuesto son microconversiones: para medir leads cualificados hace falta confirmar la conversación comercial y su origen. No hay formulario nuevo ni evento de envío ficticio.
+Dimensiones registradas el 02/10/2026. El informe estándar con periodo Hoy ya muestra eventos recibidos de QA; no asumir datos históricos disponibles en las dimensiones recién creadas. Las dimensiones describen eventos personalizados: page_view no lleva esos tres parámetros actualmente. Para entradas utilizar Página de destino y para lectura Páginas y pantallas.
 
-## Tras desplegar
+Google: guía /recursos/whatsapp-business-api/ descubierta, actualmente sin indexar. Prueba en vivo 02/10/2026: disponible e indexable, breadcrumb válido; solicitud de indexación aceptada. No es un bloqueo técnico probado ni una garantía de indexación. Bing: sitemap Success, 24 URL descubiertas, cero errores/avisos.
 
-Comprobar página principal y nuevas rutas con HTTP 200, robots, sitemap, canonical y recursos. Una URL inexistente debe responder 404, no portada con 200. Comprobar apex → www. Repetir con user-agents de crawler si el CDN presenta restricciones; revisar WAF en cuenta. Pruebas de navegador no verifican reglas de firewall.
-
-Registrar fecha real del despliegue en `EXPERIMENTS.md`. Activar y probar eventos en DebugView solo después de configurar consentimiento. Verificar las URLs en GSC/Bing. La lógica de demo permanece intacta; el arranque visual de portada se optimiza por separado; el recorrido con número y agenda de cliente requiere una prueba separada.
-
-## 30, 60 y 90 días
-
-- 30: rastreo, indexación, primeras consultas, rutas de entrada, uso de calculadora y errores.
-- 60: demanda no marca, consultas relevantes y clics hacia demo/contacto; corregir recursos que no resuelvan la intención.
-- 90: leads cualificados, implantaciones y trabajo comercial evitado; decidir el próximo contenido con esa evidencia.
-
-No añadir nuevas páginas hasta revisar esta primera colección. Sin datos, la conclusión es pendiente de medición, no éxito SEO.
-
-## Acceso propietario comprobado · 02/10
-
-El usuario confirma info@studio32.es para todos los servicios. Google devuelve «No se ha podido encontrar esta cuenta» al iniciar sesión con ese correo. El buzón no implica una identidad Google. Alta gratuita abierta; usuario debe completar datos personales, contraseña, verificación y condiciones usando su dirección actual. No contratar Workspace ni crear propiedades en tsmluky@gmail.com. Después de autenticar: GA4, GSC y Bing bajo info@studio32.es.
-
-El usuario accede después con su Google personal y autoriza continuar por esa vía. Cuenta Analytics Studio32 separada, propiedad Studio32 · Web, España/hora peninsular/EUR, leads/tráfico; acuerdo legal preparado pendiente de aceptación. No utilizar ID de KittyCorner ni mezclarlo con Studio32.
+Registro comercial mínimo en consultas-comerciales.csv (plantilla vacía). Usar un ID interno y campos enumerados; no añadir nombres/contactos/conversaciones a este archivo ni a Analytics. Origen solo si se conoce; desconocido en otro caso. Los datos comerciales reales se conservan en la herramienta operativa del negocio.

@@ -30,7 +30,7 @@ No afecta CSS/JS ni fuentes de portada, verticales o demo.
 - Enlaces nuevos solo en footer comercial: portada y demo conservan estructura.
 - `styles.css`, `script.js`, `vertical.css` mantienen hashes iniciales.
 - Eventos locales sin red, cookies, persistencia, PII ni cifras de calculadora.
-- Usuario confirmó que GA4, GSC y Bing **todavía no están configurados**.
+- GA4 creado: Studio32 / Studio32 · Web, G-ZKX0QLRZ47; GSC/Bing pendientes.
 
 ## Estructura publicada
 
@@ -99,8 +99,8 @@ garantía de ausencia de conflictos. No usar demos como tracción comercial.
 
 ## Próximo cierre
 
-Fuentes mejoradas y publicadas; cerrar cuentas/consentimiento →
-GSC/Bing y baseline de adquisición. Apex/404 y publicación inicial cerrados.
+Fuentes y GA4 con consentimiento publicados; GSC sitemap procesado.
+Bing verificado; observar baseline de adquisición. Apex/404 y publicación inicial cerrados.
 Seguimiento y criterios: `docs/seo/MEASUREMENT.md`, `BACKLOG.md`, `EXPERIMENTS.md`.
 
 
@@ -114,13 +114,17 @@ verificadas. Preview final: 97 rendimiento, 100 accesibilidad, LCP 2,6 s;
 Producción: 91 rendimiento y 100 accesibilidad/SEO/buenas prácticas; FCP 1,4 s,
 LCP 3,0 s. Objetivo LCP 2,5 s aún pendiente. Evidencia en docs/seo/QA.md.
 
-## Iteración actual
+## Medición publicada
 
-Rama fix/home-critical-render / PR #5: intro móvil sin overlay, escritorio más
-breve, explicación/CTA sin fade. QA sin overflow; demo conservada. Preview
-LCP sigue 3,1 s: objetivo no resuelto. No atribuir éxito a puntuación.
-Usuario autoriza su cuenta Google personal tras no existir identidad Google
-info@studio32.es. Cuenta Analytics Studio32 y propiedad Studio32 · Web
-preparadas con España, hora peninsular, EUR y objetivos leads/tráfico.
-Pendiente confirmación del acuerdo legal en el navegador antes de crear.
-KittyCorner es propiedad antigua y no debe renombrarse como si fuese Studio32.
+PR #6 fusionado en 1800cdc: cuenta GA4 Studio32 creada y activa con Google
+personal autorizado por usuario. Consentimiento básico en 22 páginas, tracker
+solo tras aceptar, parámetros enumerados y URLs filtradas. Test de retirada,
+rechazo, caducidad y privacidad correcto. Producción activa: Analytics tiempo
+real muestra recursos/calculadora, tráfico propio de QA. GSC dominio existente
+con Google personal: sitemap procesado, 24 páginas descubiertas. Ver MEASUREMENT.md para IDs/estado.
+PR #5 de carga sigue en borrador; LCP objetivo aún no acreditado.
+
+Colección GA4 Studio32 · Captación y uso publicada; dimensiones de evento
+page_type/sector/cta_type y reporte Uso y contacto guardados. Bing sitemap
+Success con 24 URL. Guía API en Google descubierta/sin indexar; prueba viva
+indexable y solicitud aceptada. Registro comercial vacío en docs/seo.

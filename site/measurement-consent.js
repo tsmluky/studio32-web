@@ -1,0 +1,103 @@
+/* GA4 propio de Studio32. Modo básico: sin etiqueta ni pings antes de aceptar. */
+(function () {
+    'use strict';
+    const ID = 'G-ZKX0QLRZ47';
+    const KEY = 'studio32.measurement.v1';
+    const LIFE = 180 * 86400000;
+    const source = document.currentScript;
+    const privacyURL = new URL('legal/privacidad.html#medicion', source.src).href;
+    const production = location.hostname === 'www.studio32.es';
+    const allowed = new Set(['calculator_view', 'calculator_start', 'calculator_input_change', 'calculator_complete', 'calculator_result_view', 'calculator_cta_click', 'demo_start', 'demo_cta_click', 'whatsapp_click', 'budget_request_click']);
+    let choice = null;
+    let loaded = false;
+    try {
+        const saved = JSON.parse(localStorage.getItem(KEY));
+        if (saved && saved.expires > Date.now() && ['granted', 'denied'].includes(saved.choice)) choice = saved.choice;
+    } catch (_) { /* Si el almacenamiento está bloqueado, preguntar en cada visita. */ }
+
+    function cleanReferrer() {
+        try { return new URL(document.referrer).origin + '/'; } catch (_) { return ''; }
+    }
+    function canonicalURL() {
+        const url = new URL(document.querySelector('link[rel="canonical"]').href);
+        url.search = ''; url.hash = '';
+        return url.href;
+    }
+    function send(name, params) {
+        if (choice !== 'granted' || !production || !allowed.has(name)) return;
+        const safe = {};
+        if (['home', 'commercial', 'guide', 'problem', 'calculator', 'hub'].includes(params.page_type)) safe.page_type = params.page_type;
+        if (['general', 'dental', 'restaurant', 'aesthetics', 'local_services'].includes(params.sector)) safe.sector = params.sector;
+        if (['demo', 'whatsapp', 'budget', 'calculator_demo'].includes(params.cta_type)) safe.cta_type = params.cta_type;
+        window.gtag('event', name, safe);
+    }
+    function start() {
+        window.Studio32Analytics = { consent: 'granted', send };
+        if (loaded || !production) return;
+        loaded = true;
+        window['ga-disable-' + ID] = false;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        window.gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+        window.gtag('consent', 'update', { analytics_storage: 'granted' });
+        window.gtag('js', new Date());
+        window.gtag('config', ID, {
+            send_page_view: false, allow_google_signals: false, allow_ad_personalization_signals: false,
+            cookie_expires: 180 * 86400, cookie_update: false,
+            page_location: canonicalURL(), page_referrer: cleanReferrer()
+        });
+        window.gtag('event', 'page_view', { page_location: canonicalURL(), page_referrer: cleanReferrer(), page_title: document.title });
+        const tag = document.createElement('script');
+        tag.async = true;
+        tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
+        document.head.appendChild(tag);
+    }
+    function forgetCookies() {
+        for (const name of ['_ga', '_ga_ZKX0QLRZ47']) {
+            for (const domain of ['', '; domain=www.studio32.es', '; domain=.studio32.es']) {
+                document.cookie = name + '=; Max-Age=0; path=/' + domain + '; SameSite=Lax; Secure';
+            }
+        }
+    }
+    function decide(value) {
+        const previouslyLoaded = loaded;
+        choice = value;
+        try { localStorage.setItem(KEY, JSON.stringify({ choice, expires: Date.now() + LIFE })); } catch (_) { }
+        panel.hidden = true;
+        if (choice === 'granted') start();
+        else {
+            window.Studio32Analytics = { consent: 'denied', send };
+            window['ga-disable-' + ID] = true;
+            forgetCookies();
+            // Una etiqueta ya ejecutada no puede descargarse. Recargar la página
+            // elimina su código y evita pings posteriores a retirar la elección.
+            if (previouslyLoaded) location.reload();
+        }
+        preferences.focus({ preventScroll: true });
+    }
+    const panel = document.createElement('section');
+    panel.className = 'measurement-panel';
+    panel.setAttribute('role', 'region');
+    panel.setAttribute('aria-label', 'Medición de visitas');
+    const text = document.createElement('p');
+    text.textContent = 'Studio32 usa Google Analytics solo si aceptas, para medir visitas y uso de recursos. Puedes rechazarlo y seguir usando la web.';
+    const more = document.createElement('a');
+    more.href = privacyURL; more.textContent = 'Información de privacidad';
+    const actions = document.createElement('div'); actions.className = 'measurement-actions';
+    for (const [label, value] of [['Rechazar medición', 'denied'], ['Aceptar medición', 'granted']]) {
+        const button = document.createElement('button'); button.type = 'button'; button.textContent = label;
+        button.addEventListener('click', () => decide(value)); actions.appendChild(button);
+    }
+    panel.append(text, more, actions);
+    panel.hidden = choice !== null;
+    document.body.appendChild(panel);
+    const preferences = document.createElement('button');
+    preferences.type = 'button'; preferences.className = 'measurement-preferences';
+    preferences.textContent = 'Preferencias de medición';
+    preferences.addEventListener('click', () => { panel.hidden = false; actions.querySelector('button').focus(); });
+    const footer = document.querySelector('footer .footer-bottom') || document.querySelector('.resource-footer nav') || document.querySelector('footer');
+    (footer || document.body).appendChild(preferences);
+    if (choice === 'granted') start();
+    else window.Studio32Analytics = { consent: 'denied', send };
+    window.addEventListener('storage', event => { if (event.key === KEY) location.reload(); });
+}());

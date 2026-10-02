@@ -427,6 +427,22 @@ No generalizar Syne a verticales: allí la familia existente cae a Inter.
 Contraste adicional detectado al renderizar la demo: avatar, estado, nota, label
 Inbox y figcaption. Usar el mismo text-muted, sin cambiar interacción o identidad.
 
+## 2026-10-02 · Analytics real con consentimiento básico
+
+El usuario autoriza Google personal; cuenta/propiedad Studio32 separadas de
+KittyCorner. ID G-ZKX0QLRZ47, España/EUR. Una finalidad opcional, tag bloqueada
+antes de aceptar, preferencias al pie, retirada con bloqueo y recarga. No
+medición mejorada ni Ads. URL canónica y referente solo origen; no campañas
+UTM hasta contar con etiquetas permitidas. Banner propio de tinta/papel y
+igual prominencia; consentimiento global es excepción justificada al JS por página.
+
+## 2026-10-02 · Verificación Bing
+
+Google personal también autorizado expresamente para Bing. Alta manual y meta
+msvalidate.01 publicada en portada; no importar Search Console ni conceder
+acceso amplio a sus propiedades. Preferencias de consentimiento enfocan el
+footer con preventScroll para conservar la posición del lector.
+
 ## 2026-10-02 · Primera vista sin espera artificial en movil
 
 El preloader y el fade de hero-bottom aplazan una explicación ya disponible.
