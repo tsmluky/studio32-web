@@ -1,7 +1,7 @@
 {
   "script.js": {
-    "sha256": "8afa76d046fad77b1af45dbdf4012bb4f455b0460201468e912288d5b1e9a65c",
+    "sha256": "902eae0518a7b7f60add0393bcf3227efa2d78fb22bcae7ec3a506aeda431505",
     "original_sha256": "5b96dba01364d984ea050c509baacb9029f4e4b7bd4743ced1e084811899e9f4",
-    "reason": "Introduccion de portada abreviada; texto/CTA sin fade; demo y logica operativa intactas. Revisar QA antes de publicar."
+    "reason": "Introduccion breve solo escritorio; movil/reduced-motion sin overlay y explicacion/CTA sin animacion. Demo intacta."
   }
 }
