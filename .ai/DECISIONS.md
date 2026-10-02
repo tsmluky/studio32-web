@@ -442,3 +442,23 @@ Google personal también autorizado expresamente para Bing. Alta manual y meta
 msvalidate.01 publicada en portada; no importar Search Console ni conceder
 acceso amplio a sus propiedades. Preferencias de consentimiento enfocan el
 footer con preventScroll para conservar la posición del lector.
+
+## 2026-10-02 · Primera vista sin espera artificial en movil
+
+El preloader y el fade de hero-bottom aplazan una explicación ya disponible.
+Mantener introducción breve en escritorio; móvil hasta 540 px y movimiento
+reducido pasan directamente al contenido. Hero-bottom no vuelve a ocultar texto
+ni CTA. Red de seguridad desde DOMContentLoaded, independiente del widget.
+Cambio localizado en script.js: demo, agente y sectores intactos. Baseline
+histórica se conserva; PERFORMANCE_APPROVED registra excepción de hash revisable.
+Cache busting del script también en verticales y su generador.
+
+## 2026-10-02 · Consolidación de estilos de portada
+
+home-bundle.css generado desde styles.css y home-foundation.css, en ese orden,
+sin minificar ni cambiar sus fuentes/URLs/cascada. Portada reduce una solicitud
+CSS bloqueante y precarga Inter original; demás páginas mantienen sus hojas.
+Regenerar con python _plantillas/generar-home-css.py tras cambiar cualquiera
+de las fuentes CSS. Las fuentes WOFF2 y licencias originales no cambian.
+Hash aprobado del script conserva variante CRLF y LF porque Git normaliza
+saltos al fusionar; no se modifica baseline histórica ni se permite otro código.

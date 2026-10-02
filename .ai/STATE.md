@@ -122,7 +122,9 @@ solo tras aceptar, parámetros enumerados y URLs filtradas. Test de retirada,
 rechazo, caducidad y privacidad correcto. Producción activa: Analytics tiempo
 real muestra recursos/calculadora, tráfico propio de QA. GSC dominio existente
 con Google personal: sitemap procesado, 24 páginas descubiertas. Ver MEASUREMENT.md para IDs/estado.
-PR #5 de carga sigue en borrador; LCP objetivo aún no acreditado.
+PR #5 listo para publicar mejora de carga: CSS de portada consolidado y
+precarga Inter original; intro móvil omitida, escritorio abreviado, CTA visible.
+Preview 96 rendimiento, FCP 1,2 s, LCP 2,7 s, CLS 0: objetivo no acreditado.
 
 Colección GA4 Studio32 · Captación y uso publicada; dimensiones de evento
 page_type/sector/cta_type y reporte Uso y contacto guardados. Bing sitemap

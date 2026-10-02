@@ -117,9 +117,18 @@ def main():
             if 'SIL OPEN FONT LICENSE' not in (font_manifest.parent/license).read_text(encoding='utf-8'):
                 errors.append('licencia OFL ausente: '+license)
     old=json.loads((ROOT/'docs/seo/PERFORMANCE_BASELINE.json').read_text())
+    approved=json.loads((ROOT/'docs/seo/PERFORMANCE_APPROVED.json').read_text()) if (ROOT/'docs/seo/PERFORMANCE_APPROVED.json').exists() else {}
     for name in ('script.js','styles.css','vertical.css'):
         import hashlib
-        if hashlib.sha256((SITE/name).read_bytes()).hexdigest()!=old[name]['sha256']: errors.append('base comercial alterada: '+name)
+        expected=old[name]['sha256']
+        if name in approved:
+            if approved[name]['original_sha256']!=expected: errors.append('baseline historica alterada: '+name)
+            expected=approved[name]['sha256']
+        raw=(SITE/name).read_bytes()
+        matches=hashlib.sha256(raw).hexdigest()==expected
+        if name in approved and approved[name].get('sha256_lf'):
+            matches=matches or hashlib.sha256(raw.replace(b'\r\n',b'\n')).hexdigest()==approved[name]['sha256_lf']
+        if not matches: errors.append('base comercial alterada: '+name)
     print(f'{len(names)} páginas de producto/discovery verificadas; {len(urls)} URL de sitemap; {len(errors)} errores.')
     for error in errors: print(error)
     return bool(errors)

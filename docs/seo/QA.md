@@ -60,3 +60,11 @@ GA4 y consentimiento publicados; GSC sitemap procesado (24 páginas). Bing verif
 PR #6 fusionado: consentimiento básico propio, rechazo/aceptación iguales, footer integrado. 22 páginas; pruebas de medición/calculadora y SEO 21 páginas/24 URL correctas. Producción muestra cero tags antes de aceptar y el ID correcto tras aceptar, sin salto de scroll. Analytics confirma page_view de recursos/calculadora (QA propio). Vista de calculadora inicial corregida mediante orden de scripts; generator ya conserva ese orden.
 
 Analytics tiempo real también confirma calculator_view, calculator_start, calculator_complete y calculator_result_view. Retirada en producción comprobada: recarga sin etiqueta de Google y preferencias disponibles.
+
+## Iteración de arranque · 11:00 CEST
+
+PR #5: entrada móvil sin overlay, escritorio con intro abreviada, explicación/CTA sin fade y seguridad desde DOMContentLoaded. Tres anchos reales 1440/1024/390 sin overflow; cuatro verticales también comprobadas. Cambio de sector Casa Duarte correcto. Preview sin overlay: rendimiento 93, LCP 3,1 s, FCP 1,4 s, Speed Index 2,7 s; no cumple objetivo LCP. Se descarta font-display optional y precarga adicional de Inter tras no obtener mejora LCP, conservando política de marca. No publicar como solución del LCP.
+
+## Consolidación de portada · 14:33 CEST
+
+Baseline actual producción con consentimiento: 87 rendimiento, FCP 2,1 s, LCP 3,1 s, TBT 30 ms, CLS 0, SI 5,8 s. Preview ce85887e: 96 rendimiento, 100 accesibilidad/buenas prácticas, SEO 66 por noindex de staging; FCP 1,2 s, LCP 2,7 s, TBT 0, CLS 0, SI 1,5 s. Fuentes/cascada originales, bundle exclusivo y precarga Inter. Home 1440/1024/390 sin overflow; cambio Restaurante/Casa Duarte correcto; preview no carga GA. SEO 21 páginas/24 URL, enlaces 34 HTML/801 referencias, consentimiento/calculadora pasan. Publicar mejora y comprobar producción; no dar LCP objetivo por cumplido.

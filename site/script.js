@@ -53,26 +53,28 @@ if (TIENE_GSAP) {
 // Solo la portada tiene preloader. Las páginas por vertical no, y su arranque
 // colgaba de este onComplete: sin esta bifurcación, en ellas la demo no se
 // inicializaba nunca. Como el script va con `defer`, el DOM ya está listo aquí.
-if (document.querySelector('.preloader') && TIENE_GSAP) {
+if (document.querySelector('.preloader') && TIENE_GSAP &&
+    !window.matchMedia('(max-width: 540px), (prefers-reduced-motion: reduce)').matches) {
     const tlPreload = gsap.timeline();
 
+    // Introducción breve: no simular una carga larga con contenido ya disponible.
     // Animamos las letras del preloader
     tlPreload.to('.preloader-text span', {
         y: 0,
         stagger: 0.05,
-        duration: 0.8,
+        duration: 0.35,
         ease: "power4.out"
     })
         // Barra de progreso
         .to('.progress-bar', {
             width: '100%',
-            duration: 1.5,
+            duration: 0.4,
             ease: "power2.inOut"
-        }, "-=0.2")
+        }, "-=0.1")
         // Desaparecer preloader y revelar Hero
         .to('.preloader', {
             yPercent: -100,
-            duration: 1,
+            duration: 0.4,
             ease: "power4.inOut",
             onComplete: () => {
                 // Marca el preloader como resuelto (la red de seguridad de
@@ -122,7 +124,6 @@ function initHeroAnimations() {
         ease: "power4.out"
     })
         .from('.hero-subtitle', { opacity: 0, y: 20, duration: 0.8 }, "-=0.8")
-        .from('.hero-bottom', { opacity: 0, y: 20, duration: 0.8 }, "-=0.6")
         .from('.navbar', { y: -50, opacity: 0, duration: 1 }, "-=1");
 
     initChatDemo();
