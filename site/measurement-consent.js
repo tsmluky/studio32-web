@@ -73,7 +73,7 @@
             // elimina su código y evita pings posteriores a retirar la elección.
             if (previouslyLoaded) location.reload();
         }
-        preferences.focus();
+        preferences.focus({ preventScroll: true });
     }
     const panel = document.createElement('section');
     panel.className = 'measurement-panel';
