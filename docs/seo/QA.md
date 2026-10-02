@@ -58,3 +58,8 @@ PR #2 fusionado, commit main `4e0a56d570aaf762dc26549ed01226258612b38f`, 03:08 U
 Google Rich Results sobre guía API productiva: rastreo correcto y dos elementos válidos, Article y BreadcrumbList. Resultado: https://search.google.com/test/rich-results/result?id=GKL8sUNYmCsYGQYn9BKNyw. Falta imagen editorial como recomendación opcional; no falsear schema.
 
 PSI móvil antes de mejora de fuentes: 92 rendimiento, 100 accesibilidad, 100 buenas prácticas, 100 SEO. LCP/FCP 2,7 s, TBT 0 ms, CLS 0,001. Sin datos de campo. Report: https://pagespeed.web.dev/analysis/https-www-studio32-es-recursos-whatsapp-business-api/dsty37xv1z?form_factor=mobile. Modificación localizada para probar: mismos WOFF2 de Google Fonts servidos por Cloudflare, licencias conservadas, preload de Playfair y sin CSS remoto en recursos.
+
+
+## Fuentes locales · validación previa a publicación
+
+14 rutas × 1440/390 px: H1 único, sin overflow, tipografía Playfair conservada y sin CSS Google Fonts remoto. Evidencia `qa/font-layout.json` y `qa/fonts-mobile.png`. Assets WOFF2 originales verificados contra manifest/hashes, licencias OFL conservadas. PSI del preview 17ed0174: rendimiento 100, LCP 1,5 s, FCP 1,2 s, TBT 0 ms, CLS 0,001; accesibilidad/buenas prácticas 100. SEO 66 corresponde a noindex del preview. Repetir en producción; no son métricas de campo. https://pagespeed.web.dev/analysis/https-17ed0174-studio32-web-pages-dev-recursos-whatsapp-business-api/r47z6gwhfs?form_factor=mobile.

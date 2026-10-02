@@ -1,6 +1,7 @@
 {
   "version": "20261002-discovery-1",
   "reviewedAt": "2026-10-02",
+  "publicationStatus": "published",
   "modifiedAt": "2026-10-02T03:06:26+00:00",
   "sources": {
     "twilio": {"title": "WhatsApp Business Platform", "publisher": "Twilio", "url": "https://www.twilio.com/docs/whatsapp", "accessed": "2026-10-02"},

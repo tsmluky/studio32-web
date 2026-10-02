@@ -13,7 +13,7 @@
     "commercialTarget": "precio-agente-whatsapp",
     "canonical": "https://www.studio32.es/recursos/whatsapp-business-api/",
     "index": true,
-    "status": "review",
+    "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
     "sources": [
@@ -35,7 +35,7 @@
     "commercialTarget": "panel-de-control",
     "canonical": "https://www.studio32.es/recursos/numero-actual-whatsapp-business-api/",
     "index": true,
-    "status": "review",
+    "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
     "sources": [
@@ -57,7 +57,7 @@
     "commercialTarget": "agente-whatsapp-clinicas-dentales",
     "canonical": "https://www.studio32.es/recursos/automatizar-citas-whatsapp/",
     "index": true,
-    "status": "review",
+    "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
     "sources": [
@@ -79,7 +79,7 @@
     "commercialTarget": "panel-de-control",
     "canonical": "https://www.studio32.es/recursos/integrar-whatsapp-con-agenda/",
     "index": true,
-    "status": "review",
+    "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
     "sources": [
@@ -100,7 +100,7 @@
     "commercialTarget": "panel-de-control",
     "canonical": "https://www.studio32.es/recursos/chatbot-vs-agente-ia-whatsapp/",
     "index": true,
-    "status": "review",
+    "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
     "sources": [
@@ -121,7 +121,7 @@
     "commercialTarget": "agente-whatsapp-centros-esteticos",
     "canonical": "https://www.studio32.es/recursos/recepcionista-ia/",
     "index": true,
-    "status": "review",
+    "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
     "sources": [
@@ -142,7 +142,7 @@
     "commercialTarget": "panel-de-control",
     "canonical": "https://www.studio32.es/recursos/handoff-humano-agente-ia/",
     "index": true,
-    "status": "review",
+    "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
     "sources": [
@@ -163,7 +163,7 @@
     "commercialTarget": "agente-whatsapp-restaurantes",
     "canonical": "https://www.studio32.es/problemas/consultas-fuera-de-horario/",
     "index": true,
-    "status": "review",
+    "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
     "sources": [
@@ -184,7 +184,7 @@
     "commercialTarget": "agente-whatsapp-servicios-locales",
     "canonical": "https://www.studio32.es/problemas/recepcion-saturada/",
     "index": true,
-    "status": "review",
+    "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
     "sources": [
@@ -205,7 +205,7 @@
     "commercialTarget": "precio-agente-whatsapp",
     "canonical": "https://www.studio32.es/problemas/llamadas-y-mensajes-perdidos/",
     "index": true,
-    "status": "review",
+    "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
     "sources": [
@@ -226,7 +226,7 @@
     "commercialTarget": "precio-agente-whatsapp",
     "canonical": "https://www.studio32.es/herramientas/calculadora-consultas-perdidas/",
     "index": true,
-    "status": "review",
+    "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
     "sources": []

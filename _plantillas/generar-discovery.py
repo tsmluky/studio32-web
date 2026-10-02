@@ -180,10 +180,10 @@ def main():
         content += '<a href="../panel-de-control/">Ver el panel de control<span aria-hidden="true">↗</span></a></div></section>'
         write(hub, layout(hub,title,answer,answer,content))
     registry = [{**{key: p[key] for key in ('slug','type','intent','title','description','related','commercialTarget')},
-                 'canonical':HOST+p['slug']+'/', 'index':True, 'status':'review', 'reviewedAt':DATA['reviewedAt'],
+                 'canonical':HOST+p['slug']+'/', 'index':True, 'status':DATA.get('publicationStatus','review'), 'reviewedAt':DATA['reviewedAt'],
                  'owner':'Studio32', 'sources':p['sources']} for p in PAGES.values()]
     (ROOT/'docs/seo/CONTENT_REGISTRY.json').write_text(json.dumps(registry,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print(f'{len(PAGES)} contenidos + {len(HUBS)} hubs generados; estado editorial: review.')
+    print(f"{len(PAGES)} contenidos + {len(HUBS)} hubs generados; estado: {DATA.get('publicationStatus','review')}.")
 
 
 if __name__ == '__main__':
