@@ -3,7 +3,7 @@
 | Idea | Prioridad | Estado / condición |
 |---|---|---|
 | Apex → www | P0 | Cerrado: regla Cloudflare activa, 301 HTTP/HTTPS conservando path/query; ver INFRASTRUCTURE.md |
-| GA4 + GSC + Bing | P0 | Cuentas todavía sin configurar, confirmado por el usuario; consentimiento e ID real pendientes |
+| GA4 + GSC + Bing | P0 | GA4 y consentimiento publicados, tiempo real confirma QA; GSC sitemap correcto (24 páginas); Bing verificado por meta; sitemap enviado, procesamiento pendiente |
 | Validación HTTP 404 tras publicar | P0 | Cerrado: producción devuelve 404 correcto tras PR #2; HTTP verificado |
 | Rich Results y CWV | P0 | Google rastrea y valida guía API. PSI medido; CWV de campo sin datos, no inferir INP de TBT |
 | RGPD y proveedores | P1 | No publicar sin revisión específica y fuentes jurídicas vigentes |

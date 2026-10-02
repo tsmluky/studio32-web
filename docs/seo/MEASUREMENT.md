@@ -16,6 +16,10 @@ Referencias: [modo básico de Google](https://developers.google.com/tag-platform
 
 ## Validación y pendientes
 
-node _plantillas/test-measurement.cjs verifica espera/rechazo, aceptación, retirada, caducidad, staging, URL/PII y almacenamiento bloqueado. Test de calculadora y SEO correctos. Comprobar preview visual, publicar y verificar Studio32 en Analytics real. Después GSC/Bing, sitemap y baseline.
+node _plantillas/test-measurement.cjs verifica espera/rechazo, aceptación, retirada, caducidad, staging, URL/PII y almacenamiento bloqueado. Test de calculadora y SEO correctos. PR #6 publicado en Cloudflare; preview móvil/escritorio sin overflow. Producción comprobada: 0 etiquetas antes de aceptar, 1 tras aceptar con G-ZKX0QLRZ47; sin salto de lectura. Analytics tiempo real confirma vistas de recursos y calculadora: es QA propio, no adquisición. Se corrigió orden de scripts para calculator_view con consentimiento guardado.
+
+Search Console ya tenía propiedad de dominio studio32.es accesible bajo Google personal. Sitemap www enviado y procesado correctamente: 24 páginas descubiertas. Historial previo: 7 clics, 6 páginas indexadas, 9 sin indexar; no atribuir a esta colección. Bing www.studio32.es verificado con meta publicada y Google personal autorizado; sitemap enviado, procesamiento pendiente.
 
 Clics en WhatsApp o presupuesto son microconversiones, no leads cualificados. La confirmación comercial y su origen requieren proceso operativo. No ampliar la primera colección antes de medir. Revisiones a 30/60/90 días desde baseline real; separar tráfico propio de QA.
+
+Analytics tiempo real también confirma calculator_view, calculator_start, calculator_complete y calculator_result_view. Retirada en producción comprobada: recarga sin etiqueta de Google y preferencias disponibles.

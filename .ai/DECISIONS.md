@@ -435,3 +435,10 @@ antes de aceptar, preferencias al pie, retirada con bloqueo y recarga. No
 medición mejorada ni Ads. URL canónica y referente solo origen; no campañas
 UTM hasta contar con etiquetas permitidas. Banner propio de tinta/papel y
 igual prominencia; consentimiento global es excepción justificada al JS por página.
+
+## 2026-10-02 · Verificación Bing
+
+Google personal también autorizado expresamente para Bing. Alta manual y meta
+msvalidate.01 publicada en portada; no importar Search Console ni conceder
+acceso amplio a sus propiedades. Preferencias de consentimiento enfocan el
+footer con preventScroll para conservar la posición del lector.

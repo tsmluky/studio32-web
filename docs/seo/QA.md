@@ -53,4 +53,10 @@ git diff --check
 
 ## Pendientes reales
 
-Propietarios de Google/Microsoft para GA4/GSC/Bing, configuración de consentimiento, verificación y envío de sitemap. LCP de portada y CWV de campo. Sin adquisición atribuida ni prueba operativa de reserva de cliente real. No ampliar contenido antes de medir.
+GA4 y consentimiento publicados; GSC sitemap procesado (24 páginas). Bing verificado por meta; sitemap enviado, procesamiento pendiente. LCP de portada y CWV de campo. Sin adquisición atribuida ni prueba operativa de reserva de cliente real. No ampliar contenido antes de medir.
+
+## Medición publicada · 02/10/2026
+
+PR #6 fusionado: consentimiento básico propio, rechazo/aceptación iguales, footer integrado. 22 páginas; pruebas de medición/calculadora y SEO 21 páginas/24 URL correctas. Producción muestra cero tags antes de aceptar y el ID correcto tras aceptar, sin salto de scroll. Analytics confirma page_view de recursos/calculadora (QA propio). Vista de calculadora inicial corregida mediante orden de scripts; generator ya conserva ese orden.
+
+Analytics tiempo real también confirma calculator_view, calculator_start, calculator_complete y calculator_result_view. Retirada en producción comprobada: recarga sin etiqueta de Google y preferencias disponibles.

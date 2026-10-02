@@ -99,8 +99,8 @@ garantía de ausencia de conflictos. No usar demos como tracción comercial.
 
 ## Próximo cierre
 
-Fuentes mejoradas y publicadas; cerrar cuentas/consentimiento →
-GSC/Bing y baseline de adquisición. Apex/404 y publicación inicial cerrados.
+Fuentes y GA4 con consentimiento publicados; GSC sitemap procesado.
+Bing verificado; observar baseline de adquisición. Apex/404 y publicación inicial cerrados.
 Seguimiento y criterios: `docs/seo/MEASUREMENT.md`, `BACKLOG.md`, `EXPERIMENTS.md`.
 
 
@@ -114,10 +114,12 @@ verificadas. Preview final: 97 rendimiento, 100 accesibilidad, LCP 2,6 s;
 Producción: 91 rendimiento y 100 accesibilidad/SEO/buenas prácticas; FCP 1,4 s,
 LCP 3,0 s. Objetivo LCP 2,5 s aún pendiente. Evidencia en docs/seo/QA.md.
 
-## Medición en integración
+## Medición publicada
 
-Rama feat/consent-measurement: cuenta GA4 Studio32 creada y activa con Google
+PR #6 fusionado en 1800cdc: cuenta GA4 Studio32 creada y activa con Google
 personal autorizado por usuario. Consentimiento básico en 22 páginas, tracker
 solo tras aceptar, parámetros enumerados y URLs filtradas. Test de retirada,
-rechazo, caducidad y privacidad correcto. Ver MEASUREMENT.md para IDs/estado.
+rechazo, caducidad y privacidad correcto. Producción activa: Analytics tiempo
+real muestra recursos/calculadora, tráfico propio de QA. GSC dominio existente
+con Google personal: sitemap procesado, 24 páginas descubiertas. Ver MEASUREMENT.md para IDs/estado.
 PR #5 de carga sigue en borrador; LCP objetivo aún no acreditado.
