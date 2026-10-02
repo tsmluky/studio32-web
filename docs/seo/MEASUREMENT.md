@@ -1,6 +1,6 @@
 # Medición y lanzamiento
 
-Estado 02/10/2026: el usuario confirmó que GA4, Search Console y Bing todavía no están configurados. Primera colección publicada y validada; no hay tráfico o leads atribuidos a esta entrega. Identidad propietaria de Google/Microsoft solicitada al usuario.
+Estado 02/10/2026: el usuario confirmó que GA4, Search Console y Bing todavía no están configurados. Primera colección publicada y validada; no hay tráfico o leads atribuidos a esta entrega. Propietario confirmado por el usuario: info@studio32.es para Google y Microsoft.
 
 ## Antes de publicar
 
@@ -56,7 +56,7 @@ Crear segmentos de Google organic, Bing organic y referrals de ChatGPT por fuent
 
 Comprobar página principal y nuevas rutas con HTTP 200, robots, sitemap, canonical y recursos. Una URL inexistente debe responder 404, no portada con 200. Comprobar apex → www. Repetir con user-agents de crawler si el CDN presenta restricciones; revisar WAF en cuenta. Pruebas de navegador no verifican reglas de firewall.
 
-Registrar fecha real del despliegue en `EXPERIMENTS.md`. Activar y probar eventos en DebugView solo después de configurar consentimiento. Verificar las URLs en GSC/Bing. La demo mantuvo su JS original; el recorrido con número y agenda de cliente requiere una prueba separada.
+Registrar fecha real del despliegue en `EXPERIMENTS.md`. Activar y probar eventos en DebugView solo después de configurar consentimiento. Verificar las URLs en GSC/Bing. La lógica de demo permanece intacta; el arranque visual de portada se optimiza por separado; el recorrido con número y agenda de cliente requiere una prueba separada.
 
 ## 30, 60 y 90 días
 
@@ -65,3 +65,9 @@ Registrar fecha real del despliegue en `EXPERIMENTS.md`. Activar y probar evento
 - 90: leads cualificados, implantaciones y trabajo comercial evitado; decidir el próximo contenido con esa evidencia.
 
 No añadir nuevas páginas hasta revisar esta primera colección. Sin datos, la conclusión es pendiente de medición, no éxito SEO.
+
+## Acceso propietario comprobado · 02/10
+
+El usuario confirma info@studio32.es para todos los servicios. Google devuelve «No se ha podido encontrar esta cuenta» al iniciar sesión con ese correo. El buzón no implica una identidad Google. Alta gratuita abierta; usuario debe completar datos personales, contraseña, verificación y condiciones usando su dirección actual. No contratar Workspace ni crear propiedades en tsmluky@gmail.com. Después de autenticar: GA4, GSC y Bing bajo info@studio32.es.
+
+El usuario accede después con su Google personal y autoriza continuar por esa vía. Cuenta Analytics Studio32 separada, propiedad Studio32 · Web, España/hora peninsular/EUR, leads/tráfico; acuerdo legal preparado pendiente de aceptación. No utilizar ID de KittyCorner ni mezclarlo con Studio32.

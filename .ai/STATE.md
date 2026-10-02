@@ -113,3 +113,14 @@ Portada + 14 rutas a 1440/390 px: 30 checks sin overflow, dimensiones reales
 verificadas. Preview final: 97 rendimiento, 100 accesibilidad, LCP 2,6 s;
 Producción: 91 rendimiento y 100 accesibilidad/SEO/buenas prácticas; FCP 1,4 s,
 LCP 3,0 s. Objetivo LCP 2,5 s aún pendiente. Evidencia en docs/seo/QA.md.
+
+## Iteración actual
+
+Rama fix/home-critical-render / PR #5: intro móvil sin overlay, escritorio más
+breve, explicación/CTA sin fade. QA sin overflow; demo conservada. Preview
+LCP sigue 3,1 s: objetivo no resuelto. No atribuir éxito a puntuación.
+Usuario autoriza su cuenta Google personal tras no existir identidad Google
+info@studio32.es. Cuenta Analytics Studio32 y propiedad Studio32 · Web
+preparadas con España, hora peninsular, EUR y objetivos leads/tráfico.
+Pendiente confirmación del acuerdo legal en el navegador antes de crear.
+KittyCorner es propiedad antigua y no debe renombrarse como si fuese Studio32.

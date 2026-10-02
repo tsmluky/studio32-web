@@ -54,3 +54,7 @@ git diff --check
 ## Pendientes reales
 
 Propietarios de Google/Microsoft para GA4/GSC/Bing, configuración de consentimiento, verificación y envío de sitemap. LCP de portada y CWV de campo. Sin adquisición atribuida ni prueba operativa de reserva de cliente real. No ampliar contenido antes de medir.
+
+## Iteración de arranque · 11:00 CEST
+
+PR #5: entrada móvil sin overlay, escritorio con intro abreviada, explicación/CTA sin fade y seguridad desde DOMContentLoaded. Tres anchos reales 1440/1024/390 sin overflow; cuatro verticales también comprobadas. Cambio de sector Casa Duarte correcto. Preview sin overlay: rendimiento 93, LCP 3,1 s, FCP 1,4 s, Speed Index 2,7 s; no cumple objetivo LCP. Se descarta font-display optional y precarga adicional de Inter tras no obtener mejora LCP, conservando política de marca. No publicar como solución del LCP.

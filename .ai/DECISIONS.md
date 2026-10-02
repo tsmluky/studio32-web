@@ -426,3 +426,13 @@ No generalizar Syne a verticales: allí la familia existente cae a Inter.
 
 Contraste adicional detectado al renderizar la demo: avatar, estado, nota, label
 Inbox y figcaption. Usar el mismo text-muted, sin cambiar interacción o identidad.
+
+## 2026-10-02 · Primera vista sin espera artificial en movil
+
+El preloader y el fade de hero-bottom aplazan una explicación ya disponible.
+Mantener introducción breve en escritorio; móvil hasta 540 px y movimiento
+reducido pasan directamente al contenido. Hero-bottom no vuelve a ocultar texto
+ni CTA. Red de seguridad desde DOMContentLoaded, independiente del widget.
+Cambio localizado en script.js: demo, agente y sectores intactos. Baseline
+histórica se conserva; PERFORMANCE_APPROVED registra excepción de hash revisable.
+Cache busting del script también en verticales y su generador.
