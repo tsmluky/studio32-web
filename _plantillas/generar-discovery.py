@@ -84,6 +84,8 @@ def layout(slug, title, description, answer, content, page_type='hub', reviewed=
 <link rel="stylesheet" href="{prefix}discovery.css?v={VERSION}">
 {jsonld({'@context':'https://schema.org','@graph':graph})}
 <script src="{prefix}discovery-events.js?v={VERSION}" defer></script>
+<link rel="stylesheet" href="{prefix}measurement-consent.css?v=20261002-measurement-1">
+<script src="{prefix}measurement-consent.js?v=20261002-measurement-1" defer></script>
 {'<script src="'+prefix+'consultas-calculator.js?v='+VERSION+'" defer></script>' if page_type=='tool' else ''}
 </head><body class="pagina-vertical pagina-resource" data-page-type="{page_type}">
 <a class="skip-link" href="#contenido">Saltar al contenido</a>

@@ -30,7 +30,7 @@ No afecta CSS/JS ni fuentes de portada, verticales o demo.
 - Enlaces nuevos solo en footer comercial: portada y demo conservan estructura.
 - `styles.css`, `script.js`, `vertical.css` mantienen hashes iniciales.
 - Eventos locales sin red, cookies, persistencia, PII ni cifras de calculadora.
-- Usuario confirmó que GA4, GSC y Bing **todavía no están configurados**.
+- GA4 creado: Studio32 / Studio32 · Web, G-ZKX0QLRZ47; GSC/Bing pendientes.
 
 ## Estructura publicada
 
@@ -113,3 +113,11 @@ Portada + 14 rutas a 1440/390 px: 30 checks sin overflow, dimensiones reales
 verificadas. Preview final: 97 rendimiento, 100 accesibilidad, LCP 2,6 s;
 Producción: 91 rendimiento y 100 accesibilidad/SEO/buenas prácticas; FCP 1,4 s,
 LCP 3,0 s. Objetivo LCP 2,5 s aún pendiente. Evidencia en docs/seo/QA.md.
+
+## Medición en integración
+
+Rama feat/consent-measurement: cuenta GA4 Studio32 creada y activa con Google
+personal autorizado por usuario. Consentimiento básico en 22 páginas, tracker
+solo tras aceptar, parámetros enumerados y URLs filtradas. Test de retirada,
+rechazo, caducidad y privacidad correcto. Ver MEASUREMENT.md para IDs/estado.
+PR #5 de carga sigue en borrador; LCP objetivo aún no acreditado.

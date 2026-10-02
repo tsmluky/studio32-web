@@ -426,3 +426,12 @@ No generalizar Syne a verticales: allí la familia existente cae a Inter.
 
 Contraste adicional detectado al renderizar la demo: avatar, estado, nota, label
 Inbox y figcaption. Usar el mismo text-muted, sin cambiar interacción o identidad.
+
+## 2026-10-02 · Analytics real con consentimiento básico
+
+El usuario autoriza Google personal; cuenta/propiedad Studio32 separadas de
+KittyCorner. ID G-ZKX0QLRZ47, España/EUR. Una finalidad opcional, tag bloqueada
+antes de aceptar, preferencias al pie, retirada con bloqueo y recarga. No
+medición mejorada ni Ads. URL canónica y referente solo origen; no campañas
+UTM hasta contar con etiquetas permitidas. Banner propio de tinta/papel y
+igual prominencia; consentimiento global es excepción justificada al JS por página.
