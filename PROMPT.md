@@ -66,7 +66,7 @@ Reglas JS: no introducir librerías nuevas sin aprobación explícita; JS por p�
 
 Reglas HTML: cada página con `<meta charset>`, `<meta viewport>`, `<title>`, `<meta description>`, `<link rel="icon">`; elementos semánticos (`<nav>`, `<header>`, `<main>`, `<section>`, `<article>`, `<footer>`); un solo `<h1>` por página y jerarquía correcta de encabezados; `aria-label` en botones de icono y toggles de navegación.
 
-Despliegue: estático (Netlify/Vercel). El `index.html` raíz ES la landing principal (ya no redirige; el redirect antiguo está en `index.redirect.backup.html`). Todos los enlaces relativos deben funcionar desde la raíz del servidor — probar con `python -m http.server 8080`.
+Despliegue: estático en Cloudflare Pages, proyecto `studio32-web`, rama productiva `main`, salida `site/`. La landing es `site/index.html`; probar con `python -m http.server 8080 --directory site`. Producción: `https://www.studio32.es`. El dominio raíz redirige a www en Cloudflare conservando ruta y query. Netlify está retirado y sus proyectos desactivados: no publicar allí ni usar sus previews.
 
 ---
 

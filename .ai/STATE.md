@@ -9,7 +9,9 @@ Web comercial Studio32 → `https://www.studio32.es`. HTML/CSS/JS estático; sol
 confirmado en dashboard: proyecto `studio32-web`, repositorio conectado, rama
 productiva `main`, salida `site` y dominio `www.studio32.es` activo con SSL.
 Supabase `studio32-hub` conserva su función operativa; esta web sigue estática.
-Netlify es una integración heredada; el apex ya redirige a Pages en Cloudflare.
+Netlify está retirado: tres proyectos desactivados y builds de `studio-32`
+detenidos. El apex redirige en Cloudflare sin origen Netlify. `netlify.toml`
+mantiene `ignore = "exit 0"` como guarda ante una reactivación accidental.
 Ver `docs/seo/INFRASTRUCTURE.md`.
 
 ## Trabajo actual
@@ -84,7 +86,10 @@ Capturas locales ignoradas en `docs/seo/qa/`. Rich Results oficial productivo v�
 
 Apex → www corregido mediante Single Redirect activo en Cloudflare, 301 con
 path/query conservados. HTTP y HTTPS comprobados; sin cambio de DNS. URL inexistente en www devuelve 404 correcto tras publicar.
-DNS verificado: www CNAME a Pages; apex A proxied a 75.2.60.5 y cabecera Netlify.
+DNS verificado tras retirar Netlify: www CNAME a Pages; apex A proxied a
+192.0.2.1, dirección reservada para redirección sin origen. Regla activa en
+Cloudflare; no apunta a Netlify. Si se elimina la regla, el apex dejaría de
+redirigir: conservarla. HTTP/HTTPS, rutas/query, www 200 y 404 verificados.
 Preview Cloudflare devuelve noindex/404 correcto; producción ya comprobada. Python local
 no interpreta `_headers` ni `_redirects`. No modificar DNS por una nota vieja.
 

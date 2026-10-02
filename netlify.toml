@@ -1,5 +1,6 @@
-# Netlify · Studio32
-# La web publicable vive en site/. El resto del repo (docs, agente, scripts y
-# manuales internos como CLAUDE.md o PROMPT.md) queda FUERA del dominio.
+# Netlify retirado. Producción y previews: Cloudflare Pages, salida site/.
+# Defensa adicional si alguien reactiva por error la integración heredada:
+# exit 0 en ignore hace que Netlify cancele el build.
 [build]
   publish = "site"
+  ignore = "exit 0"

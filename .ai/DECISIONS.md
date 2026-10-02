@@ -495,3 +495,16 @@ Primera ejecución avisó de checkout con runtime obsoleto. Se actualiza a
 checkout oficial v7.0.1/Node 24 fijado a SHA y runner ubuntu-24.04 para evitar
 un cambio silencioso de ubuntu-latest. Main caa6cb8 pasa (run 37028651678).
 Son controles visibles, sin activar protección de rama ni ampliar scopes.
+
+## 2026-10-02 · Retirada efectiva de Netlify
+
+Usuario aclara que Netlify está deprecado y autoriza corregir el dominio y la
+publicación. Había despliegues Git duplicados y apex A 75.2.60.5, aunque una
+regla Cloudflare ya redirigía a www. Apex pasa a A reservado 192.0.2.1 proxied
+para redirección sin origen; www sigue en Pages. Se detienen builds de studio-32
+y se desactivan reversiblemente los tres proyectos Netlify (los otros dos son
+demos GH Dent manuales de julio, sin dominios propios ni referencias en los
+repos activos revisados). No borrar historial ni claves/hooks. ignore=exit 0
+es una segunda guarda frente a reactivación accidental; no bloquea uploads
+manuales. Se corrigen instrucciones de publicación en README/PROMPT/STATE.
+HTTP/HTTPS mantienen 301 con ruta/query, www 200 y URL inexistente 404.
