@@ -21,8 +21,8 @@ Normaliza relativos, absolutos, query y fragmentos. Cuenta páginas de origen
 distintas, no repeticiones del mismo footer. No interpreta interfaces JS.
 
 Falla ante páginas importantes ausentes/inalcanzables o a más de tres clics;
-también ante canónicas sin entrada o salida interna. Importantes: portada, siete
-comerciales/hubs definidos en el script y colección publicada del registro.
+también ante canónicas sin entrada o salida interna. Importantes: portada,
+páginas comerciales/hubs definidos en el script y colección publicada del registro.
 Esto aplica el presupuesto de esta colección, no una ley universal de SEO.
 
 Baseline 02/10/2026 tras corrección de atribuciones: 24 canónicas, 21 importantes,
@@ -33,3 +33,8 @@ enlazan a ../, preservando bloques, CSS, fuentes y JS.
 Tres pruebas del grafo cubren ciclos/ruta mínima/orfandad, normalización de
 enlaces y exclusión de comentarios/recursos. Esto previene regresiones de
 estructura; no demuestra indexación, rankings, demanda ni conversión.
+
+Primera ejecución real en PR #9: success, job de seis segundos, run
+37027708024. El workflow se guardó desde la sesión web autorizada existente
+porque la credencial de Git no permite modificar workflows. No se amplió su
+scope ni se cambiaron permisos/protección de rama. Copia web/local idénticas.

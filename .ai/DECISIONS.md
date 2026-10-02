@@ -479,3 +479,12 @@ mezclar sectores/paneles. Espera limitada sin reenvío: abortar cliente no prueb
 cancelación en servidor. Invitación propia por sector, datos ficticios explícitos
 y evento con sector elegido. Movimiento reducido mantiene scroll nativo y demo,
 sin entrada GSAP. Sin modificar fuentes/diseño ni dar LCP por resuelto.
+## 2026-10-02 · QA ligero y conexión de demos
+
+Workflow de un job con paths, permisos de lectura, sin instalaciones ni backend;
+checkout oficial fijado a commit. Se guardó vía sesión web existente porque
+OAuth de Git carece de scope workflow; no ampliar credencial. Grafo cuenta
+orígenes distintos y rutas mínimas entre canónicas del sitemap; enforce hasta
+tres clics para colección/principales, no regla SEO universal. Tres demos sin
+salida se corrigen convirtiendo la atribución existente en enlace, sin nuevo
+bloque ni rediseño. Matriz y preguntas IA preparadas, sin fingir resultados.
