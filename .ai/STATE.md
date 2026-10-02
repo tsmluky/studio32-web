@@ -77,10 +77,14 @@ propio. Mantiene discovery al regenerar; después ejecutar foundation/sitemap.
 No ejecutar una regeneración de verticales como sustituto de revisar cambios
 manuales anteriores. Sitemap mantiene hashes y fechas estables en SITEMAP_STATE.
 
-QA: 21 páginas principales, 24 URL sitemap, cero errores SEO; 34 HTML y 806 enlaces,
+QA: 21 páginas principales, 24 URL sitemap, cero errores SEO; 34 HTML y 806
+referencias locales href/src (631 navegación, 175 recursos; incluye repeticiones),
 cero enlaces rotos; auditor HTMLParser excluye ejemplos comentados y detecta comillas simples. Navegador: 15 rutas en
 1440/390 px, tablas móviles corregidas, calculadora con ejemplo y cero verificados.
 Capturas locales ignoradas en `docs/seo/qa/`. Rich Results oficial productivo válido para guía API; CWV de campo sin datos.
+Inventario actual: 24 páginas de sitemap (portada + 23 subpáginas), ocho HTML
+noindex y dos históricos/alias fuera del sitemap. Las 24 URL canónicas responden
+200 en consulta HTTP actual. No equivale a indexación. Ver PAGE_INVENTORY.md.
 
 ## Límites actuales confirmados
 

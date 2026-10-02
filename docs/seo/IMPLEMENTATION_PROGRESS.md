@@ -17,7 +17,7 @@ Primera colección publicada en https://www.studio32.es/recursos/: siete guías,
 | 7. Siete guías | Publicado | Registro e intención propia, fuentes, relacionados y CTA; sin inventar clientes/capacidades |
 | 8. Tres problemas | Publicado | Opciones operativas antes de vender el producto |
 | 9. Calculadora | Publicado | Fórmula explícita, riesgo/conversión, sensibilidad anual; sin email, almacenamiento ni envío de cifras |
-| 10. Enlazado | Verificado | 806 referencias reales, cero fallos. Grafo: 24 canónicas, 203 conexiones, 21 importantes a máximo dos clics; demos con regreso al estudio |
+| 10. Enlazado | Verificado | 806 referencias locales href/src: 631 navegación y 175 recursos, con repeticiones; cero destinos/anclas ausentes. 24 páginas en sitemap: portada + 23 subpáginas. Grafo: 203 conexiones, 21 importantes a máximo dos clics |
 | 11. Fuentes | Hecho | Proveedor, URL y fecha; revisión de fuentes a 90 días; Meta corregido con documentación oficial |
 | 12. Reglas editoriales | Aplicadas | Flujos/decisiones originales, sin páginas geográficas, cifras de tracción o garantías inventadas |
 | 13. Medición | Activa | GA4 Studio32 recibe vistas de QA con consentimiento opcional; GSC procesa sitemap (24 páginas); Bing verificado por meta; sitemap procesado correctamente, 24 URL descubiertas |
