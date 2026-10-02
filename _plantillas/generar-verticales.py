@@ -472,7 +472,7 @@ PAGINA = """<!DOCTYPE html>
         </div>
     </footer>
 
-    <script src="../script.js?v={SCRIPT_VERSION}" defer></script>
+    <script src="../script.js?v={script_version}" defer></script>
 </body>
 
 </html>
@@ -493,6 +493,7 @@ def main():
             descripcion=esc(v["descripcion"]),
             slug=v["slug"],
             version=VERSION,
+            script_version=SCRIPT_VERSION,
             sector=v["sector"],
             etiqueta=v["etiqueta"],
             etiqueta_llana=v["etiqueta"].capitalize(),
