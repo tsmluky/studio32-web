@@ -4,7 +4,7 @@
 
 - Suite SEO: 21 páginas principales verificadas, 24 URL canónicas del sitemap, cero errores.
 - Regeneración idempotente: fuente editorial + foundation no cambian hashes de salidas al repetirse sin editar fuentes.
-- Enlaces globales: 34 HTML, 742 enlaces internos. Solo tres assets ausentes en la plantilla noindex Demos-Clientes, ya presentes en baseline. Sin enlaces nuevos rotos.
+- Enlaces globales: 34 HTML, 740 enlaces internos, cero fallos. Favicon ausente de la demo histórica sustituido por SVG local. Dos supuestas imágenes rotas eran ejemplos dentro de comentarios: auditor migrado a HTMLParser para inspeccionar elementos reales. Verificados comentarios, comillas simples e IDs reales; ahora devuelve código de error si hay fallos.
 - Calculadora: fórmula, cero, porcentajes, entradas negativas/no finitas, límite superior y sensibilidad anual. Ejemplo: 200 × 40% × 50% × 20% × 100 € = 800 €/mes; 40 consultas en riesgo, 8 clientes potenciales; rango anual 7.680–11.520 €.
 - Eventos: pruebas de contrato con consentimiento denegado/concedido; exclusión de email y cifras; sin red/persistencia por defecto.
 - Navegador de Codex: 14 rutas nuevas en 1440 y 390 px, 28 comprobaciones. Un H1, CTA visible y sin desbordamiento de documento. Se detectó y corrigió el ancho mínimo de tablas en móvil; las siete páginas afectadas se revalidaron.
@@ -39,3 +39,8 @@ Los renderizadores utilizan biblioteca estándar y generan HTML versionado. Tras
 ## Límites
 
 No hay resultados de adquisición todavía. No se ha desplegado ni comprobado el comportamiento del proveedor con el nuevo 404. Producción sirve actualmente una URL inexistente con 200 y hay dos hosts sin redirección. GSC/Bing/GA4 no configurados. Rich Results oficial, WAF y CWV de campo pendientes. El servidor Python local no interpreta _headers ni _redirects del proveedor.
+
+
+## Cierre de fallos de infraestructura
+
+Apex HTTP/HTTPS devuelve 301 a www conservando ruta/query; regla activa en Cloudflare. Suite SEO, calculadora y sintaxis JS correctas antes del lanzamiento. La petición posterior del usuario de resolver los fallos permite avanzar al cierre productivo; registrar resultado HTTP real después del despliegue.

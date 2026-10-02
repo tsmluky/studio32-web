@@ -1,6 +1,6 @@
 # Infraestructura verificada · 2026-10-02
 
-Inspección de los dashboards abiertos por el usuario y lecturas HTTP públicas. Sin cambios en DNS, reglas, proyectos o bases de datos.
+Inspección de los dashboards abiertos por el usuario y lecturas HTTP públicas. DNS, proyectos y bases de datos conservados. Regla de redirección activada tras la instrucción del usuario de resolver los fallos.
 
 ## Publicación comercial
 
@@ -10,9 +10,9 @@ Preview de referencia del commit `7454591`: https://e100bb0b.studio32-web.pages.
 
 ## Dominios y Netlify heredado
 
-DNS observado: `www.studio32.es` CNAME `studio32-web.pages.dev`, DNS only. Apex `studio32.es` A `75.2.60.5`, proxied. HTTP del apex contiene `x-nf-request-id`, mientras www sirve desde Pages. Ambos responden 200 con HTML distinto. Netlify sigue siendo un origen efectivo del apex y una integración de checks/previews del repositorio; no retirarlo hasta resolver y verificar el host.
+DNS observado: `www.studio32.es` CNAME `studio32-web.pages.dev`, DNS only. Apex `studio32.es` A `75.2.60.5`, proxied. HTTP del apex contiene `x-nf-request-id`, mientras www sirve desde Pages. Ese era el estado previo. Tras activar la regla, el apex devuelve 301 a www. Netlify sigue siendo un origen efectivo del apex y una integración de checks/previews del repositorio; no retirarlo hasta resolver y verificar el host.
 
-Cierre propuesto en Cloudflare, sin migrar dominio ni tocar registros de correo/apps: una Single Redirect limitada al hostname exacto `studio32.es`, respuesta 301 hacia `concat("https://www.studio32.es", http.request.uri.path)`, con preservación de query string. Revisar reglas existentes antes de activarla. Verificar `/`, una ruta interior, query UTM y HTTPS; deben terminar en www conservando ruta y query. Repetir comprobación de 404 tras publicar el nuevo `404.html` en main. Este documento es una especificación de cambio, no evidencia de que la regla esté aplicada. Referencias oficiales consultadas el 02/10: [gestión de subdominios](https://developers.cloudflare.com/fundamentals/manage-domains/manage-subdomains/) y [ajustes Single Redirects](https://developers.cloudflare.com/rules/url-forwarding/single-redirects/settings/).
+Cierre aplicado en Cloudflare, sin migrar dominio ni tocar registros de correo/apps: una Single Redirect limitada al hostname exacto `studio32.es`, respuesta 301 hacia `concat("https://www.studio32.es", http.request.uri.path)`, con preservación de query string. Inspección previa: sin Single Redirects ni Page Rules existentes. Regla `Studio32 apex a www`, ID `499aa2ea9159464aa5020078b2704b30`, activa. Verificados HTTP/HTTPS `/` y `/precio-agente-whatsapp/?utm_source=seo-qa&utm_medium=test`: 301 exacto a www conservando ruta y query. www sigue respondiendo 200. Evidencia local `qa/redirect-http.json` y `qa/cloudflare-redirect-active.png`. Repetir comprobación de 404 tras publicar el nuevo `404.html` en main. La regla ya está aplicada y comprobada con peticiones públicas. Referencias oficiales consultadas el 02/10: [gestión de subdominios](https://developers.cloudflare.com/fundamentals/manage-domains/manage-subdomains/) y [ajustes Single Redirects](https://developers.cloudflare.com/rules/url-forwarding/single-redirects/settings/).
 
 ## Supabase y superficies operativas
 

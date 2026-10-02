@@ -390,3 +390,15 @@ backend nuevo para contenido/calculadora. Se sustituye el enlace de revisión
 Netlify por Cloudflare. Netlify es heredado pero todavía sirve el apex (DNS A
 proxied y x-nf-request-id); no desactivar hasta cerrar redirección/validación.
 Evidencia y propuesta concreta de redirección: `docs/seo/INFRASTRUCTURE.md`.
+
+
+## 2026-10-02 · Cierre autorizado de fallos
+
+El usuario pidió resolver los fallos y avanzar tras revisar la entrega. Se aplicó
+Single Redirect apex a www en Cloudflare: hostname exacto, 301, path/query
+conservados. Sin cambios de DNS, correo, Supabase o permisos. HTTP verificado.
+La auditoría tenía dos falsos positivos en comentarios y un favicon realmente
+ausente: HTMLParser sustituye regex, retorno no cero ante fallos, favicon SVG
+local coherente con la demo. 34 páginas, 740 referencias, cero fallos.
+Publicar la primera colección tras checks permite corregir el soft 404 real;
+no ampliar el número de recursos hasta contar con medición.

@@ -15,4 +15,4 @@ Fecha: 2026-10-02. El objetivo es añadir recursos útiles alrededor de la recep
 
 Responsabilidad editorial: equipo Studio32. Fuentes de proveedor: revisar a los 90 días o antes si cambia el servicio. Ninguna página nueva afirma implantaciones reales o resultados comerciales. El presupuesto permanece personalizado.
 
-Entrega en rama dedicada y PR revisable. No fusionar ni desplegar automáticamente. Preparar QA, vista local y manual de activación GSC/Bing/analytics; publicar esta ampliación exige revisar el resultado concreto. La segunda calculadora, RGPD, datos propios y más recursos permanecen en backlog hasta evidencia y medición.
+Entrega en rama dedicada y PR revisable. El 02/10, tras revisar la entrega y la infraestructura, el usuario pidió resolver todos los fallos y avanzar: cerrar validación y publicar la primera colección para corregir el soft 404 productivo. Preparar QA, vista local y manual de activación GSC/Bing/analytics; publicar esta ampliación exige revisar el resultado concreto. La segunda calculadora, RGPD, datos propios y más recursos permanecen en backlog hasta evidencia y medición.

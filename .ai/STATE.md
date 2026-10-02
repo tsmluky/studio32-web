@@ -9,7 +9,8 @@ Web comercial Studio32 → `https://www.studio32.es`. HTML/CSS/JS estático; sol
 confirmado en dashboard: proyecto `studio32-web`, repositorio conectado, rama
 productiva `main`, salida `site` y dominio `www.studio32.es` activo con SSL.
 Supabase `studio32-hub` conserva su función operativa; esta web sigue estática.
-Netlify es una integración heredada y todavía sirve el apex; ver INFRASTRUCTURE.
+Netlify es una integración heredada; el apex ya redirige a Pages en Cloudflare.
+Ver `docs/seo/INFRASTRUCTURE.md`.
 
 ## Trabajo actual
 
@@ -63,15 +64,15 @@ propio. Mantiene discovery al regenerar; después ejecutar foundation/sitemap.
 No ejecutar una regeneración de verticales como sustituto de revisar cambios
 manuales anteriores. Sitemap mantiene hashes y fechas estables en SITEMAP_STATE.
 
-QA: 21 páginas principales, 24 URL sitemap, cero errores SEO; 34 HTML y 742 enlaces,
-solo tres assets rotos preexistentes en plantilla noindex. Navegador: 14 rutas en
+QA: 21 páginas principales, 24 URL sitemap, cero errores SEO; 34 HTML y 740 enlaces,
+cero enlaces rotos; auditor HTMLParser excluye ejemplos comentados y detecta comillas simples. Navegador: 14 rutas en
 1440/390 px, tablas móviles corregidas, calculadora con ejemplo y cero verificados.
 Capturas locales ignoradas en `docs/seo/qa/`. Rich Results oficial y CWV pendientes.
 
 ## Límites actuales confirmados
 
-HTTP: apex y www responden 200 con contenido distinto; falta redirección apex →
-www en proveedor. URL inexistente en www devuelve portada con 200 (soft 404).
+Apex → www corregido mediante Single Redirect activo en Cloudflare, 301 con
+path/query conservados. HTTP y HTTPS comprobados; sin cambio de DNS. URL inexistente en www devuelve portada con 200 (soft 404).
 DNS verificado: www CNAME a Pages; apex A proxied a 75.2.60.5 y cabecera Netlify.
 Preview Cloudflare devuelve noindex/404 correcto; repetir tras publicar. Python local
 no interpreta `_headers` ni `_redirects`. No modificar DNS por una nota vieja.
