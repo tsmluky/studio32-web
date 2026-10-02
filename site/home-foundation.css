@@ -161,3 +161,4 @@
 }
 /* Contraste de texto pequeno sobre papel con un token existente. */
 .cifras cite, .footer-services { color: var(--text-muted); }
+.chat-avatar, .chat-status, .live-note, .dashboard-heading small, .dashboard-mockup figcaption { color: var(--text-muted); }
