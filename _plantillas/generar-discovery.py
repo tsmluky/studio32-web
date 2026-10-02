@@ -8,7 +8,7 @@ import json
 import os
 import re
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / 'site'
@@ -28,7 +28,47 @@ def esc(value):
     return html.escape(str(value), quote=True)
 
 
+def safe_slug(value):
+    if not isinstance(value, str) or not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*(?:/[a-z0-9]+(?:-[a-z0-9]+)*)*', value):
+        raise ValueError('Ruta editorial no válida')
+    if not (SITE / value).resolve().is_relative_to(SITE.resolve()):
+        raise ValueError('Ruta editorial fuera del sitio')
+    return value
+
+
+def safe_source_url(value):
+    if not isinstance(value, str) or any(c.isspace() or ord(c) < 32 for c in value):
+        raise ValueError('URL de fuente no válida')
+    parts = urlsplit(value)
+    if parts.scheme != 'https' or not parts.hostname or parts.username or parts.password or '\\' in value:
+        raise ValueError('La fuente necesita HTTPS y no puede contener credenciales')
+    return value
+
+
+def validate_content(data):
+    seen = set()
+    for page in data['pages']:
+        slug = safe_slug(page['slug'])
+        if slug in seen:
+            raise ValueError('Ruta editorial duplicada')
+        seen.add(slug)
+        if slug.split('/')[0] not in HUBS or len(slug.split('/')) != 2:
+            raise ValueError('Contenido fuera de los hubs editoriales')
+        safe_slug(page['commercialTarget'])
+        for target in page['related']:
+            safe_slug(target)
+    for source in data['sources'].values():
+        safe_source_url(source['url'])
+    for page in data['pages']:
+        if any(target not in seen for target in page['related']):
+            raise ValueError('Contenido relacionado ausente')
+        if any(key not in data['sources'] for key in page['sources']):
+            raise ValueError('Fuente editorial ausente')
+
+
 def relative(slug, target):
+    if slug: safe_slug(slug)
+    if target: safe_slug(target)
     depth = len(slug.split('/')) if slug else 0
     # Pages live in slug/index.html; root-relative paths are avoided by convention.
     return '../' * depth + target.strip('/') + ('/' if target else '')
@@ -150,7 +190,7 @@ def render_page(page):
         body += '<section class="resource-section resource-sources" id="fuentes"><h2>Fuentes y alcance</h2><p>Las fuentes de proveedor describen su propia plataforma. Los criterios operativos de esta guía son de Studio32; la compatibilidad se valida para cada negocio.</p><ul>'
         for key in page['sources']:
             source = DATA['sources'][key]
-            body += f'<li><a href="{esc(source["url"])}">{esc(source["publisher"])} · {esc(source["title"])}</a> <span>Consultada el {esc(source["accessed"])}.</span></li>'
+            body += f'<li><a href="{esc(safe_source_url(source["url"]))}">{esc(source["publisher"])} · {esc(source["title"])}</a> <span>Consultada el {esc(source["accessed"])}.</span></li>'
         body += '</ul></section>'
     body += '</article></div><section class="resource-related resource-section"><h2>Para continuar</h2><div class="resource-links">'
     for key in page['related']:
@@ -163,12 +203,14 @@ def render_page(page):
 
 
 def write(slug, content):
+    safe_slug(slug)
     destination = SITE / slug / 'index.html'
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(content, encoding='utf-8')
 
 
 def main():
+    validate_content(DATA)
     for page in PAGES.values():
         write(page['slug'], render_page(page))
     for hub, (name,title,answer) in HUBS.items():
