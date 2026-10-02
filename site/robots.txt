@@ -6,3 +6,7 @@ Allow: /
 # acabar indexada igualmente sin descripcion. Una cosa o la otra, nunca las dos.
 
 Sitemap: https://www.studio32.es/sitemap.xml
+
+# Descubrimiento en Search; no altera la política vigente de GPTBot.
+User-agent: OAI-SearchBot
+Allow: /
