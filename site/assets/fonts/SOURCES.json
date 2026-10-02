@@ -1,0 +1,44 @@
+[
+  {
+    "file": "inter-normal-latin-ext.woff2",
+    "source": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2",
+    "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956",
+    "bytes": 85068,
+    "accessedAt": "2026-10-02"
+  },
+  {
+    "file": "inter-normal-latin.woff2",
+    "source": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+    "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+    "bytes": 48256,
+    "accessedAt": "2026-10-02"
+  },
+  {
+    "file": "playfair-display-italic-latin-ext.woff2",
+    "source": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_naUXt_A-W2r.woff2",
+    "sha256": "4f6a4778dcb42d51a922c9ee7ba5b85482473ce33e3d4eb9280912b24794b341",
+    "bytes": 14124,
+    "accessedAt": "2026-10-02"
+  },
+  {
+    "file": "playfair-display-italic-latin.woff2",
+    "source": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_naUXtHA-Q.woff2",
+    "sha256": "8176ed854ef40b2cdebbdb7a1fd9283b3dada1e87c8e89d003f3485fc3c7435b",
+    "bytes": 23176,
+    "accessedAt": "2026-10-02"
+  },
+  {
+    "file": "playfair-display-normal-latin-ext.woff2",
+    "source": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2",
+    "sha256": "42898ad49a6b23f32b109243e1df596edf831015ed685f429e4dafbb181d599d",
+    "bytes": 21140,
+    "accessedAt": "2026-10-02"
+  },
+  {
+    "file": "playfair-display-normal-latin.woff2",
+    "source": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2",
+    "sha256": "e0c764a8e9e1cce92163c55bac4b2ad6cd4cf8c696ce2289ab5c41565e65b7e2",
+    "bytes": 38404,
+    "accessedAt": "2026-10-02"
+  }
+]

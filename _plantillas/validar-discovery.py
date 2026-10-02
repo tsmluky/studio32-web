@@ -102,6 +102,20 @@ def main():
     robots=(SITE/'robots.txt').read_text(encoding='utf-8')
     if 'User-agent: GPTBot' in robots: errors.append('política GPTBot alterada')
     if 'User-agent: OAI-SearchBot\nAllow: /' not in robots: errors.append('OAI-SearchBot no permitido')
+    # Las mismas fuentes de marca, ahora locales: comprobar referencias y trazabilidad.
+    font_manifest=SITE/'assets/fonts/SOURCES.json'
+    if font_manifest.exists():
+        import hashlib
+        for font in json.loads(font_manifest.read_text(encoding='utf-8')):
+            file=font_manifest.parent/font['file']
+            if not file.exists() or hashlib.sha256(file.read_bytes()).hexdigest()!=font['sha256']:
+                errors.append('fuente ausente o modificada: '+font['file'])
+        css=(SITE/'discovery.css').read_text(encoding='utf-8')
+        for url in re.findall(r'url\(([^)]+)\)',css):
+            if url.startswith('assets/fonts/') and not (SITE/url).exists(): errors.append('CSS fuente rota: '+url)
+        for license in ('inter-OFL.txt','playfairdisplay-OFL.txt'):
+            if 'SIL OPEN FONT LICENSE' not in (font_manifest.parent/license).read_text(encoding='utf-8'):
+                errors.append('licencia OFL ausente: '+license)
     old=json.loads((ROOT/'docs/seo/PERFORMANCE_BASELINE.json').read_text())
     for name in ('script.js','styles.css','vertical.css'):
         import hashlib

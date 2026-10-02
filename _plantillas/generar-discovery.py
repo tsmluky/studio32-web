@@ -78,8 +78,7 @@ def layout(slug, title, description, answer, content, page_type='hub', reviewed=
 <meta property="og:url" content="{HOST+slug}/"><meta property="og:image" content="{HOST}assets/og-cover.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='2' y='24' font-size='24'%3E32%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,600&amp;display=swap" rel="stylesheet">
+<link rel="preload" href="{prefix}assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{prefix}styles.css?v=20260904-verticales-7">
 <link rel="stylesheet" href="{prefix}vertical.css?v=20260904-verticales-7">
 <link rel="stylesheet" href="{prefix}discovery.css?v={VERSION}">
@@ -181,10 +180,10 @@ def main():
         content += '<a href="../panel-de-control/">Ver el panel de control<span aria-hidden="true">↗</span></a></div></section>'
         write(hub, layout(hub,title,answer,answer,content))
     registry = [{**{key: p[key] for key in ('slug','type','intent','title','description','related','commercialTarget')},
-                 'canonical':HOST+p['slug']+'/', 'index':True, 'status':'review', 'reviewedAt':DATA['reviewedAt'],
+                 'canonical':HOST+p['slug']+'/', 'index':True, 'status':DATA.get('publicationStatus','review'), 'reviewedAt':DATA['reviewedAt'],
                  'owner':'Studio32', 'sources':p['sources']} for p in PAGES.values()]
     (ROOT/'docs/seo/CONTENT_REGISTRY.json').write_text(json.dumps(registry,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print(f'{len(PAGES)} contenidos + {len(HUBS)} hubs generados; estado editorial: review.')
+    print(f"{len(PAGES)} contenidos + {len(HUBS)} hubs generados; estado: {DATA.get('publicationStatus','review')}.")
 
 
 if __name__ == '__main__':
