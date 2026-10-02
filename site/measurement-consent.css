@@ -33,7 +33,7 @@
 .measurement-actions button:hover { text-decoration: underline; }
 .measurement-preferences {
     display: block;
-    margin: 16px auto;
+    margin: 0;
     padding: 8px 12px;
     color: inherit;
     border: 0;

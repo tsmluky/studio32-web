@@ -95,7 +95,7 @@
     preferences.type = 'button'; preferences.className = 'measurement-preferences';
     preferences.textContent = 'Preferencias de medición';
     preferences.addEventListener('click', () => { panel.hidden = false; actions.querySelector('button').focus(); });
-    const footer = document.querySelector('footer');
+    const footer = document.querySelector('footer .footer-bottom') || document.querySelector('.resource-footer nav') || document.querySelector('footer');
     (footer || document.body).appendChild(preferences);
     if (choice === 'granted') start();
     else window.Studio32Analytics = { consent: 'denied', send };

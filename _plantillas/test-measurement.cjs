@@ -21,7 +21,7 @@ function setup({ saved, host = 'www.studio32.es', blocked = false } = {}) {
         title: 'Studio32', body,
         head: { appendChild: node => tags.push(node) },
         createElement: tag => new Element(tag),
-        querySelector: selector => selector === 'footer' ? footer : { href: 'https://www.studio32.es/recursos/?email=private@example.com#secret' }
+        querySelector: selector => selector === 'footer' ? footer : selector.includes('canonical') ? { href: 'https://www.studio32.es/recursos/?email=private@example.com#secret' } : null
     };
     Object.defineProperty(doc, 'cookie', { set: value => cookies.push(value) });
     let reloads = 0;
