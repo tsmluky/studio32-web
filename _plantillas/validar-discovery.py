@@ -50,7 +50,13 @@ def main():
         require(p.meta.get('og:url')==expected,'og:url no coincide')
         require('noindex' not in p.meta.get('robots',''),'noindex accidental')
         for raw in re.findall(r'<script type="application/ld\+json">(.*?)</script>',source,re.S):
-            try: json.loads(raw)
+            try:
+                schema=json.loads(raw)
+                for entity in schema.get('@graph',[schema]):
+                    if entity.get('@type')=='Article':
+                        from datetime import datetime
+                        stamp=datetime.fromisoformat(entity['dateModified'])
+                        require(stamp.tzinfo is not None,'Article dateModified necesita zona horaria')
             except ValueError: errors.append(name+': JSON-LD no parseable')
         if name.startswith(('recursos/','problemas/','herramientas/')):
             require('script.js?' not in source,'recurso carga backend/animaciones globales')

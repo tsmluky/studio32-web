@@ -44,3 +44,8 @@ No hay resultados de adquisición todavía. No se ha desplegado ni comprobado el
 ## Cierre de fallos de infraestructura
 
 Apex HTTP/HTTPS devuelve 301 a www conservando ruta/query; regla activa en Cloudflare. Suite SEO, calculadora y sintaxis JS correctas antes del lanzamiento. La petición posterior del usuario de resolver los fallos permite avanzar al cierre productivo; registrar resultado HTTP real después del despliegue.
+
+
+## Rich Results oficial
+
+Prueba Google del preview detectó Article y BreadcrumbList válidos. Preview no rastreable para indexación por noindex, como corresponde. Avisos opcionales: imagen ausente y fecha sin hora/zona. Se corrige dateModified con timestamp ISO de esta revisión y timezone; no añadir una imagen ficticia al schema solo para ocultar el aviso. Repetir sobre producción tras desplegar. Fuente: https://developers.google.com/search/docs/appearance/structured-data/article.

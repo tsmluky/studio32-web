@@ -63,7 +63,7 @@ def layout(slug, title, description, answer, content, page_type='hub', reviewed=
     if page_type in ('guide', 'problem'):
         graph.append({'@type': 'Article', 'headline': title, 'description': description,
                       'mainEntityOfPage': HOST+slug+'/', 'author': {'@type': 'Organization', 'name': 'Studio32', 'url': HOST},
-                      'publisher': {'@type':'Organization', 'name':'Studio32', 'url':HOST, '@id': HOST+'#studio32'}, 'dateModified': reviewed, 'inLanguage': 'es'})
+                      'publisher': {'@type':'Organization', 'name':'Studio32', 'url':HOST, '@id': HOST+'#studio32'}, 'dateModified': DATA['modifiedAt'], 'inLanguage': 'es'})
     else:
         graph.append({'@type': 'WebPage', 'name': title, 'url': HOST+slug+'/', 'description': description, 'inLanguage': 'es'})
     date = f'<p class="resource-review">Criterio editorial: Studio32 · Revisión <time datetime="{reviewed}">2 de octubre de 2026</time></p>' if reviewed else ''
