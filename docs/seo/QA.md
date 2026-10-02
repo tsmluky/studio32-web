@@ -120,3 +120,18 @@ confirma enlace ../ con nombre accesible en Habitat y regreso real a portada.
 CI de main 37028651678 correcto: job 7 s, total 12 s; checkout v7.0.1 con Node
 24 y runner ubuntu-24.04. Captura local: qa/quality-main-success.png. No se
 ha repetido PageSpeed: LCP conserva su última medida documentada de 3,2 s.
+
+## Publicación y demo histórica · PR #10
+
+Main ba978dc, Cloudflare publicado. Siete pruebas de seguridad editorial pasan;
+SEO 21 páginas/24 URL, enlaces 34 HTML/806 referencias sin fallos y grafo 203
+conexiones con máximo dos clics. Calculadora, consentimiento y demo pasan.
+CI de PR 37038715825 success, job 7 s. Preview móvil 390: client/scroll 375,
+sin overflow. Producción: noindex,follow; cuatro inputs deshabilitados; cero
+formularios y cero scripts localhost; escritorio client/scroll 1265 iguales.
+Clic de navegador en CTA lleva a https://www.studio32.es/#control. Captura:
+qa/taberna-production-safe.png. Clic semántico inicial en preview no navegó;
+control AX del navegador sí confirmó destino. No se rellenaron campos ni
+enviaron reservas. Escáner es limitado, no auditoría integral de secretos/backend.
+CI de main 37038917631 success; job 118 s, incluido checkout. No extrapolar los
+siete segundos de la ejecución de PR a la ejecución de main.

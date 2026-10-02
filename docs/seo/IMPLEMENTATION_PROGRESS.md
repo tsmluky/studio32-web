@@ -17,11 +17,11 @@ Primera colección publicada en https://www.studio32.es/recursos/: siete guías,
 | 7. Siete guías | Publicado | Registro e intención propia, fuentes, relacionados y CTA; sin inventar clientes/capacidades |
 | 8. Tres problemas | Publicado | Opciones operativas antes de vender el producto |
 | 9. Calculadora | Publicado | Fórmula explícita, riesgo/conversión, sensibilidad anual; sin email, almacenamiento ni envío de cifras |
-| 10. Enlazado | Verificado | 804 referencias reales, cero fallos. Grafo: 24 canónicas, 203 conexiones, 21 importantes a máximo dos clics; demos con regreso al estudio |
+| 10. Enlazado | Verificado | 806 referencias reales, cero fallos. Grafo: 24 canónicas, 203 conexiones, 21 importantes a máximo dos clics; demos con regreso al estudio |
 | 11. Fuentes | Hecho | Proveedor, URL y fecha; revisión de fuentes a 90 días; Meta corregido con documentación oficial |
 | 12. Reglas editoriales | Aplicadas | Flujos/decisiones originales, sin páginas geográficas, cifras de tracción o garantías inventadas |
 | 13. Medición | Activa | GA4 Studio32 recibe vistas de QA con consentimiento opcional; GSC procesa sitemap (24 páginas); Bing verificado por meta; sitemap procesado correctamente, 24 URL descubiertas |
-| 14. QA | Verificado; control automático activo | SEO/JSON-LD/links/calculadora, escritorio/móvil; prueba viva Google valida guía; HTTP productivo correcto. PR #8: sesiones/timeout/sector. PR #9 publicado: CI de SEO, enlaces, grafo, privacidad, calculadora y demo; main pasa en 7 s, sin llamadas al backend |
+| 14. QA | Verificado; control automático activo | SEO/JSON-LD/links/calculadora, escritorio/móvil; HTTP productivo correcto. PR #8: sesiones/timeout/sector. PR #9: CI activo. PR #10: siete pruebas de seguridad editorial y guardas de salida pública; demo histórica corregida y comprobada en producción, sin llamadas de reserva |
 | 15. Detener y medir | En curso | No ampliar la colección. Revisiones a 30/60/90 días después de disponer de medición real |
 
 ## Fallos cerrados
@@ -46,6 +46,13 @@ movimiento reducido sin ampliar contenido. Corresponde a apartados 39–41
 mantiene recogida de datos; no bloquea correcciones de lo ya publicado.
 
 ## Siguiente decisión
+
+Apartados 121–125 y 132: PR #10 publicado, main ba978dc. Generador rechaza rutas
+fuera de los hubs, duplicados, referencias ausentes y fuentes ejecutables o con
+credenciales antes de escribir. Control de URLs activas locales/staging y
+archivos/firmas privadas integrado en CI; siete pruebas pasan. Taberna conserva
+noindex, desactiva inputs del ejemplo y no ofrece submit; enlace probado a la
+demo principal. Procedimiento de reversión documentado, no ensayado en producción.
 
 Apartados 61–64: workflow de QA activo tras PR #9, main caa6cb8; ejecución de
 main 37028651678 correcta (job 7 s). Cloudflare confirma publicación. Grafo

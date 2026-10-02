@@ -46,3 +46,7 @@ terminó correctamente: job siete segundos, total doce. Se actualizó checkout
 tras el aviso de runtime obsoleto de la primera ejecución. Captura local:
 qa/quality-main-success.png. Cloudflare confirma despliegue correcto; Habitat
 productivo vuelve a portada al pulsar la atribución existente.
+
+PR #10 amplía el validador existente con siete pruebas de seguridad editorial y
+guardas de salida pública. CI de PR 37038715825 correcto (7 s); CI de main
+37038917631 correcto (118 s, incluido checkout). Ver PUBLICATION_SAFETY.md.

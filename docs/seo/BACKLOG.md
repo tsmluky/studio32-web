@@ -11,7 +11,9 @@
 | Calculadora de no-shows | P2 | Medir primero utilidad de calculadora inicial; separar oportunidad de costes |
 | Datos/benchmarks | P2 | Solo datos reales, metodología y autorización pertinente |
 | Casos de éxito | P2 | Piloto real y evidencia; nunca utilizar demos como clientes |
-| Limpieza de demos antiguas | P2 | Favicon corregido; dos avisos eran comentarios. Sin enlaces rotos. Rediseño histórico fuera del alcance |
+| Limpieza de demos antiguas | P2 | Favicon y regreso desde tres demos corregidos. PR #10 elimina widget localhost de Taberna; muestra visual sin datos/reservas y CTA a Studio32. Rediseño histórico fuera del alcance |
+| Guardas de publicación / contenido | P1 | PR #10 publicado: rutas/fuentes validadas, siete pruebas, URLs locales/staging y archivos/firmas privadas comprobados. No certifica seguridad completa |
+| Reversión crítica | P1 | Procedimiento documentado en PUBLICATION_SAFETY.md, con versiones nuevas para assets cacheados; no ensayado en producción |
 
 No publicar por volumen. Cada nueva URL necesita intención, aporte operativo, fuente cuando corresponda, responsable y conexión con el producto.
 

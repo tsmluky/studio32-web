@@ -77,7 +77,7 @@ propio. Mantiene discovery al regenerar; después ejecutar foundation/sitemap.
 No ejecutar una regeneración de verticales como sustituto de revisar cambios
 manuales anteriores. Sitemap mantiene hashes y fechas estables en SITEMAP_STATE.
 
-QA: 21 páginas principales, 24 URL sitemap, cero errores SEO; 34 HTML y 804 enlaces,
+QA: 21 páginas principales, 24 URL sitemap, cero errores SEO; 34 HTML y 806 enlaces,
 cero enlaces rotos; auditor HTMLParser excluye ejemplos comentados y detecta comillas simples. Navegador: 15 rutas en
 1440/390 px, tablas móviles corregidas, calculadora con ejemplo y cero verificados.
 Capturas locales ignoradas en `docs/seo/qa/`. Rich Results oficial productivo válido para guía API; CWV de campo sin datos.
@@ -158,6 +158,17 @@ Tres demos enlazan desde su atribución existente a Studio32; 390/1440 sin
 overflow y regreso real comprobado. Preparadas TOPIC_COVERAGE y AI_QUERY_SET;
 sin citas/menciones de IA muestreadas aún. Producción confirma enlace de regreso
 de Habitat y navegación a portada; las tres demos se comprobaron en preview.
+
+PR #10 fusionado en main ba978dc: generador valida rutas/fuentes/referencias
+antes de escribir; siete pruebas de seguridad editorial pasan en CI. El
+validador bloquea URLs HTML activas locales/staging y archivos/firmas privadas
+con diagnóstico sin valores. Taberna no carga localhost, mantiene noindex y
+presenta campos de ejemplo deshabilitados, sin submit; CTA lleva a #control.
+Preview 390 sin overflow y destino confirmado mediante clic de navegador.
+Producción confirma noindex, cuatro inputs deshabilitados, cero formularios y
+scripts localhost, sin overflow a 1265; CTA navega a www/#control. CI de main
+37038917631 success. Captura local qa/taberna-production-safe.png.
+Procedimiento de reversión en PUBLICATION_SAFETY.md; no ejecutado en producción.
 
 Resolver LCP móvil con evidencia productiva (objetivo 2,5 s), observar indexación
 efectiva y demanda. No confundir solicitud/sitemap con indexación ni QA con

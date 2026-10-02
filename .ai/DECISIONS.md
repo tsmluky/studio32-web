@@ -508,3 +508,12 @@ repos activos revisados). No borrar historial ni claves/hooks. ignore=exit 0
 es una segunda guarda frente a reactivación accidental; no bloquea uploads
 manuales. Se corrigen instrucciones de publicación en README/PROMPT/STATE.
 HTTP/HTTPS mantienen 301 con ruta/query, www 200 y URL inexistente 404.
+
+## 2026-10-02 · Límites editoriales y formulario histórico
+
+PR #10 valida rutas/fuentes y relaciones antes de escribir; escape por sí solo
+no impide href javascript ni traversal de salida. Guardas de publicación y
+siete pruebas integradas en validador existente, sin cambiar workflow/scopes.
+Taberna pedía datos para un widget servido desde localhost del visitante:
+se conserva como muestra visual, sin submit ni inputs activos, con acceso a
+la demo de Studio32. No activar tenant antiguo sin validación de producto.
