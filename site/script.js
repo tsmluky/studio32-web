@@ -113,18 +113,20 @@ function initHeroAnimations() {
         return;
     }
 
-    const tlHero = gsap.timeline();
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const tlHero = gsap.timeline();
 
-    // Revelar líneas del hero ("Studio32 / Digital Systems")
-    tlHero.from('.hero-title .reveal-text', {
-        yPercent: 120,
-        rotation: 5,
-        stagger: 0.1,
-        duration: 1.2,
-        ease: "power4.out"
-    })
-        .from('.hero-subtitle', { opacity: 0, y: 20, duration: 0.8 }, "-=0.8")
-        .from('.navbar', { y: -50, opacity: 0, duration: 1 }, "-=1");
+        // Revelar líneas del hero ("Studio32 / Digital Systems")
+        tlHero.from('.hero-title .reveal-text', {
+            yPercent: 120,
+            rotation: 5,
+            stagger: 0.1,
+            duration: 1.2,
+            ease: "power4.out"
+        })
+            .from('.hero-subtitle', { opacity: 0, y: 20, duration: 0.8 }, "-=0.8")
+            .from('.navbar', { y: -50, opacity: 0, duration: 1 }, "-=1");
+    }
 
     initChatDemo();
     initSectorDemo();
@@ -558,6 +560,9 @@ function initLiveDemo() {
     let count = 0;
     let turnos = 0;
     let busy = false;
+    let generation = 0;
+    let chatRequest = null;
+    let panelRequest = null;
 
     function stamp() {
         const now = new Date();
@@ -606,19 +611,29 @@ function initLiveDemo() {
     // Lee del agente lo que ha hecho DE VERDAD en esta sesión y lo pinta en el
     // panel. No se deduce del texto de la respuesta: se consulta el estado real.
     async function refrescarPanel() {
+        const currentGeneration = generation;
+        if (panelRequest) panelRequest.abort();
+        const controller = new AbortController();
+        panelRequest = controller;
+        const timeout = setTimeout(() => controller.abort(), 15000);
         try {
             const url = AGENT_BASE + '/demo/estado?tenant=' + encodeURIComponent(DEMO_AGENT.tenant) +
                 '&sesion=' + encodeURIComponent(sesion);
-            const res = await fetch(url, { cache: 'no-store' });
+            const res = await fetch(url, { cache: 'no-store', signal: controller.signal });
             if (!res.ok) return;
 
             const data = await res.json();
+            if (currentGeneration !== generation || controller.signal.aborted) return;
             const cita = (data.citas || [])[0];
             if (!cita) return;
 
             pintarCita(cita.fecha + ' · ' + cita.hora, (cita.servicio || 'Cita') + ' · Confirmada');
             if (cita.nombre) marcarContacto(cita.nombre);
         } catch (_) { /* el panel simplemente no se actualiza; el chat sigue */ }
+        finally {
+            clearTimeout(timeout);
+            if (panelRequest === controller) panelRequest = null;
+        }
     }
 
     function iniciales(nombre) {
@@ -655,6 +670,12 @@ function initLiveDemo() {
         }
 
         busy = true;
+        const currentGeneration = generation;
+        const controller = new AbortController();
+        chatRequest = controller;
+        // Incluye arranque en frío; al agotar la espera se puede reintentar.
+        // No reenvía automáticamente: el servidor podría haber procesado el mensaje.
+        const timeout = setTimeout(() => controller.abort(), 45000);
         turnos += 1;
         input.value = '';
         sendBtn.disabled = true;
@@ -670,10 +691,13 @@ function initLiveDemo() {
             const res = await fetch(DEMO_AGENT.endpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                signal: controller.signal,
                 body: JSON.stringify({ tenant: DEMO_AGENT.tenant, sesion: sesion, mensaje: texto })
             });
 
             const data = await res.json();
+            if (currentGeneration !== generation) return;
+            if (controller.signal.aborted) throw new Error('espera agotada');
             typing.hidden = true;
 
             if (res.status === 429) {
@@ -688,17 +712,28 @@ function initLiveDemo() {
                 refrescarPanel();
             }
         } catch (err) {
+            if (currentGeneration !== generation) return;
             typing.hidden = true;
             statusEl.textContent = 'Sin conexión con el agente';
-            setNote('No he podido conectar con el agente. Vuelve a intentarlo en un momento.', true);
+            setNote(controller.signal.aborted
+                ? 'La respuesta está tardando demasiado. Puedes volver a intentarlo; el mensaje anterior podría haberse procesado.'
+                : 'No he podido conectar con el agente. Vuelve a intentarlo en un momento.', true);
         } finally {
+            clearTimeout(timeout);
+            if (chatRequest === controller) chatRequest = null;
+            if (currentGeneration !== generation) return;
             busy = false;
             sendBtn.disabled = false;
-            input.focus();
+            input.focus({ preventScroll: true });
         }
     }
 
     function limpiar(etiqueta) {
+        generation += 1;
+        if (chatRequest) chatRequest.abort();
+        if (panelRequest) panelRequest.abort();
+        chatRequest = null;
+        panelRequest = null;
         sesion = 'landing-' + Math.random().toString(36).slice(2, 10);
         count = 0;
         turnos = 0;
