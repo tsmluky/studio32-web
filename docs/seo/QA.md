@@ -115,4 +115,8 @@ salidas vacías. Tres pruebas verifican normalización, ciclos y orfandad.
 Preview e8fa74c7: tres demos 390/1440 sin overflow, enlace con nombre accesible
 Volver a Studio32. Regreso real de las tres a portada comprobado; L'Obscur
 confirmado con clic nativo tras estabilizar layout. CSS/JS/diseño de demos
-intactos. Aún pendiente comprobar producción de PR #9.
+intactos. PR #9 fusionado en main caa6cb8 y publicado en Cloudflare. Producción
+confirma enlace ../ con nombre accesible en Habitat y regreso real a portada.
+CI de main 37028651678 correcto: job 7 s, total 12 s; checkout v7.0.1 con Node
+24 y runner ubuntu-24.04. Captura local: qa/quality-main-success.png. No se
+ha repetido PageSpeed: LCP conserva su última medida documentada de 3,2 s.

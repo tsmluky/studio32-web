@@ -21,7 +21,7 @@ Primera colección publicada en https://www.studio32.es/recursos/: siete guías,
 | 11. Fuentes | Hecho | Proveedor, URL y fecha; revisión de fuentes a 90 días; Meta corregido con documentación oficial |
 | 12. Reglas editoriales | Aplicadas | Flujos/decisiones originales, sin páginas geográficas, cifras de tracción o garantías inventadas |
 | 13. Medición | Activa | GA4 Studio32 recibe vistas de QA con consentimiento opcional; GSC procesa sitemap (24 páginas); Bing verificado por meta; sitemap procesado correctamente, 24 URL descubiertas |
-| 14. QA | Verificado | SEO/JSON-LD/links/calculadora, escritorio/móvil; prueba viva Google valida guía; HTTP productivo correcto. PR #8: aislamiento de sesiones, timeout y medición por sector probados sin backend; producción publicada y verificada |
+| 14. QA | Verificado; control automático activo | SEO/JSON-LD/links/calculadora, escritorio/móvil; prueba viva Google valida guía; HTTP productivo correcto. PR #8: sesiones/timeout/sector. PR #9 publicado: CI de SEO, enlaces, grafo, privacidad, calculadora y demo; main pasa en 7 s, sin llamadas al backend |
 | 15. Detener y medir | En curso | No ampliar la colección. Revisiones a 30/60/90 días después de disponer de medición real |
 
 ## Fallos cerrados
@@ -47,8 +47,9 @@ mantiene recogida de datos; no bloquea correcciones de lo ya publicado.
 
 ## Siguiente decisión
 
-Apartados 61–64: workflow de QA preparado y primera ejecución real de PR #9
-correcta; grafo comprueba alcance y profundidad. Apartados 137–140: matriz de
+Apartados 61–64: workflow de QA activo tras PR #9, main caa6cb8; ejecución de
+main 37028651678 correcta (job 7 s). Cloudflare confirma publicación. Grafo
+comprueba alcance y profundidad. Apartados 137–140: matriz de
 cobertura y ocho preguntas de diagnóstico preparadas, todavía sin muestreo de
 resultados. No es otra colección pública ni prueba de menciones de Studio32.
 

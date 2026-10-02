@@ -4,7 +4,8 @@
 afectan site/, _plantillas/, el workflow o manifiestos JSON de SEO. Un solo job,
 máximo cinco minutos, cancela ejecuciones anteriores de la misma rama. No
 instala paquetes, no usa secretos, no llama al backend ni publica el sitio.
-Checkout oficial fijado a commit; permisos de lectura. Las comprobaciones son
+Checkout oficial v7.0.1 (Node 24) fijado a commit; runner ubuntu-24.04 y permisos
+de lectura. Las comprobaciones son
 un estado visible de la PR; no se han cambiado reglas de protección de rama.
 
 Incluye SEO/canonical/schema/sitemap, hashes de fuentes y bases comerciales,
@@ -38,3 +39,10 @@ Primera ejecución real en PR #9: success, job de seis segundos, run
 37027708024. El workflow se guardó desde la sesión web autorizada existente
 porque la credencial de Git no permite modificar workflows. No se amplió su
 scope ni se cambiaron permisos/protección de rama. Copia web/local idénticas.
+
+Publicado mediante PR #9, main caa6cb8. La ejecución productiva de main
+[37028651678](https://github.com/tsmluky/studio32-web/actions/runs/37028651678)
+terminó correctamente: job siete segundos, total doce. Se actualizó checkout
+tras el aviso de runtime obsoleto de la primera ejecución. Captura local:
+qa/quality-main-success.png. Cloudflare confirma despliegue correcto; Habitat
+productivo vuelve a portada al pulsar la atribución existente.

@@ -488,3 +488,10 @@ orígenes distintos y rutas mínimas entre canónicas del sitemap; enforce hasta
 tres clics para colección/principales, no regla SEO universal. Tres demos sin
 salida se corrigen convirtiendo la atribución existente en enlace, sin nuevo
 bloque ni rediseño. Matriz y preguntas IA preparadas, sin fingir resultados.
+
+## 2026-10-02 · Runtime de comprobaciones
+
+Primera ejecución avisó de checkout con runtime obsoleto. Se actualiza a
+checkout oficial v7.0.1/Node 24 fijado a SHA y runner ubuntu-24.04 para evitar
+un cambio silencioso de ubuntu-latest. Main caa6cb8 pasa (run 37028651678).
+Son controles visibles, sin activar protección de rama ni ampliar scopes.

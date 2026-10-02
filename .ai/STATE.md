@@ -143,13 +143,16 @@ recorridos. Continuar trabajo activo autorizado mientras se acumula medición.
 
 ## Pendientes y próxima decisión
 
-PR #9: CI de SEO/enlaces/privacidad/calculadora/demo/grafo en PR y main, sin
-paquetes, secretos ni backend; paths filtra cambios documentales. Primera
-ejecución real success (run 37027708024, job 6 s). Grafo: 24 canónicas,
+PR #9 publicado en Cloudflare desde main caa6cb8: CI de SEO/enlaces/privacidad/
+calculadora/demo/grafo en PR y main, sin paquetes, secretos ni backend; paths
+filtra cambios documentales. Ejecución de main success (run 37028651678,
+job 7 s). Runner ubuntu-24.04 y checkout oficial v7.0.1 con Node 24,
+fijado a commit. No se ampliaron permisos. Grafo: 24 canónicas,
 203 conexiones, 21 importantes; máximo dos clics y sin huérfanas/salidas vacías.
 Tres demos enlazan desde su atribución existente a Studio32; 390/1440 sin
 overflow y regreso real comprobado. Preparadas TOPIC_COVERAGE y AI_QUERY_SET;
-sin citas/menciones de IA muestreadas aún. Publicación de PR #9 pendiente.
+sin citas/menciones de IA muestreadas aún. Producción confirma enlace de regreso
+de Habitat y navegación a portada; las tres demos se comprobaron en preview.
 
 Resolver LCP móvil con evidencia productiva (objetivo 2,5 s), observar indexación
 efectiva y demanda. No confundir solicitud/sitemap con indexación ni QA con
