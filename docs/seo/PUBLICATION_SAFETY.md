@@ -19,7 +19,9 @@ Los tokens públicos de medición no se consideran credenciales privadas.
 La demo histórica de Taberna cargaba un script activo de localhost:3000.
 Se elimina esa dependencia inservible para visitantes y su atribución existente
 ofrece probar el asistente en la portada. Conserva noindex, diseño y archivos;
-identifica los datos como ficticios. No se activa un nuevo tenant o widget.
+identifica los datos como ficticios. Los cuatro inputs son deshabilitados y el
+formulario visual no tiene submit; su CTA lleva a la demo del estudio. No se
+activa un nuevo tenant o widget ni se pide información personal para simular.
 
 ## Revertir una modificación crítica
 

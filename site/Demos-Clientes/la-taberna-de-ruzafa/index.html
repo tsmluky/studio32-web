@@ -223,14 +223,15 @@
         <div class="container narrow">
             <div class="form-wrapper reveal">
                 <h2>Reserva tu mesa</h2>
-                <p>Martes a domingo. Comidas de 13:00 a 16:00 y cenas de 20:00 a 23:30. Para grupos de más de 8, escríbenos por el chat y te confirmamos en persona.</p>
+                <p id="booking-demo-note">Demo visual con datos ficticios: este formulario no recoge datos ni solicita una reserva. Prueba el asistente de Studio32 para explorar el recorrido.</p>
 
-                <form class="booking-form" id="booking-form" novalidate>
+                <div class="booking-form" id="booking-demo" aria-describedby="booking-demo-note">
                     <div class="form-group">
                         <input
                             type="text"
                             placeholder="Nombre completo"
                             aria-label="Nombre completo"
+                            disabled
                             required
                             class="hover-target">
                     </div>
@@ -239,6 +240,7 @@
                             type="tel"
                             placeholder="Teléfono"
                             aria-label="Teléfono de contacto"
+                            disabled
                             required
                             class="hover-target">
                     </div>
@@ -247,6 +249,7 @@
                             <input
                                 type="date"
                                 aria-label="Fecha de reserva"
+                                disabled
                                 required
                                 class="hover-target">
                         </div>
@@ -258,13 +261,14 @@
                                 max="20"
                                 value="2"
                                 aria-label="Número de invitados"
+                                disabled
                                 class="hover-target minimal-input">
                         </div>
                     </div>
-                    <button type="submit" class="btn-primary full-width hover-target">
-                        Solicitar Reserva
-                    </button>
-                </form>
+                    <a href="../../#control" class="btn-primary full-width hover-target">
+                        Probar el asistente de Studio32
+                    </a>
+                </div>
 
                 <!-- OPCIONAL: eventos — descomentar si el restaurante tiene sala privada
                 <div class="events-note">
