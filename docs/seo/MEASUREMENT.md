@@ -1,11 +1,11 @@
 # Medición y lanzamiento
 
-Estado 02/10/2026: el usuario confirmó que GA4, Search Console y Bing todavía no están configurados. Los cambios están preparados para revisión; no hay tráfico o leads atribuidos a esta entrega.
+Estado 02/10/2026: el usuario confirmó que GA4, Search Console y Bing todavía no están configurados. Primera colección publicada y validada; no hay tráfico o leads atribuidos a esta entrega. Identidad propietaria de Google/Microsoft solicitada al usuario.
 
 ## Antes de publicar
 
-1. Revisar siete guías, tres problemas y una calculadora en la vista previa de Cloudflare enlazada en QA.md. El estado del registro es `review`, no prueba de publicación.
-2. Resolver en el proveedor la redirección de `studio32.es` a `https://www.studio32.es`, conservando path y query y comprobando HTTPS. Ambos hosts devuelven 200 actualmente. No cambiar DNS a partir de la nota histórica sin verificar su estado.
+1. Revisar siete guías, tres problemas y una calculadora en la vista previa de Cloudflare enlazada en QA.md. El registro tiene estado `published`; evidencia HTTP y commits en QA e IMPLEMENTATION_PROGRESS.
+2. Resolver en el proveedor la redirección de `studio32.es` a `https://www.studio32.es`, conservando path y query y comprobando HTTPS. Cerrado: apex HTTP/HTTPS 301 a www y path/query conservados. No cambiar DNS a partir de la nota histórica sin verificar su estado.
 3. Verificar que previews están protegidas de indexación mediante cabecera noindex o acceso. Cloudflare confirmado: preview `e100bb0b` sirve cabecera noindex. Repetir al cambiar de despliegue. El canonical por sí solo no es una protección de staging.
 4. Validar Rich Results y comprobar el diseño de marca. JSON-LD parseable no equivale a validación oficial ni a resultados enriquecidos garantizados.
 5. Revisar el modelo de consentimiento y actualizar la política antes de activar analytics. La entrega no carga GA4 y no modifica el texto vigente de privacidad.

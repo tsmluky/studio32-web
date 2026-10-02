@@ -20,7 +20,7 @@ fusionado en `4e0a56d`. HTTP real: rutas 200, sitemap/robots 200, URL inexistent
 valida Article/Breadcrumb. Informe maestro adoptado; preservar marca y demo.
 Documentación: `docs/seo/`; estado por pasos en `IMPLEMENTATION_PROGRESS.md`.
 
-Rama `fix/discovery-font-loading`: mejora de rendimiento de recursos con las
+PR #3 fusionado en `4afa4f6`: mejora de rendimiento de recursos con las
 mismas Inter/Playfair servidas localmente, licencias OFL y preload del titular.
 No afecta CSS/JS ni fuentes de portada, verticales o demo.
 
@@ -54,7 +54,7 @@ site/
 `_plantillas/discovery-content.json` es fuente editorial estructurada: intención,
 copy, bloques, fuentes fechadas, relacionados y destino comercial. Todo texto se
 escapa; solo referencias internas `[[ruta|texto]]` crean links. HTML versionado;
-registro `docs/seo/CONTENT_REGISTRY.json` tiene estado `review`.
+registro `docs/seo/CONTENT_REGISTRY.json` tiene estado `published`.
 
 ```text
 python _plantillas/generar-discovery.py
@@ -70,7 +70,7 @@ propio. Mantiene discovery al regenerar; después ejecutar foundation/sitemap.
 No ejecutar una regeneración de verticales como sustituto de revisar cambios
 manuales anteriores. Sitemap mantiene hashes y fechas estables en SITEMAP_STATE.
 
-QA: 21 páginas principales, 24 URL sitemap, cero errores SEO; 34 HTML y 754 enlaces,
+QA: 21 páginas principales, 24 URL sitemap, cero errores SEO; 34 HTML y 757 enlaces,
 cero enlaces rotos; auditor HTMLParser excluye ejemplos comentados y detecta comillas simples. Navegador: 14 rutas en
 1440/390 px, tablas móviles corregidas, calculadora con ejemplo y cero verificados.
 Capturas locales ignoradas en `docs/seo/qa/`. Rich Results oficial productivo válido para guía API; CWV de campo sin datos.
@@ -99,6 +99,14 @@ garantía de ausencia de conflictos. No usar demos como tracción comercial.
 
 ## Próximo cierre
 
-Validar mejora de fuentes en preview y publicar → cuentas/consentimiento →
+Fuentes mejoradas y publicadas; cerrar cuentas/consentimiento →
 GSC/Bing y baseline de adquisición. Apex/404 y publicación inicial cerrados.
 Seguimiento y criterios: `docs/seo/MEASUREMENT.md`, `BACKLOG.md`, `EXPERIMENTS.md`.
+
+
+## Corrección localizada de portada en preparación
+
+Rama fix/home-loading-contrast: PSI detecta LCP 3,2 s y 4 textos de bajo contraste.
+Mismas fuentes originales desde assets/fonts, preload y home-foundation.css con
+text-muted para citas/footer-services. Mantener demo, animaciones y CSS/JS base.
+Registrar resultado medido antes de cerrar.

@@ -110,10 +110,10 @@ def main():
             file=font_manifest.parent/font['file']
             if not file.exists() or hashlib.sha256(file.read_bytes()).hexdigest()!=font['sha256']:
                 errors.append('fuente ausente o modificada: '+font['file'])
-        css=(SITE/'discovery.css').read_text(encoding='utf-8')
+        css=(SITE/'discovery.css').read_text(encoding='utf-8') + ((SITE/'home-foundation.css').read_text(encoding='utf-8') if (SITE/'home-foundation.css').exists() else '')
         for url in re.findall(r'url\(([^)]+)\)',css):
             if url.startswith('assets/fonts/') and not (SITE/url).exists(): errors.append('CSS fuente rota: '+url)
-        for license in ('inter-OFL.txt','playfairdisplay-OFL.txt'):
+        for license in ('inter-OFL.txt','playfairdisplay-OFL.txt','syne-OFL.txt'):
             if 'SIL OPEN FONT LICENSE' not in (font_manifest.parent/license).read_text(encoding='utf-8'):
                 errors.append('licencia OFL ausente: '+license)
     old=json.loads((ROOT/'docs/seo/PERFORMANCE_BASELINE.json').read_text())

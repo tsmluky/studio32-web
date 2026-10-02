@@ -63,3 +63,10 @@ PSI móvil antes de mejora de fuentes: 92 rendimiento, 100 accesibilidad, 100 bu
 ## Fuentes locales · validación previa a publicación
 
 14 rutas × 1440/390 px: H1 único, sin overflow, tipografía Playfair conservada y sin CSS Google Fonts remoto. Evidencia `qa/font-layout.json` y `qa/fonts-mobile.png`. Assets WOFF2 originales verificados contra manifest/hashes, licencias OFL conservadas. PSI del preview 17ed0174: rendimiento 100, LCP 1,5 s, FCP 1,2 s, TBT 0 ms, CLS 0,001; accesibilidad/buenas prácticas 100. SEO 66 corresponde a noindex del preview. Repetir en producción; no son métricas de campo. https://pagespeed.web.dev/analysis/https-17ed0174-studio32-web-pages-dev-recursos-whatsapp-business-api/r47z6gwhfs?form_factor=mobile.
+
+
+## Cierre productivo de recursos y baseline de portada
+
+Fuentes locales ya publicadas: 19 rutas públicas verificadas (colección completa, portada, robots/sitemap, 404 y fuente precargada); 200/canonical/indexabilidad correctos, 404 noindex, WOFF2 cache immutable. PSI productivo de guía API: 100 rendimiento/accesibilidad/buenas prácticas/SEO, LCP 1,5 s, FCP 1,2 s, TBT 0 ms, CLS 0,001.
+
+Baseline móvil portada: 88 rendimiento, 96 accesibilidad, 100 buenas prácticas/SEO; LCP 3,2 s, FCP 3,0 s, TBT 0 ms, CLS 0,001. Avisos de contraste: tres citas de fuentes y footer-services. Corrección preparada: mismos Inter/Playfair/Syne originales y pesos, preload de Playfair normal/italic y texto pequeño con token text-muted. home-foundation.css solo en portada, sin cambiar styles.css/script.js/vertical.css ni demo. Verificar preview antes de publicar.
