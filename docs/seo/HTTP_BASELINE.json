@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-02",
+  "note": "Sitio previo a despliegue. elapsedMs es descarga, no CWV.",
+  "results": [
+    {
+      "url": "https://studio32.es/",
+      "status": 200,
+      "finalUrl": "https://studio32.es/",
+      "bytes": 46415,
+      "elapsedMs": 907,
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "cacheControl": "public,max-age=0,must-revalidate"
+    },
+    {
+      "url": "https://www.studio32.es/",
+      "status": 200,
+      "finalUrl": "https://www.studio32.es/",
+      "bytes": 46049,
+      "elapsedMs": 267,
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "cacheControl": "public, max-age=0, must-revalidate"
+    },
+    {
+      "url": "https://www.studio32.es/robots.txt",
+      "status": 200,
+      "finalUrl": "https://www.studio32.es/robots.txt",
+      "bytes": 308,
+      "elapsedMs": 286,
+      "contentType": "text/plain; charset=utf-8",
+      "xRobotsTag": null,
+      "cacheControl": "public, max-age=0, must-revalidate"
+    },
+    {
+      "url": "https://www.studio32.es/sitemap.xml",
+      "status": 200,
+      "finalUrl": "https://www.studio32.es/sitemap.xml",
+      "bytes": 2275,
+      "elapsedMs": 304,
+      "contentType": "application/xml",
+      "xRobotsTag": null,
+      "cacheControl": "public, max-age=0, must-revalidate"
+    },
+    {
+      "url": "https://www.studio32.es/no-existe-seo-qa-20261002",
+      "status": 200,
+      "finalUrl": "https://www.studio32.es/no-existe-seo-qa-20261002",
+      "bytes": 46049,
+      "elapsedMs": 266,
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "cacheControl": "public, max-age=0, must-revalidate"
+    }
+  ]
+}

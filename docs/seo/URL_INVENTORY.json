@@ -1,0 +1,230 @@
+[
+  {
+    "file": "404.html",
+    "canonical": [],
+    "noindex": true,
+    "h1": 1,
+    "bytes": 1137,
+    "scripts": []
+  },
+  {
+    "file": "Agencia-Portfolio/aviso-legal.html",
+    "canonical": [
+      "https://www.studio32.es/aviso-legal.html"
+    ],
+    "noindex": true,
+    "h1": 1,
+    "bytes": 7273,
+    "scripts": []
+  },
+  {
+    "file": "Agencia-Portfolio/index.html",
+    "canonical": [
+      "https://www.studio32.es/"
+    ],
+    "noindex": false,
+    "h1": 1,
+    "bytes": 23665,
+    "scripts": [
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+      "https://unpkg.com/split-type",
+      "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js",
+      "script.js"
+    ]
+  },
+  {
+    "file": "Agencia-Portfolio/privacidad.html",
+    "canonical": [
+      "https://www.studio32.es/privacidad.html"
+    ],
+    "noindex": true,
+    "h1": 1,
+    "bytes": 10001,
+    "scripts": []
+  },
+  {
+    "file": "agente-whatsapp-centros-esteticos/index.html",
+    "canonical": [
+      "https://www.studio32.es/agente-whatsapp-centros-esteticos/"
+    ],
+    "noindex": false,
+    "h1": 1,
+    "bytes": 20962,
+    "scripts": [
+      "../script.js?v=20260904-verticales-7"
+    ]
+  },
+  {
+    "file": "agente-whatsapp-clinicas-dentales/index.html",
+    "canonical": [
+      "https://www.studio32.es/agente-whatsapp-clinicas-dentales/"
+    ],
+    "noindex": false,
+    "h1": 1,
+    "bytes": 20148,
+    "scripts": [
+      "../script.js?v=20260904-verticales-7"
+    ]
+  },
+  {
+    "file": "agente-whatsapp-restaurantes/index.html",
+    "canonical": [
+      "https://www.studio32.es/agente-whatsapp-restaurantes/"
+    ],
+    "noindex": false,
+    "h1": 1,
+    "bytes": 19071,
+    "scripts": [
+      "../script.js?v=20260904-verticales-7"
+    ]
+  },
+  {
+    "file": "agente-whatsapp-servicios-locales/index.html",
+    "canonical": [
+      "https://www.studio32.es/agente-whatsapp-servicios-locales/"
+    ],
+    "noindex": false,
+    "h1": 1,
+    "bytes": 19351,
+    "scripts": [
+      "../script.js?v=20260904-verticales-7"
+    ]
+  },
+  {
+    "file": "Demos-Clientes/la-taberna-de-ruzafa/index.html",
+    "canonical": [],
+    "noindex": true,
+    "h1": 1,
+    "bytes": 15238,
+    "scripts": [
+      "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js",
+      "script.js",
+      "http://localhost:3000/widget.js"
+    ]
+  },
+  {
+    "file": "index.html",
+    "canonical": [
+      "https://www.studio32.es/"
+    ],
+    "noindex": false,
+    "h1": 1,
+    "bytes": 46049,
+    "scripts": [
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+      "https://unpkg.com/split-type@0.3.4",
+      "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js",
+      "script.js?v=20260904-verticales-7",
+      "https://web-production-d722c.up.railway.app/widget.js"
+    ]
+  },
+  {
+    "file": "Landing1-L'Obscur/index.html",
+    "canonical": [],
+    "noindex": false,
+    "h1": 0,
+    "bytes": 186,
+    "scripts": []
+  },
+  {
+    "file": "Landing1-L'Obscur/restaurant_landing.html",
+    "canonical": [],
+    "noindex": false,
+    "h1": 1,
+    "bytes": 12590,
+    "scripts": [
+      "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js",
+      "script.js"
+    ]
+  },
+  {
+    "file": "Landing2-PrimeBurger/index.html",
+    "canonical": [],
+    "noindex": false,
+    "h1": 2,
+    "bytes": 18683,
+    "scripts": [
+      "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js",
+      "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js",
+      "script.js"
+    ]
+  },
+  {
+    "file": "Landing3-Clinic/index.html",
+    "canonical": [],
+    "noindex": true,
+    "h1": 1,
+    "bytes": 14612,
+    "scripts": [
+      "script.js?v=20260717-nord-1"
+    ]
+  },
+  {
+    "file": "Landing4-Habitat/index.html",
+    "canonical": [],
+    "noindex": false,
+    "h1": 1,
+    "bytes": 14824,
+    "scripts": [
+      "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js",
+      "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+      "script.js"
+    ]
+  },
+  {
+    "file": "legal/aviso-legal.html",
+    "canonical": [
+      "https://www.studio32.es/legal/aviso-legal.html"
+    ],
+    "noindex": true,
+    "h1": 1,
+    "bytes": 7414,
+    "scripts": []
+  },
+  {
+    "file": "legal/condiciones.html",
+    "canonical": [
+      "https://www.studio32.es/legal/condiciones.html"
+    ],
+    "noindex": true,
+    "h1": 1,
+    "bytes": 12011,
+    "scripts": []
+  },
+  {
+    "file": "legal/privacidad.html",
+    "canonical": [
+      "https://www.studio32.es/legal/privacidad.html"
+    ],
+    "noindex": true,
+    "h1": 1,
+    "bytes": 12504,
+    "scripts": []
+  },
+  {
+    "file": "panel-de-control/index.html",
+    "canonical": [
+      "https://www.studio32.es/panel-de-control/"
+    ],
+    "noindex": false,
+    "h1": 1,
+    "bytes": 20034,
+    "scripts": [
+      "../panel.js?v=20260904-verticales-7"
+    ]
+  },
+  {
+    "file": "precio-agente-whatsapp/index.html",
+    "canonical": [
+      "https://www.studio32.es/precio-agente-whatsapp/"
+    ],
+    "noindex": false,
+    "h1": 1,
+    "bytes": 22444,
+    "scripts": []
+  }
+]

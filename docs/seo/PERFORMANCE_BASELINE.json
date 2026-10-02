@@ -1,0 +1,18 @@
+{
+  "index.html": {
+    "bytes": 46049,
+    "sha256": "2b57d76d6ad61cd72e317547c8634c799d2f45bdfadcf18f67dc847d4fc67b27"
+  },
+  "styles.css": {
+    "bytes": 88665,
+    "sha256": "437aa571d2a483513e8ce67b86c9ce01969d087afd90f867c5b0d74fcd5db888"
+  },
+  "script.js": {
+    "bytes": 42089,
+    "sha256": "5b96dba01364d984ea050c509baacb9029f4e4b7bd4743ced1e084811899e9f4"
+  },
+  "vertical.css": {
+    "bytes": 7492,
+    "sha256": "d18fe6f00ad72422a7aed445fabef1efbba3cc28a1591a9baeb0eee170b4c92d"
+  }
+}
