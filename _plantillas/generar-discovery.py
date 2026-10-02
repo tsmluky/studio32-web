@@ -15,6 +15,7 @@ SITE = ROOT / 'site'
 DATA = json.loads((Path(__file__).with_name('discovery-content.json')).read_text(encoding='utf-8'))
 HOST = 'https://www.studio32.es/'
 VERSION = DATA['version']
+EVENT_VERSION = '20261002-events-2'
 PAGES = {p['slug']: p for p in DATA['pages']}
 HUBS = {
     'recursos': ('Recursos', 'Decisiones claras para una recepción conectada.', 'Guías para elegir el canal, conectar la agenda y mantener el control del equipo.'),
@@ -83,7 +84,7 @@ def layout(slug, title, description, answer, content, page_type='hub', reviewed=
 <link rel="stylesheet" href="{prefix}vertical.css?v=20260904-verticales-7">
 <link rel="stylesheet" href="{prefix}discovery.css?v={VERSION}">
 {jsonld({'@context':'https://schema.org','@graph':graph})}
-<script src="{prefix}discovery-events.js?v={VERSION}" defer></script>
+<script src="{prefix}discovery-events.js?v={EVENT_VERSION}" defer></script>
 <link rel="stylesheet" href="{prefix}measurement-consent.css?v=20261002-measurement-1">
 <script src="{prefix}measurement-consent.js?v=20261002-measurement-1" defer></script>
 {'<script src="'+prefix+'consultas-calculator.js?v='+VERSION+'" defer></script>' if page_type=='tool' else ''}

@@ -78,3 +78,26 @@ La mejora de preview no acredita mejora de LCP productivo. HTTP confirma bundle/
 ## Ensayo CSS único no promovido · 14:40 CEST
 
 PR #7 permanece en borrador. Preview 1d450566: 90 rendimiento, 100 accesibilidad/buenas prácticas, SEO 66 por noindex; FCP 1,9 s, LCP 3,1 s, TBT 20 ms, CLS 0, SI 4,5 s. No demuestra mejora frente a la variante previa ni cumple objetivo. Responsive real 390/1440 sin overflow; panel de consentimiento conserva estilos. Informe: https://pagespeed.web.dev/analysis/https-1d450566-studio32-web-pages-dev/6hah9n7vjq?form_factor=mobile. Producción sigue en PR #5, sin este ensayo.
+# Demo: aislamiento de sesión y espera limitada · 02/10/2026
+
+Antes, una respuesta de chat/panel pendiente sobrevivía al reinicio o al cambio
+de sector. Ahora ambas peticiones se cancelan y cada respuesta comprueba la
+generación de sesión antes de pintar. Chat: máximo 45 s; panel: 15 s. Sin reenvío
+automático, porque cancelar la espera no prueba que el servidor no procesó el
+mensaje. Al agotar espera se restablece el envío y se informa de esa incertidumbre.
+El foco tras responder conserva scroll. Movimiento reducido omite también la
+entrada GSAP de hero/navbar y conserva scroll nativo, manteniendo el inicio de demo.
+Invitación final propia de cada sector, datos ficticios explícitos y demo_start
+con sector elegido (enum) sin enviar el mensaje. Versiones de eventos y script
+actualizadas en referencias y generadores, sin cambiar CSS ni fuentes.
+
+Pruebas sin backend: `node _plantillas/test-demo-lifecycle.cjs` cubre reinicio,
+cambio de tenant, respuesta tardía y error antiguo durante envío nuevo, panel
+obsoleto, timeout sin reenvío y arranque único en ambos modos de movimiento.
+Consentimiento, calculadora, SEO 21 páginas/24 URL y 801 enlaces pasan.
+Preview 36bbbfb3: portada 390/1024/1440 y cuatro verticales 390/1440,
+11 comprobaciones con anchos reales, sin overflow. Inter original; menú móvil
+abre/cierra y llega a #control, selector Restaurante/Casa Duarte correcto,
+invitación propia en cada vertical y cero etiquetas GA4 en staging. Revisión
+final de medición por sector pendiente. No acredita mejora de LCP ni
+operación real de reservas de cliente.

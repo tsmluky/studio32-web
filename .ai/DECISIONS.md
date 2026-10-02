@@ -470,3 +470,12 @@ PR #7 añade consentimiento al bundle pero su preview dio LCP 3,1 s, sin mejora
 demostrada. Mantenerlo en borrador. Reducir peticiones no justifica promover un
 ensayo por sí solo. Informes GA4 y sitemaps están operativos; adquisición, leads
 e indexación efectiva necesitan observación, no cifras propias de QA.
+## 2026-10-02 · Trabajo activo y ciclo de sesión de demo
+
+Usuario aclara continuar desarrollo/pendientes mientras se recoge medición.
+Paso 15 frena expansión editorial; no bloquea correcciones técnicas. PR #8
+cancela peticiones y descarta respuestas por generación de sesión para evitar
+mezclar sectores/paneles. Espera limitada sin reenvío: abortar cliente no prueba
+cancelación en servidor. Invitación propia por sector, datos ficticios explícitos
+y evento con sector elegido. Movimiento reducido mantiene scroll nativo y demo,
+sin entrada GSAP. Sin modificar fuentes/diseño ni dar LCP por resuelto.

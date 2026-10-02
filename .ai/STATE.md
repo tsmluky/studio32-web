@@ -63,6 +63,7 @@ python _plantillas/validar-discovery.py
 python _plantillas/revisar-enlaces.py
 node _plantillas/test-calculator.cjs
 node _plantillas/test-measurement.cjs
+node _plantillas/test-demo-lifecycle.cjs
 python _plantillas/generar-home-css.py
 python -m http.server 8088 --directory site
 ```
@@ -120,6 +121,20 @@ Colección GA4 Studio32 · Captación y uso publicada; dimensiones de evento
 page_type/sector/cta_type y reporte Uso y contacto guardados. Bing sitemap
 Success con 24 URL. Guía API en Google descubierta/sin indexar; prueba viva
 indexable y solicitud aceptada. Registro comercial vacío en docs/seo.
+
+## Desarrollo activo mientras se recogen datos
+
+PR #8 corrige demo: aborta chat/panel al cambiar sesión, descarta respuestas
+anteriores y limita espera (chat 45 s, panel 15 s), sin reenvío automático.
+Invitación coherente por sector y datos ficticios explícitos. Movimiento reducido
+conserva scroll nativo y omite entrada de hero/navbar. demo_start usa el sector
+elegido (enum), sin mensaje ni datos personales. Preview móvil/escritorio de
+portada y cuatro verticales correcto; pruebas de carreras/timeout sin backend.
+Versiones: script 20261002-demo-2, discovery-events 20261002-events-2.
+Publicación pendiente de validar la revisión final en Cloudflare.
+
+El paso 15 pausa expansión editorial, no correcciones técnicas ni validación de
+recorridos. Continuar trabajo activo autorizado mientras se acumula medición.
 
 ## Pendientes y próxima decisión
 

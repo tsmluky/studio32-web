@@ -33,7 +33,7 @@ if (TIENE_GSAP) {
     gsap.registerPlugin(ScrollTrigger);
 
     // 1. Lenis Smooth Scroll Setup
-    if (TIENE_LENIS) {
+    if (TIENE_LENIS && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
@@ -113,18 +113,20 @@ function initHeroAnimations() {
         return;
     }
 
-    const tlHero = gsap.timeline();
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const tlHero = gsap.timeline();
 
-    // Revelar líneas del hero ("Studio32 / Digital Systems")
-    tlHero.from('.hero-title .reveal-text', {
-        yPercent: 120,
-        rotation: 5,
-        stagger: 0.1,
-        duration: 1.2,
-        ease: "power4.out"
-    })
-        .from('.hero-subtitle', { opacity: 0, y: 20, duration: 0.8 }, "-=0.8")
-        .from('.navbar', { y: -50, opacity: 0, duration: 1 }, "-=1");
+        // Revelar líneas del hero ("Studio32 / Digital Systems")
+        tlHero.from('.hero-title .reveal-text', {
+            yPercent: 120,
+            rotation: 5,
+            stagger: 0.1,
+            duration: 1.2,
+            ease: "power4.out"
+        })
+            .from('.hero-subtitle', { opacity: 0, y: 20, duration: 0.8 }, "-=0.8")
+            .from('.navbar', { y: -50, opacity: 0, duration: 1 }, "-=1");
+    }
 
     initChatDemo();
     initSectorDemo();
@@ -282,6 +284,7 @@ const SECTORES = {
         marcador: 'Clínica Cobalto · ayer por la noche',
         nota: 'Agente real conectado. Pregúntale lo que se te ocurra: precios, horarios, miedo al dentista, o pídele cita de verdad.',
         placeholder: 'Escribe lo que quieras preguntarle…',
+        invitacion: 'Pregúntale por servicios, precios u horarios y prueba el recorrido de una cita. Es una demostración con datos ficticios.',
         showreel: [
             { kind: 'in', texto: 'Buenas noches, llevo dos días con dolor en una muela y no sé si aguantar hasta el lunes.', estado: 'Conversación entrante · fuera de horario' },
             { kind: 'out', texto: 'Vaya, lo siento. ¿Te duele todo el rato o solo al morder?', estado: 'El agente está valorando la urgencia' },
@@ -306,6 +309,7 @@ const SECTORES = {
         marcador: 'Casa Duarte · anoche, en pleno servicio',
         nota: 'Agente real conectado. Pregúntale por la carta, por alérgenos o pídele mesa de verdad.',
         placeholder: 'Pregúntale por la carta o pide mesa…',
+        invitacion: 'Pregúntale por la carta, alérgenos u horarios y prueba el recorrido de una reserva. Es una demostración con datos ficticios.',
         showreel: [
             { kind: 'in', texto: '¿Tenéis mesa para 6 el sábado sobre las 21:30?', estado: 'Conversación entrante · sala llena' },
             { kind: 'out', texto: 'El sábado a las 21:30 me queda mesa de 6 en el salón. ¿Hay alguna alergia o intolerancia en el grupo?', estado: 'El agente consulta el aforo real del turno' },
@@ -328,6 +332,7 @@ const SECTORES = {
         marcador: 'Instalaciones Vera · antes de abrir el taller',
         nota: 'Agente real conectado. Pídele presupuesto y fíjate en lo que pregunta antes de pasarte al técnico.',
         placeholder: 'Cuéntale qué necesitas…',
+        invitacion: 'Cuéntale qué servicio necesitas y observa cómo prepara la solicitud para el técnico. Es una demostración con datos ficticios.',
         showreel: [
             { kind: 'in', texto: 'Buenos días, quería presupuesto para cambiar la caldera.', estado: 'Conversación entrante · 07:58' },
             { kind: 'out', texto: 'Te lo prepara el técnico. Para que salga ajustado, ¿es piso o unifamiliar, y sabes qué caldera tienes ahora?', estado: 'El agente está cualificando la petición' },
@@ -350,6 +355,7 @@ const SECTORES = {
         marcador: 'Estudio Áurea · domingo, con el centro cerrado',
         nota: 'Agente real conectado. Cuéntale un problema sin saber cómo se llama el tratamiento, pregúntale el precio o pide hora con una profesional concreta.',
         placeholder: 'Cuéntale qué te preocupa…',
+        invitacion: 'Pregúntale por tratamientos, precios u horarios y prueba el recorrido de una cita. Es una demostración con datos ficticios.',
         showreel: [
             { kind: 'in', texto: 'Hola, me están saliendo manchas en la cara y no sé muy bien qué me haría falta.', estado: 'Conversación entrante · domingo, centro cerrado' },
             { kind: 'out', texto: 'Te leo. ¿Desde cuándo lo notas, y has hecho antes algún tratamiento facial?', estado: 'El agente está entendiendo el caso' },
@@ -400,9 +406,7 @@ function plantillaDemo() {
         <div class="live-takeover" data-demo-takeover hidden>
             <p class="live-takeover-eyebrow">[ ESTO HA PASADO SOLO ]</p>
             <p class="live-takeover-title">Ahora <em>pruébalo tú</em>.</p>
-            <p class="live-takeover-text">Escríbele lo que quieras: precios, horarios, miedo al
-                dentista. Es el mismo agente que atendería a tus clientes, y la cita que reserves
-                aparecerá de verdad en el panel.</p>
+            <p class="live-takeover-text">Prueba el agente del sector elegido. Es una demostración con datos ficticios.</p>
             <button type="button" class="live-takeover-btn" data-demo-takeover-btn>Pruébalo tú
                 mismo</button>
         </div>
@@ -537,6 +541,7 @@ function initLiveDemo() {
     const avatar = pick('.conversation-row.is-selected .conversation-avatar');
     const takeover = pick('[data-demo-takeover]');
     const takeoverBtn = pick('[data-demo-takeover-btn]');
+    const takeoverText = pick('.live-takeover-text');
 
     if (!log || !form || !input) return;
 
@@ -558,6 +563,9 @@ function initLiveDemo() {
     let count = 0;
     let turnos = 0;
     let busy = false;
+    let generation = 0;
+    let chatRequest = null;
+    let panelRequest = null;
 
     function stamp() {
         const now = new Date();
@@ -606,19 +614,29 @@ function initLiveDemo() {
     // Lee del agente lo que ha hecho DE VERDAD en esta sesión y lo pinta en el
     // panel. No se deduce del texto de la respuesta: se consulta el estado real.
     async function refrescarPanel() {
+        const currentGeneration = generation;
+        if (panelRequest) panelRequest.abort();
+        const controller = new AbortController();
+        panelRequest = controller;
+        const timeout = setTimeout(() => controller.abort(), 15000);
         try {
             const url = AGENT_BASE + '/demo/estado?tenant=' + encodeURIComponent(DEMO_AGENT.tenant) +
                 '&sesion=' + encodeURIComponent(sesion);
-            const res = await fetch(url, { cache: 'no-store' });
+            const res = await fetch(url, { cache: 'no-store', signal: controller.signal });
             if (!res.ok) return;
 
             const data = await res.json();
+            if (currentGeneration !== generation || controller.signal.aborted) return;
             const cita = (data.citas || [])[0];
             if (!cita) return;
 
             pintarCita(cita.fecha + ' · ' + cita.hora, (cita.servicio || 'Cita') + ' · Confirmada');
             if (cita.nombre) marcarContacto(cita.nombre);
         } catch (_) { /* el panel simplemente no se actualiza; el chat sigue */ }
+        finally {
+            clearTimeout(timeout);
+            if (panelRequest === controller) panelRequest = null;
+        }
     }
 
     function iniciales(nombre) {
@@ -655,6 +673,12 @@ function initLiveDemo() {
         }
 
         busy = true;
+        const currentGeneration = generation;
+        const controller = new AbortController();
+        chatRequest = controller;
+        // Incluye arranque en frío; al agotar la espera se puede reintentar.
+        // No reenvía automáticamente: el servidor podría haber procesado el mensaje.
+        const timeout = setTimeout(() => controller.abort(), 45000);
         turnos += 1;
         input.value = '';
         sendBtn.disabled = true;
@@ -670,10 +694,13 @@ function initLiveDemo() {
             const res = await fetch(DEMO_AGENT.endpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                signal: controller.signal,
                 body: JSON.stringify({ tenant: DEMO_AGENT.tenant, sesion: sesion, mensaje: texto })
             });
 
             const data = await res.json();
+            if (currentGeneration !== generation) return;
+            if (controller.signal.aborted) throw new Error('espera agotada');
             typing.hidden = true;
 
             if (res.status === 429) {
@@ -688,17 +715,28 @@ function initLiveDemo() {
                 refrescarPanel();
             }
         } catch (err) {
+            if (currentGeneration !== generation) return;
             typing.hidden = true;
             statusEl.textContent = 'Sin conexión con el agente';
-            setNote('No he podido conectar con el agente. Vuelve a intentarlo en un momento.', true);
+            setNote(controller.signal.aborted
+                ? 'La respuesta está tardando demasiado. Puedes volver a intentarlo; el mensaje anterior podría haberse procesado.'
+                : 'No he podido conectar con el agente. Vuelve a intentarlo en un momento.', true);
         } finally {
+            clearTimeout(timeout);
+            if (chatRequest === controller) chatRequest = null;
+            if (currentGeneration !== generation) return;
             busy = false;
             sendBtn.disabled = false;
-            input.focus();
+            input.focus({ preventScroll: true });
         }
     }
 
     function limpiar(etiqueta) {
+        generation += 1;
+        if (chatRequest) chatRequest.abort();
+        if (panelRequest) panelRequest.abort();
+        chatRequest = null;
+        panelRequest = null;
         sesion = 'landing-' + Math.random().toString(36).slice(2, 10);
         count = 0;
         turnos = 0;
@@ -815,6 +853,7 @@ function initLiveDemo() {
         if (!nuevo || nuevo === sector) return;
 
         sector = nuevo;
+        root.dataset.liveDemo = id;
         DEMO_AGENT.tenant = sector.tenant;
 
         chatNombre.textContent = sector.negocio;
@@ -822,6 +861,7 @@ function initLiveDemo() {
         if (panelNombre) panelNombre.textContent = sector.negocio;
         if (panelMarca) panelMarca.textContent = sector.iniciales;
         input.placeholder = sector.placeholder;
+        takeoverText.textContent = sector.invitacion;
 
         botonesSector.forEach((boton) => {
             const activo = boton.dataset.demoSector === id;
@@ -849,11 +889,13 @@ function initLiveDemo() {
     resetBtn.addEventListener('click', arrancarShowreel);
 
     // Rótulos iniciales según el sector de la página (no siempre es clínica).
+    root.dataset.liveDemo = root.dataset.liveDemo || 'clinica';
     chatNombre.textContent = sector.negocio;
     chatAvatar.textContent = sector.iniciales;
     if (panelNombre) panelNombre.textContent = sector.negocio;
     if (panelMarca) panelMarca.textContent = sector.iniciales;
     input.placeholder = sector.placeholder;
+    takeoverText.textContent = sector.invitacion;
     setNote(sector.nota, false);
 
     botonesSector.forEach((boton) => {
