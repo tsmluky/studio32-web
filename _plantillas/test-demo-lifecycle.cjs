@@ -86,6 +86,14 @@ async function run() {
         });
         assert.equal(animations, reduced ? 0 : 3, 'movimiento reducido omite entrada del hero');
         assert.equal(live, 1, 'demo inicia una sola vez en ambos modos');
+        let smooth = 0;
+        vm.runInNewContext(source.slice(0, source.indexOf('// 2. Preloader Animation')), {
+            document: { addEventListener() {} }, window: { matchMedia: () => ({ matches: reduced }) },
+            fetch: () => Promise.resolve(), ScrollTrigger: {},
+            gsap: { registerPlugin() {}, ticker: { add() {}, lagSmoothing() {} } },
+            Lenis: class { constructor() { smooth++; } on() {} }
+        });
+        assert.equal(smooth, reduced ? 0 : 1, 'movimiento reducido conserva scroll nativo');
     }
     console.log('Demo: reinicio, cambio de sector, respuestas tardías, panel, timeout sin reenvío y movimiento reducido verificados sin backend.');
 }

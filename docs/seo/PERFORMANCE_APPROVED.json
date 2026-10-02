@@ -1,8 +1,8 @@
 {
   "script.js": {
-    "sha256": "46738e22ee90f3298ec8d1d1126cb49d1f434bc8b6e1d0a6024216788aa7b130",
+    "sha256": "67dbca65617b14dc40cbf36da8116d54ddf4c84a5370782bab34995cecdc699d",
     "original_sha256": "5b96dba01364d984ea050c509baacb9029f4e4b7bd4743ced1e084811899e9f4",
     "reason": "Arranque aprobado previo; movimiento reducido sin entrada GSAP. Demo cancela peticiones de sesiones anteriores y limita espera sin reenvio automatico. Baseline historica intacta. Invitacion coherente por sector y demo ficticia explicita.",
-    "sha256_lf": "70820e78b6446fa35e924095fc9e84645a7c637df0f952e9d36c0ac13e5f1df6"
+    "sha256_lf": "8319db6f58ac4fd35830b141aefc38419952f502ace269b4978621d9eb9e4760"
   }
 }

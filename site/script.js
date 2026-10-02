@@ -33,7 +33,7 @@ if (TIENE_GSAP) {
     gsap.registerPlugin(ScrollTrigger);
 
     // 1. Lenis Smooth Scroll Setup
-    if (TIENE_LENIS) {
+    if (TIENE_LENIS && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
