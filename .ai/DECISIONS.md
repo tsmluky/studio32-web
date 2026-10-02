@@ -355,3 +355,27 @@ cortan al leerlas, y trozos de URL (`.jpg`, `.webp`) se cuelan como clases.
 
 Ojo: `.chat-header`, `.chat-avatar`, `.chat-status`, `.chat-day`, `.chat-msg` y
 `.detail-message*` SÍ se usan — las crea la plantilla de la demo.
+
+## 2026-10-02 · Primera colección de descubrimiento orgánico
+
+Se mantiene HTML estático y el patrón Python existente: fuente editorial JSON,
+renderer que escapa texto y HTML versionado. Sin CMS, framework, npm ni nuevo CDN.
+Se preparan siete guías, tres problemas y una calculadora; después medir antes de
+ampliar. Marca, portada, demo y CSS/JS comercial base se conservan. Enlazado nuevo
+en el footer existente, con temas específicos por página.
+
+Se corrigen tarifas de Meta y cifras de mercado no documentadas. La entidad usa
+Organization sin inventar dirección ni presentar una portada social como logo.
+Se conserva la política GPTBot. Sitemap excluye noindex y mantiene las URLs de las
+demos históricas, ahora con canonical explícito.
+
+La calculadora multiplica fuera de horario por sin resolver dentro de esa franja;
+no suma porcentajes. El rango anual es sensibilidad ±10 puntos, no intervalo de
+confianza. No almacena ni envía entradas. Eventos locales con adaptador explícito
+consentido: usuario confirmó que GA4/GSC/Bing aún no existen; no se activa tracking.
+
+HTTP confirmó soft 404 y dos hosts con 200. El 404 está preparado, pero el host debe
+resolverse en el proveedor: Cloudflare Pages no permite redirects por dominio en
+_redirects. No se cambia DNS. Entrega en rama y PR para revisión; no fusionar ni
+publicar contenido desde el generador sin revisión editorial. Fuentes y cierre
+operativo en docs/seo/. No hay métricas de adquisición ni clientes inferidos de demos.

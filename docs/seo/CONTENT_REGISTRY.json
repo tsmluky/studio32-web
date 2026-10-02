@@ -1,0 +1,234 @@
+[
+  {
+    "slug": "recursos/whatsapp-business-api",
+    "type": "guide",
+    "intent": "Elegir entre app y API para recepción",
+    "title": "WhatsApp Business API: cuándo la necesita tu negocio",
+    "description": "Diferencias entre la app y la API de WhatsApp, qué aporta una integración y qué revisar antes de automatizar recepción y citas.",
+    "related": [
+      "recursos/numero-actual-whatsapp-business-api",
+      "recursos/chatbot-vs-agente-ia-whatsapp",
+      "recursos/automatizar-citas-whatsapp"
+    ],
+    "commercialTarget": "precio-agente-whatsapp",
+    "canonical": "https://www.studio32.es/recursos/whatsapp-business-api/",
+    "index": true,
+    "status": "review",
+    "reviewedAt": "2026-10-02",
+    "owner": "Studio32",
+    "sources": [
+      "twilio",
+      "windows"
+    ]
+  },
+  {
+    "slug": "recursos/numero-actual-whatsapp-business-api",
+    "type": "guide",
+    "intent": "Conservar número y operación del equipo",
+    "title": "¿Puedes conservar tu número al conectar WhatsApp a un agente?",
+    "description": "Número actual, número nuevo, migración o coexistencia: qué comprobar sobre la app, el historial y el equipo antes de conectar un agente.",
+    "related": [
+      "recursos/whatsapp-business-api",
+      "recursos/handoff-humano-agente-ia",
+      "recursos/recepcionista-ia"
+    ],
+    "commercialTarget": "panel-de-control",
+    "canonical": "https://www.studio32.es/recursos/numero-actual-whatsapp-business-api/",
+    "index": true,
+    "status": "review",
+    "reviewedAt": "2026-10-02",
+    "owner": "Studio32",
+    "sources": [
+      "migration",
+      "coexistence"
+    ]
+  },
+  {
+    "slug": "recursos/automatizar-citas-whatsapp",
+    "type": "guide",
+    "intent": "Entender y evaluar el recorrido de cita",
+    "title": "Automatizar citas por WhatsApp: de la consulta a la confirmación",
+    "description": "Cómo evaluar un flujo de citas por WhatsApp: servicio, reglas, disponibilidad, confirmación, cambios y supervisión del equipo.",
+    "related": [
+      "recursos/integrar-whatsapp-con-agenda",
+      "recursos/handoff-humano-agente-ia",
+      "problemas/consultas-fuera-de-horario"
+    ],
+    "commercialTarget": "agente-whatsapp-clinicas-dentales",
+    "canonical": "https://www.studio32.es/recursos/automatizar-citas-whatsapp/",
+    "index": true,
+    "status": "review",
+    "reviewedAt": "2026-10-02",
+    "owner": "Studio32",
+    "sources": [
+      "calendar",
+      "product"
+    ]
+  },
+  {
+    "slug": "recursos/integrar-whatsapp-con-agenda",
+    "type": "guide",
+    "intent": "Evaluar disponibilidad, fuente de verdad y fallos",
+    "title": "Integrar WhatsApp con tu agenda: qué significa reservar de verdad",
+    "description": "Fuente de verdad, disponibilidad, concurrencia y fallos: los criterios que debe cumplir una integración de WhatsApp con la agenda del negocio.",
+    "related": [
+      "recursos/automatizar-citas-whatsapp",
+      "recursos/chatbot-vs-agente-ia-whatsapp",
+      "problemas/recepcion-saturada"
+    ],
+    "commercialTarget": "panel-de-control",
+    "canonical": "https://www.studio32.es/recursos/integrar-whatsapp-con-agenda/",
+    "index": true,
+    "status": "review",
+    "reviewedAt": "2026-10-02",
+    "owner": "Studio32",
+    "sources": [
+      "calendar"
+    ]
+  },
+  {
+    "slug": "recursos/chatbot-vs-agente-ia-whatsapp",
+    "type": "guide",
+    "intent": "Elegir arquitectura según tareas y riesgo",
+    "title": "Chatbot o agente de IA en WhatsApp: cómo elegir",
+    "description": "Compara reglas, lenguaje natural, herramientas y supervisión. Qué sistema basta para informar y cuál necesitas para actuar sobre una agenda.",
+    "related": [
+      "recursos/whatsapp-business-api",
+      "recursos/recepcionista-ia",
+      "recursos/integrar-whatsapp-con-agenda"
+    ],
+    "commercialTarget": "panel-de-control",
+    "canonical": "https://www.studio32.es/recursos/chatbot-vs-agente-ia-whatsapp/",
+    "index": true,
+    "status": "review",
+    "reviewedAt": "2026-10-02",
+    "owner": "Studio32",
+    "sources": [
+      "product"
+    ]
+  },
+  {
+    "slug": "recursos/recepcionista-ia",
+    "type": "guide",
+    "intent": "Delimitar tareas automatizables en recepción",
+    "title": "Recepcionista con IA: qué automatizar y qué dejar al equipo",
+    "description": "Cómo repartir consultas, citas y excepciones entre una recepción con IA y las personas que mantienen el criterio del negocio.",
+    "related": [
+      "recursos/chatbot-vs-agente-ia-whatsapp",
+      "recursos/handoff-humano-agente-ia",
+      "problemas/recepcion-saturada"
+    ],
+    "commercialTarget": "agente-whatsapp-centros-esteticos",
+    "canonical": "https://www.studio32.es/recursos/recepcionista-ia/",
+    "index": true,
+    "status": "review",
+    "reviewedAt": "2026-10-02",
+    "owner": "Studio32",
+    "sources": [
+      "product"
+    ]
+  },
+  {
+    "slug": "recursos/handoff-humano-agente-ia",
+    "type": "guide",
+    "intent": "Evaluar toma y devolución de control humano",
+    "title": "Intervención humana: cómo debe ceder el control un agente",
+    "description": "Qué revisar al intervenir en una conversación: pausa del agente, contexto para el equipo, trazabilidad y devolución explícita del control.",
+    "related": [
+      "recursos/recepcionista-ia",
+      "recursos/numero-actual-whatsapp-business-api",
+      "recursos/automatizar-citas-whatsapp"
+    ],
+    "commercialTarget": "panel-de-control",
+    "canonical": "https://www.studio32.es/recursos/handoff-humano-agente-ia/",
+    "index": true,
+    "status": "review",
+    "reviewedAt": "2026-10-02",
+    "owner": "Studio32",
+    "sources": [
+      "product"
+    ]
+  },
+  {
+    "slug": "problemas/consultas-fuera-de-horario",
+    "type": "problem",
+    "intent": "Resolver consultas cuando el negocio está cerrado",
+    "title": "Consultas fuera de horario: qué puedes resolver antes de abrir",
+    "description": "Autorespuesta, enlace de agenda, atención diferida o agente: cómo elegir según las consultas que llegan cuando tu negocio está cerrado.",
+    "related": [
+      "recursos/recepcionista-ia",
+      "recursos/automatizar-citas-whatsapp",
+      "herramientas/calculadora-consultas-perdidas"
+    ],
+    "commercialTarget": "agente-whatsapp-restaurantes",
+    "canonical": "https://www.studio32.es/problemas/consultas-fuera-de-horario/",
+    "index": true,
+    "status": "review",
+    "reviewedAt": "2026-10-02",
+    "owner": "Studio32",
+    "sources": [
+      "product"
+    ]
+  },
+  {
+    "slug": "problemas/recepcion-saturada",
+    "type": "problem",
+    "intent": "Repartir carga y prioridades en recepción",
+    "title": "Recepción saturada: ordenar el trabajo antes de automatizar",
+    "description": "Cómo identificar interrupciones, repartir consultas y automatizar tareas repetidas sin trasladar las excepciones a otra cola sin responsable.",
+    "related": [
+      "recursos/recepcionista-ia",
+      "recursos/handoff-humano-agente-ia",
+      "recursos/integrar-whatsapp-con-agenda"
+    ],
+    "commercialTarget": "agente-whatsapp-servicios-locales",
+    "canonical": "https://www.studio32.es/problemas/recepcion-saturada/",
+    "index": true,
+    "status": "review",
+    "reviewedAt": "2026-10-02",
+    "owner": "Studio32",
+    "sources": [
+      "product"
+    ]
+  },
+  {
+    "slug": "problemas/llamadas-y-mensajes-perdidos",
+    "type": "problem",
+    "intent": "Medir y recuperar consultas pendientes sin atribución falsa",
+    "title": "Llamadas y mensajes perdidos: cómo medir lo que queda sin atender",
+    "description": "Distingue avisos, consultas únicas y casos sin resolver. Cómo organizar seguimiento y estimar el valor potencial sin contar oportunidades dos veces.",
+    "related": [
+      "problemas/consultas-fuera-de-horario",
+      "problemas/recepcion-saturada",
+      "herramientas/calculadora-consultas-perdidas"
+    ],
+    "commercialTarget": "precio-agente-whatsapp",
+    "canonical": "https://www.studio32.es/problemas/llamadas-y-mensajes-perdidos/",
+    "index": true,
+    "status": "review",
+    "reviewedAt": "2026-10-02",
+    "owner": "Studio32",
+    "sources": [
+      "product"
+    ]
+  },
+  {
+    "slug": "herramientas/calculadora-consultas-perdidas",
+    "type": "tool",
+    "intent": "Explorar valor potencial con supuestos editables",
+    "title": "Calculadora de consultas perdidas: explora el valor potencial",
+    "description": "Estima consultas en riesgo, clientes potenciales y valor mensual con tus propios supuestos. Gratis, sin email y sin guardar tus cifras.",
+    "related": [
+      "problemas/llamadas-y-mensajes-perdidos",
+      "problemas/consultas-fuera-de-horario",
+      "recursos/recepcionista-ia"
+    ],
+    "commercialTarget": "precio-agente-whatsapp",
+    "canonical": "https://www.studio32.es/herramientas/calculadora-consultas-perdidas/",
+    "index": true,
+    "status": "review",
+    "reviewedAt": "2026-10-02",
+    "owner": "Studio32",
+    "sources": []
+  }
+]
