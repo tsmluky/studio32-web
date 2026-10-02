@@ -17,7 +17,7 @@ Primera colección publicada en https://www.studio32.es/recursos/: siete guías,
 | 7. Siete guías | Publicado | Registro e intención propia, fuentes, relacionados y CTA; sin inventar clientes/capacidades |
 | 8. Tres problemas | Publicado | Opciones operativas antes de vender el producto |
 | 9. Calculadora | Publicado | Fórmula explícita, riesgo/conversión, sensibilidad anual; sin email, almacenamiento ni envío de cifras |
-| 10. Enlazado | Verificado | 801 referencias reales, cero fallos; links contextuales y hubs; ejemplos comentados excluidos |
+| 10. Enlazado | Verificado | 804 referencias reales, cero fallos. Grafo: 24 canónicas, 203 conexiones, 21 importantes a máximo dos clics; demos con regreso al estudio |
 | 11. Fuentes | Hecho | Proveedor, URL y fecha; revisión de fuentes a 90 días; Meta corregido con documentación oficial |
 | 12. Reglas editoriales | Aplicadas | Flujos/decisiones originales, sin páginas geográficas, cifras de tracción o garantías inventadas |
 | 13. Medición | Activa | GA4 Studio32 recibe vistas de QA con consentimiento opcional; GSC procesa sitemap (24 páginas); Bing verificado por meta; sitemap procesado correctamente, 24 URL descubiertas |
@@ -46,5 +46,10 @@ movimiento reducido sin ampliar contenido. Corresponde a apartados 39–41
 mantiene recogida de datos; no bloquea correcciones de lo ya publicado.
 
 ## Siguiente decisión
+
+Apartados 61–64: workflow de QA preparado y primera ejecución real de PR #9
+correcta; grafo comprueba alcance y profundidad. Apartados 137–140: matriz de
+cobertura y ocho preguntas de diagnóstico preparadas, todavía sin muestreo de
+resultados. No es otra colección pública ni prueba de menciones de Studio32.
 
 Cerrar medición y observar demanda no marca, entradas por recurso, uso de calculadora, solicitudes de demo y leads cualificados. Fechas orientativas desde lanzamiento: 01/11/2026, 01/12/2026 y 31/12/2026; el análisis de conversiones necesita una baseline desde la activación real del tracker. No crear contenido RGPD, segunda calculadora, benchmarks o casos de éxito sin fuentes, datos o demanda que los justifiquen.

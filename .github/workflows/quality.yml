@@ -1,0 +1,49 @@
+name: Calidad SEO y recorridos
+
+on:
+  pull_request:
+    paths:
+      - 'site/**'
+      - '_plantillas/**'
+      - '.github/workflows/quality.yml'
+      - 'docs/seo/*.json'
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '_plantillas/**'
+      - '.github/workflows/quality.yml'
+      - 'docs/seo/*.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: SEO, enlaces, privacidad y demo
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, Node 24
+        with:
+          fetch-depth: 2
+      - name: SEO, fuentes y enlaces
+        run: |
+          python3 _plantillas/validar-discovery.py
+          python3 _plantillas/revisar-enlaces.py
+          python3 _plantillas/test-grafo.py
+          python3 _plantillas/revisar-grafo.py
+      - name: Calculadora, consentimiento y demo sin backend
+        run: |
+          node _plantillas/test-calculator.cjs
+          node _plantillas/test-measurement.cjs
+          node _plantillas/test-demo-lifecycle.cjs
+          node --check site/script.js
+          node --check site/discovery-events.js
+          node --check site/measurement-consent.js
+      - name: Revisar espacios y conflictos de edición
+        run: git diff --check HEAD^ HEAD

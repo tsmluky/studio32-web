@@ -106,3 +106,13 @@ cero etiquetas Google con rechazo guardado. Captura local:
 qa/demo-lifecycle-production.png. No se enviaron mensajes al backend ni se
 crearon reservas durante QA. No acredita mejora de LCP ni
 operación real de reservas de cliente.
+## Control continuo y regreso desde demos · 02/10/2026
+
+PR #9: workflow real success (run 37027708024, job 6 s). Local: SEO/fuentes,
+804 enlaces, calculadora, consentimiento y demo pasan. Grafo: 24 canónicas,
+203 conexiones, 21 importantes; máximo dos clics, sin páginas aisladas ni
+salidas vacías. Tres pruebas verifican normalización, ciclos y orfandad.
+Preview e8fa74c7: tres demos 390/1440 sin overflow, enlace con nombre accesible
+Volver a Studio32. Regreso real de las tres a portada comprobado; L'Obscur
+confirmado con clic nativo tras estabilizar layout. CSS/JS/diseño de demos
+intactos. Aún pendiente comprobar producción de PR #9.
