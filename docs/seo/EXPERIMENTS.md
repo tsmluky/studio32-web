@@ -25,3 +25,7 @@ Inicio de recogida real: 02/10/2026. Las primeras visitas y eventos son pruebas 
 Revisiones desde activación: 01/11/2026 (30 días), 01/12/2026 (60 días), 31/12/2026 (90 días). Son hitos del plan, no tareas automáticas programadas. Si el volumen no permite concluir, registrar esa limitación y mantener la observación; no inventar objetivos de tráfico ni declarar éxito por visitas propias.
 
 El panel de tiempo real verifica la recepción de eventos. La decisión editorial/comercial requiere los informes acumulados y el registro de consultas. Medición solo de visitantes que aceptan; las cifras de GA4 no representan todas las visitas.
+
+## Cierres del tramo · 02/10/2026
+
+Informes publicados en colección Studio32 · Captación y uso, tres dimensiones registradas y uso/contacto guardado. Bing sitemap Success (24 URL, cero errores). Google guía API indexable en prueba viva y solicitud de indexación aceptada; pendiente rastreo/indexación real. Registro comercial vacío preparado. El pendiente técnico principal sigue siendo LCP de portada; los resultados de adquisición requieren tiempo y consultas reales.

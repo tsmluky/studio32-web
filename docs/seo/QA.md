@@ -53,7 +53,7 @@ git diff --check
 
 ## Pendientes reales
 
-GA4 y consentimiento publicados; GSC sitemap procesado (24 páginas). Bing verificado por meta; sitemap enviado, procesamiento pendiente. LCP de portada y CWV de campo. Sin adquisición atribuida ni prueba operativa de reserva de cliente real. No ampliar contenido antes de medir.
+GA4 y consentimiento publicados; GSC sitemap procesado (24 páginas). Bing verificado por meta; sitemap procesado correctamente, 24 URL descubiertas. LCP de portada y CWV de campo. Sin adquisición atribuida ni prueba operativa de reserva de cliente real. No ampliar contenido antes de medir.
 
 ## Medición publicada · 02/10/2026
 
