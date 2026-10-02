@@ -86,11 +86,18 @@ generación de sesión antes de pintar. Chat: máximo 45 s; panel: 15 s. Sin ree
 automático, porque cancelar la espera no prueba que el servidor no procesó el
 mensaje. Al agotar espera se restablece el envío y se informa de esa incertidumbre.
 El foco tras responder conserva scroll. Movimiento reducido omite también la
-entrada GSAP de hero/navbar, manteniendo el inicio de demo.
+entrada GSAP de hero/navbar y conserva scroll nativo, manteniendo el inicio de demo.
+Invitación final propia de cada sector, datos ficticios explícitos y demo_start
+con sector elegido (enum) sin enviar el mensaje. Versiones de eventos y script
+actualizadas en referencias y generadores, sin cambiar CSS ni fuentes.
 
 Pruebas sin backend: `node _plantillas/test-demo-lifecycle.cjs` cubre reinicio,
 cambio de tenant, respuesta tardía y error antiguo durante envío nuevo, panel
 obsoleto, timeout sin reenvío y arranque único en ambos modos de movimiento.
 Consentimiento, calculadora, SEO 21 páginas/24 URL y 801 enlaces pasan.
-Pendiente comprobar preview antes de publicar. No acredita mejora de LCP ni
+Preview 36bbbfb3: portada 390/1024/1440 y cuatro verticales 390/1440,
+11 comprobaciones con anchos reales, sin overflow. Inter original; menú móvil
+abre/cierra y llega a #control, selector Restaurante/Casa Duarte correcto,
+invitación propia en cada vertical y cero etiquetas GA4 en staging. Revisión
+final de medición por sector pendiente. No acredita mejora de LCP ni
 operación real de reservas de cliente.

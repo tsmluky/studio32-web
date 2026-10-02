@@ -26,6 +26,10 @@ Revisiones desde activación: 01/11/2026 (30 días), 01/12/2026 (60 días), 31/1
 
 El panel de tiempo real verifica la recepción de eventos. La decisión editorial/comercial requiere los informes acumulados y el registro de consultas. Medición solo de visitantes que aceptan; las cifras de GA4 no representan todas las visitas.
 
+Mientras se acumulan datos, continuar correcciones técnicas, QA de recorridos y
+mejoras de lo publicado. El usuario confirmó expresamente este trabajo activo;
+la pausa del paso 15 se refiere a expansión editorial, no a inactividad.
+
 ## Cierres del tramo · 02/10/2026
 
 Informes publicados en colección Studio32 · Captación y uso, tres dimensiones registradas y uso/contacto guardado. Bing sitemap Success (24 URL, cero errores). Google guía API indexable en prueba viva y solicitud de indexación aceptada; pendiente rastreo/indexación real. Registro comercial vacío preparado. El pendiente técnico principal sigue siendo LCP de portada; los resultados de adquisición requieren tiempo y consultas reales.
