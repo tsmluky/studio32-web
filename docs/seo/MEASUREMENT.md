@@ -33,3 +33,15 @@ Dimensiones registradas el 02/10/2026. El informe estándar con periodo Hoy ya m
 Google: guía /recursos/whatsapp-business-api/ descubierta, actualmente sin indexar. Prueba en vivo 02/10/2026: disponible e indexable, breadcrumb válido; solicitud de indexación aceptada. No es un bloqueo técnico probado ni una garantía de indexación. Bing: sitemap Success, 24 URL descubiertas, cero errores/avisos.
 
 Registro comercial mínimo en consultas-comerciales.csv (plantilla vacía). Usar un ID interno y campos enumerados; no añadir nombres/contactos/conversaciones a este archivo ni a Analytics. Origen solo si se conoce; desconocido en otro caso. Los datos comerciales reales se conservan en la herramienta operativa del negocio.
+
+### Uso del registro comercial
+
+La CSV versionada es solo la plantilla. Copiarla a qa/consultas-comerciales.csv (directorio ignorado) o a la herramienta privada del negocio antes de rellenar datos reales. Nunca publicar el registro ni subirlo al repositorio.
+
+- origen: google, bing, chatgpt, referencia, directo u otro; desconocido si no hay evidencia.
+- sector: dental, restaurant, aesthetics, local_services o general.
+- necesidad: recepcion, citas, presencia_web, integracion u otra.
+- estado: nueva, en_revision, cualificada, propuesta, ganada, perdida o descartada.
+- resultado: pendiente, demo, presupuesto, implantacion o sin_continuidad.
+
+Fecha ISO AAAA-MM-DD e ID interno sin nombre/teléfono/correo. Página de origen solo ruta canónica cuando se conoce. No deducir que una consulta proviene de Google por coincidir con una visita en Analytics.

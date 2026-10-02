@@ -12,12 +12,12 @@ Primera colección publicada en https://www.studio32.es/recursos/: siete guías,
 | 2. Auditoría | Hecho | SEO_AUDIT, URL_INVENTORY, HTTP_BASELINE y tamaños/hashes |
 | 3. Plan | Hecho | SEO_IMPLEMENTATION_PLAN con alcance, riesgos y validación |
 | 4. Foundation | Publicado | Organization, breadcrumbs, canonical, sitemap 24 URL, robots, OAI-SearchBot, apex 301 y 404 real; GA4 y GSC activos; Bing verificado por meta; sitemap procesado correctamente, 24 URL descubiertas |
-| 5. Rendimiento | Medido y mejorado en recursos | Mismas fuentes locales, fuente/licencia/hash; PSI antes 92 y LCP 2,7 s; producción 100 y 1,5 s; resultado en QA. Portada: FCP 1,4 s y LCP 3,0 s, objetivo 2,5 s pendiente. Sin CWV de campo/INP real |
+| 5. Rendimiento | Recursos cerrado; portada pendiente | Recursos productivos 100 y LCP 1,5 s. PR #5 portada publicado: FCP 1,9 s y LCP 3,2 s; objetivo 2,5 s pendiente. PR #7 en borrador sin mejora demostrada. Fuentes originales conservadas; sin CWV de campo/INP real |
 | 6. Arquitectura reutilizable | Hecho | Fuente editorial + renderizador; HTML versionado, sin CMS/framework/build npm |
 | 7. Siete guías | Publicado | Registro e intención propia, fuentes, relacionados y CTA; sin inventar clientes/capacidades |
 | 8. Tres problemas | Publicado | Opciones operativas antes de vender el producto |
 | 9. Calculadora | Publicado | Fórmula explícita, riesgo/conversión, sensibilidad anual; sin email, almacenamiento ni envío de cifras |
-| 10. Enlazado | Verificado | 757 referencias reales, cero fallos; links contextuales y hubs; ejemplos comentados excluidos |
+| 10. Enlazado | Verificado | 801 referencias reales, cero fallos; links contextuales y hubs; ejemplos comentados excluidos |
 | 11. Fuentes | Hecho | Proveedor, URL y fecha; revisión de fuentes a 90 días; Meta corregido con documentación oficial |
 | 12. Reglas editoriales | Aplicadas | Flujos/decisiones originales, sin páginas geográficas, cifras de tracción o garantías inventadas |
 | 13. Medición | Activa | GA4 Studio32 recibe vistas de QA con consentimiento opcional; GSC procesa sitemap (24 páginas); Bing verificado por meta; sitemap procesado correctamente, 24 URL descubiertas |
@@ -32,7 +32,7 @@ Primera colección publicada en https://www.studio32.es/recursos/: siete guías,
 - Auditoría falsa: parser HTML excluye los dos ejemplos dentro de comentarios y admite comillas simples; salida no cero ante fallos reales.
 - Fecha Article: timestamp ISO con hora y zona; schema válido en Google. Imagen editorial ausente es recomendación opcional, no error: no falsear image para ocultar avisos.
 - LCP de recursos: quitar CSS remoto de fuentes; conservar Inter/Playfair originales, licencias y layout.
-- Portada: Inter/Playfair/Syne locales originales; contraste de citas, footer y etiquetas de demo con el token existente. Producción: 91 rendimiento, 100 accesibilidad/SEO/buenas prácticas, FCP 1,4 s y LCP 3,0 s. LCP de portada aún por encima del objetivo 2,5 s.
+- Portada: Inter/Playfair/Syne locales originales y contraste corregido. PR #5 publicado: bundle de estilos, intro móvil omitida, escritorio abreviado y explicación/CTA visible. Última producción: 89 rendimiento, 100 accesibilidad/SEO/buenas prácticas, FCP 1,9 s y LCP 3,2 s. El LCP sigue abierto; PR #7 permanece en borrador.
 
 ## Dependencias reales pendientes
 

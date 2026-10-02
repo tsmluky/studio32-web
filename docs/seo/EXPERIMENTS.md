@@ -18,7 +18,7 @@ Inicio de recogida real: 02/10/2026. Las primeras visitas y eventos son pruebas 
 |---|---|---|
 | 1 | Informes útiles en GA4: adquisición, páginas de entrada, uso de calculadora/demo y clics de contacto | Informes guardados con dimensiones page_type, sector y cta_type; distinguir interacciones de leads reales |
 | 2 | Indexación de la colección en GSC/Bing | Revisar procesamiento de Bing y cobertura por URL; corregir causas reales de exclusión, sin asumir que sitemap implica indexación |
-| 3 | Rendimiento de portada | LCP móvil objetivo 2,5 s comprobado en producción; conservar identidad, animaciones y demo. PR #5 sigue en borrador porque no demuestra ese objetivo |
+| 3 | Rendimiento de portada | LCP móvil objetivo 2,5 s comprobado en producción; conservar identidad y demo. PR #5 publicado: LCP productivo 3,2 s, objetivo abierto. PR #7 en borrador sin mejora demostrada |
 | 4 | Registro comercial mínimo | Registrar fecha, origen conocido, necesidad y resultado de consultas reales; no enviar datos personales ni conversaciones a GA4 |
 | 5 | Evaluación de la colección | Comparar consultas no marca, entradas por recurso, uso de herramienta y oportunidades cualificadas; modificar según evidencia |
 
@@ -29,3 +29,5 @@ El panel de tiempo real verifica la recepción de eventos. La decisión editoria
 ## Cierres del tramo · 02/10/2026
 
 Informes publicados en colección Studio32 · Captación y uso, tres dimensiones registradas y uso/contacto guardado. Bing sitemap Success (24 URL, cero errores). Google guía API indexable en prueba viva y solicitud de indexación aceptada; pendiente rastreo/indexación real. Registro comercial vacío preparado. El pendiente técnico principal sigue siendo LCP de portada; los resultados de adquisición requieren tiempo y consultas reales.
+
+Ensayo PR #7: bundle de tres hojas, preview 90/100/100/66 (SEO noindex de staging), FCP 1,9 s, LCP 3,1 s, TBT 20 ms, CLS 0, SI 4,5 s. No supera el preview previo ni demuestra objetivo productivo. Conservar en borrador; no publicarlo por reducir solicitudes sin mejora observada. Las medidas aisladas tienen variación: diagnosticar el retraso de renderizado antes de otro cambio.

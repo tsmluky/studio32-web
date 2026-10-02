@@ -462,3 +462,11 @@ Regenerar con python _plantillas/generar-home-css.py tras cambiar cualquiera
 de las fuentes CSS. Las fuentes WOFF2 y licencias originales no cambian.
 Hash aprobado del script conserva variante CRLF y LF porque Git normaliza
 saltos al fusionar; no se modifica baseline histórica ni se permite otro código.
+# 2026-10-02 · Separar mejora visual publicada de objetivo LCP
+
+PR #5 publicó bundle de estilos y arranque revisado preservando fuentes y demo.
+El último PSI productivo dio LCP 3,2 s; el objetivo 2,5 s sigue abierto.
+PR #7 añade consentimiento al bundle pero su preview dio LCP 3,1 s, sin mejora
+demostrada. Mantenerlo en borrador. Reducir peticiones no justifica promover un
+ensayo por sí solo. Informes GA4 y sitemaps están operativos; adquisición, leads
+e indexación efectiva necesitan observación, no cifras propias de QA.

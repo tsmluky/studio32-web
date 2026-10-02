@@ -28,15 +28,15 @@ No afecta CSS/JS ni fuentes de portada, verticales o demo.
 - Organization, BreadcrumbList, sitemap generado, OAI-SearchBot permitido.
 - Tarifas de Meta corregidas con fuente oficial; sin rangos de mercado inventados.
 - Enlaces nuevos solo en footer comercial: portada y demo conservan estructura.
-- `styles.css`, `script.js`, `vertical.css` mantienen hashes iniciales.
-- Eventos locales sin red, cookies, persistencia, PII ni cifras de calculadora.
-- GA4 creado: Studio32 / Studio32 · Web, G-ZKX0QLRZ47; GSC/Bing pendientes.
+- styles.css y vertical.css mantienen hashes iniciales; script.js tiene cambio de arranque aprobado en PERFORMANCE_APPROVED.json.
+- Eventos enumerados; adaptador GA4 solo tras consentimiento, sin PII ni cifras de calculadora.
+- GA4 Studio32 / Studio32 · Web activo; GSC/Bing sitemaps procesados (24 URL cada uno).
 
 ## Estructura publicada
 
 ```text
 site/
-  index.html · styles.css · script.js
+  index.html · styles.css · home-bundle.css · home-foundation.css · script.js
   vertical.css · panel.css · panel.js
   agente-whatsapp-clinicas-dentales/
   agente-whatsapp-restaurantes/
@@ -62,6 +62,8 @@ python _plantillas/seo-foundation.py
 python _plantillas/validar-discovery.py
 python _plantillas/revisar-enlaces.py
 node _plantillas/test-calculator.cjs
+node _plantillas/test-measurement.cjs
+python _plantillas/generar-home-css.py
 python -m http.server 8088 --directory site
 ```
 
@@ -70,7 +72,7 @@ propio. Mantiene discovery al regenerar; después ejecutar foundation/sitemap.
 No ejecutar una regeneración de verticales como sustituto de revisar cambios
 manuales anteriores. Sitemap mantiene hashes y fechas estables en SITEMAP_STATE.
 
-QA: 21 páginas principales, 24 URL sitemap, cero errores SEO; 34 HTML y 757 enlaces,
+QA: 21 páginas principales, 24 URL sitemap, cero errores SEO; 34 HTML y 801 enlaces,
 cero enlaces rotos; auditor HTMLParser excluye ejemplos comentados y detecta comillas simples. Navegador: 15 rutas en
 1440/390 px, tablas móviles corregidas, calculadora con ejemplo y cero verificados.
 Capturas locales ignoradas en `docs/seo/qa/`. Rich Results oficial productivo válido para guía API; CWV de campo sin datos.
@@ -97,23 +99,6 @@ garantía de ausencia de conflictos. No usar demos como tracción comercial.
 - Registro visual claro: papel cálido, tinta, bronce, Playfair Display + Inter.
 - No ampliar contenido antes de medir esta primera colección.
 
-## Próximo cierre
-
-Fuentes y GA4 con consentimiento publicados; GSC sitemap procesado.
-Bing verificado; observar baseline de adquisición. Apex/404 y publicación inicial cerrados.
-Seguimiento y criterios: `docs/seo/MEASUREMENT.md`, `BACKLOG.md`, `EXPERIMENTS.md`.
-
-
-## Corrección localizada de portada publicada
-
-PR #4 fusionado en `8dd3e00`: mismas Inter/Playfair/Syne originales y pesos,
-licencias OFL, preload y home-foundation.css exclusivo. Texto pequeno de citas,
-footer y demo usa text-muted. Archivos base, estructura y animaciones conservados.
-Portada + 14 rutas a 1440/390 px: 30 checks sin overflow, dimensiones reales
-verificadas. Preview final: 97 rendimiento, 100 accesibilidad, LCP 2,6 s;
-Producción: 91 rendimiento y 100 accesibilidad/SEO/buenas prácticas; FCP 1,4 s,
-LCP 3,0 s. Objetivo LCP 2,5 s aún pendiente. Evidencia en docs/seo/QA.md.
-
 ## Medición publicada
 
 PR #6 fusionado en 1800cdc: cuenta GA4 Studio32 creada y activa con Google
@@ -122,11 +107,24 @@ solo tras aceptar, parámetros enumerados y URLs filtradas. Test de retirada,
 rechazo, caducidad y privacidad correcto. Producción activa: Analytics tiempo
 real muestra recursos/calculadora, tráfico propio de QA. GSC dominio existente
 con Google personal: sitemap procesado, 24 páginas descubiertas. Ver MEASUREMENT.md para IDs/estado.
-PR #5 listo para publicar mejora de carga: CSS de portada consolidado y
+PR #5 publicado en c895a1e: CSS de portada consolidado y
 precarga Inter original; intro móvil omitida, escritorio abreviado, CTA visible.
-Preview 96 rendimiento, FCP 1,2 s, LCP 2,7 s, CLS 0: objetivo no acreditado.
+Preview 96 rendimiento, FCP 1,2 s, LCP 2,7 s. Producción 89 rendimiento,
+FCP 1,9 s, LCP 3,2 s, CLS 0: objetivo no acreditado. PR #7 queda en borrador:
+incluir consentimiento en el bundle dio preview 90 rendimiento y LCP 3,1 s;
+no demuestra mejora y no se ha publicado. No confundir preview con producción.
+Originales CSS intactos; bundle generado conserva cascada. Cambios de arranque
+aprobados y hashes CRLF/LF exactos en PERFORMANCE_APPROVED.json.
 
 Colección GA4 Studio32 · Captación y uso publicada; dimensiones de evento
 page_type/sector/cta_type y reporte Uso y contacto guardados. Bing sitemap
 Success con 24 URL. Guía API en Google descubierta/sin indexar; prueba viva
 indexable y solicitud aceptada. Registro comercial vacío en docs/seo.
+
+## Pendientes y próxima decisión
+
+Resolver LCP móvil con evidencia productiva (objetivo 2,5 s), observar indexación
+efectiva y demanda. No confundir solicitud/sitemap con indexación ni QA con
+captación. Registro comercial: copiar plantilla a un lugar privado antes de usar.
+Revisiones 01/11, 01/12 y 31/12/2026; no son automatizaciones programadas.
+Seguimiento: `docs/seo/MEASUREMENT.md`, `BACKLOG.md`, `EXPERIMENTS.md`, `QA.md`.

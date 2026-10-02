@@ -68,3 +68,13 @@ PR #5: entrada móvil sin overlay, escritorio con intro abreviada, explicación/
 ## Consolidación de portada · 14:33 CEST
 
 Baseline actual producción con consentimiento: 87 rendimiento, FCP 2,1 s, LCP 3,1 s, TBT 30 ms, CLS 0, SI 5,8 s. Preview ce85887e: 96 rendimiento, 100 accesibilidad/buenas prácticas, SEO 66 por noindex de staging; FCP 1,2 s, LCP 2,7 s, TBT 0, CLS 0, SI 1,5 s. Fuentes/cascada originales, bundle exclusivo y precarga Inter. Home 1440/1024/390 sin overflow; cambio Restaurante/Casa Duarte correcto; preview no carga GA. SEO 21 páginas/24 URL, enlaces 34 HTML/801 referencias, consentimiento/calculadora pasan. Publicar mejora y comprobar producción; no dar LCP objetivo por cumplido.
+
+## Portada consolidada publicada · 14:36 CEST
+
+PR #5 fusionado c895a1e. Producción: 89 rendimiento, 100 accesibilidad/buenas prácticas/SEO, FCP 1,9 s, LCP 3,2 s, TBT 50 ms, CLS 0, Speed Index 4,2 s. https://pagespeed.web.dev/analysis/https-www-studio32-es/y6a28lg9bk?form_factor=mobile
+
+La mejora de preview no acredita mejora de LCP productivo. HTTP confirma bundle/script nuevos; móvil 390 sin overflow, Inter original y preloader none; selector Restaurante muestra Casa Duarte. PR #7 consolida también measurement-consent.css en la portada para eliminar la segunda solicitud bloqueante, conservando orden y estilos.
+
+## Ensayo CSS único no promovido · 14:40 CEST
+
+PR #7 permanece en borrador. Preview 1d450566: 90 rendimiento, 100 accesibilidad/buenas prácticas, SEO 66 por noindex; FCP 1,9 s, LCP 3,1 s, TBT 20 ms, CLS 0, SI 4,5 s. No demuestra mejora frente a la variante previa ni cumple objetivo. Responsive real 390/1440 sin overflow; panel de consentimiento conserva estilos. Informe: https://pagespeed.web.dev/analysis/https-1d450566-studio32-web-pages-dev/6hah9n7vjq?form_factor=mobile. Producción sigue en PR #5, sin este ensayo.
