@@ -21,7 +21,7 @@ Primera colección publicada en https://www.studio32.es/recursos/: siete guías,
 | 11. Fuentes | Hecho | Proveedor, URL y fecha; revisión de fuentes a 90 días; Meta corregido con documentación oficial |
 | 12. Reglas editoriales | Aplicadas | Flujos/decisiones originales, sin páginas geográficas, cifras de tracción o garantías inventadas |
 | 13. Medición | Activa | GA4 Studio32 recibe vistas de QA con consentimiento opcional; GSC procesa sitemap (24 páginas); Bing verificado por meta; sitemap procesado correctamente, 24 URL descubiertas |
-| 14. QA | Verificado | SEO/JSON-LD/links/calculadora, escritorio/móvil; Google rastrea guía y valida Article/Breadcrumb; HTTP productivo correcto |
+| 14. QA | Verificado | SEO/JSON-LD/links/calculadora, escritorio/móvil; prueba viva Google valida guía; HTTP productivo correcto. PR #8: aislamiento de sesiones, timeout y medición por sector probados sin backend; producción publicada y verificada |
 | 15. Detener y medir | En curso | No ampliar la colección. Revisiones a 30/60/90 días después de disponer de medición real |
 
 ## Fallos cerrados
@@ -39,6 +39,11 @@ Primera colección publicada en https://www.studio32.es/recursos/: siete guías,
 GA4 Studio32 creado con Google personal autorizado; consentimiento publicado y vistas de QA recibidas en tiempo real. GSC dominio existente, sitemap procesado (24 páginas). Bing con Google personal autorizado verificado por meta; sitemap procesado correctamente, 24 URL descubiertas. No hay leads ni adquisición atribuida todavía. Ver MEASUREMENT.md.
 
 No hay datos de CWV de campo; TBT de laboratorio no equivale a INP. Prueba de reserva/agenda de un cliente real y auditoría de RLS/Supabase pertenecen al producto y no se dan por realizadas por publicar la web.
+
+Desarrollo activo mientras se mide: PR #8, main ed44e93, cierra errores de demo y
+movimiento reducido sin ampliar contenido. Corresponde a apartados 39–41
+(recorrido/medición), 46–47 (usabilidad/demo), 60–61 (QA) del maestro. El paso 15
+mantiene recogida de datos; no bloquea correcciones de lo ya publicado.
 
 ## Siguiente decisión
 

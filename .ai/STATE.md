@@ -131,7 +131,10 @@ conserva scroll nativo y omite entrada de hero/navbar. demo_start usa el sector
 elegido (enum), sin mensaje ni datos personales. Preview móvil/escritorio de
 portada y cuatro verticales correcto; pruebas de carreras/timeout sin backend.
 Versiones: script 20261002-demo-2, discovery-events 20261002-events-2.
-Publicación pendiente de validar la revisión final en Cloudflare.
+Publicado en Cloudflare tras PR #8, main ed44e93. Producción confirma versiones,
+Restaurante/Casa Duarte, invitación y dataset correctos, 1440 sin overflow,
+cero etiquetas GA4 con rechazo guardado. No se enviaron mensajes ni reservas
+reales en QA; las carreras y timeouts se probaron con respuestas simuladas.
 
 El paso 15 pausa expansión editorial, no correcciones técnicas ni validación de
 recorridos. Continuar trabajo activo autorizado mientras se acumula medición.

@@ -99,5 +99,10 @@ Preview 36bbbfb3: portada 390/1024/1440 y cuatro verticales 390/1440,
 11 comprobaciones con anchos reales, sin overflow. Inter original; menú móvil
 abre/cierra y llega a #control, selector Restaurante/Casa Duarte correcto,
 invitación propia en cada vertical y cero etiquetas GA4 en staging. Revisión
-final de medición por sector pendiente. No acredita mejora de LCP ni
+final 876399c5 confirma sector restaurante, invitación y versiones correctas.
+PR #8 publicado en Cloudflare (main ed44e93); producción confirma los scripts,
+Casa Duarte, dataset restaurante e invitación correcta; 1440 sin overflow y
+cero etiquetas Google con rechazo guardado. Captura local:
+qa/demo-lifecycle-production.png. No se enviaron mensajes al backend ni se
+crearon reservas durante QA. No acredita mejora de LCP ni
 operación real de reservas de cliente.
