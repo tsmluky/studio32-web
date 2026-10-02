@@ -52,6 +52,8 @@ async function run() {
 
     const switchSector = setup(); switchSector.submit('Consulta clínica');
     switchSector.buttons[1].listeners.click(); switchSector.control();
+    assert.match(switchSector.get('.live-takeover-text').textContent, /carta, alérgenos/);
+    assert.match(switchSector.get('.live-takeover-text').textContent, /datos ficticios/);
     switchSector.submit('Consulta restaurante');
     assert.equal(JSON.parse(switchSector.requests[0].options.body).tenant === JSON.parse(switchSector.requests[1].options.body).tenant, false);
     switchSector.requests[0].reject(Error('petición antigua')); await flush();

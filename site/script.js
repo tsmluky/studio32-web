@@ -284,6 +284,7 @@ const SECTORES = {
         marcador: 'Clínica Cobalto · ayer por la noche',
         nota: 'Agente real conectado. Pregúntale lo que se te ocurra: precios, horarios, miedo al dentista, o pídele cita de verdad.',
         placeholder: 'Escribe lo que quieras preguntarle…',
+        invitacion: 'Pregúntale por servicios, precios u horarios y prueba el recorrido de una cita. Es una demostración con datos ficticios.',
         showreel: [
             { kind: 'in', texto: 'Buenas noches, llevo dos días con dolor en una muela y no sé si aguantar hasta el lunes.', estado: 'Conversación entrante · fuera de horario' },
             { kind: 'out', texto: 'Vaya, lo siento. ¿Te duele todo el rato o solo al morder?', estado: 'El agente está valorando la urgencia' },
@@ -308,6 +309,7 @@ const SECTORES = {
         marcador: 'Casa Duarte · anoche, en pleno servicio',
         nota: 'Agente real conectado. Pregúntale por la carta, por alérgenos o pídele mesa de verdad.',
         placeholder: 'Pregúntale por la carta o pide mesa…',
+        invitacion: 'Pregúntale por la carta, alérgenos u horarios y prueba el recorrido de una reserva. Es una demostración con datos ficticios.',
         showreel: [
             { kind: 'in', texto: '¿Tenéis mesa para 6 el sábado sobre las 21:30?', estado: 'Conversación entrante · sala llena' },
             { kind: 'out', texto: 'El sábado a las 21:30 me queda mesa de 6 en el salón. ¿Hay alguna alergia o intolerancia en el grupo?', estado: 'El agente consulta el aforo real del turno' },
@@ -330,6 +332,7 @@ const SECTORES = {
         marcador: 'Instalaciones Vera · antes de abrir el taller',
         nota: 'Agente real conectado. Pídele presupuesto y fíjate en lo que pregunta antes de pasarte al técnico.',
         placeholder: 'Cuéntale qué necesitas…',
+        invitacion: 'Cuéntale qué servicio necesitas y observa cómo prepara la solicitud para el técnico. Es una demostración con datos ficticios.',
         showreel: [
             { kind: 'in', texto: 'Buenos días, quería presupuesto para cambiar la caldera.', estado: 'Conversación entrante · 07:58' },
             { kind: 'out', texto: 'Te lo prepara el técnico. Para que salga ajustado, ¿es piso o unifamiliar, y sabes qué caldera tienes ahora?', estado: 'El agente está cualificando la petición' },
@@ -352,6 +355,7 @@ const SECTORES = {
         marcador: 'Estudio Áurea · domingo, con el centro cerrado',
         nota: 'Agente real conectado. Cuéntale un problema sin saber cómo se llama el tratamiento, pregúntale el precio o pide hora con una profesional concreta.',
         placeholder: 'Cuéntale qué te preocupa…',
+        invitacion: 'Pregúntale por tratamientos, precios u horarios y prueba el recorrido de una cita. Es una demostración con datos ficticios.',
         showreel: [
             { kind: 'in', texto: 'Hola, me están saliendo manchas en la cara y no sé muy bien qué me haría falta.', estado: 'Conversación entrante · domingo, centro cerrado' },
             { kind: 'out', texto: 'Te leo. ¿Desde cuándo lo notas, y has hecho antes algún tratamiento facial?', estado: 'El agente está entendiendo el caso' },
@@ -402,9 +406,7 @@ function plantillaDemo() {
         <div class="live-takeover" data-demo-takeover hidden>
             <p class="live-takeover-eyebrow">[ ESTO HA PASADO SOLO ]</p>
             <p class="live-takeover-title">Ahora <em>pruébalo tú</em>.</p>
-            <p class="live-takeover-text">Escríbele lo que quieras: precios, horarios, miedo al
-                dentista. Es el mismo agente que atendería a tus clientes, y la cita que reserves
-                aparecerá de verdad en el panel.</p>
+            <p class="live-takeover-text">Prueba el agente del sector elegido. Es una demostración con datos ficticios.</p>
             <button type="button" class="live-takeover-btn" data-demo-takeover-btn>Pruébalo tú
                 mismo</button>
         </div>
@@ -539,6 +541,7 @@ function initLiveDemo() {
     const avatar = pick('.conversation-row.is-selected .conversation-avatar');
     const takeover = pick('[data-demo-takeover]');
     const takeoverBtn = pick('[data-demo-takeover-btn]');
+    const takeoverText = pick('.live-takeover-text');
 
     if (!log || !form || !input) return;
 
@@ -857,6 +860,7 @@ function initLiveDemo() {
         if (panelNombre) panelNombre.textContent = sector.negocio;
         if (panelMarca) panelMarca.textContent = sector.iniciales;
         input.placeholder = sector.placeholder;
+        takeoverText.textContent = sector.invitacion;
 
         botonesSector.forEach((boton) => {
             const activo = boton.dataset.demoSector === id;
@@ -889,6 +893,7 @@ function initLiveDemo() {
     if (panelNombre) panelNombre.textContent = sector.negocio;
     if (panelMarca) panelMarca.textContent = sector.iniciales;
     input.placeholder = sector.placeholder;
+    takeoverText.textContent = sector.invitacion;
     setNote(sector.nota, false);
 
     botonesSector.forEach((boton) => {
