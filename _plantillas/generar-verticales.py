@@ -15,7 +15,7 @@ import os
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(RAIZ, "site")
-VERSION = "20260801-verticales-6"
+VERSION = "20260904-verticales-7"
 
 # ── Datos por vertical ───────────────────────────────────────────────────────
 VERTICALES = [
@@ -513,6 +513,11 @@ def main():
 
         destino = os.path.join(carpeta, "index.html")
         io.open(destino, "w", encoding="utf-8").write(html)
+        # Mantener discovery al regenerar sin duplicar su marcado en esta plantilla.
+        import runpy
+        from pathlib import Path
+        foundation = runpy.run_path(os.path.join(RAIZ, "_plantillas", "seo-foundation.py"))
+        foundation["enhance"](Path(destino))
         print("generada:", v["slug"] + "/index.html", "|", len(html), "caracteres")
 
 

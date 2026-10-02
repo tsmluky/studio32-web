@@ -1,97 +1,99 @@
 # Estado actual · studio32-web
 
-> **Se sobrescribe, no se acumula.** Refleja dónde está el repo AHORA.
-> Lo histórico va a `DECISIONS.md`. Tope: ~100 líneas.
-> Última actualización: **2026-08-01**
+Actualizado: **2026-10-02**. Estado canónico; histórico en DECISIONS.md.
 
-## Qué es este repo
+## Producto y publicación
 
-Web pública comercial de Studio32 → **studio32.es**. Superficie **estática**:
-HTML/CSS/JS sin framework ni build. Es la cara comercial, no el producto.
+Web comercial Studio32 → `https://www.studio32.es`. HTML/CSS/JS estático; solo
+`site/` se publica. Sin framework ni npm/build para el sitio. Cloudflare Pages
+confirmado en dashboard: proyecto `studio32-web`, repositorio conectado, rama
+productiva `main`, salida `site` y dominio `www.studio32.es` activo con SSL.
+Supabase `studio32-hub` conserva su función operativa; esta web sigue estática.
+Netlify es una integración heredada; el apex ya redirige a Pages en Cloudflare.
+Ver `docs/seo/INFRASTRUCTURE.md`.
 
-Contexto del ecosistema completo: **repo `Studio32` → `notes/CONTEXTO.md`** y el
-traspaso `Studio32 → reportes/2026-08-01-traspaso.md`.
+## Trabajo actual
+
+Rama `feat/organic-discovery`: entrega local preparada para revisión, **sin
+fusionar ni publicar en producción; preview Cloudflare disponible**. Informe maestro SEO/GEO adoptado por el usuario;
+mantener criterio y calidad de marca. Documentación: `docs/seo/`. Infraestructura verificada en `INFRASTRUCTURE.md`.
+
+- Siete guías, tres problemas, una calculadora y tres hubs.
+- Organization, BreadcrumbList, sitemap generado, OAI-SearchBot permitido.
+- Tarifas de Meta corregidas con fuente oficial; sin rangos de mercado inventados.
+- Enlaces nuevos solo en footer comercial: portada y demo conservan estructura.
+- `styles.css`, `script.js`, `vertical.css` mantienen hashes iniciales.
+- Eventos locales sin red, cookies, persistencia, PII ni cifras de calculadora.
+- Usuario confirmó que GA4, GSC y Bing **todavía no están configurados**.
 
 ## Estructura publicada
 
-```
-site/                                   ← ÚNICO directorio publicado
-  index.html                            ← portada
-  styles.css · script.js                ← base, las cargan todas las páginas
-  vertical.css                          ← páginas interiores
-  panel.css · panel.js                  ← tour del panel
-  agente-whatsapp-clinicas-dentales/    ┐
-  agente-whatsapp-restaurantes/         ├ páginas por vertical
-  agente-whatsapp-servicios-locales/    ┘
-  precio-agente-whatsapp/               ← "cuánto cuesta"
-  panel-de-control/                     ← tour de producto del panel
-  legal/ · assets/ · robots.txt · sitemap.xml · _redirects
-  Landing1-L'Obscur/ … Landing4-Habitat/  ← demos de diseño web (estilo antiguo)
-  Demos-Clientes/la-taberna-de-ruzafa/    ← plantilla SIN TERMINAR, en noindex
-_plantillas/                            ← fuera del deploy
-  generar-verticales.py                 ← genera las 3 páginas por vertical
-  revisar-enlaces.py                    ← auditoría de enlaces internos
+```text
+site/
+  index.html · styles.css · script.js
+  vertical.css · panel.css · panel.js
+  agente-whatsapp-clinicas-dentales/
+  agente-whatsapp-restaurantes/
+  agente-whatsapp-centros-esteticos/
+  agente-whatsapp-servicios-locales/
+  precio-agente-whatsapp/ · panel-de-control/
+  recursos/ · problemas/ · herramientas/
+  discovery.css · discovery-events.js · consultas-calculator.js
+  404.html · legal/ · assets/ · robots.txt · sitemap.xml
+  Landing1-4 · Demos-Clientes · Agencia-Portfolio
 ```
 
-## Cómo se trabaja
+## Fuentes, generación y QA
 
-- **Las 3 páginas por vertical se GENERAN**: editar
-  `_plantillas/generar-verticales.py` y ejecutarlo. Editar el HTML a mano se
-  pierde en la siguiente regeneración.
-- **El marcado de la demo vive en `script.js`** (`plantillaDemo()`), no en el
-  HTML. Cualquier página con `<div class="live-demo" data-live-demo="SECTOR">`
-  la recibe entera. Sectores: `clinica`, `restaurante`, `servicios`.
-- **Auditar enlaces antes de dar por buena una reorganización**:
-  `python _plantillas/revisar-enlaces.py` (17 páginas, 220 enlaces).
-- Probar en local: `python -m http.server 8080 --directory site`
+`_plantillas/discovery-content.json` es fuente editorial estructurada: intención,
+copy, bloques, fuentes fechadas, relacionados y destino comercial. Todo texto se
+escapa; solo referencias internas `[[ruta|texto]]` crean links. HTML versionado;
+registro `docs/seo/CONTENT_REGISTRY.json` tiene estado `review`.
 
-## 🚨 Reglas que se rompen solas si no se miran
+```text
+python _plantillas/generar-discovery.py
+python _plantillas/seo-foundation.py
+python _plantillas/validar-discovery.py
+python _plantillas/revisar-enlaces.py
+node _plantillas/test-calculator.cjs
+python -m http.server 8088 --directory site
+```
 
-1. **Subir el `?v=` al tocar `styles.css` o `script.js`.** Está en `index.html` y
-   en el generador (constante `VERSION`). Si no se sube, Cloudflare y el
-   navegador siguen sirviendo lo viejo y parece que el despliegue no ocurrió.
-2. **Nunca `overflow: hidden` en un contenedor con hijos `sticky`.** Rompió la
-   cabecera de la FAQ. Usar `clip`.
-3. **Los bloques a sangre completa** (`calc(50% - 50vw)`) desbordan el ancho de
-   la barra de scroll. Por eso hay `overflow-x: clip` en `html, body`.
-4. **Las páginas por vertical NO cargan GSAP/Lenis/SplitType** (Core Web Vitals).
-   `script.js` lo detecta con `TIENE_GSAP`. No dar por hecho que existen.
-5. **Sin preloader, `initHeroAnimations()` va en `queueMicrotask`**, o revienta
-   por zona muerta temporal de las `const` de más abajo.
+Generador histórico `generar-verticales.py`: tres verticales; estética tiene HTML
+propio. Mantiene discovery al regenerar; después ejecutar foundation/sitemap.
+No ejecutar una regeneración de verticales como sustituto de revisar cambios
+manuales anteriores. Sitemap mantiene hashes y fechas estables en SITEMAP_STATE.
 
-## Registro visual
+QA: 21 páginas principales, 24 URL sitemap, cero errores SEO; 34 HTML y 740 enlaces,
+cero enlaces rotos; auditor HTMLParser excluye ejemplos comentados y detecta comillas simples. Navegador: 14 rutas en
+1440/390 px, tablas móviles corregidas, calculadora con ejemplo y cero verificados.
+Capturas locales ignoradas en `docs/seo/qa/`. Rich Results oficial y CWV pendientes.
 
-**Claro** desde el 01/08. Papel cálido `#f7f4ee`, tinta `#1c1812`, bronce
-`#8a6421` para texto y el oro de marca `#c9a86a` como relleno. Profundidad por
-sombra (`--sombra-1/2/3`), no por contraste. Playfair Display + Inter.
+## Límites actuales confirmados
 
-⚠️ Los ajustes de componente del cambio de registro están **al final de
-`styles.css`** como bloque aparte. Pendiente plegarlos dentro de cada componente
-y borrar el bloque, o el mismo componente queda definido en dos sitios.
+Apex → www corregido mediante Single Redirect activo en Cloudflare, 301 con
+path/query conservados. HTTP y HTTPS comprobados; sin cambio de DNS. URL inexistente en www devuelve portada con 200 (soft 404).
+DNS verificado: www CNAME a Pages; apex A proxied a 75.2.60.5 y cabecera Netlify.
+Preview Cloudflare devuelve noindex/404 correcto; repetir tras publicar. Python local
+no interpreta `_headers` ni `_redirects`. No modificar DNS por una nota vieja.
 
-## Lo que hay en la portada
+Producto canónico en repo `studio32-agent`: piloto pendiente, sin evidencia de
+cliente real operando el recorrido completo. Las guías explican evaluación y
+criterios de implantación; no vender coexistencia/agenda como alta universal o
+garantía de ausencia de conflictos. No usar demos como tracción comercial.
 
-`#problema` (con banda de cifras) → `#control` (demo en vivo con el agente REAL,
-selector de 3 sectores) → `#agente` → `#process` → `#tarifas` → `#services` →
-`#faq` → `#contact`.
+## Reglas técnicas que importan
 
-La demo habla con `POST /chat` del agente en Railway. El widget propio sigue
-cargado pero **su burbuja está oculta**: lo abre el botón "Hablemos" del menú.
+- Subir `?v=` si se modifica CSS/JS compartido; mismo valor en referencias y fuentes.
+- No `overflow:hidden` en padres de sticky; usar clip cuando proceda.
+- Demo HTML vive en `script.js`, con sector por `data-live-demo`.
+- Verticales y recursos no añaden GSAP/Lenis/SplitType; recursos tampoco cargan agente.
+- Registro visual claro: papel cálido, tinta, bronce, Playfair Display + Inter.
+- No ampliar contenido antes de medir esta primera colección.
 
-## Deuda conocida
+## Próximo cierre
 
-- Código huérfano del selector anterior: `.fit-card--tab`, `.sector-panel`,
-  `.sector-points`, `.agent-grid`, `.control-grid` en CSS; `initSectorDemo()` e
-  `initChatDemo()` en JS (ya no hay `[data-chat-demo]`).
-- Las demos `Landing1-4` siguen en el **estilo oscuro antiguo**: quien llega
-  desde el pie se encuentra otro sitio. Sin decidir si se rediseñan o se retiran.
-- `Demos-Clientes/la-taberna-de-ruzafa/` es una plantilla sin terminar (faltan
-  3 imágenes, quedan marcadores `{{...}}`). Está en `noindex` y no enlazada.
-- El apex desnudo `studio32.es` todavía apunta a Netlify (A `75.2.60.5`); lo
-  canónico es Cloudflare Pages. Pendiente cortar el apex.
-
-## Foco actual
-
-La web está en buen estado. **El cuello de botella del negocio no está aquí**:
-es GH Dent, bloqueado en verificar el número en Meta y conectar Google Calendar
-(repo `studio32-agent`). Ninguna de las dos cosas es programar.
+Revisión editorial en Cloudflare → cuentas y consentimiento de medición →
+redirección apex a www en Cloudflare → despliegue autorizado → HTTP/404/schema/demo
+→ GSC/Bing. Preview verificado; producción sigue en `main`.
+Seguimiento y criterios: `docs/seo/MEASUREMENT.md`, `BACKLOG.md`, `EXPERIMENTS.md`.

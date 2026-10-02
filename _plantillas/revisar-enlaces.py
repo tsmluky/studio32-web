@@ -10,14 +10,30 @@ secciones.
 """
 import io
 import os
-import re
+from html.parser import HTMLParser
+import sys
 from urllib.parse import unquote, urldefrag
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(RAIZ, "site")
 
-RE_HREF = re.compile(r'(?:href|src)\s*=\s*"([^"]+)"', re.I)
-RE_ID = re.compile(r'\bid\s*=\s*"([^"]+)"')
+class ReferenciasHTML(HTMLParser):
+    """Solo atributos de elementos reales; no ejemplos dentro de comentarios."""
+    def __init__(self):
+        super().__init__(); self.enlaces = []; self.ids = set()
+
+    def handle_starttag(self, tag, attrs):
+        for nombre, valor in attrs:
+            if nombre in ("href", "src") and valor is not None:
+                self.enlaces.append(valor)
+            if nombre == "id" and valor is not None:
+                self.ids.add(valor)
+
+
+def referencias(html):
+    parser = ReferenciasHTML(); parser.feed(html)
+    return parser
+
 
 EXTERNO = ("http://", "https://", "mailto:", "tel:", "data:", "//")
 
@@ -31,7 +47,7 @@ def paginas():
 
 def ids_de(ruta):
     try:
-        return set(RE_ID.findall(io.open(ruta, encoding="utf-8", errors="ignore").read()))
+        return referencias(io.open(ruta, encoding="utf-8", errors="ignore").read()).ids
     except OSError:
         return set()
 
@@ -64,9 +80,10 @@ def main():
         revisadas += 1
         rel_pagina = os.path.relpath(pagina, SITE).replace("\\", "/")
         html = io.open(pagina, encoding="utf-8", errors="ignore").read()
-        propios = set(RE_ID.findall(html))
+        documento = referencias(html)
+        propios = documento.ids
 
-        for href in RE_HREF.findall(html):
+        for href in documento.enlaces:
             href = href.strip()
             if not href or href.startswith(EXTERNO) or href.startswith("#") and href == "#":
                 continue
@@ -100,6 +117,8 @@ def main():
     else:
         print("\nsin enlaces rotos")
 
+    return 1 if fallos else 0
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

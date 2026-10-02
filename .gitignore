@@ -45,3 +45,6 @@ studio32-agent-deploy/
 onlook-estetica/.next/
 silex-data/
 silex-output/
+
+# Capturas de QA local: artefactos de revisión, fuera del sitio publicado.
+docs/seo/qa/

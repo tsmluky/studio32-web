@@ -355,3 +355,50 @@ cortan al leerlas, y trozos de URL (`.jpg`, `.webp`) se cuelan como clases.
 
 Ojo: `.chat-header`, `.chat-avatar`, `.chat-status`, `.chat-day`, `.chat-msg` y
 `.detail-message*` SÍ se usan — las crea la plantilla de la demo.
+
+## 2026-10-02 · Primera colección de descubrimiento orgánico
+
+Se mantiene HTML estático y el patrón Python existente: fuente editorial JSON,
+renderer que escapa texto y HTML versionado. Sin CMS, framework, npm ni nuevo CDN.
+Se preparan siete guías, tres problemas y una calculadora; después medir antes de
+ampliar. Marca, portada, demo y CSS/JS comercial base se conservan. Enlazado nuevo
+en el footer existente, con temas específicos por página.
+
+Se corrigen tarifas de Meta y cifras de mercado no documentadas. La entidad usa
+Organization sin inventar dirección ni presentar una portada social como logo.
+Se conserva la política GPTBot. Sitemap excluye noindex y mantiene las URLs de las
+demos históricas, ahora con canonical explícito.
+
+La calculadora multiplica fuera de horario por sin resolver dentro de esa franja;
+no suma porcentajes. El rango anual es sensibilidad ±10 puntos, no intervalo de
+confianza. No almacena ni envía entradas. Eventos locales con adaptador explícito
+consentido: usuario confirmó que GA4/GSC/Bing aún no existen; no se activa tracking.
+
+HTTP confirmó soft 404 y dos hosts con 200. El 404 está preparado, pero el host debe
+resolverse en el proveedor: Cloudflare Pages no permite redirects por dominio en
+_redirects. No se cambia DNS. Entrega en rama y PR para revisión; no fusionar ni
+publicar contenido desde el generador sin revisión editorial. Fuentes y cierre
+operativo en docs/seo/. No hay métricas de adquisición ni clientes inferidos de demos.
+
+
+## 2026-10-02 · Cloudflare como referencia de revisión
+
+El usuario confirmó Cloudflare + Supabase e indicó inspeccionar sus dashboards.
+Pages `studio32-web` publica `site` desde `main` con www activo; preview de la
+rama SEO verificado noindex/404. Supabase hub conserva función operativa, sin
+backend nuevo para contenido/calculadora. Se sustituye el enlace de revisión
+Netlify por Cloudflare. Netlify es heredado pero todavía sirve el apex (DNS A
+proxied y x-nf-request-id); no desactivar hasta cerrar redirección/validación.
+Evidencia y propuesta concreta de redirección: `docs/seo/INFRASTRUCTURE.md`.
+
+
+## 2026-10-02 · Cierre autorizado de fallos
+
+El usuario pidió resolver los fallos y avanzar tras revisar la entrega. Se aplicó
+Single Redirect apex a www en Cloudflare: hostname exacto, 301, path/query
+conservados. Sin cambios de DNS, correo, Supabase o permisos. HTTP verificado.
+La auditoría tenía dos falsos positivos en comentarios y un favicon realmente
+ausente: HTMLParser sustituye regex, retorno no cero ante fallos, favicon SVG
+local coherente con la demo. 34 páginas, 740 referencias, cero fallos.
+Publicar la primera colección tras checks permite corregir el soft 404 real;
+no ampliar el número de recursos hasta contar con medición.
