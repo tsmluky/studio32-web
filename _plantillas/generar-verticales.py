@@ -16,6 +16,7 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(RAIZ, "site")
 VERSION = "20260904-verticales-7"
+SCRIPT_VERSION = "20261002-critical-1"
 
 # ── Datos por vertical ───────────────────────────────────────────────────────
 VERTICALES = [
@@ -471,7 +472,7 @@ PAGINA = """<!DOCTYPE html>
         </div>
     </footer>
 
-    <script src="../script.js?v={version}" defer></script>
+    <script src="../script.js?v={SCRIPT_VERSION}" defer></script>
 </body>
 
 </html>

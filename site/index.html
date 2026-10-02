@@ -40,7 +40,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     <script src="https://unpkg.com/split-type@0.3.4" defer></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js" defer></script>
-    <script src="script.js?v=20260904-verticales-7" defer></script>
+    <script src="script.js?v=20261002-critical-1" defer></script>
 
     <!-- Red de seguridad del preloader: si un CDN falla o el JS principal
          no llega a retirarlo, lo forzamos para no dejar la web en negro. -->
@@ -53,7 +53,7 @@
             document.addEventListener('DOMContentLoaded', function () {
                 if (typeof window.gsap === 'undefined') { hidePreloader(); }
             });
-            window.addEventListener('load', function () {
+            document.addEventListener('DOMContentLoaded', function () {
                 setTimeout(function () {
                     var p = document.querySelector('.preloader');
                     if (p && !p.classList.contains('is-done')) { hidePreloader(); }
@@ -63,7 +63,7 @@
                     // igualmente el hero y los reveals de texto. El guard interno
                     // evita que se inicialice dos veces.
                     if (typeof window.initHeroAnimations === 'function') { window.initHeroAnimations(); }
-                }, 4000);
+                }, 1600);
             });
         })();
     </script>
