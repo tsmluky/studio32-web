@@ -124,7 +124,11 @@ def main():
         if name in approved:
             if approved[name]['original_sha256']!=expected: errors.append('baseline historica alterada: '+name)
             expected=approved[name]['sha256']
-        if hashlib.sha256((SITE/name).read_bytes()).hexdigest()!=expected: errors.append('base comercial alterada: '+name)
+        raw=(SITE/name).read_bytes()
+        matches=hashlib.sha256(raw).hexdigest()==expected
+        if name in approved and approved[name].get('sha256_lf'):
+            matches=matches or hashlib.sha256(raw.replace(b'\r\n',b'\n')).hexdigest()==approved[name]['sha256_lf']
+        if not matches: errors.append('base comercial alterada: '+name)
     print(f'{len(names)} páginas de producto/discovery verificadas; {len(urls)} URL de sitemap; {len(errors)} errores.')
     for error in errors: print(error)
     return bool(errors)
