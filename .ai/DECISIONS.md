@@ -414,3 +414,12 @@ recursos/problemas/herramientas: @font-face en discovery.css y preload de
 Playfair normal Latin; quitar CSS externo de esas páginas. No modificar
 styles.css, vertical.css, script.js ni demo. Verificar marca y PSI antes de
 atribuir una mejora. No interpretar TBT como INP ni laboratorio como CWV real.
+
+
+## 2026-10-02 · Carga y contraste de portada
+
+Baseline PSI móvil muestra LCP 3,2 s y contraste insuficiente en citas y
+footer-services. Aplicar en una hoja exclusiva home-foundation.css los mismos
+font-face Inter/Playfair/Syne, licencias OFL y preload de Playfair normal/italic.
+Mantener archivos base y demo intactos; texto pequeño cambia solo a text-muted.
+No generalizar Syne a verticales: allí la familia existente cae a Inter.
