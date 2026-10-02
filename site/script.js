@@ -853,6 +853,7 @@ function initLiveDemo() {
         if (!nuevo || nuevo === sector) return;
 
         sector = nuevo;
+        root.dataset.liveDemo = id;
         DEMO_AGENT.tenant = sector.tenant;
 
         chatNombre.textContent = sector.negocio;
@@ -888,6 +889,7 @@ function initLiveDemo() {
     resetBtn.addEventListener('click', arrancarShowreel);
 
     // Rótulos iniciales según el sector de la página (no siempre es clínica).
+    root.dataset.liveDemo = root.dataset.liveDemo || 'clinica';
     chatNombre.textContent = sector.negocio;
     chatAvatar.textContent = sector.iniciales;
     if (panelNombre) panelNombre.textContent = sector.negocio;

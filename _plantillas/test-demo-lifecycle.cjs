@@ -95,6 +95,18 @@ async function run() {
         });
         assert.equal(smooth, reduced ? 0 : 1, 'movimiento reducido conserva scroll nativo');
     }
+    const eventsSource = fs.readFileSync('site/discovery-events.js', 'utf8');
+    for (const [selection, expected] of [['restaurante', 'restaurant'], ['clinica', 'dental'], ['estetica', 'aesthetics'], ['servicios', 'local_services'], ['INVALID', 'general']]) {
+        const handlers = {}, sent = [];
+        vm.runInNewContext(eventsSource, {
+            document: { body: { dataset: {} }, addEventListener(type, fn) { handlers[type] = fn; }, dispatchEvent() {} },
+            location: { pathname: '/' }, Set, URL, CustomEvent: class {},
+            window: { Studio32Analytics: { consent: 'granted', send: (name, params) => sent.push({ name, params }) } }
+        });
+        handlers.submit({ target: { matches: () => true, querySelector: () => ({ value: 'mensaje PRIVADO' }), closest: () => ({ dataset: { liveDemo: selection } }) } });
+        assert.equal(sent[0].params.sector, expected, 'medición usa sector seleccionado y enum válido');
+        assert.equal(JSON.stringify(sent).includes('PRIVADO'), false, 'mensaje no llega a medición');
+    }
     console.log('Demo: reinicio, cambio de sector, respuestas tardías, panel, timeout sin reenvío y movimiento reducido verificados sin backend.');
 }
 run().catch(error => { console.error(error); process.exitCode = 1; });

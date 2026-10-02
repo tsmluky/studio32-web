@@ -11,6 +11,7 @@
     function track(name, extras = {}) {
         if (!allowed.has(name)) return;
         const params = { page_type: pageType, sector: sectors[path.split('/')[1]] || 'general' };
+        if (['dental', 'restaurant', 'aesthetics', 'local_services'].includes(extras.sector)) params.sector = extras.sector;
         if (['demo', 'whatsapp', 'budget', 'calculator_demo'].includes(extras.cta_type)) params.cta_type = extras.cta_type;
         document.dispatchEvent(new CustomEvent('studio32:discovery', { detail: { name, params } }));
         const adapter = window.Studio32Analytics;
@@ -25,7 +26,9 @@
         const input = event.target.querySelector('input, textarea');
         if (!input || !input.value.trim()) return;
         demoStarted = true;
-        track('demo_start');
+        const demoSector = event.target.closest('[data-live-demo]')?.dataset.liveDemo;
+        const sector = { clinica: 'dental', restaurante: 'restaurant', estetica: 'aesthetics', servicios: 'local_services' }[demoSector];
+        track('demo_start', { sector });
     }, true);
     document.addEventListener('click', function (event) {
         const anchor = event.target.closest('a');

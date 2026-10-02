@@ -10,7 +10,7 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / 'site'
 HOST = 'https://www.studio32.es'
-VERSION = '20261002-discovery-1'
+VERSION = '20261002-events-2'
 COMMERCIAL = ['index.html'] + [p + '/index.html' for p in (
     'agente-whatsapp-clinicas-dentales', 'agente-whatsapp-restaurantes',
     'agente-whatsapp-centros-esteticos', 'agente-whatsapp-servicios-locales',
