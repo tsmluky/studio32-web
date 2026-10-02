@@ -2,7 +2,7 @@
 
 | Idea | Prioridad | Estado / condición |
 |---|---|---|
-| Apex → www | P0 | Requiere revisar el proveedor y aplicar redirección verificada; no es una migración de dominio |
+| Apex → www | P0 | Proveedor verificado: apex aún llega a Netlify; preparar redirección Cloudflare 301 conservando path/query (INFRASTRUCTURE.md) |
 | GA4 + GSC + Bing | P0 | Cuentas todavía sin configurar, confirmado por el usuario; consentimiento e ID real pendientes |
 | Validación HTTP 404 tras publicar | P0 | Producción actual tiene soft 404; 404.html preparado |
 | Rich Results y CWV | P0 | Validación oficial y datos de campo pendientes; no inferirlos de bytes/latencia |

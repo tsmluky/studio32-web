@@ -379,3 +379,14 @@ resolverse en el proveedor: Cloudflare Pages no permite redirects por dominio en
 _redirects. No se cambia DNS. Entrega en rama y PR para revisión; no fusionar ni
 publicar contenido desde el generador sin revisión editorial. Fuentes y cierre
 operativo en docs/seo/. No hay métricas de adquisición ni clientes inferidos de demos.
+
+
+## 2026-10-02 · Cloudflare como referencia de revisión
+
+El usuario confirmó Cloudflare + Supabase e indicó inspeccionar sus dashboards.
+Pages `studio32-web` publica `site` desde `main` con www activo; preview de la
+rama SEO verificado noindex/404. Supabase hub conserva función operativa, sin
+backend nuevo para contenido/calculadora. Se sustituye el enlace de revisión
+Netlify por Cloudflare. Netlify es heredado pero todavía sirve el apex (DNS A
+proxied y x-nf-request-id); no desactivar hasta cerrar redirección/validación.
+Evidencia y propuesta concreta de redirección: `docs/seo/INFRASTRUCTURE.md`.

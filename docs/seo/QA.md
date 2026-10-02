@@ -16,7 +16,9 @@ Capturas locales en `qa/` (ignoradas por Git): recursos en escritorio, guía en 
 
 ## Vista previa del PR
 
-[PR #2](https://github.com/tsmluky/studio32-web/pull/2), en borrador. [Vista previa](https://deploy-preview-2--studio-32.netlify.app/recursos/) disponible. Cloudflare Pages y checks Netlify de headers, redirects y preview pasaron. HTTP de preview: recursos, calculadora y sitemap responden 200 con `X-Robots-Tag: noindex`; una URL inexistente responde 404. Canonical apunta a producción. Lectura de www confirma que el código nuevo todavía no está en producción. Evidencia local `qa/preview-http.json`.
+[PR #2](https://github.com/tsmluky/studio32-web/pull/2), en borrador. [Vista previa Cloudflare](https://e100bb0b.studio32-web.pages.dev/recursos/) del commit `7454591`, verificada el 02/10. Recursos, calculadora y sitemap responden 200 con `X-Robots-Tag: noindex`; una URL inexistente responde 404. Canonical apunta a producción. Lectura de www confirma que el código nuevo todavía no está en producción. Evidencia local `qa/cloudflare-preview-http.json`.
+
+Cloudflare Pages es el destino de publicación y revisión. Los checks de Netlify siguen pasando por una integración heredada; su preview se comprobó previamente, pero no es la referencia de entrega. Dominios y configuración efectiva: `INFRASTRUCTURE.md`.
 
 ## Comandos reproducibles
 

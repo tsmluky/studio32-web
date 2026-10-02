@@ -5,15 +5,17 @@ Actualizado: **2026-10-02**. Estado canónico; histórico en DECISIONS.md.
 ## Producto y publicación
 
 Web comercial Studio32 → `https://www.studio32.es`. HTML/CSS/JS estático; solo
-`site/` se publica. Sin framework ni npm/build para el sitio. Netlify configurado
-en repo; contexto previo describe Cloudflare Pages como destino principal.
-No asumir configuración efectiva de DNS/CDN sin revisarla.
+`site/` se publica. Sin framework ni npm/build para el sitio. Cloudflare Pages
+confirmado en dashboard: proyecto `studio32-web`, repositorio conectado, rama
+productiva `main`, salida `site` y dominio `www.studio32.es` activo con SSL.
+Supabase `studio32-hub` conserva su función operativa; esta web sigue estática.
+Netlify es una integración heredada y todavía sirve el apex; ver INFRASTRUCTURE.
 
 ## Trabajo actual
 
 Rama `feat/organic-discovery`: entrega local preparada para revisión, **sin
-fusionar ni desplegar**. Informe maestro SEO/GEO adoptado por el usuario;
-mantener criterio y calidad de marca. Documentación: `docs/seo/`.
+fusionar ni publicar en producción; preview Cloudflare disponible**. Informe maestro SEO/GEO adoptado por el usuario;
+mantener criterio y calidad de marca. Documentación: `docs/seo/`. Infraestructura verificada en `INFRASTRUCTURE.md`.
 
 - Siete guías, tres problemas, una calculadora y tres hubs.
 - Organization, BreadcrumbList, sitemap generado, OAI-SearchBot permitido.
@@ -70,7 +72,8 @@ Capturas locales ignoradas en `docs/seo/qa/`. Rich Results oficial y CWV pendien
 
 HTTP: apex y www responden 200 con contenido distinto; falta redirección apex →
 www en proveedor. URL inexistente en www devuelve portada con 200 (soft 404).
-`404.html` preparado: verificar status real después de desplegar. Python local
+DNS verificado: www CNAME a Pages; apex A proxied a 75.2.60.5 y cabecera Netlify.
+Preview Cloudflare devuelve noindex/404 correcto; repetir tras publicar. Python local
 no interpreta `_headers` ni `_redirects`. No modificar DNS por una nota vieja.
 
 Producto canónico en repo `studio32-agent`: piloto pendiente, sin evidencia de
@@ -89,6 +92,7 @@ garantía de ausencia de conflictos. No usar demos como tracción comercial.
 
 ## Próximo cierre
 
-Revisión editorial → cuentas y consentimiento de medición → verificar proveedor,
-host y preview noindex → despliegue autorizado → HTTP/404/schema/demo → GSC/Bing.
+Revisión editorial en Cloudflare → cuentas y consentimiento de medición →
+redirección apex a www en Cloudflare → despliegue autorizado → HTTP/404/schema/demo
+→ GSC/Bing. Preview verificado; producción sigue en `main`.
 Seguimiento y criterios: `docs/seo/MEASUREMENT.md`, `BACKLOG.md`, `EXPERIMENTS.md`.
