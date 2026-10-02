@@ -55,6 +55,8 @@ def enhance(path):
         source = source.replace('</head>', '<script type="application/ld+json">'+json.dumps(schema,ensure_ascii=False)+'</script>\n</head>')
     if 'discovery-events.js' not in source:
         source = source.replace('</head>',f'<script src="{prefix}discovery-events.js?v={VERSION}" defer></script>\n</head>')
+    if 'measurement-consent.js' not in source:
+        source=source.replace('</head>', f'<link rel="stylesheet" href="{prefix}measurement-consent.css?v=20261002-measurement-1">\n<script src="{prefix}measurement-consent.js?v=20261002-measurement-1" defer></script>\n</head>')
     if 'data-discovery-links' not in source:
         links = f'<a href="{prefix}recursos/" data-discovery-links>Recursos de recepción</a>\n<a href="{prefix}herramientas/">Herramientas</a>'
         pattern = r'(<nav class="footer-col"[^>]*>\s*<p class="footer-col-titulo">El agente</p>)'

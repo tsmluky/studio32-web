@@ -1,0 +1,52 @@
+/* Misma tinta y papel. Elecciones con igual tamaño, contraste y posición. */
+.measurement-panel {
+    --measurement-paper: #f7f4ee;
+    --measurement-ink: #1c1812;
+    --measurement-rule: #8b8377;
+    position: fixed;
+    z-index: 10000;
+    inset: auto 20px 20px;
+    max-width: 720px;
+    margin-inline: auto;
+    padding: 20px 24px;
+    background: var(--measurement-paper);
+    color: var(--measurement-ink);
+    border: 1px solid var(--measurement-rule);
+    border-radius: 12px;
+    box-shadow: 0 6px 24px rgba(28, 24, 18, .15);
+    font: 400 .95rem/1.5 Inter, sans-serif;
+}
+.measurement-panel[hidden] { display: none; }
+.measurement-panel p { margin: 0 0 8px; }
+.measurement-panel a { color: inherit; text-decoration: underline; }
+.measurement-actions { display: flex; gap: 12px; margin-top: 14px; }
+.measurement-actions button {
+    flex: 1;
+    padding: 11px 16px;
+    border: 1px solid currentColor;
+    background: transparent;
+    color: inherit;
+    border-radius: 6px;
+    font: inherit;
+    cursor: pointer;
+}
+.measurement-actions button:hover { text-decoration: underline; }
+.measurement-preferences {
+    display: block;
+    margin: 0;
+    padding: 8px 12px;
+    color: inherit;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.measurement-actions button:focus-visible, .measurement-preferences:focus-visible {
+    outline: 2px solid currentColor; outline-offset: 4px;
+}
+@media (max-width: 540px) {
+    .measurement-panel { inset: auto 12px 12px; padding: 16px; font-size: .88rem; max-height: 80vh; overflow: auto; }
+    .measurement-actions { gap: 8px; }
+    .measurement-actions button { padding: 10px 8px; }
+}
