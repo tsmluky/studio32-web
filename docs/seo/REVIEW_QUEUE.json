@@ -1,0 +1,166 @@
+{
+  "asOf": "2026-10-03",
+  "owner": "Studio32",
+  "tasks": [
+    {
+      "kind": "source",
+      "id": "calendar",
+      "due": "2026-12-31",
+      "state": "scheduled",
+      "pages": [
+        "recursos/automatizar-citas-whatsapp",
+        "recursos/integrar-whatsapp-con-agenda"
+      ]
+    },
+    {
+      "kind": "source",
+      "id": "coexistence",
+      "due": "2026-12-31",
+      "state": "scheduled",
+      "pages": [
+        "recursos/numero-actual-whatsapp-business-api"
+      ]
+    },
+    {
+      "kind": "source",
+      "id": "migration",
+      "due": "2026-12-31",
+      "state": "scheduled",
+      "pages": [
+        "recursos/numero-actual-whatsapp-business-api"
+      ]
+    },
+    {
+      "kind": "source",
+      "id": "product",
+      "due": "2026-12-31",
+      "state": "scheduled",
+      "pages": [
+        "recursos/automatizar-citas-whatsapp",
+        "recursos/chatbot-vs-agente-ia-whatsapp",
+        "recursos/recepcionista-ia",
+        "recursos/handoff-humano-agente-ia",
+        "problemas/consultas-fuera-de-horario",
+        "problemas/recepcion-saturada",
+        "problemas/llamadas-y-mensajes-perdidos"
+      ]
+    },
+    {
+      "kind": "source",
+      "id": "twilio",
+      "due": "2026-12-31",
+      "state": "scheduled",
+      "pages": [
+        "recursos/whatsapp-business-api"
+      ]
+    },
+    {
+      "kind": "source",
+      "id": "windows",
+      "due": "2026-12-31",
+      "state": "scheduled",
+      "pages": [
+        "recursos/whatsapp-business-api"
+      ]
+    },
+    {
+      "kind": "page",
+      "id": "herramientas/calculadora-consultas-perdidas",
+      "due": "2027-10-02",
+      "state": "scheduled",
+      "pages": [
+        "herramientas/calculadora-consultas-perdidas"
+      ]
+    },
+    {
+      "kind": "page",
+      "id": "problemas/consultas-fuera-de-horario",
+      "due": "2027-10-02",
+      "state": "scheduled",
+      "pages": [
+        "problemas/consultas-fuera-de-horario"
+      ]
+    },
+    {
+      "kind": "page",
+      "id": "problemas/llamadas-y-mensajes-perdidos",
+      "due": "2027-10-02",
+      "state": "scheduled",
+      "pages": [
+        "problemas/llamadas-y-mensajes-perdidos"
+      ]
+    },
+    {
+      "kind": "page",
+      "id": "problemas/recepcion-saturada",
+      "due": "2027-10-02",
+      "state": "scheduled",
+      "pages": [
+        "problemas/recepcion-saturada"
+      ]
+    },
+    {
+      "kind": "page",
+      "id": "recursos/automatizar-citas-whatsapp",
+      "due": "2027-10-02",
+      "state": "scheduled",
+      "pages": [
+        "recursos/automatizar-citas-whatsapp"
+      ]
+    },
+    {
+      "kind": "page",
+      "id": "recursos/chatbot-vs-agente-ia-whatsapp",
+      "due": "2027-10-02",
+      "state": "scheduled",
+      "pages": [
+        "recursos/chatbot-vs-agente-ia-whatsapp"
+      ]
+    },
+    {
+      "kind": "page",
+      "id": "recursos/handoff-humano-agente-ia",
+      "due": "2027-10-02",
+      "state": "scheduled",
+      "pages": [
+        "recursos/handoff-humano-agente-ia"
+      ]
+    },
+    {
+      "kind": "page",
+      "id": "recursos/integrar-whatsapp-con-agenda",
+      "due": "2027-10-02",
+      "state": "scheduled",
+      "pages": [
+        "recursos/integrar-whatsapp-con-agenda"
+      ]
+    },
+    {
+      "kind": "page",
+      "id": "recursos/numero-actual-whatsapp-business-api",
+      "due": "2027-10-02",
+      "state": "scheduled",
+      "pages": [
+        "recursos/numero-actual-whatsapp-business-api"
+      ]
+    },
+    {
+      "kind": "page",
+      "id": "recursos/recepcionista-ia",
+      "due": "2027-10-02",
+      "state": "scheduled",
+      "pages": [
+        "recursos/recepcionista-ia"
+      ]
+    },
+    {
+      "kind": "page",
+      "id": "recursos/whatsapp-business-api",
+      "due": "2027-10-02",
+      "state": "scheduled",
+      "pages": [
+        "recursos/whatsapp-business-api"
+      ]
+    }
+  ]
+}

@@ -36,6 +36,10 @@ def main():
     guard_spec.loader.exec_module(guard)
     errors.extend(guard.check_site(SITE))
     security_test = subprocess.run([sys.executable, str(ROOT/'_plantillas/test-content-security.py')])
+    editorial_test = subprocess.run([sys.executable, str(ROOT/'_plantillas/test-editorial-maintenance.py')])
+    editorial_check = subprocess.run([sys.executable, str(ROOT/'_plantillas/editorial-maintenance.py')], capture_output=True, text=True)
+    if editorial_test.returncode or editorial_check.returncode:
+        errors.append('fechas o estado editorial no válidos')
     if security_test.returncode: errors.append('pruebas de seguridad editorial fallan')
     files={f.relative_to(SITE).as_posix():f for f in SITE.rglob('*.html')}
     parsed={}

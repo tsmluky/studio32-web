@@ -16,6 +16,7 @@
     "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
+    "publishedAt": "2026-10-02",
     "sources": [
       "twilio",
       "windows"
@@ -38,6 +39,7 @@
     "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
+    "publishedAt": "2026-10-02",
     "sources": [
       "migration",
       "coexistence"
@@ -60,6 +62,7 @@
     "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
+    "publishedAt": "2026-10-02",
     "sources": [
       "calendar",
       "product"
@@ -82,6 +85,7 @@
     "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
+    "publishedAt": "2026-10-02",
     "sources": [
       "calendar"
     ]
@@ -103,6 +107,7 @@
     "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
+    "publishedAt": "2026-10-02",
     "sources": [
       "product"
     ]
@@ -124,6 +129,7 @@
     "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
+    "publishedAt": "2026-10-02",
     "sources": [
       "product"
     ]
@@ -145,6 +151,7 @@
     "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
+    "publishedAt": "2026-10-02",
     "sources": [
       "product"
     ]
@@ -166,6 +173,7 @@
     "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
+    "publishedAt": "2026-10-02",
     "sources": [
       "product"
     ]
@@ -187,6 +195,7 @@
     "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
+    "publishedAt": "2026-10-02",
     "sources": [
       "product"
     ]
@@ -208,6 +217,7 @@
     "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
+    "publishedAt": "2026-10-02",
     "sources": [
       "product"
     ]
@@ -229,6 +239,7 @@
     "status": "published",
     "reviewedAt": "2026-10-02",
     "owner": "Studio32",
+    "publishedAt": "2026-10-02",
     "sources": []
   }
 ]
