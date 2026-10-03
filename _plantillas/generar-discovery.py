@@ -4,6 +4,7 @@ python _plantillas/generar-discovery.py
 Salida versionada; no añade un paso de build al proveedor de hosting.
 """
 import html
+import importlib.util
 import json
 import os
 import re
@@ -11,6 +12,9 @@ from pathlib import Path
 from urllib.parse import quote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
+_spec = importlib.util.spec_from_file_location('editorial_maintenance', Path(__file__).with_name('editorial-maintenance.py'))
+maintenance = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(maintenance)
 SITE = ROOT / 'site'
 DATA = json.loads((Path(__file__).with_name('discovery-content.json')).read_text(encoding='utf-8'))
 HOST = 'https://www.studio32.es/'
@@ -46,6 +50,7 @@ def safe_source_url(value):
 
 
 def validate_content(data):
+    maintenance.validate(data)
     seen = set()
     for page in data['pages']:
         slug = safe_slug(page['slug'])
@@ -107,7 +112,7 @@ def layout(slug, title, description, answer, content, page_type='hub', reviewed=
                       'publisher': {'@type':'Organization', 'name':'Studio32', 'url':HOST, '@id': HOST+'#studio32'}, 'dateModified': DATA['modifiedAt'], 'inLanguage': 'es'})
     else:
         graph.append({'@type': 'WebPage', 'name': title, 'url': HOST+slug+'/', 'description': description, 'inLanguage': 'es'})
-    date = f'<p class="resource-review">Criterio editorial: Studio32 · Revisión <time datetime="{reviewed}">2 de octubre de 2026</time></p>' if reviewed else ''
+    date = f'<p class="resource-review">Criterio editorial: Studio32 · Revisión <time datetime="{reviewed}">{maintenance.display_date(reviewed)}</time></p>' if reviewed else ''
     return f'''<!DOCTYPE html>
 <html lang="es"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -125,10 +130,9 @@ def layout(slug, title, description, answer, content, page_type='hub', reviewed=
 <link rel="stylesheet" href="{prefix}discovery.css?v={VERSION}">
 {jsonld({'@context':'https://schema.org','@graph':graph})}
 <script src="{prefix}discovery-events.js?v={EVENT_VERSION}" defer></script>
-<link rel="stylesheet" href="{prefix}measurement-consent.css?v=20261002-measurement-1">
+{chr(10) if page_type!='tool' else ''}<link rel="stylesheet" href="{prefix}measurement-consent.css?v=20261002-measurement-1">
 <script src="{prefix}measurement-consent.js?v=20261002-measurement-1" defer></script>
-{'<script src="'+prefix+'consultas-calculator.js?v='+VERSION+'" defer></script>' if page_type=='tool' else ''}
-</head><body class="pagina-vertical pagina-resource" data-page-type="{page_type}">
+{'<script src="'+prefix+'consultas-calculator.js?v='+VERSION+'" defer></script>'+chr(10) if page_type=='tool' else ''}</head><body class="pagina-vertical pagina-resource" data-page-type="{page_type}">
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
 <nav class="navbar" aria-label="Principal"><div class="container nav-inner">
 <a href="{prefix}" class="logo" aria-label="Studio32 · Digital Systems"><span class="logo-mark">STUDIO32</span><span class="logo-sub">Digital Systems</span></a>
@@ -226,7 +230,7 @@ def main():
         write(hub, layout(hub,title,answer,answer,content))
     registry = [{**{key: p[key] for key in ('slug','type','intent','title','description','related','commercialTarget')},
                  'canonical':HOST+p['slug']+'/', 'index':True, 'status':DATA.get('publicationStatus','review'), 'reviewedAt':DATA['reviewedAt'],
-                 'owner':'Studio32', 'sources':p['sources']} for p in PAGES.values()]
+                 'owner':DATA['owner'], 'publishedAt':DATA['publishedAt'], 'sources':p['sources']} for p in PAGES.values()]
     (ROOT/'docs/seo/CONTENT_REGISTRY.json').write_text(json.dumps(registry,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(f"{len(PAGES)} contenidos + {len(HUBS)} hubs generados; estado: {DATA.get('publicationStatus','review')}.")
 
