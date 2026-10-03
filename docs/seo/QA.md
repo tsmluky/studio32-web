@@ -135,3 +135,35 @@ control AX del navegador sí confirmó destino. No se rellenaron campos ni
 enviaron reservas. Escáner es limitado, no auditoría integral de secretos/backend.
 CI de main 37038917631 success; job 118 s, incluido checkout. No extrapolar los
 siete segundos de la ejecución de PR a la ejecución de main.
+
+## 2026-10-03 · Navegación móvil, cifras y prueba de rendimiento
+
+PR #12 publicado, main 44755bc: entrada del hero móvil sin animación; escritorio
+conservado. Menú con foco inicial, ciclo Tab/Shift+Tab, Escape con retorno al
+botón, foco en destino interno y cierre al pasar a escritorio. Pruebas de
+comportamiento automatizadas y navegador móvil 390/escritorio 1440. Producción:
+foco inicial Pruébalo, Escape vuelve a Abrir menú, ancho client/scroll 375 iguales.
+Captura qa/mobile-menu-production.png. CI main 37119581490 correcto.
+
+PSI de producción tras PR #12, 03/10/2026 13:30 CEST: 89 rendimiento y 100 en
+accesibilidad, buenas prácticas y SEO; FCP 1,9 s, LCP 3,3 s, TBT 60 ms, CLS 0,
+SI 4,3 s. [Informe](https://pagespeed.web.dev/analysis/https-www-studio32-es/vj8dm159un?form_factor=mobile). No hay datos de campo. Preview había mostrado
+93/FCP 1,2/LCP 3,2; esa mejora no se reproduce en esta medición de producción.
+No cerrar el objetivo LCP <2,5 s ni inferir resultados comerciales.
+
+PR #11 permanece en borrador, sin publicar: instancia estática de Inter original
+redujo el archivo de 48.256 a 23.692 bytes, pero preview dio 88 y LCP 3,2 s.
+No se ha cambiado la tipografía productiva por este experimento.
+
+PR #13 publicado, main 1b212ee: cifras de portada con fuentes primarias clicables,
+periodo INE explícito y umbral diez o más empleados; intención de inversión
+YouGov/IONOS diferenciada de gasto ejecutado. IAB reproduce penetración mensual
+sin extrapolar a toda la población internauta. Ver HOME_CLAIMS.md. Layout y
+fuentes conservados; producción confirma las tres correcciones. CI PR
+37119966128 correcto, job 9 s; main y Cloudflare correctos.
+
+SEO: 21 páginas de producto/discovery, 24 URL de sitemap; 34 HTML y 806
+referencias locales sin fallos. Siete pruebas editoriales correctas. Apartados
+36–38 (fuentes/estadísticas/claims), 46 (accesibilidad) y 60–64 (QA); rendimiento
+23/129 abierto. Paso 15 recoge datos mientras continúa el desarrollo; no se da
+por terminado todo el maestro de 158 apartados.

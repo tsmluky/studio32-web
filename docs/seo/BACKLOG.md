@@ -20,3 +20,10 @@ No publicar por volumen. Cada nueva URL necesita intención, aporte operativo, f
 ## Pendiente verificado tras publicación de portada
 
 Último PSI productivo tras PR #5: 89 rendimiento, LCP 3,2 s (objetivo 2,5), FCP 1,9 s; accesibilidad/SEO/buenas prácticas 100. El objetivo sigue abierto. PR #7 en borrador: consolidar también consentimiento dio LCP 3,1 s en preview, sin mejora acreditada. Diagnosticar retraso de renderizado antes de otra modificación; preservar demo e identidad. No presentar resultados de preview como producción.
+
+## Actualización 03/10/2026
+
+Menú móvil y fuentes de cifras de portada corregidos (#12/#13). LCP sigue
+abierto: producción 3,3 s, objetivo 2,5; fuente estática #11 no publicada al
+no mejorar preview. Siguiente diagnóstico: demora de render del párrafo hero;
+evitar cambiar fuentes/diseño por una reducción de bytes sin mejora medida.

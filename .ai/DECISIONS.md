@@ -517,3 +517,12 @@ siete pruebas integradas en validador existente, sin cambiar workflow/scopes.
 Taberna pedía datos para un widget servido desde localhost del visitante:
 se conserva como muestra visual, sin submit ni inputs activos, con acceso a
 la demo de Studio32. No activar tenant antiguo sin validación de producto.
+
+## 2026-10-03 · Evidencia antes de optimizar y publicar cifras
+
+No promover fuente estática de PR #11 sin mejora demostrada. PR #12 corrige
+accesibilidad del menú independientemente de LCP; preview no prueba mejora en
+producción. Mantener objetivo abierto (última medida 3,3 s). PR #13 precisa
+periodo, población e intención de las cifras y enlaza fuentes primarias sin
+atribuir esos resultados a Studio32. No extrapolar penetración IAB a todos los
+internautas sin revisar el denominador del estudio completo.

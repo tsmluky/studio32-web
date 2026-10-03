@@ -1,6 +1,6 @@
 # Estado actual · studio32-web
 
-Actualizado: **2026-10-02**. Estado canónico; histórico en DECISIONS.md.
+Actualizado: **2026-10-03**. Estado canónico; histórico en DECISIONS.md.
 
 ## Producto y publicación
 
@@ -13,6 +13,15 @@ Netlify está retirado: tres proyectos desactivados y builds de `studio-32`
 detenidos. El apex redirige en Cloudflare sin origen Netlify. `netlify.toml`
 mantiene `ignore = "exit 0"` como guarda ante una reactivación accidental.
 Ver `docs/seo/INFRASTRUCTURE.md`.
+
+## Último avance · 03/10/2026
+
+PR #12 (44755bc) y #13 (1b212ee) publicados: menú móvil accesible, entrada móvil
+sin animación y tres cifras de portada precisadas con fuentes clicables.
+Pruebas y publicación verificadas. Último PSI de producción tras #12: 89/100/
+100/100; FCP 1,9 s, LCP 3,3 s, CLS 0. Objetivo LCP sigue abierto. PR #11 de
+fuente estática queda en borrador porque no mostró mejora. Evidencia y límites
+en docs/seo/QA.md; no hay adquisición/cliente real acreditado por estas pruebas.
 
 ## Trabajo actual
 
