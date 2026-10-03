@@ -143,6 +143,8 @@ async function run() {
         assert.equal(sent[0].params.sector, expected, 'medición usa sector seleccionado y enum válido');
         assert.equal(JSON.stringify(sent).includes('PRIVADO'), false, 'mensaje no llega a medición');
     }
+    const contactTest = require('node:child_process').spawnSync(process.execPath, ['_plantillas/test-contact-accessibility.cjs'], { stdio: 'inherit' });
+    assert.equal(contactTest.status, 0, 'contacto accesible pasa sin backend');
     console.log('Demo: reinicio, cambio de sector, respuestas tardías, panel, timeout sin reenvío y movimiento reducido verificados sin backend.');
 }
 run().catch(error => { console.error(error); process.exitCode = 1; });
