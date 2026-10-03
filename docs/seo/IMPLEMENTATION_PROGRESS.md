@@ -12,12 +12,12 @@ Primera colección publicada en https://www.studio32.es/recursos/: siete guías,
 | 2. Auditoría | Hecho | SEO_AUDIT, URL_INVENTORY, HTTP_BASELINE y tamaños/hashes |
 | 3. Plan | Hecho | SEO_IMPLEMENTATION_PLAN con alcance, riesgos y validación |
 | 4. Foundation | Publicado | Organization, breadcrumbs, canonical, sitemap 24 URL, robots, OAI-SearchBot, apex 301 y 404 real; GA4 y GSC activos; Bing verificado por meta; sitemap procesado correctamente, 24 URL descubiertas |
-| 5. Rendimiento | Recursos cerrado; portada pendiente | Recursos productivos 100 y LCP 1,5 s. Última producción tras #12 (03/10): FCP 1,9 s y LCP 3,3 s; objetivo 2,5 s pendiente. PR #7/#11 en borrador sin mejora demostrada. Fuentes originales conservadas; sin CWV de campo/INP real |
+| 5. Rendimiento | Recursos cerrado; portada pendiente | Recursos productivos 100 y LCP 1,5 s. Última producción tras #17 (03/10 14:11): 92 rendimiento, FCP 1,2 s y LCP 3,3 s; objetivo 2,5 s pendiente. PR #7/#11/#16 en borrador sin mejora demostrada. Fuentes originales conservadas; sin CWV de campo/INP real |
 | 6. Arquitectura reutilizable | Hecho | Fuente editorial + renderizador; HTML versionado, sin CMS/framework/build npm |
 | 7. Siete guías | Publicado | Registro e intención propia, fuentes, relacionados y CTA; sin inventar clientes/capacidades |
 | 8. Tres problemas | Publicado | Opciones operativas antes de vender el producto |
 | 9. Calculadora | Publicado | Fórmula explícita, riesgo/conversión, sensibilidad anual; sin email, almacenamiento ni envío de cifras |
-| 10. Enlazado | Verificado | 806 referencias locales href/src: 631 navegación y 175 recursos, con repeticiones; cero destinos/anclas ausentes. 24 páginas en sitemap: portada + 23 subpáginas. Grafo: 203 conexiones, 21 importantes a máximo dos clics |
+| 10. Enlazado | Verificado | 807 referencias locales href/src: 631 navegación y 176 recursos, con repeticiones; cero destinos/anclas ausentes. 24 páginas en sitemap: portada + 23 subpáginas. Grafo: 203 conexiones, 21 importantes a máximo dos clics |
 | 11. Fuentes | Hecho | Proveedor, URL y fecha; revisión de fuentes a 90 días; Meta corregido con documentación oficial |
 | 12. Reglas editoriales | Aplicadas | Flujos/decisiones originales, sin páginas geográficas, cifras de tracción o garantías inventadas |
 | 13. Medición | Activa | GA4 Studio32 recibe vistas de QA con consentimiento opcional; GSC procesa sitemap (24 páginas); Bing verificado por meta; sitemap procesado correctamente, 24 URL descubiertas |
