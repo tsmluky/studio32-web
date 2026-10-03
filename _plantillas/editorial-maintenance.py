@@ -24,6 +24,9 @@ def validate(data, today=None):
     today = today or date.today()
     if data.get('publicationStatus') != 'published':
         raise ValueError('No generar contenido público en estado borrador/review/stale')
+    for page in data['pages']:
+        if page.get('status', data['publicationStatus']) != 'published':
+            raise ValueError('Hay una página sin aprobación para publicación')
     if not isinstance(data.get('owner'), str) or not data['owner'].strip():
         raise ValueError('Responsable editorial ausente')
     published, reviewed = iso_date(data['publishedAt']), iso_date(data['reviewedAt'])
