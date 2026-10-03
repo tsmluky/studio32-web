@@ -5,6 +5,10 @@ Apartados 54, 63, 104–105, 120 y 149. Responsable: Studio32. Fuente de verdad:
 
 El generador rechaza borradores, estados sin aprobación, responsable ausente,
 fechas incoherentes o futuras y dateModified sin zona antes de escribir HTML.
+El estado se comprueba también por página: un status draft/review/stale dentro
+de una colección published bloquea toda la generación antes de escribir. Si
+la página no define status, hereda el de la colección. No se publica un subconjunto
+silenciosamente ni se convierte un borrador en publicado dentro del registro.
 La fecha visible se obtiene de reviewedAt; no queda fijada al primer día.
 No actualizar reviewedAt ni modifiedAt por formato, regeneración o cambios de
 plantilla. Actualizarlos solo después de una revisión real de contenido.

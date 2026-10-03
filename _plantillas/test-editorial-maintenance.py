@@ -11,6 +11,15 @@ maintenance = renderer.maintenance
 
 
 class MaintenanceTests(unittest.TestCase):
+    def test_individual_draft_cannot_hide_inside_published_collection(self):
+        for status in ('draft', 'review', 'stale', None, ''):
+            data = copy.deepcopy(renderer.DATA)
+            data['pages'][0]['status'] = status
+            with self.assertRaises(ValueError): renderer.validate_content(data)
+        data = copy.deepcopy(renderer.DATA)
+        data['pages'][0]['status'] = 'published'
+        renderer.validate_content(data)
+
     def test_draft_rejected_before_any_write(self):
         for status in ('draft', 'review', 'stale', None):
             data = copy.deepcopy(renderer.DATA)
