@@ -143,6 +143,8 @@ async function run() {
         assert.equal(sent[0].params.sector, expected, 'medición usa sector seleccionado y enum válido');
         assert.equal(JSON.stringify(sent).includes('PRIVADO'), false, 'mensaje no llega a medición');
     }
+    const widgetTest = require('node:child_process').spawnSync(process.execPath, ['_plantillas/test-widget-on-demand.cjs'], { stdio: 'inherit' });
+    assert.equal(widgetTest.status, 0, 'widget bajo demanda pasa sin backend');
     console.log('Demo: reinicio, cambio de sector, respuestas tardías, panel, timeout sin reenvío y movimiento reducido verificados sin backend.');
 }
 run().catch(error => { console.error(error); process.exitCode = 1; });
