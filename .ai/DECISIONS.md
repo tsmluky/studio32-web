@@ -540,3 +540,11 @@ No publicar la carga bajo demanda #16: no mejora medida. Corregir por separado
 etiquetas y cierre/foco del widget existente (#17). Es chat no modal, por lo
 que no se atrapa Tab ni se bloquea el resto de la web. No enviar mensajes de QA.
 La puntuación PSI varía; no atribuir el salto 89→92 a esta corrección sin control.
+
+
+## 2026-10-03 · Limitar la ronda y avanzar en aprobación editorial
+
+Por alcance solicitado: una variante y una comparación, sin beneficio LCP
+demostrado. Cerrar #18 sin fusionar y detener esta ronda. No cambiar tipografía
+ni diseño por puntuaciones. Integrar #19: validar estado por página antes de
+generar la colección; ningún borrador debe heredarse como publicado por error.

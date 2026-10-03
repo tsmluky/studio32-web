@@ -32,7 +32,7 @@ tienen su revisión separada en HOME_CLAIMS.md (enero de 2027).
 
 Una fuente vencida se informa para revisión humana; no cambia contenido, estado,
 fechas públicas ni elimina una página automáticamente. Los errores estructurales
-sí fallan en el validador existente y CI. Cinco pruebas cubren publicación de
+sí fallan en el validador existente y CI. Seis pruebas cubren publicación de
 borradores, cronología, fuentes, fecha visible y vencimiento sin mutaciones.
 
 Este control no confirma que una fuente continúe correcta o una URL responda.

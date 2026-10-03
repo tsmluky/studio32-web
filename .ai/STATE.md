@@ -16,15 +16,14 @@ Ver `docs/seo/INFRASTRUCTURE.md`.
 
 ## Último avance · 03/10/2026
 
-PR #17 (a349dab) publicado: chat de contacto con etiqueta y diálogo no modal,
-Escape/Cerrar devuelven foco a Hablemos; comprobado en preview y producción.
-CI main 37122042769 y Cloudflare correctos. No se enviaron mensajes/reservas.
-Último PSI 14:11 CEST: 92/100/100/100; FCP 1,2 s, LCP 3,3 s, CLS 0.
-Lectura aislada, sin atribución causal ni CWV de campo; objetivo sigue abierto.
-PR #16 de carga bajo demanda queda en borrador: preview LCP 3,8 s frente a
-control productivo 3,2 s. PR #7/#11 también sin mejora acreditada, no publicados.
-807 referencias locales (631 navegación/176 recursos), cero fallos; 24 sitemap,
-34 HTML. PR #14/#15 mantienen guardas editoriales, cola y auditoría HTTP fiable.
+Ronda acotada de rendimiento terminada: una variante, PR #18 cerrada sin fusionar.
+Prioridad alta de Inter no demuestra mejora: control 19:24 CEST 91/100/100/100,
+FCP 1,7 s, LCP 3,3 s, TBT 50 ms, CLS 0; preview 88, LCP 3,3 s y TBT 110 ms.
+Sin cambios de fuentes/diseño; objetivo 2,5 s abierto, sin datos de campo.
+Siguiente corrección integrada: PR #19 cda1ea6 impide publicar páginas borrador
+dentro de una colección aprobada; seis pruebas editoriales, CI/Cloudflare correctos.
+PR #17 conserva accesibilidad del chat verificada en producción. #7/#11/#16
+siguen sin publicar. 807 referencias locales, 24 URL sitemap y 34 HTML.
 Pendientes/condiciones en docs/seo/REMAINING_PLAN.md; evidencia en QA.md.
 
 ## Trabajo actual

@@ -74,3 +74,25 @@ Referencias locales actuales: 807 (631 navegación, 176 recursos), cero errores;
 24 URL de sitemap, 34 HTML. La nueva referencia es contact-accessibility.js,
 no una página nueva. Grafo e inventario de páginas no se amplían.
 Apartados 46–47, 60–62 (recorrido/QA); 23/129 permanecen abiertos.
+
+
+## 2026-10-03 · Ronda acotada cerrada y aprobación por página
+
+Una sola variante: prioridad alta en el preload existente de Inter, sin cambiar
+fuentes, CSS, diseño o demo. Control productivo 19:24:08 CEST: rendimiento 91,
+accesibilidad/buenas prácticas/SEO 100; FCP 1,7 s, LCP 3,3 s (3254 ms),
+TBT 50 ms, CLS 0 y SI 2,8 s. Preview 19:24:27: rendimiento 88, FCP 2,0 s,
+LCP 3,3 s (3285 ms), TBT 110 ms, CLS 0 y SI 4,3 s; SEO 66 por noindex.
+Comparación aislada entre producción y preview, sin datos de campo: no demuestra
+beneficio. PR #18 cerrada sin fusionar. Ronda finalizada; objetivo 2,5 s abierto,
+sin ampliar experimentos ni modificar las fuentes originales.
+
+Como siguiente corrección del maestro (104/121, reglas editoriales y validación),
+PR #19 integrada en main cda1ea6: una página draft/review/stale o con estado vacío
+ya no puede ocultarse dentro de una colección published. Se rechaza el conjunto
+antes de generar; las páginas sin estado individual heredan el de la colección.
+No se regeneraron contenidos ni fechas públicas. Validación: siete pruebas de
+seguridad, seis editoriales y tres HTTP; 21 páginas/24 sitemap sin errores.
+CI y Cloudflare de la PR correctos.
+
+Informes: [control](https://pagespeed.web.dev/analysis/https-www-studio32-es/erpofuocre?form_factor=mobile), [variante](https://pagespeed.web.dev/analysis/https-7a271945-studio32-web-pages-dev/ebh9c9sf06?form_factor=mobile).

@@ -7,7 +7,7 @@ su paso 15 recoge evidencia mientras se corrige lo existente.
 
 | Apartados | Trabajo no acreditado o pendiente | Condición para avanzar |
 | --- | --- | --- |
-| 23, 129–130 | LCP de portada ≤2,5 s; CWV reales, incluido INP | Última lectura de laboratorio tras #17: 92 rendimiento, FCP 1,2/LCP 3,3 s; diagnosticar retraso de render, comparar y validar producción. No hay datos de campo. |
+| 23, 129–130 | LCP de portada ≤2,5 s; CWV reales, incluido INP | Última lectura de laboratorio 03/10 19:24: 91 rendimiento, FCP 1,7/LCP 3,3 s. Ronda acotada #18 cerrada sin beneficio demostrado; priorizar otras correcciones. No hay datos de campo. |
 | 19, 43–44, 65–68, 127, 143 | Indexación efectiva, consultas, impresiones y rendimiento orgánico de la colección | Sitemap procesado y envío aceptado no equivalen a indexación. Revisar informes acumulados; no atribuir histórico a páginas nuevas. |
 | 42, 67, 137–138 | Referencias de IA y menciones/citas verificadas | Conjunto de preguntas preparado; falta muestrear respuestas y conservar fecha, producto y enlace. No hay menciones demostradas. |
 | 39–41, 91–93, 134 | Leads cualificados y feedback ventas → contenido → producto | Registrar consultas reales y origen conocido; clics de WhatsApp y visitas de QA no son leads. No exportar PII a GA4. |
@@ -41,3 +41,5 @@ acceso de Googlebot, HTTP 200 y contenido indexable sí son requisitos básicos.
 [requisitos técnicos](https://developers.google.com/search/docs/essentials/technical).
 
 Chat de contacto corregido y comprobado (#17). No equivale a validar una reserva real. Prueba #16 bajo demanda sin publicar; no mejora LCP acreditada.
+
+Ronda acotada cerrada; aprobación individual de páginas reforzada en #19.
