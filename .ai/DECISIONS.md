@@ -526,3 +526,10 @@ producción. Mantener objetivo abierto (última medida 3,3 s). PR #13 precisa
 periodo, población e intención de las cifras y enlaza fuentes primarias sin
 atribuir esos resultados a Studio32. No extrapolar penetración IAB a todos los
 internautas sin revisar el denominador del estudio completo.
+
+## 2026-10-03 · Mantenimiento sin falsa actualización
+
+Estado y cronología se validan antes de generación. La cola informa vencimientos,
+no revisa fuentes ni publica automáticamente. No modificar fechas por regenerar.
+Auditoría HTTP conserva baseline con escritura exclusiva; errores fallan y
+descarga no se interpreta como LCP ni respuesta final como código de primer salto.

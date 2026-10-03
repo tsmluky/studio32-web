@@ -27,3 +27,10 @@ Menú móvil y fuentes de cifras de portada corregidos (#12/#13). LCP sigue
 abierto: producción 3,3 s, objetivo 2,5; fuente estática #11 no publicada al
 no mejorar preview. Siguiente diagnóstico: demora de render del párrafo hero;
 evitar cambiar fuentes/diseño por una reducción de bytes sin mejora medida.
+
+## Actualización de mantenimiento · 03/10/2026
+
+Guardas editoriales y auditoría HTTP fiable integradas (#14/#15). Revisiones
+recurrentes siguen pendientes de ejecución cuando correspondan. Desglose de
+trabajo no acreditado/condicionado en REMAINING_PLAN.md. REVIEW_QUEUE.json es
+fotografía, no recordatorio. No se ha ensayado rollback de producción.

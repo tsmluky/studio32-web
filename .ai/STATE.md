@@ -16,12 +16,17 @@ Ver `docs/seo/INFRASTRUCTURE.md`.
 
 ## Último avance · 03/10/2026
 
-PR #12 (44755bc) y #13 (1b212ee) publicados: menú móvil accesible, entrada móvil
-sin animación y tres cifras de portada precisadas con fuentes clicables.
-Pruebas y publicación verificadas. Último PSI de producción tras #12: 89/100/
-100/100; FCP 1,9 s, LCP 3,3 s, CLS 0. Objetivo LCP sigue abierto. PR #11 de
-fuente estática queda en borrador porque no mostró mejora. Evidencia y límites
-en docs/seo/QA.md; no hay adquisición/cliente real acreditado por estas pruebas.
+PR #14 (617f034) y #15 (68f8342) integrados: validación de estado/fechas
+editoriales, fecha visible derivada de revisión y cola local de revisiones;
+auditoría HTTP con fecha real, histórico preservado y detección de soft 404.
+Ocho pruebas nuevas integradas en CI. No hay cambio de HTML público.
+PR #12/#13 mantienen menú móvil corregido y cifras con fuentes clicables.
+Último PSI de producción tras #12: 89/100/100/100; FCP 1,9 s, LCP 3,3 s,
+CLS 0. Objetivo LCP sigue abierto. PR #7/#11 quedan en borrador sin mejora
+demostrada. HTTP 03/10: portada/robots/sitemap 200, URL inexistente 404.
+Pendientes y condiciones: docs/seo/REMAINING_PLAN.md. Cola 03/10: 17 tareas,
+cero vencidas; fotografía local, no automatización. No hay adquisición ni
+recorrido completo de cliente real acreditados. Evidencia en docs/seo/QA.md.
 
 ## Trabajo actual
 
@@ -92,8 +97,8 @@ cero enlaces rotos; auditor HTMLParser excluye ejemplos comentados y detecta com
 1440/390 px, tablas móviles corregidas, calculadora con ejemplo y cero verificados.
 Capturas locales ignoradas en `docs/seo/qa/`. Rich Results oficial productivo válido para guía API; CWV de campo sin datos.
 Inventario actual: 24 páginas de sitemap (portada + 23 subpáginas), ocho HTML
-noindex y dos históricos/alias fuera del sitemap. Las 24 URL canónicas responden
-200 en consulta HTTP actual. No equivale a indexación. Ver PAGE_INVENTORY.md.
+noindex y dos históricos/alias fuera del sitemap. Las 24 URL canónicas respondieron
+200 en consulta HTTP del 02/10/2026. No equivale a indexación. Ver PAGE_INVENTORY.md.
 
 ## Límites actuales confirmados
 
@@ -150,7 +155,7 @@ Invitación coherente por sector y datos ficticios explícitos. Movimiento reduc
 conserva scroll nativo y omite entrada de hero/navbar. demo_start usa el sector
 elegido (enum), sin mensaje ni datos personales. Preview móvil/escritorio de
 portada y cuatro verticales correcto; pruebas de carreras/timeout sin backend.
-Versiones: script 20261002-demo-2, discovery-events 20261002-events-2.
+Versiones actuales: script 20261003-mobile-1, discovery-events 20261002-events-2.
 Publicado en Cloudflare tras PR #8, main ed44e93. Producción confirma versiones,
 Restaurante/Casa Duarte, invitación y dataset correctos, 1440 sin overflow,
 cero etiquetas GA4 con rechazo guardado. No se enviaron mensajes ni reservas

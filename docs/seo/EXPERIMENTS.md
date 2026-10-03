@@ -35,3 +35,15 @@ la pausa del paso 15 se refiere a expansión editorial, no a inactividad.
 Informes publicados en colección Studio32 · Captación y uso, tres dimensiones registradas y uso/contacto guardado. Bing sitemap Success (24 URL, cero errores). Google guía API indexable en prueba viva y solicitud de indexación aceptada; pendiente rastreo/indexación real. Registro comercial vacío preparado. El pendiente técnico principal sigue siendo LCP de portada; los resultados de adquisición requieren tiempo y consultas reales.
 
 Ensayo PR #7: bundle de tres hojas, preview 90/100/100/66 (SEO noindex de staging), FCP 1,9 s, LCP 3,1 s, TBT 20 ms, CLS 0, SI 4,5 s. No supera el preview previo ni demuestra objetivo productivo. Conservar en borrador; no publicarlo por reducir solicitudes sin mejora observada. Las medidas aisladas tienen variación: diagnosticar el retraso de renderizado antes de otro cambio.
+
+## Registro de decisiones · 03/10/2026
+
+| Prueba | Preview | Producción | Decisión |
+| --- | --- | --- | --- |
+| #11 Inter estática original, 48.256 → 23.692 bytes | 88 rendimiento, FCP 2,1/LCP 3,2 s | No publicada | Borrador; bytes reducidos sin mejora acreditada |
+| #12 Entrada móvil y foco de menú | 93 rendimiento, FCP 1,2/LCP 3,2 s | 89, FCP 1,9/LCP 3,3 s, CLS 0 | Publicada por corrección de accesibilidad; no cerrar LCP ni afirmar mejora productiva |
+| #13 Cifras y fuentes | Diseño y destinos revisados | Tres textos y fuentes confirmados | Publicada por precisión; no experimento de conversión |
+| #14–15 Mantenimiento y auditor | Pruebas y CI correctos | HTML público idéntico | Integradas; evitan fechas falsas, borradores y pérdida de baseline |
+
+Medidas aisladas de laboratorio, sin grupo control ni efecto comercial probado.
+No extrapolar preview a producción. Evidencia y reportes en QA.md.

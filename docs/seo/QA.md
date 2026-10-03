@@ -167,3 +167,25 @@ referencias locales sin fallos. Siete pruebas editoriales correctas. Apartados
 36–38 (fuentes/estadísticas/claims), 46 (accesibilidad) y 60–64 (QA); rendimiento
 23/129 abierto. Paso 15 recoge datos mientras continúa el desarrollo; no se da
 por terminado todo el maestro de 158 apartados.
+
+## 2026-10-03 · Mantenimiento editorial y auditoría fiable
+
+PR #14 publicado, main 617f034: fecha visible derivada de reviewedAt, guardas
+de estado publicado/responsable/cronología/zona antes de escribir; registro
+con publishedAt y cola de 17 revisiones (seis fuentes y once páginas). Cero
+vencidas a 03/10; fuentes 31/12/2026, conceptual 02/10/2027. No se han cambiado
+fechas públicas ni creado automatizaciones. Cinco pruebas nuevas en CI.
+
+PR #15 publicado, main 68f8342: auditoría HTTP no sobrescribe baseline, fecha
+UTC actual y guardado explícito exclusivo; fallo ante errores o soft 404. Tres
+pruebas sin red en CI. Lectura pública 03/10 11:56 UTC: portada/robots/sitemap
+200, ruta inexistente 404, apex acaba en www. La lectura sigue redirecciones,
+no acredita el código del primer salto ni acceso de bots reales. Evidencia
+local qa/http-20261003.json. La baseline original permanece intacta.
+
+Apartados 54, 63, 104–105, 120, 149 (mantenimiento) y 18, 61–62, 126
+(auditoría). HTML regenerado idéntico: no se modifican tipografía, diseño o
+contenido público. Validación: 21 páginas/24 sitemap, 806 referencias locales
+sin errores; siete pruebas de seguridad, cinco editoriales y tres HTTP.
+REMAINING_PLAN.md detalla los bloques pendientes y sus condiciones. LCP sigue
+abierto con última lectura 3,3 s; no se midió otra vez tras cambios de herramientas.
