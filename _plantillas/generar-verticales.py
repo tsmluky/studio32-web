@@ -16,7 +16,7 @@ import os
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(RAIZ, "site")
 VERSION = "20260904-verticales-7"
-SCRIPT_VERSION = "20261002-demo-2"
+SCRIPT_VERSION = "20261003-mobile-1"
 
 # ── Datos por vertical ───────────────────────────────────────────────────────
 VERTICALES = [
