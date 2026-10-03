@@ -37,6 +37,8 @@ def main():
     errors.extend(guard.check_site(SITE))
     security_test = subprocess.run([sys.executable, str(ROOT/'_plantillas/test-content-security.py')])
     editorial_test = subprocess.run([sys.executable, str(ROOT/'_plantillas/test-editorial-maintenance.py')])
+    http_test = subprocess.run([sys.executable, str(ROOT/'_plantillas/test-http-audit.py')])
+    if http_test.returncode: errors.append('auditoría HTTP no conserva evidencia o acepta falsos éxitos')
     editorial_check = subprocess.run([sys.executable, str(ROOT/'_plantillas/editorial-maintenance.py')], capture_output=True, text=True)
     if editorial_test.returncode or editorial_check.returncode:
         errors.append('fechas o estado editorial no válidos')
