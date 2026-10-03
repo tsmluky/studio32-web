@@ -16,17 +16,16 @@ Ver `docs/seo/INFRASTRUCTURE.md`.
 
 ## Último avance · 03/10/2026
 
-PR #14 (617f034) y #15 (68f8342) integrados: validación de estado/fechas
-editoriales, fecha visible derivada de revisión y cola local de revisiones;
-auditoría HTTP con fecha real, histórico preservado y detección de soft 404.
-Ocho pruebas nuevas integradas en CI. No hay cambio de HTML público.
-PR #12/#13 mantienen menú móvil corregido y cifras con fuentes clicables.
-Último PSI de producción tras #12: 89/100/100/100; FCP 1,9 s, LCP 3,3 s,
-CLS 0. Objetivo LCP sigue abierto. PR #7/#11 quedan en borrador sin mejora
-demostrada. HTTP 03/10: portada/robots/sitemap 200, URL inexistente 404.
-Pendientes y condiciones: docs/seo/REMAINING_PLAN.md. Cola 03/10: 17 tareas,
-cero vencidas; fotografía local, no automatización. No hay adquisición ni
-recorrido completo de cliente real acreditados. Evidencia en docs/seo/QA.md.
+PR #17 (a349dab) publicado: chat de contacto con etiqueta y diálogo no modal,
+Escape/Cerrar devuelven foco a Hablemos; comprobado en preview y producción.
+CI main 37122042769 y Cloudflare correctos. No se enviaron mensajes/reservas.
+Último PSI 14:11 CEST: 92/100/100/100; FCP 1,2 s, LCP 3,3 s, CLS 0.
+Lectura aislada, sin atribución causal ni CWV de campo; objetivo sigue abierto.
+PR #16 de carga bajo demanda queda en borrador: preview LCP 3,8 s frente a
+control productivo 3,2 s. PR #7/#11 también sin mejora acreditada, no publicados.
+807 referencias locales (631 navegación/176 recursos), cero fallos; 24 sitemap,
+34 HTML. PR #14/#15 mantienen guardas editoriales, cola y auditoría HTTP fiable.
+Pendientes/condiciones en docs/seo/REMAINING_PLAN.md; evidencia en QA.md.
 
 ## Trabajo actual
 
@@ -91,8 +90,8 @@ propio. Mantiene discovery al regenerar; después ejecutar foundation/sitemap.
 No ejecutar una regeneración de verticales como sustituto de revisar cambios
 manuales anteriores. Sitemap mantiene hashes y fechas estables en SITEMAP_STATE.
 
-QA: 21 páginas principales, 24 URL sitemap, cero errores SEO; 34 HTML y 806
-referencias locales href/src (631 navegación, 175 recursos; incluye repeticiones),
+QA: 21 páginas principales, 24 URL sitemap, cero errores SEO; 34 HTML y 807
+referencias locales href/src (631 navegación, 176 recursos; incluye repeticiones),
 cero enlaces rotos; auditor HTMLParser excluye ejemplos comentados y detecta comillas simples. Navegador: 15 rutas en
 1440/390 px, tablas móviles corregidas, calculadora con ejemplo y cero verificados.
 Capturas locales ignoradas en `docs/seo/qa/`. Rich Results oficial productivo válido para guía API; CWV de campo sin datos.

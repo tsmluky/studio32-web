@@ -533,3 +533,10 @@ Estado y cronología se validan antes de generación. La cola informa vencimient
 no revisa fuentes ni publica automáticamente. No modificar fechas por regenerar.
 Auditoría HTTP conserva baseline con escritura exclusiva; errores fallan y
 descarga no se interpreta como LCP ni respuesta final como código de primer salto.
+
+## 2026-10-03 · Separar rendimiento y accesibilidad del contacto
+
+No publicar la carga bajo demanda #16: no mejora medida. Corregir por separado
+etiquetas y cierre/foco del widget existente (#17). Es chat no modal, por lo
+que no se atrapa Tab ni se bloquea el resto de la web. No enviar mensajes de QA.
+La puntuación PSI varía; no atribuir el salto 89→92 a esta corrección sin control.

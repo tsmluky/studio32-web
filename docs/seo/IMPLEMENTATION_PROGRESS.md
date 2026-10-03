@@ -115,3 +115,30 @@ contenido público. Validación: 21 páginas/24 sitemap, 806 referencias locales
 sin errores; siete pruebas de seguridad, cinco editoriales y tres HTTP.
 REMAINING_PLAN.md detalla los bloques pendientes y sus condiciones. LCP sigue
 abierto con última lectura 3,3 s; no se midió otra vez tras cambios de herramientas.
+
+## 2026-10-03 · Chat de contacto accesible y experimento de LCP
+
+PR #17 publicado, main a349dab: campo de chat con etiqueta accesible, diálogo
+no modal, historial log anunciado, Escape y botón Cerrar con retorno a Hablemos.
+Diseño y widget originales preservados. Pruebas sin backend cubren carga
+inmediata/tardía y cierre. Navegador en preview y producción confirma etiqueta,
+apertura, Escape y foco. Producción móvil 390: client/scroll 375 iguales.
+Sin enviar mensajes, datos ni reservas. Captura qa/contact-accessibility-production.png.
+CI de main 37122042769 y Cloudflare correctos; CI PR 37121994506, job 8 s.
+
+Último PSI productivo 03/10 14:11 CEST: 92 rendimiento, 100 accesibilidad,
+buenas prácticas y SEO; FCP 1,2 s, LCP 3,3 s, TBT 40 ms, CLS 0, SI 2,6 s.
+[Informe](https://pagespeed.web.dev/analysis/https-www-studio32-es/j9ymwua046?form_factor=mobile). Medida de laboratorio aislada; no atribuir diferencia de
+puntuación al cambio de accesibilidad ni cerrar LCP <2,5 s o CWV de campo.
+
+PR #16 queda en borrador sin publicar. Widget bajo demanda pasa pruebas de
+instancia única, apertura, fallo, timeout y respuesta tardía. Preview 14:06:
+85/100/100/66 (noindex), FCP 1,9 s, LCP 3,8 s, TBT 50 ms, CLS 0, SI 4,2 s.
+Control productivo 14:07: 89/100/100/100, FCP 1,9 s, LCP 3,2 s, TBT 10 ms.
+No demostró mejora; no promoverlo por reducir una descarga. Desglose de LCP
+en control previo: párrafo hero-desc, demora de render ~2,3 s. Diagnóstico abierto.
+
+Referencias locales actuales: 807 (631 navegación, 176 recursos), cero errores;
+24 URL de sitemap, 34 HTML. La nueva referencia es contact-accessibility.js,
+no una página nueva. Grafo e inventario de páginas no se amplían.
+Apartados 46–47, 60–62 (recorrido/QA); 23/129 permanecen abiertos.

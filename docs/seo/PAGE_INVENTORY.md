@@ -1,13 +1,13 @@
-# Inventario actual de páginas · 02/10/2026
+# Inventario actual de páginas · 03/10/2026
 
-La cifra 806 del auditor incluye referencias locales href/src repetidas:
-631 enlaces de navegación y 175 recursos (CSS, JS, imágenes/preloads).
-No son 806 destinos únicos, páginas o redirecciones. Se excluyen URLs absolutas
+La cifra 807 actual del auditor incluye referencias locales href/src repetidas:
+631 enlaces de navegación y 176 recursos (CSS, JS, imágenes/preloads).
+No son 807 destinos únicos, páginas o redirecciones. Se excluyen URLs absolutas
 y externas en este contador. Revisa existencia local y anclas; no demuestra
 todos los clics en navegador, enlaces externos ni operación del backend.
 
 24 URL en sitemap: portada y 23 subpáginas. Las 24 respondieron HTTP 200 en esta
-consulta real. Procesamiento/HTTP 200 no acredita indexación. 34 archivos HTML:
+consulta real del 02/10/2026. Procesamiento/HTTP 200 no acredita indexación. 34 archivos HTML:
 24 de sitemap, ocho noindex y dos históricos/alias fuera de sitemap.
 203 conexiones distintas entre las 24 canónicas; las 21 importantes están a
 máximo dos clics desde portada. Los enlaces #control son saltos a una sección;
