@@ -113,7 +113,7 @@ function initHeroAnimations() {
         return;
     }
 
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (!window.matchMedia('(max-width: 540px), (prefers-reduced-motion: reduce)').matches) {
         const tlHero = gsap.timeline();
 
         // Revelar líneas del hero ("Studio32 / Digital Systems")
@@ -980,16 +980,18 @@ function openMobileMenu() {
     navToggle.setAttribute('aria-expanded', 'true');
     navToggle.setAttribute('aria-label', 'Cerrar menú');
     mobileMenu.setAttribute('aria-hidden', 'false');
+    mobileMenu.querySelector('a[href]')?.focus({ preventScroll: true });
     if (typeof lenis !== 'undefined' && lenis.stop) lenis.stop();
 }
 
-function closeMobileMenu() {
+function closeMobileMenu(restoreFocus = true) {
     if (!navToggle || !mobileMenu) return;
     document.body.classList.remove('menu-open');
     mobileMenu.setAttribute('inert', '');
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.setAttribute('aria-label', 'Abrir menú');
     mobileMenu.setAttribute('aria-hidden', 'true');
+    if (restoreFocus) navToggle.focus({ preventScroll: true });
     if (typeof lenis !== 'undefined' && lenis.start) lenis.start();
 }
 
@@ -1006,21 +1008,37 @@ if (navToggle && mobileMenu) {
     // Close on link click (allow native scroll to fire after closing)
     mobileMenuLinks.forEach(link => {
         link.addEventListener('click', () => {
-            closeMobileMenu();
+            const href = link.getAttribute('href') || '';
+            const destination = href.startsWith('#') ? document.getElementById(href.slice(1)) : null;
+            closeMobileMenu(!destination);
+            if (destination) {
+                destination.setAttribute('tabindex', '-1');
+                destination.focus({ preventScroll: true });
+            }
         });
     });
 
     // Close on Escape
     document.addEventListener('keydown', (e) => {
+        if (!document.body.classList.contains('menu-open')) return;
         if (e.key === 'Escape' && document.body.classList.contains('menu-open')) {
+            e.preventDefault();
             closeMobileMenu();
+        } else if (e.key === 'Tab') {
+            const controls = [navToggle, ...mobileMenu.querySelectorAll('a[href], button:not([disabled])')];
+            const index = controls.indexOf(document.activeElement);
+            if (index < 0 || (!e.shiftKey && index === controls.length - 1) || (e.shiftKey && index === 0)) {
+                e.preventDefault();
+                controls[e.shiftKey ? controls.length - 1 : 0].focus({ preventScroll: true });
+            }
         }
     });
 
     // If user resizes back to desktop while menu is open, reset state
     window.addEventListener('resize', () => {
         if (window.innerWidth > 900 && document.body.classList.contains('menu-open')) {
-            closeMobileMenu();
+            closeMobileMenu(false);
+            document.querySelector('.navbar .logo')?.focus({ preventScroll: true });
         }
     });
 }

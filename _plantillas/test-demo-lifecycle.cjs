@@ -77,14 +77,14 @@ async function run() {
     assert.equal(timeout.requests.length, 1, 'no hay reenvío automático');
 
     const hero = source.slice(source.indexOf('let heroAnimationsStarted'), source.indexOf('// 4. Scroll Reveal'));
-    for (const reduced of [true, false]) {
+    for (const [reduced, mobile] of [[true, false], [false, false], [false, true]]) {
         let animations = 0, live = 0;
         const timeline = { from() { animations++; return this; } };
         vm.runInNewContext(hero + '\ninitHeroAnimations(); initHeroAnimations();', {
-            TIENE_GSAP: true, window: { matchMedia: () => ({ matches: reduced }) }, gsap: { timeline: () => timeline },
+            TIENE_GSAP: true, window: { matchMedia: query => ({ matches: reduced || (mobile && query.includes('max-width')) }) }, gsap: { timeline: () => timeline },
             initChatDemo() {}, initSectorDemo() {}, initLiveDemo() { live++; }, initScrollAnimations() {}
         });
-        assert.equal(animations, reduced ? 0 : 3, 'movimiento reducido omite entrada del hero');
+        assert.equal(animations, reduced || mobile ? 0 : 3, 'movil y movimiento reducido omiten entrada del hero');
         assert.equal(live, 1, 'demo inicia una sola vez en ambos modos');
         let smooth = 0;
         vm.runInNewContext(source.slice(0, source.indexOf('// 2. Preloader Animation')), {
@@ -95,6 +95,42 @@ async function run() {
         });
         assert.equal(smooth, reduced ? 0 : 1, 'movimiento reducido conserva scroll nativo');
     }
+    const menuSource = source.slice(source.indexOf('// 6. Mobile menu'), source.indexOf('// 7. FAQ'));
+    const menuHandlers = {}, windowHandlers = {}, openClasses = new Set();
+    const menuDoc = { activeElement: null, body: { classList: {
+        add: c => openClasses.add(c), remove: c => openClasses.delete(c), contains: c => openClasses.has(c)
+    } }, addEventListener(type, fn) { menuHandlers[type] = fn; } };
+    function control(href) {
+        return { attrs: {}, listeners: {}, focus() { menuDoc.activeElement = this; },
+            setAttribute(k,v) { this.attrs[k] = v; }, removeAttribute(k) { delete this.attrs[k]; },
+            getAttribute(k) { return k === 'href' ? href : this.attrs[k]; },
+            addEventListener(type,fn) { this.listeners[type] = fn; } };
+    }
+    const toggle = control(), links = [control('#control'), control('https://example.com')], destination = control(), logo = control();
+    const menu = control();
+    menu.querySelector = () => links[0]; menu.querySelectorAll = () => links;
+    menuDoc.querySelector = selector => selector === '.nav-toggle' ? toggle : selector === '.mobile-menu' ? menu : logo;
+    menuDoc.querySelectorAll = () => links; menuDoc.getElementById = () => destination;
+    const menuWindow = { innerWidth: 390, addEventListener(type,fn) { windowHandlers[type] = fn; } };
+    vm.runInNewContext(menuSource, { document: menuDoc, window: menuWindow });
+    toggle.listeners.click(); assert.equal(menuDoc.activeElement, links[0]);
+    menuDoc.activeElement = links[1];
+    let prevented = false;
+    menuHandlers.keydown({key:'Tab',shiftKey:false,preventDefault() { prevented=true; }});
+    assert.equal(prevented,true); assert.equal(menuDoc.activeElement,toggle);
+    menuHandlers.keydown({key:'Tab',shiftKey:true,preventDefault() {}});
+    assert.equal(menuDoc.activeElement,links[1]);
+    menuDoc.activeElement = control();
+    menuHandlers.keydown({key:'Tab',shiftKey:false,preventDefault() {}});
+    assert.equal(menuDoc.activeElement,toggle,'foco externo vuelve al menu');
+    menuHandlers.keydown({key:'Escape',preventDefault() {}});
+    assert.equal(menuDoc.activeElement,toggle); assert.equal(menu.attrs['aria-hidden'],'true');
+    assert.equal(toggle.attrs['aria-expanded'],'false'); assert.ok('inert' in menu.attrs);
+    toggle.listeners.click(); links[0].listeners.click();
+    assert.equal(menuDoc.activeElement,destination); assert.equal(destination.attrs.tabindex,'-1');
+    toggle.listeners.click(); links[1].listeners.click(); assert.equal(menuDoc.activeElement,toggle);
+    toggle.listeners.click(); menuWindow.innerWidth = 1200; windowHandlers.resize();
+    assert.equal(menuDoc.activeElement,logo); assert.equal(openClasses.has('menu-open'),false);
     const eventsSource = fs.readFileSync('site/discovery-events.js', 'utf8');
     for (const [selection, expected] of [['restaurante', 'restaurant'], ['clinica', 'dental'], ['estetica', 'aesthetics'], ['servicios', 'local_services'], ['INVALID', 'general']]) {
         const handlers = {}, sent = [];
