@@ -1,5 +1,7 @@
 """Lectura HTTP pública. No cambia cuentas, DNS o políticas de CDN."""
 import concurrent.futures
+import argparse
+from datetime import datetime, timezone
 import json
 import time
 import urllib.error
@@ -25,7 +27,21 @@ def check(url):
         return {'url':url,'error':str(error)}
 
 
-if __name__=='__main__':
+def main(argv=None):
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output',type=Path,help='Informe nuevo opcional; nunca sobrescribe uno existente')
+    args=parser.parse_args(argv)
+    if args.output and args.output.exists():
+        parser.error('El informe ya existe; usar un archivo nuevo para conservar el histórico')
     with concurrent.futures.ThreadPoolExecutor(max_workers=5) as pool: results=list(pool.map(check,URLS))
-    (ROOT/'docs/seo/HTTP_BASELINE.json').write_text(json.dumps({'date':'2026-10-02','note':'Sitio previo a despliegue. elapsedMs es descarga, no CWV.','results':results},indent=2)+'\n',encoding='utf-8')
-    print(json.dumps(results,indent=2))
+    report={'checkedAt':datetime.now(timezone.utc).isoformat(),
+            'note':'Lectura pública actual. elapsedMs es descarga, no LCP/CWV. finalUrl sigue redirecciones; status no acredita el código del primer salto.',
+            'results':results}
+    text=json.dumps(report,indent=2,ensure_ascii=False)+'\n'
+    if args.output:
+        with args.output.open('x',encoding='utf-8') as output: output.write(text)
+    print(text)
+    return int(any('error' in result or result['status']!=(404 if 'no-existe-seo-qa' in result['url'] else 200) for result in results))
+
+
+if __name__=='__main__': raise SystemExit(main())
