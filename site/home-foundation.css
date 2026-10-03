@@ -161,6 +161,7 @@
 }
 /* Contraste de texto pequeno sobre papel con un token existente. */
 .cifras cite, .footer-services { color: var(--text-muted); }
+.cifras cite a { color: inherit; text-decoration: underline; text-underline-offset: .2em; }
 .chat-avatar, .chat-status, .live-note, .dashboard-heading small, .dashboard-mockup figcaption { color: var(--text-muted); }
 
 /* En movil, la primera vista es el producto; la intro se conserva en escritorio. */
