@@ -548,3 +548,17 @@ Por alcance solicitado: una variante y una comparación, sin beneficio LCP
 demostrado. Cerrar #18 sin fusionar y detener esta ronda. No cambiar tipografía
 ni diseño por puntuaciones. Integrar #19: validar estado por página antes de
 generar la colección; ningún borrador debe heredarse como publicado por error.
+
+## 2026-10-04 · Rutas finales, consentimiento familiar y servicio verificable
+
+Search Console tiene prioridad frente a puntuaciones de herramientas. Demos
+usan las rutas limpias que sirve Cloudflare; no canonicals que vuelven a una
+redirección. Alias explícitos; conservar 404 en cadenas inexistentes.
+Consentimiento se presenta como Cookies y privacidad, sin duplicar carteles
+ni cambiar la preferencia existente. No enfocar footer tras la primera elección.
+Minificación conserva fuentes originales y las herramientas fuera del proyecto;
+no cambiar plataforma ni añadir build. Test de hashes y privacidad verifica el
+JS que realmente carga el HTML. Archivos de demos modificados normalizados a LF según .gitattributes.
+Servicio reutilizable con evidencia y límites: diagnóstico/corrección/seguimiento,
+no garantías de posición, clientes ni afirmaciones de SEO espectacular. No publicar
+el kit o informes de cliente en site; presupuestar según alcance real.

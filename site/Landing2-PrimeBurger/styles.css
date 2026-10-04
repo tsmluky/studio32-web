@@ -1048,3 +1048,4 @@ ul {
         * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
 }
+.hero-text h1 > span { display: block; }

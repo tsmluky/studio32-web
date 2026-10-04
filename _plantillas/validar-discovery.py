@@ -7,6 +7,7 @@ from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
+from site_routes import html_target
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT/'site'
@@ -38,6 +39,9 @@ def main():
     security_test = subprocess.run([sys.executable, str(ROOT/'_plantillas/test-content-security.py')])
     editorial_test = subprocess.run([sys.executable, str(ROOT/'_plantillas/test-editorial-maintenance.py')])
     http_test = subprocess.run([sys.executable, str(ROOT/'_plantillas/test-http-audit.py')])
+    service_test = subprocess.run([sys.executable, str(ROOT/'servicios/seo-local/test_auditar.py')])
+    asset_test = subprocess.run(['node', str(ROOT/'_plantillas/test-assets.cjs')], cwd=ROOT)
+    if service_test.returncode or asset_test.returncode: errors.append('auditor reutilizable o assets publicados no válidos')
     if http_test.returncode: errors.append('auditoría HTTP no conserva evidencia o acepta falsos éxitos')
     editorial_check = subprocess.run([sys.executable, str(ROOT/'_plantillas/editorial-maintenance.py')], capture_output=True, text=True)
     if editorial_test.returncode or editorial_check.returncode:
@@ -82,6 +86,7 @@ def main():
             dest=files[name].parent/unquote(parts.path) if not parts.path.startswith('/') else SITE/unquote(parts.path.lstrip('/'))
             if not parts.path: dest=files[name]
             if dest.is_dir(): dest/='index.html'
+            elif not dest.suffix and dest.with_suffix('.html').exists(): dest=dest.with_suffix('.html')
             require(dest.exists(),'enlace roto: '+href)
             if parts.fragment and dest.exists():
                 target=Parser(); target.feed(dest.read_text(encoding='utf-8'))
@@ -92,8 +97,7 @@ def main():
     urls=[e.text for e in ET.parse(SITE/'sitemap.xml').getroot().iter() if e.tag.endswith('}loc') or e.tag=='loc']
     if len(urls)!=len(set(urls)): errors.append('sitemap duplicado')
     for url in urls:
-        dest=SITE/unquote(urlsplit(url).path.lstrip('/'))
-        if dest.is_dir(): dest/='index.html'
+        dest=html_target(SITE, url)
         name=dest.relative_to(SITE).as_posix()
         if name not in parsed: errors.append('sitemap destino ausente: '+url); continue
         if 'noindex' in parsed[name].meta.get('robots','') or parsed[name].canonical!=[url]: errors.append('sitemap no canónico/indexable: '+url)

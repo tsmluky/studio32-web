@@ -48,3 +48,6 @@ silex-output/
 
 # Capturas de QA local: artefactos de revisión, fuera del sitio publicado.
 docs/seo/qa/
+servicios/seo-local/diagnosticos/
+__pycache__/
+*.pyc

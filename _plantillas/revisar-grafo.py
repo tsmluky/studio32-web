@@ -5,6 +5,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urljoin, urlsplit
 import xml.etree.ElementTree as ET
+from site_routes import html_target
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / 'site'
@@ -30,9 +31,7 @@ def destination(base, href, site=SITE):
     path = (site / unquote(url.path).lstrip('/')).resolve()
     if not path.is_relative_to(site.resolve()):
         return None
-    if path.is_dir():
-        path /= 'index.html'
-    return path
+    return html_target(site, url.geturl())
 
 
 def analyse(edges, home):

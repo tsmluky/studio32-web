@@ -1,0 +1,79 @@
+{
+  "version": "20261004-min-1",
+  "tools": {
+    "terser": "5.51.2",
+    "clean_css": "5.3.3"
+  },
+  "assets": [
+    {
+      "source": "home-bundle.css",
+      "target": "home-bundle.min.css",
+      "source_sha256_lf": "8d323ce92a0740b3442f1dd49cf2f4b73c2c0376f7a9b6b6e991a1f5cf7b3077",
+      "target_sha256_lf": "6af39c442dc66534a7d927157d93a7e9a0b3c477f4fee50f831cb0af43f448e4",
+      "bytes_before": 97055,
+      "bytes_after": 66568,
+      "gzip_before": 18352,
+      "gzip_after": 12259
+    },
+    {
+      "source": "script.js",
+      "target": "script.min.js",
+      "source_sha256_lf": "68d24483fa994c0f55685f08a1637bb4fcd3186a4b8acee2182348f32466f953",
+      "target_sha256_lf": "bce489c426181fbefa16e9aafe8b967f26e3b2a7e99191e301f8fa0b297534b6",
+      "bytes_before": 45995,
+      "bytes_after": 29990,
+      "gzip_before": 13042,
+      "gzip_after": 8950
+    },
+    {
+      "source": "measurement-consent.css",
+      "target": "measurement-consent.min.css",
+      "source_sha256_lf": "e82134064f995d4249d81a5001fae2aed2b87968341bccf105fff3c99ccdc243",
+      "target_sha256_lf": "079a2f306414474c470fc4697cdf72c02eb72df51ddaff6b6edda3f61d214723",
+      "bytes_before": 2222,
+      "bytes_after": 1772,
+      "gzip_before": 803,
+      "gzip_after": 677
+    },
+    {
+      "source": "measurement-consent.js",
+      "target": "measurement-consent.min.js",
+      "source_sha256_lf": "7b9d2180b69432194ae2b1bcbcfb95f4b9580afb7714a9798ceeab9d2ccc85a8",
+      "target_sha256_lf": "edfa11d084d43a4f03ec3254f5e703348d8049ed03845ef79dddbc371dbb0aa5",
+      "bytes_before": 6479,
+      "bytes_after": 4885,
+      "gzip_before": 2267,
+      "gzip_after": 1898
+    },
+    {
+      "source": "discovery.css",
+      "target": "discovery.min.css",
+      "source_sha256_lf": "a9feeb8d70acd426f6933caca2b09b03ebef859972436b4692be9ced5d393d8c",
+      "target_sha256_lf": "b9eb005d6843a8219d95f804f0b4cc72a9e7089115acbacbe225be3173089c96",
+      "bytes_before": 11852,
+      "bytes_after": 10299,
+      "gzip_before": 2160,
+      "gzip_after": 1957
+    },
+    {
+      "source": "discovery-events.js",
+      "target": "discovery-events.min.js",
+      "source_sha256_lf": "3c252106515e851be86a34aa690b182d135e8c097680b0f95808baf488f157b1",
+      "target_sha256_lf": "4bd542bbdf46a5a2a90add863d33f641ee13151e83b2299105facaca9483617d",
+      "bytes_before": 3095,
+      "bytes_after": 2282,
+      "gzip_before": 1247,
+      "gzip_after": 967
+    },
+    {
+      "source": "vertical.css",
+      "target": "vertical.min.css",
+      "source_sha256_lf": "d18fe6f00ad72422a7aed445fabef1efbba3cc28a1591a9baeb0eee170b4c92d",
+      "target_sha256_lf": "9a81106c2453c631eff4411926231ed32180669e5e932ea87df0cfddd2ae3924",
+      "bytes_before": 7492,
+      "bytes_after": 3449,
+      "gzip_before": 2477,
+      "gzip_after": 1180
+    }
+  ]
+}

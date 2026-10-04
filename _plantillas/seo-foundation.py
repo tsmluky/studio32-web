@@ -6,6 +6,8 @@ import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
+from datetime import date
+from site_routes import html_target
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / 'site'
@@ -53,10 +55,10 @@ def enhance(path):
             {'@type':'ListItem','position':1,'name':'Studio32','item':HOST+'/'},
             {'@type':'ListItem','position':2,'name':name,'item':canonical}]}
         source = source.replace('</head>', '<script type="application/ld+json">'+json.dumps(schema,ensure_ascii=False)+'</script>\n</head>')
-    if 'discovery-events.js' not in source:
+    if not re.search(r'discovery-events(?:\.min)?\.js', source):
         source = source.replace('</head>',f'<script src="{prefix}discovery-events.js?v={VERSION}" defer></script>\n</head>')
-    if 'measurement-consent.js' not in source:
-        source=source.replace('</head>', f'<link rel="stylesheet" href="{prefix}measurement-consent.css?v=20261002-measurement-1">\n<script src="{prefix}measurement-consent.js?v=20261002-measurement-1" defer></script>\n</head>')
+    if not re.search(r'measurement-consent(?:\.min)?\.js', source):
+        source=source.replace('</head>', f'<link rel="stylesheet" href="{prefix}measurement-consent.css?v=20261004-cookies-1">\n<script src="{prefix}measurement-consent.js?v=20261004-cookies-1" defer></script>\n</head>')
     if 'data-discovery-links' not in source:
         links = f'<a href="{prefix}recursos/" data-discovery-links>Recursos de recepción</a>\n<a href="{prefix}herramientas/">Herramientas</a>'
         pattern = r'(<nav class="footer-col"[^>]*>\s*<p class="footer-col-titulo">El agente</p>)'
@@ -131,12 +133,11 @@ def sitemap():
         canonical = match[1]
         if not canonical.startswith(HOST+'/'): raise ValueError(f'Host canonical ajeno: {file}')
         slug = urlsplit(canonical).path
-        target = SITE/unquote(slug.lstrip('/'))
-        if slug.endswith('/'): target /= 'index.html'
+        target = html_target(SITE, canonical)
         if target.resolve() != file.resolve(): continue  # aliases are not canonical routes
         digest = hashlib.sha256(source.encode()).hexdigest()
         old = previous.get(canonical,{})
-        lastmod = old.get('lastmod') if old.get('sha256')==digest else '2026-10-02'
+        lastmod = old.get('lastmod') if old.get('sha256')==digest else date.today().isoformat()
         if not previous and file.relative_to(SITE).as_posix() not in COMMERCIAL:
             lastmod = existing_dates.get(canonical,'2026-10-02')
         state[canonical] = {'sha256':digest,'lastmod':lastmod}
@@ -152,16 +153,18 @@ def main():
     correct_prices()
     for name in COMMERCIAL: enhance(SITE/name)
     # Preserve the public design demos already present in the original sitemap.
-    # Their URLs stay the same; Landing3 remains noindex and is excluded.
-    demos = ["Landing1-L'Obscur/restaurant_landing.html", 'Landing2-PrimeBurger/index.html', 'Landing4-Habitat/index.html']
-    for name in demos:
+    # Cloudflare normaliza .html e index.html: canonical apunta al destino final.
+    demos = {"Landing1-L'Obscur/restaurant_landing.html": "Landing1-L%27Obscur/restaurant_landing", 'Landing2-PrimeBurger/index.html': 'Landing2-PrimeBurger/', 'Landing4-Habitat/index.html': 'Landing4-Habitat/'}
+    for name, route in demos.items():
         path = SITE/name
         source = path.read_bytes()
+        addition = f'<link rel="canonical" href="{HOST}/{route}">'.encode()
         if b'rel="canonical"' not in source:
-            from urllib.parse import quote
-            addition = f'<link rel="canonical" href="{HOST}/{quote(name, safe="/")}">\n'.encode()
+            addition += b'\n'
             source = source.replace(b'</head>',addition+b'</head>')
-            path.write_bytes(source)
+        else:
+            source = re.sub(rb'<link\s+rel="canonical"[^>]*>', lambda _: addition, source)
+        path.write_bytes(source)
     robots = (SITE/'robots.txt').read_text(encoding='utf-8')
     if 'User-agent: OAI-SearchBot' not in robots:
         robots += '\n# Descubrimiento en Search; no altera la política vigente de GPTBot.\nUser-agent: OAI-SearchBot\nAllow: /\n'
