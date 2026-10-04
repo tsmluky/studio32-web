@@ -1,5 +1,6 @@
 // Herramienta de mantenimiento; no añade dependencias ni build al despliegue.
 // node _plantillas/minificar-assets.cjs --tools <carpeta de herramientas externa>
+// Repetir con las mismas fuentes conserva URLs; las fuentes nuevas cambian su versión.
 const fs = require('node:fs');
 const path = require('node:path');
 const zlib = require('node:zlib');
