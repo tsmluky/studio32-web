@@ -38,6 +38,10 @@ Fuentes de referencia: [factores locales de Google](https://support.google.com/b
 
 ## Cierre verificable
 
+Antes de publicar, copiar `FICHA-CLIENTE.md` y `REGISTRO-CONTACTOS.csv` a una ubicación privada. Registrar allí cada consulta real, sin guardar conversaciones ni datos personales en este repositorio. Fuentes: google_organico, google_maps, referido, directo o desconocido; certeza: confirmada, declarada o desconocida. Estados: consulta, cualificada, cliente o descartada. `es_qa` y `es_duplicado` excluyen pruebas y duplicados. Un clic no abre por sí solo una fila de lead confirmado.
+
+Fijar una primera revisión de rastreo a los 7 días, otra de consultas a los 14 y una comparación a los 28, adaptándolas al volumen real. No esperar dos meses para detectar una URL inaccesible. La ficha debe distinguir trabajo cerrado, mejora abierta y resultado todavía no observable.
+
 - Cada problema tiene URL, evidencia, fecha, impacto, acción y prueba de cierre.
 - Noindex/duplicados se interpretan antes de modificarlos.
 - Antes/después comparten alcance y condiciones; descarga HTTP no se vende como LCP.

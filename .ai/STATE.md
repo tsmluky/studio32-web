@@ -31,6 +31,15 @@ Search Console confirmó solicitudes de indexación para precios, clínicas,
 restaurantes y calculadora; siguen pendientes de indexación efectiva por Google.
 Detalle: `docs/seo/CORRECTIONS_2026-10-04.md`.
 
+Revisión final 04/10: se normalizan enlaces/canónicas legales y alias históricos
+al destino sin .html (Cloudflare añadía otro salto). Generadores y consentimiento
+actualizados; versión de minificados regenerada automáticamente. Pendiente
+preview/publicación de esta segunda corrección. Revisión móvil actual: PageSpeed
+93, FCP 1,2 s, LCP 3,1 s, TBT 40 ms y CLS 0; sin datos de campo. GA4 recibe
+eventos de QA consentidos y la retirada elimina la etiqueta. Se incorporan mapa
+de intención, registro privado de contactos y cierre con límites explícitos.
+Ver `docs/seo/CIERRE_2026-10-04.md` y `SEARCH_INTENT_2026-10-04.md`.
+
 La ronda LCP anterior está cerrada sin mejora acreditada (#18). No datos CWV
 suficientes; objetivo 2,5 s sigue abierto. #17 accesibilidad y #19 publicación
 editorial continúan integrados. #7/#11/#16 permanecen sin publicar.
