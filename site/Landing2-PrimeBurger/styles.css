@@ -256,8 +256,7 @@ ul {
     /* Subtler zoom */
 }
 
-.hero-text h1,
-.hero-text .hero-line {
+.hero-text h1 {
     font-size: 12vw;
     /* Massive responsive text */
     letter-spacing: -2px;
@@ -1010,8 +1009,7 @@ ul {
     }
 
     /* Hero */
-    .hero-text h1,
-.hero-text .hero-line {
+    .hero-text h1 {
         font-size: 17vw;
     }
 
@@ -1050,4 +1048,4 @@ ul {
         * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
 }
-.hero-text .hero-line { font-family: var(--font-heading); font-weight: 400; line-height: .9; margin: 0; text-transform: uppercase; }
+.hero-text h1 > span { display: block; }
