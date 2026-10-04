@@ -460,8 +460,8 @@ PAGINA = """<!DOCTYPE html>
                     <p class="footer-col-titulo">Contacto</p>
                     <a href="mailto:info@studio32.es">info@studio32.es</a>
                     <a href="https://wa.me/34694293166" target="_blank" rel="noopener">+34 694 29 31 66</a>
-                    <a href="../legal/aviso-legal.html">Aviso legal</a>
-                    <a href="../legal/privacidad.html">Privacidad</a>
+                    <a href="../legal/aviso-legal">Aviso legal</a>
+                    <a href="../legal/privacidad">Privacidad</a>
                 </div>
             </div>
 

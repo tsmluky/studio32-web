@@ -142,7 +142,7 @@ def layout(slug, title, description, answer, content, page_type='hub', reviewed=
 <h1>{esc(title)}</h1><p class="vertical-entrada">{esc(answer)}</p>{date}</div></header>
 <main id="contenido" class="resource-main container">{content}</main>
 <footer class="resource-footer"><div class="container"><a href="{prefix}" class="logo-mark">STUDIO32</a><nav aria-label="Pie de página">
-<a href="{prefix}recursos/">Recursos</a><a href="{prefix}problemas/">Problemas de recepción</a><a href="{prefix}herramientas/">Herramientas</a><a href="{prefix}panel-de-control/">Panel</a><a href="{prefix}precio-agente-whatsapp/">Precio</a><a href="{prefix}legal/privacidad.html">Privacidad</a><a href="{prefix}legal/aviso-legal.html">Aviso legal</a></nav><p>Studio32 · Digital Systems</p></div></footer>
+<a href="{prefix}recursos/">Recursos</a><a href="{prefix}problemas/">Problemas de recepción</a><a href="{prefix}herramientas/">Herramientas</a><a href="{prefix}panel-de-control/">Panel</a><a href="{prefix}precio-agente-whatsapp/">Precio</a><a href="{prefix}legal/privacidad">Privacidad</a><a href="{prefix}legal/aviso-legal">Aviso legal</a></nav><p>Studio32 · Digital Systems</p></div></footer>
 </body></html>'''
 
 

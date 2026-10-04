@@ -1,5 +1,5 @@
 {
-  "version": "20261004-min-1",
+  "version": "min-df9e55090f7c045f",
   "tools": {
     "terser": "5.51.2",
     "clean_css": "5.3.3"
@@ -38,12 +38,12 @@
     {
       "source": "measurement-consent.js",
       "target": "measurement-consent.min.js",
-      "source_sha256_lf": "7b9d2180b69432194ae2b1bcbcfb95f4b9580afb7714a9798ceeab9d2ccc85a8",
-      "target_sha256_lf": "edfa11d084d43a4f03ec3254f5e703348d8049ed03845ef79dddbc371dbb0aa5",
-      "bytes_before": 6479,
-      "bytes_after": 4885,
-      "gzip_before": 2267,
-      "gzip_after": 1898
+      "source_sha256_lf": "7307601d0cf937cc23c7229deb3e6de0b835225a908ee9c59bd28548c8b36434",
+      "target_sha256_lf": "fec5b212041ed37bec25a565f883f11e7acd4312ad50a5719f65344f819f5f9f",
+      "bytes_before": 6474,
+      "bytes_after": 4880,
+      "gzip_before": 2264,
+      "gzip_after": 1894
     },
     {
       "source": "discovery.css",

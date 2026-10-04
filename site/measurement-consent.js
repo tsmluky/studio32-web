@@ -5,7 +5,7 @@
     const KEY = 'studio32.measurement.v1';
     const LIFE = 180 * 86400000;
     const source = document.currentScript;
-    const privacyURL = new URL('legal/privacidad.html#medicion', source.src).href;
+    const privacyURL = new URL('legal/privacidad#medicion', source.src).href;
     const production = location.hostname === 'www.studio32.es';
     const allowed = new Set(['calculator_view', 'calculator_start', 'calculator_input_change', 'calculator_complete', 'calculator_result_view', 'calculator_cta_click', 'demo_start', 'demo_cta_click', 'whatsapp_click', 'budget_request_click']);
     let choice = null;
