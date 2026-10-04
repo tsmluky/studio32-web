@@ -28,7 +28,15 @@ Solo descarga HTML público, robots y sitemap, hasta 25 páginas por defecto y 5
 
 No enviar informes, contactar negocios, crear accesos ni cambiar datos públicos sin encargo. Outputs y datos de clientes se guardan en una ubicación privada; los informes no se publican en `site/`.
 
-## Criterios de entrega
+## Revisión local manual
+
+Registrar ubicación real, zonas atendidas y servicios prioritarios. En Google Business Profile comprobar titularidad autorizada, categoría principal, datos de contacto, horarios, web y servicios. Verificar su coherencia con la web; no crear direcciones ficticias ni incorporar reseñas inventadas. No modificar la ficha hasta acordar el alcance con el titular.
+
+Separar búsquedas de marca de búsquedas de servicio y ubicación. Guardar fecha, ubicación y dispositivo de cualquier comprobación de posiciones: los resultados locales varían. Google explica que intervienen relevancia, distancia y popularidad; el servicio puede mejorar información y presencia, pero no controlar la distancia del usuario.
+
+Fuentes de referencia: [factores locales de Google](https://support.google.com/business/answer/7091?hl=es) y [fundamentos de la Búsqueda](https://developers.google.com/search/docs/essentials?hl=es). Revisarlas en cada nuevo encargo.
+
+## Cierre verificable
 
 - Cada problema tiene URL, evidencia, fecha, impacto, acción y prueba de cierre.
 - Noindex/duplicados se interpretan antes de modificarlos.

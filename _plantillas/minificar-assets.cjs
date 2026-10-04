@@ -10,9 +10,14 @@ const tools = process.argv.indexOf('--tools');
 const lookup = tools >= 0 ? [path.resolve(process.argv[tools + 1])] : [root];
 const terser = require(require.resolve('terser', { paths: lookup }));
 const CleanCSS = require(require.resolve('clean-css', { paths: lookup }));
-const version = '20261004-min-1';
 const names = ['home-bundle.css', 'script.js', 'measurement-consent.css', 'measurement-consent.js', 'discovery.css', 'discovery-events.js', 'vertical.css'];
 const hash = text => crypto.createHash('sha256').update(text).digest('hex');
+const manifestPath = path.join(root, 'docs/seo/MINIFIED_ASSETS.json');
+const previous = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, 'utf8')) : null;
+const sourceHashes = names.map(name => hash(fs.readFileSync(path.join(site, name), 'utf8').replace(/\r\n/g, '\n')));
+const unchanged = previous && names.every((name, index) => previous.assets.some(asset => asset.source === name && asset.source_sha256_lf === sourceHashes[index]));
+// Cambiar automáticamente la versión al cambiar fuentes evita reutilizar una URL cacheada.
+const version = unchanged ? previous.version : 'min-' + hash(sourceHashes.join(':')).slice(0, 16);
 async function main() {
     const assets = [];
     for (const name of names) {

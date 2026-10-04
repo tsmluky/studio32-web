@@ -562,3 +562,6 @@ JS que realmente carga el HTML. Archivos de demos modificados normalizados a LF 
 Servicio reutilizable con evidencia y límites: diagnóstico/corrección/seguimiento,
 no garantías de posición, clientes ni afirmaciones de SEO espectacular. No publicar
 el kit o informes de cliente en site; presupuestar según alcance real.
+
+Versionado de minificados: conservar la URL mientras coincidan las fuentes; al cambiarlas, generar una nueva versión derivada de sus hashes. Evita servir contenido antiguo desde cachés y elimina un paso manual fácil de olvidar. Verificado en copia temporal sin cambios en assets publicados.
+

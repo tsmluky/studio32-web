@@ -16,7 +16,7 @@ Ver `docs/seo/INFRASTRUCTURE.md`.
 
 ## Último avance · 04/10/2026
 
-En preparación en `fix/seo-routing-cookie-service`: demos con canonical/sitemap
+Publicado en `main`, PR #20 fusionado en `315b9a0`: demos con canonical/sitemap
 alineados a rutas finales, alias históricos concretos, favicon y un H1 PrimeBurger.
 Cookies y privacidad reemplaza el aviso de medición; mismas preferencias guardadas,
 rechazo/aceptación equivalentes y Escape/foco al reabrir. Siete assets minificados
@@ -24,7 +24,11 @@ con fuentes legibles, manifiesto y test; no hay build en Cloudflare.
 Kit replicable `servicios/seo-local/`: auditor público Python sin dependencias,
 informe HTML/JSON y alcance/ficha de cliente. No acreditar ranking por puntuaciones.
 Pruebas locales de SEO/enlaces/grafo/demo/privacidad/minificados y auditor pasan.
-Navegador 390×844/escritorio correcto. Pendiente preview, CI, publicación y HTTP.
+Navegador 390×844/escritorio correcto. Preview y CI pasan. Cloudflare publicó
+la versión y las 24 URLs del sitemap responden 200 sin redirección. Alias
+históricos y favicon redirigen 301; inexistentes siguen 404; apex conserva path/query.
+Search Console confirmó solicitudes de indexación para precios, clínicas,
+restaurantes y calculadora; siguen pendientes de indexación efectiva por Google.
 Detalle: `docs/seo/CORRECTIONS_2026-10-04.md`.
 
 La ronda LCP anterior está cerrada sin mejora acreditada (#18). No datos CWV
