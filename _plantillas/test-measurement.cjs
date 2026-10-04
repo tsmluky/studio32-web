@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
-const source = fs.readFileSync('site/measurement-consent.js', 'utf8');
+const source = fs.readFileSync(process.env.MEASUREMENT_SOURCE || 'site/measurement-consent.js', 'utf8');
 function setup({ saved, host = 'www.studio32.es', blocked = false } = {}) {
     const nodes = [], tags = [], cookies = [], data = new Map();
     if (saved) data.set('studio32.measurement.v1', JSON.stringify(saved));
@@ -34,11 +34,11 @@ function setup({ saved, host = 'www.studio32.es', blocked = false } = {}) {
 const initial = setup();
 assert.equal(initial.tags.length, 0, 'sin etiqueta antes de elegir');
 assert.equal(initial.win.gtag, undefined);
-initial.click('Rechazar medición');
+initial.click('Rechazar opcionales');
 assert.equal(initial.tags.length, 0, 'rechazo sin pings ni etiqueta');
 assert.equal(initial.win.Studio32Analytics.consent, 'denied');
-initial.click('Preferencias de medición');
-initial.click('Aceptar medición');
+initial.click('Configurar cookies');
+initial.click('Aceptar analíticas');
 assert.equal(initial.tags.length, 1);
 assert.match(initial.tags[0].src, /G-ZKX0QLRZ47$/);
 const commands = initial.win.dataLayer.map(args => Array.from(args));
@@ -54,7 +54,7 @@ assert.equal(JSON.stringify(initial.win.dataLayer).includes('12000'), false);
 const count = initial.win.dataLayer.length;
 initial.win.Studio32Analytics.send('unknown_event', {});
 assert.equal(initial.win.dataLayer.length, count);
-initial.click('Preferencias de medición'); initial.click('Rechazar medición');
+initial.click('Configurar cookies'); initial.click('Rechazar opcionales');
 initial.win.Studio32Analytics.send('demo_start', {});
 assert.equal(initial.win.dataLayer.length, count, 'sin eventos tras retirar');
 assert.equal(initial.reloads(), 1);
@@ -65,6 +65,6 @@ assert.equal(setup({ saved: { choice: 'granted', expires: Date.now() - 10000 } }
 const preview = setup({ host: 'preview.studio32-web.pages.dev', saved: { choice: 'granted', expires: Date.now() + 10000 } });
 assert.equal(preview.tags.length, 0, 'preview no envía medición');
 preview.win.Studio32Analytics.send('demo_start', {});
-const blocked = setup({ blocked: true }); blocked.click('Aceptar medición');
+const blocked = setup({ blocked: true }); blocked.click('Aceptar analíticas');
 assert.equal(blocked.tags.length, 1, 'almacenamiento bloqueado no rompe la elección');
 console.log('Consentimiento: espera, rechazo, aceptación, retirada, caducidad, preview, URL/PII y almacenamiento bloqueado verificados.');

@@ -73,28 +73,41 @@
             // elimina su código y evita pings posteriores a retirar la elección.
             if (previouslyLoaded) location.reload();
         }
-        preferences.focus({ preventScroll: true });
+        if (returnFocus) returnFocus.focus({ preventScroll: true });
     }
     const panel = document.createElement('section');
     panel.className = 'measurement-panel';
     panel.setAttribute('role', 'region');
-    panel.setAttribute('aria-label', 'Medición de visitas');
+    panel.setAttribute('aria-labelledby', 'measurement-title');
+    const heading = document.createElement('h2');
+    heading.id = 'measurement-title'; heading.textContent = 'Cookies y privacidad';
     const text = document.createElement('p');
-    text.textContent = 'Studio32 usa Google Analytics solo si aceptas, para medir visitas y uso de recursos. Puedes rechazarlo y seguir usando la web.';
+    text.textContent = 'Si aceptas, usaremos cookies de Google Analytics para medir las visitas y el uso de la web. Puedes rechazarlas y seguir navegando.';
     const more = document.createElement('a');
     more.href = privacyURL; more.textContent = 'Información de privacidad';
     const actions = document.createElement('div'); actions.className = 'measurement-actions';
-    for (const [label, value] of [['Rechazar medición', 'denied'], ['Aceptar medición', 'granted']]) {
+    for (const [label, value] of [['Rechazar opcionales', 'denied'], ['Aceptar analíticas', 'granted']]) {
         const button = document.createElement('button'); button.type = 'button'; button.textContent = label;
         button.addEventListener('click', () => decide(value)); actions.appendChild(button);
     }
-    panel.append(text, more, actions);
+    panel.append(heading, text, more, actions);
     panel.hidden = choice !== null;
     document.body.appendChild(panel);
     const preferences = document.createElement('button');
     preferences.type = 'button'; preferences.className = 'measurement-preferences';
-    preferences.textContent = 'Preferencias de medición';
-    preferences.addEventListener('click', () => { panel.hidden = false; actions.querySelector('button').focus(); });
+    preferences.textContent = 'Configurar cookies';
+    let returnFocus = null;
+    preferences.addEventListener('click', () => {
+        returnFocus = document.activeElement || preferences;
+        panel.hidden = false; actions.querySelector('button').focus();
+    });
+    panel.addEventListener('keydown', event => {
+        // Escape cierra preferencias ya elegidas sin cambiar el consentimiento.
+        if (event.key === 'Escape' && choice !== null) {
+            panel.hidden = true;
+            if (returnFocus) returnFocus.focus({ preventScroll: true });
+        }
+    });
     const footer = document.querySelector('footer .footer-bottom') || document.querySelector('.resource-footer nav') || document.querySelector('footer');
     (footer || document.body).appendChild(preferences);
     if (choice === 'granted') start();

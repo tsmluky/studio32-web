@@ -1,6 +1,6 @@
 # Estado actual · studio32-web
 
-Actualizado: **2026-10-03**. Estado canónico; histórico en DECISIONS.md.
+Actualizado: **2026-10-04**. Estado canónico; histórico en DECISIONS.md.
 
 ## Producto y publicación
 
@@ -14,17 +14,22 @@ detenidos. El apex redirige en Cloudflare sin origen Netlify. `netlify.toml`
 mantiene `ignore = "exit 0"` como guarda ante una reactivación accidental.
 Ver `docs/seo/INFRASTRUCTURE.md`.
 
-## Último avance · 03/10/2026
+## Último avance · 04/10/2026
 
-Ronda acotada de rendimiento terminada: una variante, PR #18 cerrada sin fusionar.
-Prioridad alta de Inter no demuestra mejora: control 19:24 CEST 91/100/100/100,
-FCP 1,7 s, LCP 3,3 s, TBT 50 ms, CLS 0; preview 88, LCP 3,3 s y TBT 110 ms.
-Sin cambios de fuentes/diseño; objetivo 2,5 s abierto, sin datos de campo.
-Siguiente corrección integrada: PR #19 cda1ea6 impide publicar páginas borrador
-dentro de una colección aprobada; seis pruebas editoriales, CI/Cloudflare correctos.
-PR #17 conserva accesibilidad del chat verificada en producción. #7/#11/#16
-siguen sin publicar. 807 referencias locales, 24 URL sitemap y 34 HTML.
-Pendientes/condiciones en docs/seo/REMAINING_PLAN.md; evidencia en QA.md.
+En preparación en `fix/seo-routing-cookie-service`: demos con canonical/sitemap
+alineados a rutas finales, alias históricos concretos, favicon y un H1 PrimeBurger.
+Cookies y privacidad reemplaza el aviso de medición; mismas preferencias guardadas,
+rechazo/aceptación equivalentes y Escape/foco al reabrir. Siete assets minificados
+con fuentes legibles, manifiesto y test; no hay build en Cloudflare.
+Kit replicable `servicios/seo-local/`: auditor público Python sin dependencias,
+informe HTML/JSON y alcance/ficha de cliente. No acreditar ranking por puntuaciones.
+Pruebas locales de SEO/enlaces/grafo/demo/privacidad/minificados y auditor pasan.
+Navegador 390×844/escritorio correcto. Pendiente preview, CI, publicación y HTTP.
+Detalle: `docs/seo/CORRECTIONS_2026-10-04.md`.
+
+La ronda LCP anterior está cerrada sin mejora acreditada (#18). No datos CWV
+suficientes; objetivo 2,5 s sigue abierto. #17 accesibilidad y #19 publicación
+editorial continúan integrados. #7/#11/#16 permanecen sin publicar.
 
 ## Trabajo actual
 

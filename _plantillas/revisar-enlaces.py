@@ -68,6 +68,8 @@ def resolver(pagina, destino):
         ruta = os.path.normpath(os.path.join(carpeta, unquote(destino)))
     if os.path.isdir(ruta):
         ruta = os.path.join(ruta, "index.html")
+    elif not os.path.splitext(ruta)[1] and os.path.isfile(ruta + '.html'):
+        ruta += '.html'
     return ruta
 
 

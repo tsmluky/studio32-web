@@ -7,3 +7,18 @@
 /Agencia-Portfolio/ / 301
 /agencia-portfolio/* /:splat 301
 /Agencia-Portfolio/* /:splat 301
+
+# Alias históricos conocidos. No redirigir rutas inexistentes encadenadas.
+/Landing1-L'Obscur/ /Landing1-L'Obscur/restaurant_landing 301
+/Landing1-L'Obscur/index.html /Landing1-L'Obscur/restaurant_landing 301
+/landing1-l'obscur/ /Landing1-L'Obscur/restaurant_landing 301
+/landing1-l'obscur/index.html /Landing1-L'Obscur/restaurant_landing 301
+/landing1-l'obscur/restaurant_landing /Landing1-L'Obscur/restaurant_landing 301
+/landing1-l'obscur/restaurant_landing.html /Landing1-L'Obscur/restaurant_landing 301
+/landing2-primeburger/ /Landing2-PrimeBurger/ 301
+/landing2-primeburger/index.html /Landing2-PrimeBurger/ 301
+/landing3-clinic/ /Landing3-Clinic/ 301
+/landing3-clinic/index.html /Landing3-Clinic/ 301
+/landing4-habitat/ /Landing4-Habitat/ 301
+/landing4-habitat/index.html /Landing4-Habitat/ 301
+/favicon.ico /favicon.svg 301
