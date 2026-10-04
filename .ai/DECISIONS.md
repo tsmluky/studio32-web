@@ -564,3 +564,5 @@ no garantías de posición, clientes ni afirmaciones de SEO espectacular. No pub
 el kit o informes de cliente en site; presupuestar según alcance real.
 
 Versionado de minificados: conservar la URL mientras coincidan las fuentes; al cambiarlas, generar una nueva versión derivada de sus hashes. Evita servir contenido antiguo desde cachés y elimina un paso manual fácil de olvidar. Verificado en copia temporal sin cambios en assets publicados.
+
+Revisión final del 04/10: también las páginas legales deben enlazar al destino limpio de Cloudflare. Se eliminan saltos adicionales de alias, se corrigen los generadores y se alinean instrucciones de privacidad con los nombres reales de los botones. Cerrar la preparación técnica con evidencia de producción no equivale a cerrar LCP, Google Maps, pilotos de producto o resultados orgánicos. Mantener esas diferencias en la ficha y el procedimiento reutilizable.

@@ -27,14 +27,17 @@ Pruebas locales de SEO/enlaces/grafo/demo/privacidad/minificados y auditor pasan
 Navegador 390×844/escritorio correcto. Preview y CI pasan. Cloudflare publicó
 la versión y las 24 URLs del sitemap responden 200 sin redirección. Alias
 históricos y favicon redirigen 301; inexistentes siguen 404; apex conserva path/query.
-Search Console confirmó solicitudes de indexación para precios, clínicas,
-restaurantes y calculadora; siguen pendientes de indexación efectiva por Google.
+Search Console confirmó siete solicitudes de indexación: precios, las cuatro
+verticales, panel y calculadora; siguen pendientes de indexación efectiva por Google.
 Detalle: `docs/seo/CORRECTIONS_2026-10-04.md`.
 
 Revisión final 04/10: se normalizan enlaces/canónicas legales y alias históricos
 al destino sin .html (Cloudflare añadía otro salto). Generadores y consentimiento
-actualizados; versión de minificados regenerada automáticamente. Pendiente
-preview/publicación de esta segunda corrección. Revisión móvil actual: PageSpeed
+actualizados; versión de minificados regenerada automáticamente. PR #21 fusionado
+en `99169be`; CI y Cloudflare pasan. Producción verifica los 34 archivos HTML,
+noindex intencionales, JSON-LD parseable y dos rutas inexistentes 404; 24 URLs
+de sitemap 200 sin saltos. Legales finales y alias históricos correctos, texto
+de privacidad alineado con los botones. Revisión móvil actual: PageSpeed
 93, FCP 1,2 s, LCP 3,1 s, TBT 40 ms y CLS 0; sin datos de campo. GA4 recibe
 eventos de QA consentidos y la retirada elimina la etiqueta. Se incorporan mapa
 de intención, registro privado de contactos y cierre con límites explícitos.
