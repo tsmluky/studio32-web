@@ -24,9 +24,15 @@
     <link rel="stylesheet" href="../assets/vendor/maplibre-gl-4.7.1/maplibre-gl.css">
     <script>if (/[?&]embed=1/.test(location.search)) document.documentElement.classList.add('embebida');</script>
     <link rel="stylesheet" href="../measurement-consent.min.css?v=min-df9e55090f7c045f">
-    <script src="../measurement-consent.min.js?v=min-df9e55090f7c045f" defer></script>
-    <script src="../discovery-events.min.js?v=min-df9e55090f7c045f" defer></script>
-    <link rel="stylesheet" href="auditoria.css?v=20261020-9">
+    <script>
+      /* Dentro de la portada (?embed=1) el aviso de cookies y la medición ya los pone la portada: aquí no se cargan dos veces. */
+      if (!document.documentElement.classList.contains('embebida')) {
+        ['../measurement-consent.min.js?v=min-df9e55090f7c045f', '../discovery-events.min.js?v=min-df9e55090f7c045f'].forEach(function (src) {
+          var s = document.createElement('script'); s.src = src; s.defer = true; document.head.appendChild(s);
+        });
+      }
+    </script>
+    <link rel="stylesheet" href="auditoria.css?v=20261020-11">
 </head>
 <body>
 <div class="app">
@@ -36,7 +42,7 @@
             <span class="marca__sub">Visibilidad en IA</span>
         </a>
         <p class="barra__dato"><strong data-n="webs">2.795</strong> webs de restaurantes leídas como las lee una IA · octubre de 2026</p>
-        <a class="boton boton--oro" href="#panel" data-ir-oferta>Análisis completo <span class="boton__precio">· 49 € + IVA</span></a>
+        <a class="boton boton--oro" href="#panel" data-ir-oferta>Análisis completo <span class="boton__precio">· gratis</span></a>
     </header>
 
     <main class="panel" id="panel" aria-live="polite">
@@ -106,6 +112,6 @@
 </template>
 
 <script src="../assets/vendor/maplibre-gl-4.7.1/maplibre-gl.js"></script>
-<script src="auditoria.js?v=20261020-10"></script>
+<script src="auditoria.js?v=20261020-11"></script>
 </body>
 </html>
