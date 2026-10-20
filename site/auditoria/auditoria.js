@@ -462,7 +462,7 @@
       <ul class="oferta__lista">
         <li>Cada problema, con su arreglo, quién lo hace y cómo comprobar que está resuelto</li>
         <li>Lo que encuentra un turista cuando pregunta en su idioma</li>
-        <li>Tu web con los arreglos aplicados, sin cambiar su diseño</li>
+        <li>Tu web con los arreglos aplicados y su nota nueva, medida igual que esta</li>
         <li>Tu zona y un plan por prioridades</li>
         <li>Un anexo técnico para quien te lleva la web</li>
       </ul>

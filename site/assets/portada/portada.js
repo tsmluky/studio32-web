@@ -153,9 +153,8 @@
   window.addEventListener('load', mapaHero);   // el mapa no frena el primer pintado
 
   // ---------------------------------------------------------------- la demo dentro de la portada
-  // En escritorio se carga sola al acercarse; en el móvil, el botón abre la demo a pantalla completa (dentro sería incómoda).
+  // Se carga sola al acercarse, también en el móvil: el mapa real, que se mueve y se amplía, es la mejor invitación.
   const marco = $('#demo-marco'), boton = $('#demo-cargar');
-  const ESCRITORIO = window.matchMedia('(min-width: 900px)');
   let puesta = false;
   const poner = () => {
     if (puesta) return;
@@ -168,8 +167,8 @@
     marco.appendChild(f);
     f.addEventListener('load', () => boton.remove());
   };
-  boton.addEventListener('click', () => { if (ESCRITORIO.matches) poner(); else location.href = 'auditoria/'; });
-  if (ESCRITORIO.matches) {
+  boton.addEventListener('click', poner);
+  {
     const cerca = () => { if (marco.getBoundingClientRect().top < window.innerHeight + 500) { poner(); window.removeEventListener('scroll', cerca); } };
     window.addEventListener('scroll', cerca, { passive: true });
     window.addEventListener('load', cerca);
