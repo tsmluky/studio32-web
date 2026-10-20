@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>¿Qué ve una IA de tu restaurante? · Índice Studio32</title>
+    <meta name="description" content="Busca tu restaurante y mira cómo lee tu web una IA: nota de 0 a 100, qué falla, en qué idiomas te entiende y cómo está tu zona. 2.795 webs medidas.">
+    <!-- Prototipo: no indexar hasta que se apruebe y pase a portada -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#12100c">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23f7f4ee'/><text x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='18' fill='%238a6421'>32</text></svg>">
+    <link rel="preload" href="../assets/fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="datos/puntos.json" as="fetch" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+    <link rel="stylesheet" href="auditoria.css?v=20261020-5">
+</head>
+<body>
+<div class="app">
+    <header class="barra">
+        <a class="marca" href="../" aria-label="Studio32, ir al inicio">
+            <span class="marca__nombre">Studio32</span>
+            <span class="marca__sub">Visibilidad en IA</span>
+        </a>
+        <p class="barra__dato"><strong>2.795</strong> webs de restaurantes leídas como las lee una IA · medido el 18/10/2026</p>
+        <a class="boton boton--oro" href="#oferta" data-ir-oferta>Análisis completo <span class="boton__precio">· 49 € + IVA</span></a>
+    </header>
+
+    <main class="panel" id="panel" aria-live="polite">
+        <div class="panel__dentro" id="panel-dentro">
+            <!-- inicio: lo pinta auditoria.js; esto es lo que se ve sin JavaScript -->
+            <section class="inicio">
+                <span class="etiqueta">Índice Studio32 · Comunitat Valenciana</span>
+                <h1 class="titular">¿Qué ve una IA cuando busca <em>tu restaurante</em>?</h1>
+                <p class="entradilla">Cuando un turista le pregunta a ChatGPT dónde comer, la IA lee webs. Hemos leído 2.795 de restaurantes como lo hace ella.</p>
+                <noscript><p class="entradilla">Para buscar tu restaurante en el mapa hace falta activar JavaScript.</p></noscript>
+            </section>
+        </div>
+    </main>
+
+    <section class="mapa" aria-label="Mapa de restaurantes medidos">
+        <div id="mapa"></div>
+        <div class="cargando" id="cargando">Cargando el mapa…</div>
+        <p class="cartel" id="cartel"><i></i><span>Toca cualquier punto o busca tu restaurante</span></p>
+        <aside class="leyenda" id="leyenda" aria-label="Qué significa cada color">
+            <button class="leyenda__boton" id="leyenda-boton" type="button" aria-expanded="true" aria-controls="leyenda-cuerpo">
+                <span class="leyenda__puntos" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Cómo la lee una IA
+            </button>
+            <div class="leyenda__cuerpo" id="leyenda-cuerpo">
+            <ul id="leyenda-lista"></ul>
+            <p class="leyenda__pie">El color mide la web, no la calidad del restaurante. La nota solo se ve al buscar el tuyo.</p>
+            </div>
+        </aside>
+    </section>
+</div>
+
+<template id="t-inicio">
+    <section class="inicio aparecer">
+        <span class="etiqueta">Índice Studio32 · Comunitat Valenciana</span>
+        <h1 class="titular">¿Qué ve una IA cuando busca <em>tu restaurante</em>?</h1>
+        <p class="entradilla">Cuando un turista le pregunta a ChatGPT dónde comer, la IA lee webs. Hemos leído <span data-n="webs"></span> de restaurantes como lo hace ella. Escribe el nombre del tuyo.</p>
+
+        <div class="buscador" id="buscador">
+            <label class="visualmente-oculto" for="q">Nombre de tu restaurante</label>
+            <div class="buscador__caja">
+                <svg class="buscador__icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Nombre de tu restaurante"
+                       role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugerencias">
+            </div>
+            <ul class="sugerencias" id="sugerencias" role="listbox" hidden></ul>
+            <p class="buscador__ayuda">También puedes tocar cualquier punto del mapa.</p>
+        </div>
+
+        <div class="cifras">
+            <div class="cifra"><div class="cifra__num">65 %</div><div class="cifra__txt">solo está en español</div></div>
+            <div class="cifra"><div class="cifra__num">67 %</div><div class="cifra__txt">no tiene la carta en texto</div></div>
+            <div class="cifra"><div class="cifra__num">45 %</div><div class="cifra__txt">de las webs de los mapas no se pueden leer</div></div>
+        </div>
+        <p class="nota-fuente">Índice Studio32 2.0: <span data-n="webs"></span> webs de restaurantes que funcionan, de <span data-n="con_web"></span> que figuran en Overture Maps y OpenStreetMap. Medido el 18/10/2026, sin IA y respetando el robots.txt de cada web.</p>
+
+        <ol class="como">
+            <li><span><strong>Busca tu restaurante.</strong> Te enseñamos tu nota de 0 a 100, qué falla y en qué idiomas te entiende una IA.</span></li>
+            <li><span><strong>Mira tu zona.</strong> Los restaurantes de alrededor, por colores, y tu puesto entre ellos.</span></li>
+            <li><span><strong>Pide el análisis completo.</strong> Cada fallo con su arreglo y cómo comprobarlo, en 48 horas.</span></li>
+        </ol>
+    </section>
+</template>
+
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="auditoria.js?v=20261020-5"></script>
+</body>
+</html>

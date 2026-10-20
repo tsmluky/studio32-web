@@ -566,3 +566,18 @@ el kit o informes de cliente en site; presupuestar según alcance real.
 Versionado de minificados: conservar la URL mientras coincidan las fuentes; al cambiarlas, generar una nueva versión derivada de sus hashes. Evita servir contenido antiguo desde cachés y elimina un paso manual fácil de olvidar. Verificado en copia temporal sin cambios en assets publicados.
 
 Revisión final del 04/10: también las páginas legales deben enlazar al destino limpio de Cloudflare. Se eliminan saltos adicionales de alias, se corrigen los generadores y se alinean instrucciones de privacidad con los nombres reales de los botones. Cerrar la preparación técnica con evidencia de producción no equivale a cerrar LCP, Google Maps, pilotos de producto o resultados orgánicos. Mantener esas diferencias en la ficha y el procedimiento reutilizable.
+
+## 2026-10-20 · Prototipo de auditoría con mapa (rama `auditoria-mapa`, sin publicar)
+
+Francisco pide que la web pase a vender la auditoría de visibilidad en IA, con la
+calidad de la demo de synco.es como referencia. Prototipo en `site/auditoria/`
+(noindex): buscador y diagnóstico a la izquierda, mapa en el centro con los
+restaurantes del Índice Studio32 (repo Visibilidad-IA → `visibilidad/mapa_web.py`
+genera `site/auditoria/datos/`, que no se versiona todavía). Decisiones de Francisco: vecinos con
+nombre y color por tramo, sin número; el restaurante buscado, con nota y detalle;
+49 € + IVA de lanzamiento, después 90 € + IVA, sin precio tachado nunca cobrado.
+Excepciones a CONVENTIONS pendientes de aprobar antes de publicar: MapLibre GL
+4.7.1 (CDN jsdelivr, BSD-3; mejor alojarlo en `assets/`), teselas gratuitas de
+OpenFreeMap sin clave, y mencionar la Comunitat Valenciana (el índice es de allí).
+Sin backend: todo estático; el detalle de cada restaurante es un JSON aparte que solo
+se descarga al buscarlo. Las páginas del agente de WhatsApp no se tocan.
