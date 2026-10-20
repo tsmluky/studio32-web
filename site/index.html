@@ -57,12 +57,12 @@
       "serviceType": "Auditoría de web y visibilidad en IA",
       "offers": {
         "@type": "Offer",
-        "price": "49",
+        "price": "0",
         "priceCurrency": "EUR",
-        "description": "Precio de lanzamiento, más IVA, pago único",
+        "description": "Gratis para los primeros restaurantes (promoción de lanzamiento; después, 49 € + IVA)",
         "priceSpecification": {
           "@type": "UnitPriceSpecification",
-          "price": "49",
+          "price": "0",
           "priceCurrency": "EUR",
           "valueAddedTaxIncluded": false
         }
@@ -116,7 +116,7 @@
           "name": "¿Cuánto tarda el análisis completo?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Te lo entregamos en 48 horas desde el pago. Los primeros restaurantes lo tienen gratis a cambio de poder contar su caso."
+            "text": "En 48 horas. Los primeros restaurantes lo tienen gratis a cambio de poder contar su caso."
           }
         },
         {
@@ -143,7 +143,7 @@
     <link rel="preload" href="assets/fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="assets/vendor/maplibre-gl-4.7.1/maplibre-gl.css">
-    <link rel="stylesheet" href="assets/portada/portada.css?v=20261020-6">
+    <link rel="stylesheet" href="assets/portada/portada.css?v=20261020-10">
     <link rel="stylesheet" href="measurement-consent.min.css?v=min-df9e55090f7c045f">
     <script src="measurement-consent.min.js?v=min-df9e55090f7c045f" defer></script>
     <script src="discovery-events.min.js?v=min-df9e55090f7c045f" defer></script>
@@ -160,12 +160,8 @@
         <div class="nav__enlaces">
             <a href="#como">Cómo funciona</a>
             <a href="#mapa">El mapa</a>
-            <a href="#estudio">El estudio</a>
-            <a href="#revisamos">Qué revisamos</a>
-            <a href="#mapa">Probar el mapa</a>
             <a href="#precio">Precio</a>
             <a href="#preguntas">Preguntas</a>
-            <a href="metodologia/">Metodología y datos</a>
         </div>
         <a class="boton boton--oro boton--peq" href="auditoria/">Buscar mi restaurante</a>
     </div>
@@ -176,8 +172,7 @@
         <div class="hero__texto">
             <span class="etiqueta">Visibilidad en IA para restaurantes</span>
             <h1 class="hero__titulo">Cuando un turista le pregunta a ChatGPT dónde comer, <em>¿sale tu restaurante?</em></h1>
-            <p class="hero__entradilla"><strong>La IA recomienda lo que puede leer.</strong> Hemos leído <strong><span data-n="webs">2.795</span> webs de restaurantes</strong>
-                como lo hace ella. Busca la tuya y mira <strong>tu nota, qué falla y si te entiende un turista</strong> que pregunta en su idioma.</p>
+            <p class="hero__entradilla">La IA recomienda lo que puede leer. <strong>Busca tu restaurante y mira cómo te lee.</strong></p>
 
             <form class="buscar" action="auditoria/" method="get" role="search">
                 <label class="visualmente-oculto" for="q-hero">Nombre de tu restaurante</label>
@@ -204,7 +199,7 @@
                 <p class="ventana__dato"><b id="hero-n">17.197</b> restaurantes en el mapa</p>
                 <ul class="ventana__tramos" id="hero-tramos"></ul>
             </div>
-            <figcaption class="ventana__pie"><span>Cada punto es un restaurante. El color dice lo bien que una IA lee su web.</span>
+            <figcaption class="ventana__pie"><span>Cada punto, un restaurante. El color, cómo lo lee una IA.</span>
                 <span class="ventana__abrir">Abrir el mapa →</span></figcaption>
         </figure>
     </div>
@@ -286,7 +281,7 @@
             <article class="bloque-r aparece">
                 <span class="bloque-r__num">04</span>
                 <h3>¿Te entiende en su idioma?</h3>
-                <p>A quien pregunta en inglés, la IA le responde con páginas en inglés. Si no tienes, recomienda a otro.</p>
+                <p>Quien pregunta en inglés recibe páginas en inglés. Si tu web no lo tiene, la IA recomienda a otro.</p>
                 <ul><li><strong>Inglés</strong>, el que más pesa</li><li>Italiano y francés</li><li>Neerlandés y alemán</li><li>Carta traducida, con traducción real</li></ul>
             </article>
         </div>
@@ -301,10 +296,10 @@
                 <span class="etiqueta etiqueta--osc">Pruébalo aquí</span>
                 <h2 class="titulo">Busca tu restaurante. <em>El mapa vuela hasta él.</em></h2>
             </div>
-            <ul class="lista-check">
-                <li><strong>Tu nota de 0 a 100</strong> y tu puesto en tu zona</li>
-                <li><strong>Cada fallo</strong>, con su porqué y su prueba</li>
-                <li><strong>Tus vecinos por colores</strong>, sin ver sus notas</li>
+            <ul class="ideas">
+                <li><b>Tu nota</b><span>de 0 a 100 y tu puesto en la zona</span></li>
+                <li><b>Cada fallo</b><span>con su porqué y su prueba</span></li>
+                <li><b>Tus vecinos</b><span>por colores, sin ver sus notas</span></li>
             </ul>
         </div>
         <div class="demo" id="demo">
@@ -333,14 +328,20 @@
                 <p class="plan__paso"><span>01</span>Al momento</p>
                 <h3>Diagnóstico</h3>
                 <p class="plan__precio"><b>0 €</b></p>
-                <p>Tu nota, tu zona y lo que falla, en el mapa. <strong>Para saber si tienes un problema.</strong></p>
+                <p class="plan__precio-sub">En el mapa, sin registrarte. <strong>Para saber si tienes un problema.</strong></p>
+                <ul>
+                    <li>Tu nota de 0 a 100 y tu puesto en tu zona</li>
+                    <li>Lo que falla, con su porqué</li>
+                    <li>Si te entiende un turista en su idioma</li>
+                    <li>Si la IA no puede leer tu web, el motivo</li>
+                </ul>
                 <a class="boton boton--linea-osc" href="auditoria/">Ver el mío</a>
             </article>
             <article class="plan plan--destacado aparece">
-                <span class="plan__sello">Precio de lanzamiento</span>
+                <span class="plan__sello">Promoción de lanzamiento</span>
                 <p class="plan__paso"><span>02</span>En 48 horas</p>
                 <h3>Análisis completo</h3>
-                <p class="plan__precio"><b>49 €</b> + IVA <small>59,29 € con IVA · pago único · precio normal 90 € + IVA</small></p>
+                <p class="plan__precio"><b>0 €</b> <s>49&nbsp;€&nbsp;+&nbsp;IVA</s> <small>Gratis para los primeros restaurantes, a cambio de poder contar su caso</small></p>
                 <ul>
                     <li>Cada problema, con su arreglo, quién lo hace y cómo comprobarlo</li>
                     <li>Lo que encuentra un turista cuando pregunta en su idioma</li>
@@ -348,7 +349,7 @@
                     <li>Tu zona y un plan por prioridades</li>
                     <li>Un anexo técnico para quien te lleva la web</li>
                 </ul>
-                <p class="plan__nota">Te lo llevas aunque los arreglos los haga otra persona. <strong>Los primeros restaurantes, gratis</strong> a cambio de poder contar su caso.</p>
+                <p class="plan__nota">Te lo llevas aunque los arreglos los haga otra persona.</p>
                 <a class="boton boton--oro" href="https://wa.me/34657695181?text=Hola%2C%20quiero%20el%20an%C3%A1lisis%20completo%20de%20mi%20restaurante." target="_blank" rel="noopener">Pedir el análisis</a>
             </article>
             <article class="plan aparece">
@@ -382,7 +383,7 @@
             <details><summary>¿Y si no tengo web?</summary>
                 <p>Búscate igual en el mapa: te decimos lo que eso supone y qué haría falta. Si no apareces, mándanos tu local y lo añadimos.</p></details>
             <details><summary>¿Cuánto tarda el análisis completo?</summary>
-                <p>Te lo entregamos en 48 horas desde el pago. Los primeros restaurantes lo tienen gratis a cambio de poder contar su caso.</p></details>
+                <p>En 48 horas. Los primeros restaurantes lo tienen gratis a cambio de poder contar su caso.</p></details>
             <details><summary>¿Puedo quitar mi restaurante del mapa?</summary>
                 <p>Sí. Escríbenos a <a href="mailto:francisco@studio32.es">francisco@studio32.es</a> y lo retiramos. También si ves un dato que no es correcto.</p></details>
         </div>
@@ -413,6 +414,8 @@
         <div class="pie__col">
             <p class="pie__titulo">Studio32</p>
             <a href="auditoria/">Mapa del Índice</a>
+            <a href="#mapa">Probar el mapa</a>
+            <a href="metodologia/">Metodología y datos</a>
             <a href="#precio">Precio</a>
             <a href="#preguntas">Preguntas</a>
         </div>
@@ -434,6 +437,6 @@
 </footer>
 
 <script src="assets/vendor/maplibre-gl-4.7.1/maplibre-gl.js" defer></script>
-<script src="assets/portada/portada.js?v=20261020-4" defer></script>
+<script src="assets/portada/portada.js?v=20261020-5" defer></script>
 </body>
 </html>

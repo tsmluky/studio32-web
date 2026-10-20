@@ -416,6 +416,19 @@
       <div class="histo__eje" aria-hidden="true"><span>0</span><span>50</span><span>100</span></div>`;
   }
 
+  function filaZona(z, medido) {
+    // una marca por web de la zona, de la mejor a la peor; la tuya, señalada
+    const colores = [3, 2, 1, 0].flatMap((t) => Array(z.tramos[t]).fill(TRAMOS[t].color));
+    if (!colores.length) return '';
+    const tuya = medido && z.puesto ? Math.min(z.puesto, colores.length) - 1 : -1;
+    const pos = tuya >= 0 ? ((tuya + .5) / colores.length) * 100 : 0;
+    return `<div class="fila-zona" aria-hidden="true">
+        ${tuya >= 0 ? `<span class="fila-zona__tu" style="left:${pos}%">Tú · ${z.puesto}.ª</span>` : ''}
+        <div class="fila-zona__marcas">${colores.map((col, i) => `<i class="${i === tuya ? 'tu' : ''}" style="background:${col}"></i>`).join('')}</div>
+        <div class="fila-zona__eje"><span>Mejor leída</span><span>Peor leída</span></div>
+      </div>`;
+  }
+
   function zona(z, medido, k = 0) {
     const tipo = TIPOS[k] || TIPOS[0];
     return `<section class="bloque">
@@ -426,10 +439,10 @@
           <div><b>${miles(z.con_web)}</b>con una web apuntada</div>
           <div><b>${miles(z.medidas)}</b>que una IA puede leer</div>
         </div>
-        <div class="pila" aria-hidden="true">${[3, 2, 1, 0].map((t) => z.tramos[t] ? `<span style="flex:${z.tramos[t]};background:${TRAMOS[t].color}"></span>` : '').join('')}</div>
+        ${filaZona(z, medido)}
         <div class="pila-leyenda">${[3, 2, 1, 0].map((t) => `<span><i style="background:${TRAMOS[t].color}"></i>${z.tramos[t]} ${z.tramos[t] === 1 ? TRAMOS[t].nombre.toLowerCase() : PLURAL[t]}</span>`).join('')}</div>
         <p class="bloque__texto bloque__texto--sep">${medido
-          ? `De las ${z.medidas} webs que una IA puede leer aquí, la tuya es la <strong>${z.puesto}.ª</strong>. En el mapa tienes a tus vecinos por colores.`
+          ? `De las ${z.medidas} webs que una IA puede leer aquí, <strong>la tuya es la ${z.puesto}.ª</strong>. En el mapa tienes a tus vecinos por colores.`
           : z.medidas ? `Aquí hay ${z.medidas} ${z.medidas === 1 ? tipo.uno : tipo.plural.toLowerCase()} cuya web sí lee una IA. Cuando un turista pregunta, compites con ${z.medidas === 1 ? 'él' : 'ellos'}.`
             : `Todavía no hay ${tipo.plural.toLowerCase()} con web medida en esta zona.`}</p>
       </div>
@@ -449,9 +462,9 @@
         <li>Tu zona y un plan por prioridades</li>
         <li>Un anexo técnico para quien te lleva la web</li>
       </ul>
-      <div class="precio"><span class="precio__num">49 €</span><span class="precio__iva">+ IVA · 59,29 € en total</span></div>
-      <p class="precio__nota"><strong>Pago único, precio de lanzamiento.</strong> Precio normal: 90 € + IVA. Lo tienes en 48 horas desde el pago.</p>
-      <div class="gratis"><span><b>Los primeros restaurantes, gratis</b>, a cambio de poder contar su caso. Pregúntanos si quedan plazas.</span></div>
+      <span class="promo">Promoción de lanzamiento</span>
+      <div class="precio"><span class="precio__num">0 €</span><s class="precio__antes">49&nbsp;€&nbsp;+&nbsp;IVA</s></div>
+      <p class="precio__nota"><strong>Gratis para los primeros restaurantes</strong>, a cambio de poder contar su caso. Lo tienes en 48 horas.</p>
       <div class="oferta__botones">
         <a class="boton boton--oro boton--ancho" href="${wa(texto)}" target="_blank" rel="noopener">Pedir el análisis por WhatsApp</a>
         <a class="boton boton--linea boton--ancho" href="mailto:${CONTACTO.correo}?subject=${encodeURIComponent('Análisis completo · ' + f.nombre)}&body=${encodeURIComponent(texto)}">Escribir por correo</a>

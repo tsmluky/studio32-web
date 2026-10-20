@@ -112,6 +112,7 @@
     });
     map.on('load', () => {
       tono(map);
+      document.querySelector('.ventana .maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');   // créditos plegados
       const antes = (map.getStyle().layers.find((l) => l.type === 'symbol') || {}).id;
       const f = (lon, lat, g) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [lon, lat] }, properties: { g } });
       const puntos = [
