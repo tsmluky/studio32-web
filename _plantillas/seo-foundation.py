@@ -13,8 +13,9 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / 'site'
 HOST = 'https://www.studio32.es'
 VERSION = '20261002-events-2'
-COMMERCIAL = ['index.html'] + [p + '/index.html' for p in (
-    'agente-whatsapp-clinicas-dentales', 'agente-whatsapp-restaurantes',
+# Desde el 20/10/2026 la portada es la de visibilidad en IA (se edita a mano); la del agente vive en /agente-whatsapp/.
+COMMERCIAL = [p + '/index.html' for p in (
+    'agente-whatsapp', 'agente-whatsapp-clinicas-dentales', 'agente-whatsapp-restaurantes',
     'agente-whatsapp-centros-esteticos', 'agente-whatsapp-servicios-locales',
     'precio-agente-whatsapp', 'panel-de-control')]
 
@@ -69,7 +70,7 @@ def enhance(path):
             pattern = r'(<p class="footer-col-titulo">El agente</p>)'
             source = re.sub(pattern,lambda m: m[1]+'\n'+links,source,count=1)
     related = {
-        '': [('problemas/llamadas-y-mensajes-perdidos','Revisar cómo medir consultas pendientes'),('herramientas/calculadora-consultas-perdidas','Estimar su valor potencial')],
+        'agente-whatsapp': [('problemas/llamadas-y-mensajes-perdidos','Revisar cómo medir consultas pendientes'),('herramientas/calculadora-consultas-perdidas','Estimar su valor potencial')],
         'agente-whatsapp-clinicas-dentales': [('recursos/automatizar-citas-whatsapp','Revisar el recorrido de una cita'),('recursos/integrar-whatsapp-con-agenda','Qué comprobar al conectar la agenda')],
         'agente-whatsapp-centros-esteticos': [('recursos/recepcionista-ia','Repartir tareas entre agente y equipo'),('recursos/automatizar-citas-whatsapp','Evaluar el recorrido de citas')],
         'agente-whatsapp-restaurantes': [('problemas/consultas-fuera-de-horario','Elegir cómo atender al cerrar'),('recursos/integrar-whatsapp-con-agenda','Revisar disponibilidad y reservas')],

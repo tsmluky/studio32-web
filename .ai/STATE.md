@@ -1,6 +1,6 @@
 # Estado actual · studio32-web
 
-Actualizado: **2026-10-04**. Estado canónico; histórico en DECISIONS.md.
+Actualizado: **2026-10-20**. Estado canónico; histórico en DECISIONS.md.
 
 ## Producto y publicación
 
@@ -13,6 +13,21 @@ Netlify está retirado: tres proyectos desactivados y builds de `studio-32`
 detenidos. El apex redirige en Cloudflare sin origen Netlify. `netlify.toml`
 mantiene `ignore = "exit 0"` como guarda ante una reactivación accidental.
 Ver `docs/seo/INFRASTRUCTURE.md`.
+
+## Cambio de producto · 20/10/2026 (rama `auditoria-mapa`)
+
+La portada pasa a vender la **auditoría de visibilidad en IA para restaurantes** (decisión de Francisco).
+- `site/index.html`: portada nueva (estilos y script en `assets/portada/`), hero con buscador y mapa vivo,
+  demo integrada, estudio, comprobaciones, precios (Diagnóstico gratis · Análisis 49 € + IVA de lanzamiento,
+  pago único, precio normal 90 € · arreglos a medida), preguntas y contacto (657 695 181, francisco@studio32.es).
+- `site/auditoria/`: demo del mapa del Índice Studio32 (MapLibre en `assets/vendor/`, teselas OpenFreeMap).
+  Datos en `auditoria/datos/`, generados en el repo Visibilidad-IA (`visibilidad/mapa_web.py`), bajo ODbL.
+- `site/metodologia/`: fuentes, comprobaciones, nota, límites, datos abiertos y retirada.
+- La portada del agente de WhatsApp vive en `site/agente-whatsapp/`; los enlaces a sus secciones se
+  apuntaron allí y la portada nueva redirige los `#control`, `#tarifas`… antiguos. Verticales, recursos,
+  problemas y herramientas no cambian. `seo-foundation.py` y `validar-discovery.py` ya usan la ruta nueva.
+- Controles locales: validar-discovery 0 errores (24 páginas, 27 URL), enlaces 0 rotos, grafo 0 errores
+  (profundidad 2), tests de calculadora, consentimiento, demo y minificados correctos.
 
 ## Último avance · 04/10/2026
 
@@ -71,7 +86,8 @@ No afecta CSS/JS ni fuentes de portada, verticales o demo.
 
 ```text
 site/
-  index.html · styles.css · home-bundle.css · home-foundation.css · script.js
+  index.html (visibilidad en IA) · assets/portada/ · auditoria/ · metodologia/
+  agente-whatsapp/ (portada anterior) · styles.css · home-bundle.css · home-foundation.css · script.js
   vertical.css · panel.css · panel.js
   agente-whatsapp-clinicas-dentales/
   agente-whatsapp-restaurantes/

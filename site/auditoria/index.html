@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Mapa del Índice Studio32: ¿qué ve una IA de tu restaurante?</title>
+    <meta name="description" content="Busca tu restaurante en el mapa de la Comunitat Valenciana y mira cómo lee tu web una IA: nota de 0 a 100, qué falla, si te entiende un turista en su idioma y cómo está tu zona.">
+    <link rel="canonical" href="https://www.studio32.es/auditoria/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Studio32">
+    <meta property="og:title" content="Mapa del Índice Studio32 · ¿Qué ve una IA de tu restaurante?">
+    <meta property="og:description" content="Miles de restaurantes de la Comunitat Valenciana, por colores según cómo los lee una IA. Busca el tuyo.">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:url" content="https://www.studio32.es/auditoria/">
+    <meta property="og:image" content="https://www.studio32.es/assets/portada/og-portada.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Studio32", "item": "https://www.studio32.es/"}, {"@type": "ListItem", "position": 2, "name": "Mapa del Índice Studio32", "item": "https://www.studio32.es/auditoria/"}]}</script>
+    <meta name="theme-color" content="#12100c">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23f7f4ee'/><text x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='18' fill='%238a6421'>32</text></svg>">
+    <link rel="preload" href="../assets/fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="datos/puntos.json" as="fetch" crossorigin>
+    <link rel="stylesheet" href="../assets/vendor/maplibre-gl-4.7.1/maplibre-gl.css">
+    <script>if (/[?&]embed=1/.test(location.search)) document.documentElement.classList.add('embebida');</script>
+    <link rel="stylesheet" href="../measurement-consent.min.css?v=min-df9e55090f7c045f">
+    <script src="../measurement-consent.min.js?v=min-df9e55090f7c045f" defer></script>
+    <script src="../discovery-events.min.js?v=min-df9e55090f7c045f" defer></script>
+    <link rel="stylesheet" href="auditoria.css?v=20261020-9">
+</head>
+<body>
+<div class="app">
+    <header class="barra">
+        <a class="marca" href="../" aria-label="Studio32, ir al inicio">
+            <span class="marca__nombre">Studio32</span>
+            <span class="marca__sub">Visibilidad en IA</span>
+        </a>
+        <p class="barra__dato"><strong data-n="webs">2.795</strong> webs de restaurantes leídas como las lee una IA · octubre de 2026</p>
+        <a class="boton boton--oro" href="#panel" data-ir-oferta>Análisis completo <span class="boton__precio">· 49 € + IVA</span></a>
+    </header>
+
+    <main class="panel" id="panel" aria-live="polite">
+        <div class="panel__dentro" id="panel-dentro">
+            <!-- inicio: lo pinta auditoria.js; esto es lo que se ve sin JavaScript -->
+            <section class="inicio">
+                <span class="etiqueta">Índice Studio32 · Comunitat Valenciana</span>
+                <p class="titular">¿Qué ve una IA cuando busca <em>tu restaurante</em>?</p>
+                <p class="entradilla">Cuando un turista le pregunta a ChatGPT dónde comer, la IA lee webs. Hemos leído 2.795 de restaurantes como lo hace ella.</p>
+                <noscript><p class="entradilla">Para buscar tu restaurante en el mapa hace falta activar JavaScript.</p></noscript>
+            </section>
+        </div>
+        <footer class="pie-app">
+            <a href="../metodologia/">Metodología y datos</a>
+            <a href="../legal/aviso-legal">Aviso legal</a>
+            <a href="../legal/privacidad">Privacidad</a>
+        </footer>
+    </main>
+
+    <section class="mapa" aria-label="Mapa de restaurantes medidos">
+        <div id="mapa"></div>
+        <div class="cargando" id="cargando">Cargando el mapa…</div>
+        <p class="cartel" id="cartel"><i></i><span>Toca cualquier punto o busca tu restaurante</span></p>
+        <div class="tipos" id="tipos" role="group" aria-label="Tipo de local"></div>
+        <aside class="leyenda" id="leyenda" aria-label="Qué significa cada color">
+            <button class="leyenda__boton" id="leyenda-boton" type="button" aria-expanded="true" aria-controls="leyenda-cuerpo">
+                <span class="leyenda__puntos" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Cómo la lee una IA
+            </button>
+            <div class="leyenda__cuerpo" id="leyenda-cuerpo">
+            <ul id="leyenda-lista"></ul>
+            <p class="leyenda__pie">El color mide la web, no la calidad del restaurante. La nota solo se ve al buscar el tuyo.</p>
+            </div>
+        </aside>
+    </section>
+</div>
+
+<template id="t-inicio">
+    <section class="inicio aparecer">
+        <span class="etiqueta">Índice Studio32 · Comunitat Valenciana</span>
+        <h1 class="titular">¿Qué ve una IA cuando busca <em>tu restaurante</em>?</h1>
+        <p class="entradilla">Cuando un turista le pregunta a ChatGPT dónde comer, la IA lee webs. Hemos leído <span data-n="webs"></span> de restaurantes como lo hace ella. Escribe el nombre del tuyo.</p>
+
+        <div class="buscador" id="buscador">
+            <label class="visualmente-oculto" for="q">Nombre de tu restaurante</label>
+            <div class="buscador__caja">
+                <svg class="buscador__icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Nombre de tu restaurante"
+                       role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugerencias">
+            </div>
+            <ul class="sugerencias" id="sugerencias" role="listbox" hidden></ul>
+            <p class="buscador__ayuda">También puedes tocar cualquier punto del mapa. ¿No aparece tu local? <a href="https://wa.me/34657695181?text=Hola%2C%20quiero%20a%C3%B1adir%20mi%20local%20al%20mapa%20de%20Studio32.%20Nombre%3A%20%20Direcci%C3%B3n%3A%20%20Web%3A%20" target="_blank" rel="noopener">Añádelo</a>.</p>
+        </div>
+
+        <ol class="como">
+            <li><span><strong>Tu nota de 0 a 100</strong>, qué falla y si te entiende un turista en su idioma.</span></li>
+            <li><span><strong>Tu zona por colores</strong> y tu puesto entre tus vecinos.</span></li>
+            <li><span><strong>El análisis completo</strong>: cada fallo con su arreglo, en 48 horas.</span></li>
+        </ol>
+
+        <div class="cifras">
+            <div class="cifra"><div class="cifra__num">65 %</div><div class="cifra__txt">solo en español</div></div>
+            <div class="cifra"><div class="cifra__num">67 %</div><div class="cifra__txt">sin la carta en texto</div></div>
+            <div class="cifra"><div class="cifra__num">45 %</div><div class="cifra__txt">no se pueden leer</div></div>
+        </div>
+        <p class="nota-fuente">Índice Studio32: <span data-n="webs"></span> webs de restaurantes que funcionan, de <span data-n="con_web"></span> que figuran en Overture Maps y OpenStreetMap. Medido en octubre de 2026, sin IA y respetando el robots.txt de cada web.</p>
+    </section>
+</template>
+
+<script src="../assets/vendor/maplibre-gl-4.7.1/maplibre-gl.js"></script>
+<script src="auditoria.js?v=20261020-10"></script>
+</body>
+</html>

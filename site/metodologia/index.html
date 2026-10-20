@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Metodología y datos del Índice Studio32 · Studio32</title>
+    <meta name="description" content="Cómo medimos la web de cada restaurante: de dónde salen los datos, las 24 comprobaciones, cómo se calcula la nota, sus límites y cómo descargar los datos abiertos del mapa.">
+    <link rel="canonical" href="https://www.studio32.es/metodologia/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Studio32">
+    <meta property="og:title" content="Metodología y datos del Índice Studio32">
+    <meta property="og:description" content="Fuentes, comprobaciones, nota, límites y datos abiertos del mapa de restaurantes.">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:url" content="https://www.studio32.es/metodologia/">
+    <meta property="og:image" content="https://www.studio32.es/assets/portada/og-portada.png">
+    <meta name="theme-color" content="#0c0a08">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23f7f4ee'/><text x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='18' fill='%238a6421'>32</text></svg>">
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Studio32","item":"https://www.studio32.es/"},{"@type":"ListItem","position":2,"name":"Metodología y datos","item":"https://www.studio32.es/metodologia/"}]},{"@type":"Dataset","name":"Índice Studio32 de lectura por IA · restaurantes de la Comunitat Valenciana","description":"Restaurantes de la Comunitat Valenciana con su tramo de lectura por IA de su web (acceso, identidad, contenido e idiomas), medido en octubre de 2026.","url":"https://www.studio32.es/metodologia/","creator":{"@type":"Organization","name":"Studio32","url":"https://www.studio32.es/"},"license":"https://opendatacommons.org/licenses/odbl/1-0/","spatialCoverage":"Comunitat Valenciana, España","temporalCoverage":"2026-10","isAccessibleForFree":true,"distribution":[{"@type":"DataDownload","encodingFormat":"application/json","contentUrl":"https://www.studio32.es/auditoria/datos/puntos.json"}]}]}</script>
+    <link rel="preload" href="../assets/fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../assets/portada/portada.css?v=20261020-6">
+    <link rel="stylesheet" href="../measurement-consent.min.css?v=min-df9e55090f7c045f">
+    <script src="../measurement-consent.min.js?v=min-df9e55090f7c045f" defer></script>
+    <script src="../discovery-events.min.js?v=min-df9e55090f7c045f" defer></script>
+</head>
+<body>
+<a class="saltar-contenido" href="#contenido">Ir al contenido</a>
+
+<nav class="nav" aria-label="Navegación principal">
+    <div class="contenedor nav__dentro">
+        <a class="marca" href="../" aria-label="Studio32, inicio">
+            <span class="marca__nombre">Studio32</span>
+            <span class="marca__sub">Visibilidad en IA</span>
+        </a>
+        <div class="nav__enlaces">
+            <a href="../#como">Cómo funciona</a>
+            <a href="../#mapa">El mapa</a>
+            <a href="../#precio">Precio</a>
+        </div>
+        <a class="boton boton--oro boton--peq" href="../auditoria/">Buscar mi restaurante</a>
+    </div>
+</nav>
+
+<header class="hero hero--corto">
+    <div class="contenedor">
+        <span class="etiqueta">Metodología y datos</span>
+        <h1 class="hero__titulo hero__titulo--corto">Cómo leemos la web <em>de cada restaurante.</em></h1>
+        <p class="hero__entradilla">Lo que mide el Índice Studio32, de dónde salen los datos, cómo se calcula la nota y hasta dónde llega.
+            <strong>Medición de octubre de 2026.</strong></p>
+    </div>
+</header>
+
+<main id="contenido">
+<article class="seccion">
+    <div class="contenedor contenedor--estrecho texto-largo">
+
+        <h2>Qué mide y qué no</h2>
+        <p><strong>Mide lo bien que una IA puede leer y entender la web de un restaurante:</strong> si puede entrar, si sabe qué es y dónde está,
+            qué ofrece y si lo entiende un turista que pregunta en su idioma. Es la parte de la visibilidad que depende del propio restaurante y que se puede arreglar.</p>
+        <p><strong>No mide</strong> la calidad de la cocina ni del servicio, ni a quién recomienda una IA en un momento concreto. Una nota baja no dice que un
+            restaurante sea malo: dice que una máquina entiende mal su web.</p>
+
+        <h2>De dónde salen los restaurantes</h2>
+        <ul class="datos-lista">
+            <li><b>Overture Maps Foundation</b><span>versión 2026-09-23.1, licencia CDLA-Permissive 2.0</span></li>
+            <li><b>OpenStreetMap</b><span>© colaboradores de OpenStreetMap, licencia ODbL</span></li>
+            <li><b>Socios de Visit València</b><span>su directorio público</span></li>
+        </ul>
+        <p>Unimos las fuentes y dejamos un solo punto por local: si dos registros tienen el mismo nombre propio en el mismo sitio, son el mismo
+            restaurante. Cada local lleva su tipo (restaurante, bar, cafetería, heladería u horno) porque no compiten entre sí.</p>
+        <p>De cada restaurante con web en los mapas medimos esa web. Si no funciona, es de otro negocio o es una red social, el mapa lo dice:
+            <strong>para una IA, esa web no existe.</strong></p>
+
+        <h2>Cómo se lee cada web</h2>
+        <p>Con un lector propio, <strong>sin IA</strong>: entra como lo haría el robot de un buscador o de una IA, sin ejecutar JavaScript, lee la portada
+            y las páginas principales y guarda lo que encuentra. Respeta el robots.txt de cada web. Cada comprobación guarda su prueba: qué vimos, dónde y cuándo.</p>
+
+        <h2>Las cuatro preguntas</h2>
+        <div class="preguntas-m">
+            <section><h3>¿Puede entrar?</h3><p>La web funciona y es suya, conexión segura, deja pasar a los robots de las IA, se lee sin JavaScript, está preparada para el móvil, carga rápido y tiene mapa del sitio.</p></section>
+            <section><h3>¿Sabe quién eres?</h3><p>Ficha de restaurante para máquinas (schema.org), un título que dice qué es y dónde, dirección y teléfono escritos, descripción para buscadores y enlaces a sus fichas.</p></section>
+            <section><h3>¿Sabe qué ofreces?</h3><p>Carta en texto con precios, especialidad dicha claramente, horario escrito, texto suficiente, preguntas frecuentes, fotos descritas y web al día.</p></section>
+            <section><h3>¿Te entiende en su idioma?</h3><p>Páginas en inglés, italiano, francés, neerlandés y alemán además del español, carta traducida, traducción real en vez de un botón automático e idiomas bien declarados.</p></section>
+        </div>
+        <p>Cada pregunta da una puntuación de 0 a 100. <strong>La nota del índice es su media ponderada</strong>; la de idiomas pesa menos que las otras tres.
+            El análisis completo mira además lo que pasa fuera de la web: guías, listas oficiales y fichas.</p>
+
+        <h2>Los colores del mapa</h2>
+        <ul class="tramos-m">
+            <li><i class="t3"></i><b>Muy bien preparada</b><span>80 a 100</span></li>
+            <li><i class="t2"></i><b>Bien preparada</b><span>65 a 79</span></li>
+            <li><i class="t1"></i><b>Mejorable</b><span>50 a 64</span></li>
+            <li><i class="t0"></i><b>Con mucho margen</b><span>menos de 50</span></li>
+            <li><i class="t4"></i><b>La IA no puede leer su web</b><span>no existe, da error o es de otro</span></li>
+            <li><i class="t5"></i><b>Sin web propia</b><span>no tiene, o solo una red social o un portal</span></li>
+        </ul>
+        <p>En el mapa, los vecinos se ven por su color. La nota con número y el detalle se ven al buscar un restaurante concreto.</p>
+
+        <h2>Cómo comprobamos que funciona</h2>
+        <ul class="datos-lista">
+            <li><b>Se repite igual</b><span>147 webs medidas otra vez horas después: la nota cambia de media 0,16 puntos y el orden se mantiene.</span></li>
+            <li><b>Acierta</b><span>35 webs revisadas a mano punto por punto: idiomas y carta coinciden en 34 y 35.</span></li>
+            <li><b>Limpia</b><span>dominios caducados, webs de otros negocios y portales se apartan por reglas y a mano.</span></li>
+        </ul>
+
+        <h2>Sus límites</h2>
+        <p>Las fuentes abiertas no tienen todos los locales, y algunos registros son antiguos: un restaurante puede haber cerrado o cambiado de web. En una
+            muestra al azar, en torno a un 5 % de las webs medidas no eran la web de un restaurante. Una web cambia: la nota es la de la fecha de medición.</p>
+
+        <h2 id="datos-abiertos">Datos abiertos</h2>
+        <p>Los datos del mapa (cada local con su nombre, municipio, coordenadas, tipo y tramo) se ofrecen bajo la
+            <a href="https://opendatacommons.org/licenses/odbl/1-0/">Open Database License (ODbL) 1.0</a>, como pide OpenStreetMap.
+            Puedes usarlos citando «Índice Studio32, con datos de © colaboradores de OpenStreetMap y Overture Maps Foundation».</p>
+        <p><a class="boton boton--tinta" href="../auditoria/datos/puntos.json" download>Descargar los datos (JSON)</a></p>
+
+        <h2 id="correcciones">Correcciones y retirada</h2>
+        <p>Si ves un dato que no es correcto, tu web ha cambiado o prefieres que tu restaurante no aparezca, escríbenos a
+            <a href="mailto:francisco@studio32.es">francisco@studio32.es</a> o al <a href="tel:+34657695181">657 695 181</a>. Lo revisamos y lo corregimos o lo retiramos.</p>
+    </div>
+</article>
+</main>
+
+<footer class="pie">
+    <div class="contenedor pie__dentro">
+        <div>
+            <p class="marca__nombre">Studio32</p>
+            <p class="pie__texto">Medimos cómo leen las IA las webs de los restaurantes y las arreglamos.</p>
+        </div>
+        <div class="pie__col">
+            <p class="pie__titulo">Studio32</p>
+            <a href="../auditoria/">Mapa del Índice</a>
+            <a href="../#precio">Precio</a>
+            <a href="./">Metodología y datos</a>
+        </div>
+        <div class="pie__col">
+            <p class="pie__titulo">Otros servicios</p>
+            <a href="../agente-whatsapp/">Agente de WhatsApp con IA</a>
+            <a href="../recursos/">Recursos</a>
+        </div>
+        <div class="pie__col">
+            <p class="pie__titulo">Legal</p>
+            <a href="../legal/aviso-legal">Aviso legal</a>
+            <a href="../legal/privacidad">Privacidad</a>
+            <a href="../legal/condiciones">Condiciones</a>
+        </div>
+    </div>
+    <p class="contenedor pie__fuentes">Restaurantes: Overture Maps Foundation (CDLA-Permissive 2.0) y © colaboradores de OpenStreetMap (ODbL). Datos del mapa bajo ODbL.</p>
+</footer>
+</body>
+</html>

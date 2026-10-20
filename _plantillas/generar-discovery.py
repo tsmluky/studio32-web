@@ -181,7 +181,7 @@ def calculator():
 <p class="section-label">[ SEGÚN TUS SUPUESTOS ]</p><h3>Valor potencial asociado a esas consultas</h3><p class="calculator-amount"><output id="monthly-value"></output><span> al mes</span></p>
 <dl><div><dt>Consultas en riesgo / mes</dt><dd id="risk-enquiries"></dd></div><div><dt>Clientes potenciales / mes</dt><dd id="potential-clients"></dd></div><div><dt>Valor central anual</dt><dd id="annual-value"></dd></div><div><dt>Rango anual de escenarios</dt><dd id="annual-range"></dd></div></dl>
 <p>Es una estimación de oportunidad, no una pérdida demostrada ni beneficio. El rango varía el porcentaje sin resolver en ±10 puntos, manteniendo los demás supuestos.</p>
-<p>Studio32 permite evaluar el recorrido de recepción, reserva y control del equipo. Comprueba esas tareas en la demo antes de decidir.</p><a href="../../#control" class="hero-link" data-cta="calculator_demo">Probar el agente</a></div></section>'''
+<p>Studio32 permite evaluar el recorrido de recepción, reserva y control del equipo. Comprueba esas tareas en la demo antes de decidir.</p><a href="../../agente-whatsapp/#control" class="hero-link" data-cta="calculator_demo">Probar el agente</a></div></section>'''
 
 
 def render_page(page):

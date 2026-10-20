@@ -566,3 +566,31 @@ el kit o informes de cliente en site; presupuestar según alcance real.
 Versionado de minificados: conservar la URL mientras coincidan las fuentes; al cambiarlas, generar una nueva versión derivada de sus hashes. Evita servir contenido antiguo desde cachés y elimina un paso manual fácil de olvidar. Verificado en copia temporal sin cambios en assets publicados.
 
 Revisión final del 04/10: también las páginas legales deben enlazar al destino limpio de Cloudflare. Se eliminan saltos adicionales de alias, se corrigen los generadores y se alinean instrucciones de privacidad con los nombres reales de los botones. Cerrar la preparación técnica con evidencia de producción no equivale a cerrar LCP, Google Maps, pilotos de producto o resultados orgánicos. Mantener esas diferencias en la ficha y el procedimiento reutilizable.
+
+## 2026-10-20 · Prototipo de auditoría con mapa (rama `auditoria-mapa`, sin publicar)
+
+Francisco pide que la web pase a vender la auditoría de visibilidad en IA, con la
+calidad de la demo de synco.es como referencia. Prototipo en `site/auditoria/`
+(noindex): buscador y diagnóstico a la izquierda, mapa en el centro con los
+restaurantes del Índice Studio32 (repo Visibilidad-IA → `visibilidad/mapa_web.py`
+genera `site/auditoria/datos/`). Un punto por restaurante (17.197, OpenStreetMap + Overture con
+los repetidos fusionados), todos con nombre: color por tramo si su web está medida, blanco con
+anillo si la IA no puede leerla, gris si no tiene web propia o queda fuera del índice. Decisiones
+de Francisco: vecinos con nombre y color, sin número (los datos son públicos y el estudio es
+suyo); el restaurante buscado, con nota y detalle;
+49 € + IVA de lanzamiento, después 90 € + IVA, sin precio tachado nunca cobrado.
+MapLibre GL 4.7.1 alojado en `assets/vendor/` (BSD-3, licencia incluida): ningún CDN nuevo.
+Siguen siendo externas las teselas gratuitas de OpenFreeMap, sin clave (alternativa propia: un
+extracto PMTiles de la Comunitat en almacenamiento propio). Se menciona la Comunitat Valenciana
+porque el índice es de allí.
+Sin backend: todo estático; el detalle de cada restaurante es un JSON aparte que solo
+se descarga al buscarlo. Las páginas del agente de WhatsApp no se tocan.
+
+Continuación 20/10: propuesta de nueva portada en `site/portada-ia/` (noindex), con la
+estructura de synco.es: hero con buscador que abre la demo (`/auditoria/?q=`) y mapa vivo
+con datos reales que recorre ciudades; cómo funciona, el estudio con sus cifras y la
+validez frente a ChatGPT, las 24 comprobaciones (pesos del índice: 25/31/25/19 %), ejemplo
+de diagnóstico marcado como tal, precios (gratis → 49 € + IVA de lanzamiento → a medida),
+preguntas y contacto. Las páginas del agente de WhatsApp pasan al pie («Otros servicios»).
+Tipos de local en el mapa (restaurante, bar, cafetería, heladería u horno, comida rápida):
+al buscar un local, el mapa enseña solo los de su tipo; cada tipo tendrá su ranking.

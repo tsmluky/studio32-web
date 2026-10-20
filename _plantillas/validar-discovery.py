@@ -51,7 +51,7 @@ def main():
     parsed={}
     for name,file in files.items():
         p=Parser(); p.feed(file.read_text(encoding='utf-8')); parsed[name]=p
-    names=['index.html']+[s+'/index.html' for s in ('panel-de-control','precio-agente-whatsapp','agente-whatsapp-clinicas-dentales','agente-whatsapp-restaurantes','agente-whatsapp-centros-esteticos','agente-whatsapp-servicios-locales','recursos','problemas','herramientas')]+[p['slug']+'/index.html' for p in DATA['pages']]
+    names=['index.html']+[s+'/index.html' for s in ('agente-whatsapp','auditoria','metodologia','panel-de-control','precio-agente-whatsapp','agente-whatsapp-clinicas-dentales','agente-whatsapp-restaurantes','agente-whatsapp-centros-esteticos','agente-whatsapp-servicios-locales','recursos','problemas','herramientas')]+[p['slug']+'/index.html' for p in DATA['pages']]
     titles=[]; descriptions=[]
     for name in names:
         p=parsed[name]; source=files[name].read_text(encoding='utf-8')
