@@ -32,7 +32,10 @@
   const GRUPOS = [...TRAMOS.map((t) => t.nombre), 'La IA no puede leer su web', 'Sin web propia', 'Fuera del índice'];
   const CONTACTO = { whatsapp: '34657695181', telefono: '657 695 181', correo: 'francisco@studio32.es' };
   const URL_PUBLICA = 'https://www.studio32.es/auditoria/';
-  const IDIOMAS = [['es', 'Español'], ['en', 'Inglés'], ['fr', 'Francés'], ['de', 'Alemán'], ['it', 'Italiano'], ['nl', 'Neerlandés']];
+  // por lo que pesan para el turista de la Comunitat: inglés muy por delante; después italiano y francés; neerlandés y alemán
+  const IDIOMAS = [['es', 'Español'], ['en', 'Inglés'], ['it', 'Italiano'], ['fr', 'Francés'], ['nl', 'Neerlandés'], ['de', 'Alemán']];
+  const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  const mesAno = (iso) => { const [a, m] = String(iso || '2026-10').split('-'); return `${MESES[(+m || 10) - 1]} de ${a}`; };
   const BLOQUES = [['acceso', 'Puede entrar'], ['entidad', 'Sabe quién eres'], ['contenido', 'Sabe qué ofreces'], ['idiomas', 'Te entiende en su idioma']];
   const CARTA = {
     texto: 'Tu carta está en texto: una IA puede leer tus platos y precios.',
@@ -164,7 +167,7 @@
   function pintarInicio() {
     turno++;
     dentro.replaceChildren($('#t-inicio').content.cloneNode(true));
-    dentro.querySelectorAll('[data-n]').forEach((el) => { el.textContent = miles(D[el.dataset.n]); });
+    document.querySelectorAll('[data-n]').forEach((el) => { el.textContent = miles(D[el.dataset.n]); });
     montarBuscador();
     if (!MOVIL.matches) $('#q').focus({ preventScroll: true });
     history.replaceState(null, '', location.pathname);
@@ -210,7 +213,7 @@
       <section class="lectura" aria-label="Leyendo la web">
         <span class="etiqueta">Leyendo su web como una IA</span>
         <h2 class="lectura__nombre">${esc(e.nombre)}</h2>
-        <p class="lectura__aviso">Repasamos la medición del 18/10/2026.</p>
+        <p class="lectura__aviso">Repasamos la medición de octubre de 2026.</p>
         <ol class="pasos" id="pasos"></ol>
         <button class="saltar" id="saltar" type="button">Ver el resultado ya</button>
       </section>`;
@@ -224,7 +227,7 @@
       const grupos = Object.fromEntries(f.comprobaciones.map((g) => [g.id, g.comprobaciones]));
       const cuenta = (b) => { const c = grupos[b] || []; return `${c.filter((x) => x.estado === 'ok').length} de ${c.length} bien`; };
       pasos.push(['Entrando como un robot de IA', cuenta('acceso')], ['¿Sabe quién eres?', cuenta('entidad')],
-        ['¿Sabe qué ofreces?', cuenta('contenido')], ['¿Te entiende en su idioma?', `${f.idiomas.length} de 6 idiomas`]);
+        ['¿Sabe qué ofreces?', cuenta('contenido')], ['¿Te entiende en su idioma?', f.idiomas.includes('en') ? `${f.idiomas.length} idiomas, con inglés` : 'sin inglés']);
     } else {
       pasos.push(['Entrando como un robot de IA', 'no se puede leer']);
     }
@@ -251,7 +254,7 @@
     return `
       <button class="volver" type="button" data-volver>← Buscar otro restaurante</button>
       <header class="ficha__cabeza">
-        <span class="etiqueta">${f.tipo === 'otro' ? 'Índice Studio32 · ' + esc(TIPOS[f.k || 0].uno) : 'Diagnóstico · medido el ' + esc(fecha(f.fecha))}</span>
+        <span class="etiqueta">${f.tipo === 'otro' ? 'Índice Studio32 · ' + esc(TIPOS[f.k || 0].uno) : 'Diagnóstico · ' + esc(mesAno(f.fecha))}</span>
         <h2 class="ficha__nombre">${esc(f.nombre)}</h2>
         <p class="ficha__lugar">${lugar}${f.web ? `${lugar ? '<br>' : ''}<a href="${esc(f.web)}" target="_blank" rel="noopener nofollow">${esc(dominio(f.web))}</a>` : ''}</p>
       </header>`;
@@ -281,7 +284,7 @@
     </article>`;
   }
 
-  const fecha = (iso) => { const [a, m, d] = String(iso || '').split('-'); return d ? `${+d}/${+m}/${a}` : '18/10/2026'; };
+
 
   function fichaMedido(f) {
     const t = TRAMOS[f.tramo];
@@ -336,7 +339,10 @@
       <section class="bloque">
         <h3 class="bloque__titulo">En qué idiomas te entiende</h3>
         <div class="idiomas">${IDIOMAS.map(([c, n]) => `<div class="idioma ${f.idiomas.includes(c) ? 'si' : 'no'}"><b>${c.toUpperCase()}</b><span>${n}</span></div>`).join('')}</div>
-        <p class="bloque__texto bloque__texto--sep">${f.idiomas.length >= 6 ? 'Tu web habla los seis idiomas del turista.' : `A un turista que pregunta en ${faltaUno(f.idiomas)}, la IA le responde con páginas en su idioma: si no tienes, recomienda a otro.`} ${esc(CARTA[f.carta] || '')}</p>
+        <p class="bloque__texto bloque__texto--sep">${!f.idiomas.includes('en')
+          ? '<strong>Te falta el inglés, el idioma que más pesa:</strong> a quien pregunta en inglés, la IA le responde con páginas en inglés. Si no tienes, recomienda a otro.'
+          : f.idiomas.length >= 6 ? 'Tu web habla los idiomas de los turistas que más vienen.'
+            : `Tienes el inglés, que es lo que más pesa. El siguiente que te falta es el ${faltaUno(f.idiomas)}.`} ${esc(CARTA[f.carta] || '')}</p>
       </section>
 
       ${z ? zona(z, true) : ''}
@@ -396,7 +402,7 @@
   }
 
   function faltaUno(idiomas) {
-    const falta = (idiomas.includes('de') ? null : IDIOMAS[3]) || IDIOMAS.find(([c]) => c !== 'es' && !idiomas.includes(c));
+    const falta = IDIOMAS.find(([c]) => c !== 'es' && !idiomas.includes(c));   // por orden de importancia
     return falta ? falta[1].toLowerCase() : 'otro idioma';
   }
   const color = (v) => TRAMOS[v >= 80 ? 3 : v >= 65 ? 2 : v >= 50 ? 1 : 0].color;
@@ -438,13 +444,13 @@
       <p class="oferta__texto">Revisamos a fondo tu web y lo que encuentra un turista. Te llevas el plan aunque los arreglos los haga otra persona.</p>
       <ul class="oferta__lista">
         <li>Cada problema, con su arreglo, quién lo hace y cómo comprobar que está resuelto</li>
-        <li>Lo que encuentra un turista que pregunta en español, inglés, francés, alemán, italiano o neerlandés</li>
+        <li>Lo que encuentra un turista cuando pregunta en su idioma</li>
         <li>Tu web con los arreglos aplicados, sin cambiar su diseño</li>
         <li>Tu zona y un plan por prioridades</li>
         <li>Un anexo técnico para quien te lleva la web</li>
       </ul>
       <div class="precio"><span class="precio__num">49 €</span><span class="precio__iva">+ IVA · 59,29 € en total</span></div>
-      <p class="precio__nota"><strong>Precio de lanzamiento.</strong> Después, 90 € + IVA. Lo tienes en 48 horas desde el pago.</p>
+      <p class="precio__nota"><strong>Pago único, precio de lanzamiento.</strong> Precio normal: 90 € + IVA. Lo tienes en 48 horas desde el pago.</p>
       <div class="gratis"><span><b>Los primeros restaurantes, gratis</b>, a cambio de poder contar su caso. Pregúntanos si quedan plazas.</span></div>
       <div class="oferta__botones">
         <a class="boton boton--oro boton--ancho" href="${wa(texto)}" target="_blank" rel="noopener">Pedir el análisis por WhatsApp</a>
@@ -457,7 +463,7 @@
   function limites() {
     return `<p class="limites">El Índice Studio32 mide cómo puede leer una IA la web de cada restaurante: si puede entrar, si sabe quién eres,
       qué ofreces y en qué idiomas. No mide la calidad del restaurante ni a quién recomienda ChatGPT, y no prometemos ponerte el primero:
-      medimos y te decimos qué arreglar. Medición automática del 18/10/2026; si tu web ha cambiado, la medimos otra vez.
+      medimos y te decimos qué arreglar. Medición automática de octubre de 2026; si tu web ha cambiado, la medimos otra vez.
       ¿Ves un error o prefieres no aparecer? <a href="mailto:${CONTACTO.correo}?subject=${encodeURIComponent('Mapa del Índice Studio32')}">Escríbenos</a>.</p>`;
   }
 

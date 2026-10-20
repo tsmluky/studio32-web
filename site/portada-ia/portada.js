@@ -101,10 +101,14 @@
   async function mapaHero() {
     if (!window.maplibregl) return;
     try { datos = await (await fetch('../auditoria/datos/puntos.json')).json(); } catch { return; }
+    document.querySelectorAll('[data-n="webs"]').forEach((el) => { el.textContent = miles(datos.webs); });
+    const total = datos.medidos.filter((x) => x[3] != null).length + datos.sin_leer.length + datos.otros.length;
+    document.querySelectorAll('.demo__cargar small').forEach((el) => { el.textContent = `${miles(total)} restaurantes de la Comunitat Valenciana`; });
     ficha(null);
     const map = new maplibregl.Map({
       container: 'mapa-hero', style: 'https://tiles.openfreemap.org/styles/positron',
-      center: [-0.35, 39.15], zoom: 6.7, interactive: false, attributionControl: false,
+      center: [-0.35, 39.15], zoom: 6.7, interactive: false,
+      attributionControl: { compact: true, customAttribution: 'Restaurantes: Overture Maps, OpenStreetMap' },
     });
     map.on('load', () => {
       tono(map);
@@ -146,4 +150,27 @@
     });
   }
   window.addEventListener('load', mapaHero);   // el mapa no frena el primer pintado
+
+  // ---------------------------------------------------------------- la demo dentro de la portada
+  // En escritorio se carga sola al acercarse; en el móvil, el botón abre la demo a pantalla completa (dentro sería incómoda).
+  const marco = $('#demo-marco'), boton = $('#demo-cargar');
+  const ESCRITORIO = window.matchMedia('(min-width: 900px)');
+  let puesta = false;
+  const poner = () => {
+    if (puesta) return;
+    puesta = true;
+    const f = document.createElement('iframe');
+    f.src = '../auditoria/?embed=1';
+    f.title = 'Mapa del Índice Studio32';
+    f.loading = 'lazy';
+    f.setAttribute('allow', 'fullscreen');
+    marco.appendChild(f);
+    f.addEventListener('load', () => boton.remove());
+  };
+  boton.addEventListener('click', () => { if (ESCRITORIO.matches) poner(); else location.href = '../auditoria/'; });
+  if (ESCRITORIO.matches) {
+    const cerca = () => { if (marco.getBoundingClientRect().top < window.innerHeight + 500) { poner(); window.removeEventListener('scroll', cerca); } };
+    window.addEventListener('scroll', cerca, { passive: true });
+    window.addEventListener('load', cerca);
+  }
 })();

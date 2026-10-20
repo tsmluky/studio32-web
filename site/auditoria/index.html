@@ -14,7 +14,8 @@
     <link rel="preload" href="../assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="datos/puntos.json" as="fetch" crossorigin>
     <link rel="stylesheet" href="../assets/vendor/maplibre-gl-4.7.1/maplibre-gl.css">
-    <link rel="stylesheet" href="auditoria.css?v=20261020-7">
+    <script>if (/[?&]embed=1/.test(location.search)) document.documentElement.classList.add('embebida');</script>
+    <link rel="stylesheet" href="auditoria.css?v=20261020-9">
 </head>
 <body>
 <div class="app">
@@ -23,7 +24,7 @@
             <span class="marca__nombre">Studio32</span>
             <span class="marca__sub">Visibilidad en IA</span>
         </a>
-        <p class="barra__dato"><strong>2.795</strong> webs de restaurantes leídas como las lee una IA · medido el 18/10/2026</p>
+        <p class="barra__dato"><strong data-n="webs">2.795</strong> webs de restaurantes leídas como las lee una IA · octubre de 2026</p>
         <a class="boton boton--oro" href="#oferta" data-ir-oferta>Análisis completo <span class="boton__precio">· 49 € + IVA</span></a>
     </header>
 
@@ -73,22 +74,22 @@
             <p class="buscador__ayuda">También puedes tocar cualquier punto del mapa. ¿No aparece tu local? <a href="https://wa.me/34657695181?text=Hola%2C%20quiero%20a%C3%B1adir%20mi%20local%20al%20mapa%20de%20Studio32.%20Nombre%3A%20%20Direcci%C3%B3n%3A%20%20Web%3A%20" target="_blank" rel="noopener">Añádelo</a>.</p>
         </div>
 
-        <div class="cifras">
-            <div class="cifra"><div class="cifra__num">65 %</div><div class="cifra__txt">solo está en español</div></div>
-            <div class="cifra"><div class="cifra__num">67 %</div><div class="cifra__txt">no tiene la carta en texto</div></div>
-            <div class="cifra"><div class="cifra__num">45 %</div><div class="cifra__txt">de las webs de los mapas no se pueden leer</div></div>
-        </div>
-        <p class="nota-fuente">Índice Studio32 2.0: <span data-n="webs"></span> webs de restaurantes que funcionan, de <span data-n="con_web"></span> que figuran en Overture Maps y OpenStreetMap. Medido el 18/10/2026, sin IA y respetando el robots.txt de cada web.</p>
-
         <ol class="como">
-            <li><span><strong>Busca tu restaurante.</strong> Te enseñamos tu nota de 0 a 100, qué falla y en qué idiomas te entiende una IA.</span></li>
-            <li><span><strong>Mira tu zona.</strong> Los restaurantes de alrededor, por colores, y tu puesto entre ellos.</span></li>
-            <li><span><strong>Pide el análisis completo.</strong> Cada fallo con su arreglo y cómo comprobarlo, en 48 horas.</span></li>
+            <li><span><strong>Tu nota de 0 a 100</strong>, qué falla y si te entiende un turista en su idioma.</span></li>
+            <li><span><strong>Tu zona por colores</strong> y tu puesto entre tus vecinos.</span></li>
+            <li><span><strong>El análisis completo</strong>: cada fallo con su arreglo, en 48 horas.</span></li>
         </ol>
+
+        <div class="cifras">
+            <div class="cifra"><div class="cifra__num">65 %</div><div class="cifra__txt">solo en español</div></div>
+            <div class="cifra"><div class="cifra__num">67 %</div><div class="cifra__txt">sin la carta en texto</div></div>
+            <div class="cifra"><div class="cifra__num">45 %</div><div class="cifra__txt">no se pueden leer</div></div>
+        </div>
+        <p class="nota-fuente">Índice Studio32: <span data-n="webs"></span> webs de restaurantes que funcionan, de <span data-n="con_web"></span> que figuran en Overture Maps y OpenStreetMap. Medido en octubre de 2026, sin IA y respetando el robots.txt de cada web.</p>
     </section>
 </template>
 
 <script src="../assets/vendor/maplibre-gl-4.7.1/maplibre-gl.js"></script>
-<script src="auditoria.js?v=20261020-9"></script>
+<script src="auditoria.js?v=20261020-10"></script>
 </body>
 </html>
