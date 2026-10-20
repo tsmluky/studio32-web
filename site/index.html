@@ -143,7 +143,7 @@
     <link rel="preload" href="assets/fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="assets/vendor/maplibre-gl-4.7.1/maplibre-gl.css">
-    <link rel="stylesheet" href="assets/portada/portada.css?v=20261020-10">
+    <link rel="stylesheet" href="assets/portada/portada.css?v=20261020-11">
     <link rel="stylesheet" href="measurement-consent.min.css?v=min-df9e55090f7c045f">
     <script src="measurement-consent.min.js?v=min-df9e55090f7c045f" defer></script>
     <script src="discovery-events.min.js?v=min-df9e55090f7c045f" defer></script>
@@ -158,8 +158,8 @@
             <span class="marca__sub">Visibilidad en IA</span>
         </a>
         <div class="nav__enlaces">
-            <a href="#como">Cómo funciona</a>
             <a href="#mapa">El mapa</a>
+            <a href="#como">Cómo funciona</a>
             <a href="#precio">Precio</a>
             <a href="#preguntas">Preguntas</a>
         </div>
@@ -206,6 +206,36 @@
 </header>
 
 <main id="contenido">
+
+<section class="seccion seccion--papel" id="mapa">
+    <div class="contenedor">
+        <div class="mapa-cab">
+            <div>
+                <span class="etiqueta etiqueta--osc">Pruébalo aquí</span>
+                <h2 class="titulo">Busca tu restaurante. <em>El mapa vuela hasta él.</em></h2>
+            </div>
+            <ul class="ideas">
+                <li><b>Tu nota</b><span>de 0 a 100 y tu puesto en la zona</span></li>
+                <li><b>Cada fallo</b><span>con su porqué y su prueba</span></li>
+                <li><b>Tus vecinos</b><span>por colores, sin ver sus notas</span></li>
+            </ul>
+        </div>
+        <div class="demo" id="demo">
+            <div class="demo__barra">
+                <span class="ventana__puntos" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="ventana__url">studio32.es/auditoria</span>
+                <a class="demo__grande" href="auditoria/">Abrir a pantalla completa ↗</a>
+            </div>
+            <div class="demo__marco" id="demo-marco">
+                <button class="demo__cargar" type="button" id="demo-cargar">
+                    <span class="demo__cargar-icono" aria-hidden="true"></span>
+                    <b>Abrir el mapa aquí</b>
+                    <small>17.197 restaurantes de la Comunitat Valenciana</small>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section class="seccion" id="como">
     <div class="contenedor">
@@ -289,36 +319,6 @@
     </div>
 </section>
 
-<section class="seccion seccion--papel" id="mapa">
-    <div class="contenedor">
-        <div class="mapa-cab">
-            <div>
-                <span class="etiqueta etiqueta--osc">Pruébalo aquí</span>
-                <h2 class="titulo">Busca tu restaurante. <em>El mapa vuela hasta él.</em></h2>
-            </div>
-            <ul class="ideas">
-                <li><b>Tu nota</b><span>de 0 a 100 y tu puesto en la zona</span></li>
-                <li><b>Cada fallo</b><span>con su porqué y su prueba</span></li>
-                <li><b>Tus vecinos</b><span>por colores, sin ver sus notas</span></li>
-            </ul>
-        </div>
-        <div class="demo" id="demo">
-            <div class="demo__barra">
-                <span class="ventana__puntos" aria-hidden="true"><i></i><i></i><i></i></span>
-                <span class="ventana__url">studio32.es/auditoria</span>
-                <a class="demo__grande" href="auditoria/">Abrir a pantalla completa ↗</a>
-            </div>
-            <div class="demo__marco" id="demo-marco">
-                <button class="demo__cargar" type="button" id="demo-cargar">
-                    <span class="demo__cargar-icono" aria-hidden="true"></span>
-                    <b>Abrir el mapa aquí</b>
-                    <small>17.197 restaurantes de la Comunitat Valenciana</small>
-                </button>
-            </div>
-        </div>
-    </div>
-</section>
-
 <section class="seccion" id="precio">
     <div class="contenedor">
         <span class="etiqueta etiqueta--osc">Del diagnóstico al arreglo</span>
@@ -345,7 +345,7 @@
                 <ul>
                     <li>Cada problema, con su arreglo, quién lo hace y cómo comprobarlo</li>
                     <li>Lo que encuentra un turista cuando pregunta en su idioma</li>
-                    <li>Tu web con los arreglos aplicados, sin cambiar su diseño</li>
+                    <li>Tu web con los arreglos aplicados y su nota nueva, medida igual que esta</li>
                     <li>Tu zona y un plan por prioridades</li>
                     <li>Un anexo técnico para quien te lleva la web</li>
                 </ul>
@@ -437,6 +437,6 @@
 </footer>
 
 <script src="assets/vendor/maplibre-gl-4.7.1/maplibre-gl.js" defer></script>
-<script src="assets/portada/portada.js?v=20261020-5" defer></script>
+<script src="assets/portada/portada.js?v=20261020-11" defer></script>
 </body>
 </html>

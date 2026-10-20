@@ -173,6 +173,7 @@ img, svg { display: block; }
 .bloque-r li::before { content: ""; position: absolute; left: 0; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--t3); }
 
 .mapa-cab { margin-bottom: 36px; }
+#mapa { padding-top: 96px; }
 .mapa-cab .titulo { margin-bottom: 22px; }
 .ideas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 900px; }
 .ideas li { display: grid; gap: 2px; padding: 14px 18px; border-radius: 14px; background: var(--blanco); box-shadow: 0 0 0 1px var(--linea); }
@@ -280,8 +281,9 @@ img, svg { display: block; }
   .ventana__ficha { left: 12px; right: auto; width: auto; bottom: 58px; padding: 10px 14px; }
   .ventana__pie > span:first-child { display: none; }
   .ventana__pie { justify-content: flex-end; }
-  .demo__marco { height: 420px; }
-  .demo__grande { display: none; }
+  .demo__marco { height: 78vh; height: 78svh; min-height: 520px; }
+  .demo__grande { display: inline-flex; font-size: 12px; padding: 6px 10px; }
+  .demo__barra .ventana__url { display: none; }
   .ventana__dato { margin: 2px 0 0; }
   .ventana__dato b { font-size: 22px; }
   .ventana__tramos { display: none; }
