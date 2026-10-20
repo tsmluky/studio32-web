@@ -54,7 +54,8 @@
   let lista = [];               // para buscar: medidos y sin leer
   const porId = new Map();
   let map = null, mapaListo = false, marcador = null, ventana = null;
-  let filtroTipo = null;        // al buscar tu local, el mapa enseña solo los de tu tipo
+  let filtroTipo = null;
+  let tiposAbiertos = false;   // los botones de tipo, plegados de entrada        // al buscar tu local, el mapa enseña solo los de tu tipo
   let turno = 0;                // cada búsqueda nueva cancela la animación anterior
   let pendiente = null;         // restaurante pedido antes de que el mapa estuviera listo
 
@@ -567,6 +568,12 @@
     const n = TIPOS.map((_, k) => lista.filter((e) => e.k === k && e.lat != null).length);
     const boton = (k, texto, cuantos) => `<button type="button" class="tipo${filtroTipo === k ? ' activo' : ''}" data-tipo="${k ?? ''}"
       aria-pressed="${filtroTipo === k}">${texto}${cuantos != null ? ` <span>${miles(cuantos)}</span>` : ''}</button>`;
+    // plegados: solo el tipo elegido y un botón para ver los demás (así se ve más mapa)
+    if (!tiposAbiertos) {
+      const actual = filtroTipo == null ? 'Todos los locales' : TIPOS[filtroTipo].plural;
+      caja.innerHTML = `<button type="button" class="tipo activo tipo--plegado" data-abrir-tipos aria-expanded="false">${actual} <span>▾</span></button>`;
+      return;
+    }
     caja.innerHTML = boton(null, 'Todos', null) + TIPOS.map((t, k) => n[k] ? boton(k, t.plural, n[k]) : '').join('');
   }
 
@@ -673,8 +680,9 @@
     $('#leyenda-boton').addEventListener('click', () => plegarLeyenda(!$('#leyenda').classList.contains('plegada')));
     if (MOVIL.matches || window.innerWidth < 1280) plegarLeyenda(true);
     $('#tipos').addEventListener('click', (ev) => {
+      if (ev.target.closest('[data-abrir-tipos]')) { tiposAbiertos = true; pintarTipos(); return; }
       const b = ev.target.closest('[data-tipo]');
-      if (b) ponerFiltro(b.dataset.tipo === '' ? null : +b.dataset.tipo);
+      if (b) { tiposAbiertos = false; ponerFiltro(b.dataset.tipo === '' ? null : +b.dataset.tipo); }
     });
     pintarTipos();
     pintarLeyenda();

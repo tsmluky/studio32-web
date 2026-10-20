@@ -143,7 +143,7 @@
     <link rel="preload" href="assets/fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="assets/vendor/maplibre-gl-4.7.1/maplibre-gl.css">
-    <link rel="stylesheet" href="assets/portada/portada.css?v=20261020-11">
+    <link rel="stylesheet" href="assets/portada/portada.css?v=20261020-13">
     <link rel="stylesheet" href="measurement-consent.min.css?v=min-df9e55090f7c045f">
     <script src="measurement-consent.min.js?v=min-df9e55090f7c045f" defer></script>
     <script src="discovery-events.min.js?v=min-df9e55090f7c045f" defer></script>
@@ -193,11 +193,19 @@
                 <span class="ventana__puntos" aria-hidden="true"><i></i><i></i><i></i></span>
                 <span class="ventana__url">studio32.es/auditoria</span>
             </div>
-            <div class="ventana__mapa" id="mapa-hero" aria-hidden="true"></div>
+            <div class="ventana__mapa" id="mapa-hero" aria-hidden="true">
+                <img class="ventana__imagen" src="assets/portada/mapa-hero.webp" width="900" height="1140" alt="" fetchpriority="high">
+            </div>
             <div class="ventana__ficha" id="ficha-hero" aria-live="polite">
-                <span class="ventana__etiqueta" id="hero-lugar">Comunitat Valenciana</span>
-                <p class="ventana__dato"><b id="hero-n">17.197</b> restaurantes en el mapa</p>
-                <ul class="ventana__tramos" id="hero-tramos"></ul>
+                <span class="ventana__etiqueta" id="hero-lugar">València</span>
+                <p class="ventana__dato"><b id="hero-n">3.039</b> restaurantes en el mapa</p>
+                <ul class="ventana__tramos" id="hero-tramos">
+                    <li><i class="t3"></i><span>Muy bien preparada</span><span>37</span></li>
+                    <li><i class="t2"></i><span>Bien preparada</span><span>221</span></li>
+                    <li><i class="t1"></i><span>Mejorable</span><span>301</span></li>
+                    <li><i class="t0"></i><span>Con mucho margen</span><span>147</span></li>
+                    <li><i class="sin-leer"></i><span>La IA no puede leer su web</span><span>694</span></li>
+                </ul>
             </div>
             <figcaption class="ventana__pie"><span>Cada punto, un restaurante. El color, cómo lo lee una IA.</span>
                 <span class="ventana__abrir">Abrir el mapa →</span></figcaption>
@@ -215,9 +223,18 @@
                 <h2 class="titulo">Busca tu restaurante. <em>El mapa vuela hasta él.</em></h2>
             </div>
             <ul class="ideas">
-                <li><b>Tu nota</b><span>de 0 a 100 y tu puesto en la zona</span></li>
-                <li><b>Cada fallo</b><span>con su porqué y su prueba</span></li>
-                <li><b>Tus vecinos</b><span>por colores, sin ver sus notas</span></li>
+                <li>
+                    <span class="idea__dibujo idea__dibujo--nota" aria-hidden="true"><b>76</b></span>
+                    <b>Tu nota</b><span>De 0 a 100, y tu puesto en la zona</span>
+                </li>
+                <li>
+                    <span class="idea__dibujo idea__dibujo--fallos" aria-hidden="true"><i class="mal">Falla</i><i class="aviso">Mejorable</i></span>
+                    <b>Cada fallo</b><span>Con su porqué y su prueba</span>
+                </li>
+                <li>
+                    <span class="idea__dibujo idea__dibujo--vecinos" aria-hidden="true"><i></i><i></i><i class="tu"></i><i></i><i></i><i></i></span>
+                    <b>Tus vecinos</b><span>Por colores, sin ver sus notas</span>
+                </li>
             </ul>
         </div>
         <div class="demo" id="demo">
@@ -341,7 +358,8 @@
                 <span class="plan__sello">Promoción de lanzamiento</span>
                 <p class="plan__paso"><span>02</span>En 48 horas</p>
                 <h3>Análisis completo</h3>
-                <p class="plan__precio"><b>0 €</b> <s>49&nbsp;€&nbsp;+&nbsp;IVA</s> <small>Gratis para los primeros restaurantes, a cambio de poder contar su caso</small></p>
+                <p class="plan__precio plan__precio--promo"><s><b>49&nbsp;€</b> <span>+&nbsp;IVA</span></s> <em class="plan__gratis">Gratis ahora</em>
+                    <small>Para los primeros restaurantes, a cambio de poder contar su caso</small></p>
                 <ul>
                     <li>Cada problema, con su arreglo, quién lo hace y cómo comprobarlo</li>
                     <li>Lo que encuentra un turista cuando pregunta en su idioma</li>
@@ -352,16 +370,17 @@
                 <p class="plan__nota">Te lo llevas aunque los arreglos los haga otra persona.</p>
                 <a class="boton boton--oro" href="https://wa.me/34657695181?text=Hola%2C%20quiero%20el%20an%C3%A1lisis%20completo%20de%20mi%20restaurante." target="_blank" rel="noopener">Pedir el análisis</a>
             </article>
-            <article class="plan aparece">
+            <article class="plan plan--arreglos aparece">
                 <p class="plan__paso"><span>03</span>Cuando quieras</p>
                 <h3>Arreglos o web nueva</h3>
                 <p class="plan__precio"><b>A medida</b><small>Presupuesto cerrado, después del análisis</small></p>
+                <div class="antes-despues" aria-hidden="true"><span class="ad ad--antes"><i></i>Antes</span><span class="ad__flecha">→</span><span class="ad ad--despues"><i></i>Después</span></div>
                 <ol class="plan__pasos">
                     <li><b>1</b><span>Aplicamos los arreglos del análisis en tu web, o te hacemos una nueva</span></li>
                     <li><b>2</b><span>Volvemos a medir a los 45 días</span></li>
                     <li><b>3</b><span>Ves el antes y el después, con las mismas reglas</span></li>
                 </ol>
-                <a class="boton boton--linea-osc" href="https://wa.me/34657695181?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20los%20arreglos." target="_blank" rel="noopener">Preguntar</a>
+                <a class="boton boton--tinta" href="https://wa.me/34657695181?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20los%20arreglos." target="_blank" rel="noopener">Pedir presupuesto</a>
             </article>
         </div>
     </div>
@@ -437,6 +456,6 @@
 </footer>
 
 <script src="assets/vendor/maplibre-gl-4.7.1/maplibre-gl.js" defer></script>
-<script src="assets/portada/portada.js?v=20261020-11" defer></script>
+<script src="assets/portada/portada.js?v=20261020-12" defer></script>
 </body>
 </html>

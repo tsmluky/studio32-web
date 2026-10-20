@@ -1,0 +1,29 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<!-- Fuente de site/assets/portada/mapa-hero.webp. Servir site/ en local, copiar este archivo a site/ y abrirlo en un navegador con WebGL; exportar el canvas a WebP (0,84). Mismo estilo y capas que el mapa del hero. -->
+<link rel="stylesheet" href="assets/vendor/maplibre-gl-4.7.1/maplibre-gl.css">
+<style>html,body{margin:0}#m{width:900px;height:1140px}.maplibregl-ctrl-attrib{display:none}</style></head>
+<body><div id="m"></div>
+<script src="assets/vendor/maplibre-gl-4.7.1/maplibre-gl.js"></script>
+<script>
+const COL=['#c4553a','#d9a441','#8fa85a','#2f7d5b'];
+const map=new maplibregl.Map({container:'m',style:'https://tiles.openfreemap.org/styles/positron',center:[-0.362,39.468],zoom:12.55,interactive:false,attributionControl:false,preserveDrawingBuffer:true});
+map.on('load',async()=>{
+  const p=(id,k,v)=>{try{if(map.getLayer(id))map.setPaintProperty(id,k,v)}catch(e){}};
+  p('background','background-color','#f3eee4');p('park','fill-color','#e6e5d5');p('landcover_wood','fill-color','#e2e2d0');
+  p('landuse_residential','fill-color','#eee8dc');p('water','fill-color','#cdd7d6');p('building','fill-color','#e8e0d2');
+  ['highway_minor','highway_path','highway_major_subtle','highway_motorway_subtle'].forEach(i=>p(i,'line-color','#e3dbcc'));
+  ['highway_major_casing','highway_motorway_casing'].forEach(i=>p(i,'line-color','#d8cfbf'));
+  map.getStyle().layers.filter(l=>l.type==='symbol').forEach(l=>{try{map.setLayoutProperty(l.id,'visibility',/label_(city|town|village|other)/.test(l.id)?'visible':'none')}catch(e){}
+    try{if(l.layout&&l.layout['text-field'])map.setLayoutProperty(l.id,'text-field',['coalesce',['get','name:es'],['get','name']])}catch(e){}
+    p(l.id,'text-color','#3b352c');p(l.id,'text-halo-color','rgba(247,244,238,.9)')});
+  const d=await (await fetch('auditoria/datos/puntos.json')).json();
+  const f=(lon,lat,g)=>({type:'Feature',geometry:{type:'Point',coordinates:[lon,lat]},properties:{g}});
+  const pts=[...d.otros.map(x=>f(x[3],x[2],5)),...d.sin_leer.map(x=>f(x[4],x[3],4)),...d.medidos.filter(x=>x[3]!=null).map(x=>f(x[4],x[3],x[5]))];
+  map.addSource('p',{type:'geojson',data:{type:'FeatureCollection',features:pts}});
+  const antes=(map.getStyle().layers.find(l=>l.type==='symbol')||{}).id;
+  map.addLayer({id:'o',type:'circle',source:'p',filter:['==',['get','g'],5],paint:{'circle-radius':2.4,'circle-color':'#a3977f','circle-opacity':.7}},antes);
+  map.addLayer({id:'s',type:'circle',source:'p',filter:['==',['get','g'],4],paint:{'circle-radius':4,'circle-color':'#fff','circle-stroke-color':'#3b352c','circle-stroke-width':1.4}},antes);
+  map.addLayer({id:'m2',type:'circle',source:'p',filter:['<=',['get','g'],3],paint:{'circle-radius':5,'circle-color':['match',['get','g'],3,COL[3],2,COL[2],1,COL[1],COL[0]],'circle-stroke-color':'#fff','circle-stroke-width':1.3},layout:{'circle-sort-key':['get','g']}},antes);
+  map.once('idle',()=>{document.title='listo'});
+});
+</script></body></html>
