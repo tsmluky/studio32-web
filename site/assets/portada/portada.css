@@ -135,7 +135,7 @@ img, svg { display: block; }
 .ventana .maplibregl-ctrl-attrib-button { opacity: .45; transform: scale(.8); }
 
 /* ---------------------------------------------------------------- secciones */
-.seccion { padding: 120px 0; background: var(--papel); }
+.seccion { padding: 96px 0; background: var(--papel); }
 .seccion--papel { background: var(--papel-2); }
 .seccion--oscura { background: var(--negro); color: var(--crema); position: relative; overflow: hidden; }
 .seccion--oscura::before { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 60% at 100% 0%, rgba(201, 168, 106, .1), transparent 60%); pointer-events: none; }
@@ -399,3 +399,12 @@ img, svg { display: block; }
 /* la raya: recta, por el centro de las cifras, de punta a punta */
 .tachado::after { content: ""; position: absolute; left: 0; right: 0; top: 56%; height: 3px; margin-top: -1.5px; border-radius: 3px;
   background: var(--oro, #c9a86a); }
+
+/* aviso de cookies más discreto en el móvil (sin tocar measurement-consent.css, común a la web) */
+@media (max-width: 640px) {
+  .measurement-panel { left: 10px !important; right: 10px !important; bottom: 10px !important; padding: 14px 16px !important; font-size: 13px !important; max-width: none !important; }
+  .measurement-panel h2, .measurement-panel strong:first-child, .measurement-panel [class*="title"] { font-size: 16px !important; margin: 0 0 4px !important; }
+  .measurement-panel p { font-size: 12.5px !important; line-height: 1.45 !important; margin: 0 0 6px !important; }
+  .measurement-actions { gap: 8px !important; margin-top: 8px !important; }
+  .measurement-actions button { padding: 9px 10px !important; font-size: 13px !important; min-height: 0 !important; }
+}

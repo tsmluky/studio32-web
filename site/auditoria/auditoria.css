@@ -501,3 +501,10 @@ button { font: inherit; color: inherit; }
   background: var(--oro, #c9a86a); }
 .precio { margin-bottom: 10px; }
 .gratis-ahora { font-style: normal; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 6px 12px; border-radius: 99px; background: var(--oro); color: var(--tinta); }
+
+@media (max-width: 820px) {
+  .measurement-panel { left: 10px !important; right: 10px !important; bottom: 10px !important; padding: 14px 16px !important; font-size: 13px !important; max-width: none !important; }
+  .measurement-panel p { font-size: 12.5px !important; line-height: 1.45 !important; margin: 0 0 6px !important; }
+  .measurement-actions { gap: 8px !important; margin-top: 8px !important; }
+  .measurement-actions button { padding: 9px 10px !important; font-size: 13px !important; min-height: 0 !important; }
+}
