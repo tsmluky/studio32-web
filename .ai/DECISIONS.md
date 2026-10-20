@@ -573,11 +573,15 @@ Francisco pide que la web pase a vender la auditoría de visibilidad en IA, con 
 calidad de la demo de synco.es como referencia. Prototipo en `site/auditoria/`
 (noindex): buscador y diagnóstico a la izquierda, mapa en el centro con los
 restaurantes del Índice Studio32 (repo Visibilidad-IA → `visibilidad/mapa_web.py`
-genera `site/auditoria/datos/`, que no se versiona todavía). Decisiones de Francisco: vecinos con
-nombre y color por tramo, sin número; el restaurante buscado, con nota y detalle;
+genera `site/auditoria/datos/`). Un punto por restaurante (17.197, OpenStreetMap + Overture con
+los repetidos fusionados), todos con nombre: color por tramo si su web está medida, blanco con
+anillo si la IA no puede leerla, gris si no tiene web propia o queda fuera del índice. Decisiones
+de Francisco: vecinos con nombre y color, sin número (los datos son públicos y el estudio es
+suyo); el restaurante buscado, con nota y detalle;
 49 € + IVA de lanzamiento, después 90 € + IVA, sin precio tachado nunca cobrado.
-Excepciones a CONVENTIONS pendientes de aprobar antes de publicar: MapLibre GL
-4.7.1 (CDN jsdelivr, BSD-3; mejor alojarlo en `assets/`), teselas gratuitas de
-OpenFreeMap sin clave, y mencionar la Comunitat Valenciana (el índice es de allí).
+MapLibre GL 4.7.1 alojado en `assets/vendor/` (BSD-3, licencia incluida): ningún CDN nuevo.
+Siguen siendo externas las teselas gratuitas de OpenFreeMap, sin clave (alternativa propia: un
+extracto PMTiles de la Comunitat en almacenamiento propio). Se menciona la Comunitat Valenciana
+porque el índice es de allí.
 Sin backend: todo estático; el detalle de cada restaurante es un JSON aparte que solo
 se descarga al buscarlo. Las páginas del agente de WhatsApp no se tocan.

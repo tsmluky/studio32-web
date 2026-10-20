@@ -29,7 +29,8 @@
   --t1: #d9a441;
   --t2: #8fa85a;
   --t3: #2f7d5b;
-  --sin-leer: #8c8476;
+  --sin-leer: #3b352c;
+  --sin-web: #a3977f;
   --serif: 'Playfair Display', Georgia, serif;
   --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --radio: 14px;
@@ -142,7 +143,9 @@ button { font: inherit; color: inherit; }
 }
 .sugerencia[aria-selected="true"], .sugerencia:hover { background: var(--papel-2); }
 .sugerencia__punto { flex: none; width: 10px; height: 10px; border-radius: 50%; }
-.sugerencia__punto--hueco { background: transparent; box-shadow: inset 0 0 0 2px var(--sin-leer); }
+.sugerencia__punto--g4 { background: #fff; box-shadow: inset 0 0 0 2px var(--sin-leer); }
+.sugerencia__punto--g5 { background: var(--sin-web); }
+.sugerencia__punto--g6 { background: #e9e2d4; box-shadow: inset 0 0 0 1px #b3a791; }
 .sugerencia__texto { min-width: 0; }
 .sugerencia__nombre { display: block; font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sugerencia__nombre mark { background: rgba(201, 168, 106, .35); color: inherit; border-radius: 2px; }
@@ -294,6 +297,7 @@ button { font: inherit; color: inherit; }
 .alerta__titulo { font-family: var(--serif); font-size: 24px; font-weight: 600; line-height: 1.15; margin: 0 0 8px; }
 .alerta p { font-size: 14px; line-height: 1.6; color: var(--crema-2); margin: 0; }
 .alerta p + p { margin-top: 8px; }
+.alerta--neutra { background: var(--tinta-2); box-shadow: inset 0 0 0 1px var(--linea-osc); }
 
 .aparecer { animation: aparecer .55s var(--ease) both; }
 @keyframes aparecer { from { opacity: 0; transform: translateY(10px); } }
@@ -324,8 +328,9 @@ button { font: inherit; color: inherit; }
 .leyenda li { display: flex; align-items: center; gap: 10px; font-size: 13px; }
 .leyenda li span:last-child { margin-left: auto; font-size: 12px; color: var(--texto-2); font-variant-numeric: tabular-nums; }
 .leyenda i { flex: none; width: 11px; height: 11px; border-radius: 50%; box-shadow: 0 0 0 2px #fff; }
-.leyenda i.hueco { background: transparent; box-shadow: inset 0 0 0 2px var(--sin-leer); }
-.leyenda i.mini { width: 5px; height: 5px; margin: 0 3px; background: #b5aa96; box-shadow: none; }
+.leyenda i.leyenda__g4 { background: #fff; box-shadow: inset 0 0 0 2px var(--sin-leer); }
+.leyenda i.leyenda__g5 { width: 8px; height: 8px; margin: 0 1.5px; background: var(--sin-web); box-shadow: none; }
+.leyenda i.leyenda__g6 { width: 8px; height: 8px; margin: 0 1.5px; background: #e9e2d4; box-shadow: inset 0 0 0 1px #b3a791; }
 .leyenda__pie { font-size: 11.5px; line-height: 1.45; color: var(--texto-2); margin: 10px 0 0; padding-top: 10px; border-top: 1px solid rgba(28, 24, 18, .08); }
 .leyenda__plegar { display: none; }
 
@@ -349,6 +354,7 @@ button { font: inherit; color: inherit; }
 .elegido { position: relative; width: 26px; height: 26px; }
 .elegido__pulso { position: absolute; inset: -12px; border-radius: 50%; border: 2px solid var(--oro); animation: pulso 2s var(--ease) infinite; }
 .elegido__punto { position: absolute; inset: 0; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 4px 14px rgba(0, 0, 0, .35); }
+.elegido__punto--hueco { border-color: var(--sin-leer); }
 .elegido__rotulo {
   position: absolute; left: 50%; bottom: calc(100% + 12px); transform: translateX(-50%);
   display: flex; align-items: center; gap: 8px; white-space: nowrap;
@@ -366,6 +372,9 @@ button { font: inherit; color: inherit; }
 .vecino__lugar { font-size: 12px; color: var(--texto-2); margin: 0 0 8px; }
 .vecino__tramo { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; }
 .vecino__tramo i { width: 9px; height: 9px; border-radius: 50%; }
+.vecino__tramo i.vecino__hueco { background: #fff; box-shadow: inset 0 0 0 2px var(--sin-leer); }
+.vecino__tramo i.vecino__gris--g5 { background: var(--sin-web); }
+.vecino__tramo i.vecino__gris--g6 { background: #e9e2d4; box-shadow: inset 0 0 0 1px #b3a791; }
 .vecino__ver { display: block; width: 100%; margin-top: 10px; padding: 8px 10px; border: 0; border-radius: 8px; background: var(--tinta); color: var(--crema); font-size: 12.5px; font-weight: 600; cursor: pointer; }
 .vecino__ver:hover { background: var(--tinta-3); }
 .maplibregl-ctrl-attrib { font-size: 10.5px; }
