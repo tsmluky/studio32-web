@@ -327,3 +327,68 @@ img, svg { display: block; }
   .preguntas-m { grid-template-columns: 1fr; }
   .texto-largo p { font-size: 16px; }
 }
+
+/* ---------------------------------------------------------------- 20/10 tarde: móvil primero */
+.ventana__imagen { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transition: opacity .9s var(--ease); }
+/* la imagen siempre debajo; el mapa vivo aparece encima solo cuando ya se ha dibujado */
+.ventana__mapa .maplibregl-canvas { opacity: 0; transition: opacity .9s var(--ease); }
+.ventana__mapa.vivo .maplibregl-canvas { opacity: 1; }
+.ventana__tramos i.t3 { background: var(--t3); } .ventana__tramos i.t2 { background: var(--t2); }
+.ventana__tramos i.t1 { background: var(--t1); } .ventana__tramos i.t0 { background: var(--t0); }
+
+.ideas { grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: none; }
+.ideas li { display: grid; grid-template-rows: auto auto 1fr; gap: 4px; padding: 20px 20px 18px; border-radius: 18px; }
+.idea__dibujo { display: flex; align-items: center; gap: 6px; height: 56px; margin-bottom: 10px; }
+.idea__dibujo--nota b { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--texto);
+  background: radial-gradient(closest-side, var(--blanco) 76%, transparent 78% 100%), conic-gradient(var(--t2) 0 76%, var(--papel-2) 76% 100%); }
+.idea__dibujo--fallos { flex-direction: column; align-items: flex-start; justify-content: center; gap: 6px; }
+.idea__dibujo--fallos i { font-style: normal; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 9px 4px 20px; border-radius: 99px; position: relative; background: var(--papel); }
+.idea__dibujo--fallos i::before { content: ""; position: absolute; left: 8px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; }
+.idea__dibujo--fallos .mal { color: #a9442c; } .idea__dibujo--fallos .mal::before { background: var(--t0); }
+.idea__dibujo--fallos .aviso { color: #94681c; } .idea__dibujo--fallos .aviso::before { background: var(--t1); }
+.idea__dibujo--vecinos i { width: 14px; height: 14px; border-radius: 50%; box-shadow: 0 0 0 2px var(--blanco); }
+.idea__dibujo--vecinos i:nth-child(1) { background: var(--t3); } .idea__dibujo--vecinos i:nth-child(2) { background: var(--t2); }
+.idea__dibujo--vecinos i:nth-child(4) { background: var(--t1); } .idea__dibujo--vecinos i:nth-child(5) { background: var(--t0); }
+.idea__dibujo--vecinos i:nth-child(6) { background: #fff; box-shadow: inset 0 0 0 2px #3b352c; }
+.idea__dibujo--vecinos i.tu { width: 22px; height: 22px; background: var(--t2); box-shadow: 0 0 0 3px var(--blanco), 0 0 0 5px var(--oro); }
+.ideas b { font-size: 20px; }
+.ideas span:not(.idea__dibujo) { font-size: 14px; }
+
+/* comprobaciones: etiquetas en vez de listas de texto */
+.bloque-r ul { display: flex; flex-wrap: wrap; gap: 6px; }
+.bloque-r li { padding: 6px 11px 6px 22px; border-radius: 99px; background: var(--papel); font-size: 12.5px; line-height: 1.3; }
+.bloque-r li::before { left: 10px; top: 50%; width: 6px; height: 6px; margin-top: -3px; }
+.bloque-r__num { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; font-size: 18px; background: rgba(138, 100, 33, .1); }
+
+/* precios */
+.plan__precio--promo s { color: var(--crema-3); text-decoration-thickness: 2px; text-decoration-color: rgba(246, 240, 229, .55); margin: 0; }
+.plan__precio--promo s b { font-family: var(--serif); font-size: 44px; color: var(--crema-2); }
+.plan__precio--promo s span { font-size: 14px; }
+.plan__gratis { display: inline-block; margin-left: 10px; vertical-align: 12px; font-style: normal; font-size: 12px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; padding: 6px 12px; border-radius: 99px; background: var(--oro); color: var(--negro); }
+.plan--arreglos { background: linear-gradient(180deg, #fffaf0, var(--blanco)); box-shadow: 0 0 0 1.5px rgba(201, 168, 106, .6), 0 24px 60px rgba(28, 24, 18, .1); }
+.plan--arreglos .plan__precio b { color: var(--oro-osc); }
+.antes-despues { display: flex; align-items: center; gap: 12px; margin: -4px 0 22px; }
+.ad { display: grid; gap: 6px; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--texto-3); flex: 1; }
+.ad i { display: block; height: 8px; border-radius: 99px; background: var(--papel-2); position: relative; overflow: hidden; }
+.ad i::after { content: ""; position: absolute; inset: 0 auto 0 0; border-radius: 99px; }
+.ad--antes i::after { width: 45%; background: var(--t1); }
+.ad--despues i::after { width: 92%; background: var(--t3); }
+.ad__flecha { color: var(--oro-osc); font-weight: 700; }
+
+@media (max-width: 640px) {
+  .ideas { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .ideas li { display: grid; grid-template-columns: none; grid-template-rows: auto auto auto; gap: 2px; padding: 14px 10px 12px; text-align: center; justify-items: center; }
+  .idea__dibujo { height: 46px; margin-bottom: 6px; justify-content: center; }
+  .idea__dibujo--nota b { width: 44px; height: 44px; font-size: 16px; }
+  .idea__dibujo--fallos { align-items: center; }
+  .idea__dibujo--fallos i { font-size: 9px; padding: 3px 7px 3px 16px; }
+  .idea__dibujo--fallos i::before { left: 6px; }
+  .idea__dibujo--vecinos { gap: 3px; }
+  .idea__dibujo--vecinos i { width: 9px; height: 9px; }
+  .idea__dibujo--vecinos i.tu { width: 15px; height: 15px; }
+  .ideas b { font-size: 16px; }
+  .ideas span:not(.idea__dibujo) { font-size: 12px; line-height: 1.35; }
+  .bloque-r { padding: 22px 18px; }
+  .plan__precio--promo s b { font-size: 38px; }
+}

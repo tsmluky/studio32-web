@@ -99,15 +99,16 @@
   }
 
   async function mapaHero() {
-    if (!window.maplibregl) return;
+    // En el móvil se queda la imagen (el mapa real, ya dibujado): carga al instante y no gasta datos.
+    // El mapa vivo para tocar está justo debajo, en «Pruébalo aquí».
+    if (!window.maplibregl || !window.matchMedia('(min-width: 900px)').matches) return;
     try { datos = await (await fetch('auditoria/datos/puntos.json')).json(); } catch { return; }
     document.querySelectorAll('[data-n="webs"]').forEach((el) => { el.textContent = miles(datos.webs); });
     const total = datos.medidos.filter((x) => x[3] != null).length + datos.sin_leer.length + datos.otros.length;
     document.querySelectorAll('.demo__cargar small').forEach((el) => { el.textContent = `${miles(total)} restaurantes de la Comunitat Valenciana`; });
-    ficha(null);
     const map = new maplibregl.Map({
       container: 'mapa-hero', style: 'https://tiles.openfreemap.org/styles/positron',
-      center: [-0.35, 39.15], zoom: 6.7, interactive: false,
+      center: [-0.362, 39.468], zoom: 12.1, interactive: false,
       attributionControl: { compact: true, customAttribution: 'Restaurantes: Overture Maps, OpenStreetMap' },
     });
     map.on('load', () => {
@@ -130,6 +131,7 @@
         'circle-radius': z(6, 1.8, 13, 5.2),
         'circle-color': ['match', ['get', 'g'], 3, TRAMOS[3].color, 2, TRAMOS[2].color, 1, TRAMOS[1].color, TRAMOS[0].color],
         'circle-stroke-color': '#fff', 'circle-stroke-width': z(6, .3, 13, 1.3) } }, antes);
+      map.once('idle', () => $('#mapa-hero').classList.add('vivo'));   // fundido: de la imagen al mapa vivo, mismo encuadre
       if (QUIETO) return;
       // recorrido: la Comunitat entera y después ciudad a ciudad, solo mientras se ve
       let i = -1, activo = true, reloj = null;
