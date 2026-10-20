@@ -585,3 +585,12 @@ extracto PMTiles de la Comunitat en almacenamiento propio). Se menciona la Comun
 porque el índice es de allí.
 Sin backend: todo estático; el detalle de cada restaurante es un JSON aparte que solo
 se descarga al buscarlo. Las páginas del agente de WhatsApp no se tocan.
+
+Continuación 20/10: propuesta de nueva portada en `site/portada-ia/` (noindex), con la
+estructura de synco.es: hero con buscador que abre la demo (`/auditoria/?q=`) y mapa vivo
+con datos reales que recorre ciudades; cómo funciona, el estudio con sus cifras y la
+validez frente a ChatGPT, las 24 comprobaciones (pesos del índice: 25/31/25/19 %), ejemplo
+de diagnóstico marcado como tal, precios (gratis → 49 € + IVA de lanzamiento → a medida),
+preguntas y contacto. Las páginas del agente de WhatsApp pasan al pie («Otros servicios»).
+Tipos de local en el mapa (restaurante, bar, cafetería, heladería u horno, comida rápida):
+al buscar un local, el mapa enseña solo los de su tipo; cada tipo tendrá su ranking.

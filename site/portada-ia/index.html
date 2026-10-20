@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Visibilidad en IA para restaurantes · Studio32</title>
+    <meta name="description" content="Cuando un turista le pregunta a ChatGPT dónde comer, la IA lee webs. Medimos cómo lee la tuya, qué le falta y cómo arreglarlo. Diagnóstico gratis en el mapa de 2.795 webs.">
+    <!-- Propuesta de nueva portada: no indexar hasta que se apruebe y pase a la raíz -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0c0a08">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23f7f4ee'/><text x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='18' fill='%238a6421'>32</text></svg>">
+    <link rel="preload" href="../assets/fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../assets/vendor/maplibre-gl-4.7.1/maplibre-gl.css">
+    <link rel="stylesheet" href="portada.css?v=20261020-2">
+</head>
+<body>
+<a class="saltar-contenido" href="#contenido">Ir al contenido</a>
+
+<nav class="nav" aria-label="Navegación principal">
+    <div class="contenedor nav__dentro">
+        <a class="marca" href="./" aria-label="Studio32, inicio">
+            <span class="marca__nombre">Studio32</span>
+            <span class="marca__sub">Visibilidad en IA</span>
+        </a>
+        <div class="nav__enlaces">
+            <a href="#como">Cómo funciona</a>
+            <a href="#estudio">El estudio</a>
+            <a href="#revisamos">Qué revisamos</a>
+            <a href="#precio">Precio</a>
+            <a href="#preguntas">Preguntas</a>
+        </div>
+        <a class="boton boton--oro boton--peq" href="../auditoria/">Buscar mi restaurante</a>
+    </div>
+</nav>
+
+<header class="hero" id="top">
+    <div class="contenedor hero__dentro">
+        <div class="hero__texto">
+            <span class="etiqueta">Visibilidad en IA para restaurantes</span>
+            <h1 class="hero__titulo">Cuando un turista le pregunta a ChatGPT dónde comer, <em>¿sale tu restaurante?</em></h1>
+            <p class="hero__entradilla">La IA recomienda lo que puede leer. Hemos leído <strong>2.795 webs de restaurantes</strong> como lo hace ella:
+                busca la tuya y mira tu nota, qué falla y en qué idiomas te entiende.</p>
+
+            <form class="buscar" action="../auditoria/" method="get" role="search">
+                <label class="visualmente-oculto" for="q-hero">Nombre de tu restaurante</label>
+                <svg class="buscar__icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                <input id="q-hero" name="q" type="search" autocomplete="off" placeholder="Nombre de tu restaurante" required>
+                <button class="boton boton--oro" type="submit">Ver mi diagnóstico</button>
+            </form>
+            <ul class="hero__puntos">
+                <li>Gratis y al momento</li>
+                <li>Sin registrarte</li>
+                <li>Datos medidos el 18/10/2026</li>
+            </ul>
+        </div>
+
+        <figure class="ventana" aria-label="Vista del mapa del Índice Studio32">
+            <div class="ventana__barra">
+                <span class="ventana__puntos" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="ventana__url">studio32.es/auditoria</span>
+            </div>
+            <div class="ventana__mapa" id="mapa-hero" aria-hidden="true"></div>
+            <div class="ventana__ficha" id="ficha-hero" aria-live="polite">
+                <span class="ventana__etiqueta" id="hero-lugar">Comunitat Valenciana</span>
+                <p class="ventana__dato"><b id="hero-n">17.197</b> restaurantes en el mapa</p>
+                <ul class="ventana__tramos" id="hero-tramos"></ul>
+            </div>
+            <figcaption class="ventana__pie">Cada punto es un restaurante. El color dice lo bien que una IA lee su web.</figcaption>
+        </figure>
+    </div>
+</header>
+
+<main id="contenido">
+
+<section class="seccion" id="como">
+    <div class="contenedor">
+        <span class="etiqueta etiqueta--osc">Cómo funciona</span>
+        <h2 class="titulo">La IA no come en tu restaurante. <em>Lee tu web.</em></h2>
+        <p class="entradilla">Un turista ya no busca «restaurantes» y abre diez pestañas: se lo pregunta a una IA, en su idioma, y se fía de lo que le responde.</p>
+        <ol class="pasos">
+            <li class="paso aparece">
+                <span class="paso__num">1</span>
+                <h3>El turista pregunta</h3>
+                <p>«Where can I eat a good paella near the beach?» En inglés, en alemán, en italiano… Y quiere una respuesta, no una lista.</p>
+            </li>
+            <li class="paso aparece">
+                <span class="paso__num">2</span>
+                <h3>La IA busca y lee</h3>
+                <p>Lee webs, guías y fichas. De tu web toma lo que entiende: qué eres, dónde estás, tu carta, tu horario y tus idiomas.</p>
+            </li>
+            <li class="paso aparece">
+                <span class="paso__num">3</span>
+                <h3>Recomienda a quien entiende</h3>
+                <p>Si tu web no se deja leer, tiene la carta en una foto o solo está en español, para esa pregunta no existes.</p>
+            </li>
+            <li class="paso aparece">
+                <span class="paso__num">4</span>
+                <h3>Medimos lo que depende de ti</h3>
+                <p>Tu web es lo que puedes arreglar mañana. Te decimos qué falla, por qué importa y cómo comprobar que está resuelto.</p>
+            </li>
+        </ol>
+    </div>
+</section>
+
+<section class="seccion seccion--oscura" id="estudio">
+    <div class="contenedor">
+        <span class="etiqueta">El estudio</span>
+        <h2 class="titulo titulo--claro">Hemos leído <em>2.795 webs</em> de restaurantes como las lee una IA.</h2>
+        <p class="entradilla entradilla--clara">Todas las que funcionan en la Comunitat Valenciana, de las que figuran en Overture Maps y OpenStreetMap. Sin IA y respetando el robots.txt de cada web.</p>
+        <div class="cifras">
+            <div class="cifra aparece"><b data-cuenta="65">65</b><span class="cifra__u">%</span><p>solo está en español</p></div>
+            <div class="cifra aparece"><b data-cuenta="67">67</b><span class="cifra__u">%</span><p>no tiene la carta en texto: una IA no lee una foto</p></div>
+            <div class="cifra aparece"><b data-cuenta="45">45</b><span class="cifra__u">%</span><p>de las webs que figuran en los mapas no se pueden leer</p></div>
+            <div class="cifra aparece"><b>1,8</b><span class="cifra__u">%</span><p>está en 5 idiomas o más</p></div>
+            <div class="cifra aparece"><b>3,7</b><span class="cifra__u">%</span><p>tiene lo básico completo</p></div>
+            <div class="cifra aparece"><b data-cuenta="57">57</b><span class="cifra__u">/100</span><p>es la nota media</p></div>
+        </div>
+        <div class="validez aparece">
+            <p class="validez__titulo">¿Se parece la nota a lo que hace la IA?</p>
+            <div class="validez__barras" aria-hidden="true">
+                <div><span class="validez__barra validez__barra--si" data-v="66.3"></span><b>66,3</b><small>webs que ChatGPT recomienda</small></div>
+                <div><span class="validez__barra" data-v="60.1"></span><b>60,1</b><small>las que no recomienda</small></div>
+            </div>
+            <p class="validez__texto">Nota media de las webs de restaurantes que ChatGPT con búsqueda recomienda en Valencia, frente a las que no (53 y 59 webs, 13/10/2026). La relación es modesta y va en el mismo sentido: leer bien no lo es todo, pero cuenta.</p>
+        </div>
+    </div>
+</section>
+
+<section class="seccion" id="revisamos">
+    <div class="contenedor">
+        <span class="etiqueta etiqueta--osc">Qué revisamos</span>
+        <h2 class="titulo">24 comprobaciones, <em>en cuatro preguntas.</em></h2>
+        <p class="entradilla">Las mismas para todas las webs. Cada una con su prueba guardada: lo que vimos, dónde y cuándo.</p>
+        <div class="bloques">
+            <article class="bloque-r aparece">
+                <span class="bloque-r__num">25 % de la nota</span>
+                <h3>¿Puede entrar?</h3>
+                <p>Si la web carga, deja pasar a los robots de las IA y se lee sin JavaScript.</p>
+                <ul><li>La web funciona y es tuya</li><li>Conexión segura</li><li>Robots de IA permitidos</li><li>Texto legible sin JavaScript</li><li>Móvil, velocidad y mapa del sitio</li></ul>
+            </article>
+            <article class="bloque-r aparece">
+                <span class="bloque-r__num">31 % de la nota</span>
+                <h3>¿Sabe quién eres?</h3>
+                <p>Si una máquina entiende que eres un restaurante, cuál y dónde.</p>
+                <ul><li>Ficha de restaurante para máquinas</li><li>Un título que dice qué eres y dónde</li><li>Dirección y teléfono escritos</li><li>Descripción para buscadores</li><li>Enlaces a Google Maps, TripAdvisor o TheFork</li></ul>
+            </article>
+            <article class="bloque-r aparece">
+                <span class="bloque-r__num">25 % de la nota</span>
+                <h3>¿Sabe qué ofreces?</h3>
+                <p>Lo que pregunta un turista: qué se come, cuánto cuesta y cuándo abres.</p>
+                <ul><li>Carta en texto, con precios</li><li>Tu especialidad, dicha claramente</li><li>Horario escrito</li><li>Preguntas frecuentes</li><li>Fotos descritas</li></ul>
+            </article>
+            <article class="bloque-r aparece">
+                <span class="bloque-r__num">19 % de la nota</span>
+                <h3>¿Te entiende en su idioma?</h3>
+                <p>A un alemán la IA le responde con páginas en alemán. Si no tienes, recomienda a otro.</p>
+                <ul><li>Páginas en español, inglés, francés, alemán, italiano y neerlandés</li><li>Carta traducida</li><li>Traducción real, no un botón automático</li><li>Idiomas bien declarados</li></ul>
+            </article>
+        </div>
+        <p class="nota-pie">La nota del mapa mide tu web. El análisis completo mira además lo que pasa fuera de ella: guías, listas oficiales y fichas.</p>
+    </div>
+</section>
+
+<section class="seccion seccion--papel" id="diagnostico">
+    <div class="contenedor diag">
+        <div class="diag__texto">
+            <span class="etiqueta etiqueta--osc">Tu diagnóstico</span>
+            <h2 class="titulo">En un minuto, <em>lo que ve una IA de ti.</em></h2>
+            <p class="entradilla">Escribe el nombre de tu restaurante y el mapa vuela hasta él. Ves tu nota de 0 a 100, tu puesto entre las 2.795 webs y en tu zona, cada fallo con su porqué y en qué idiomas te entiende.</p>
+            <ul class="lista-check">
+                <li>Tus vecinos, por colores: sabes dónde estás sin ver sus notas</li>
+                <li>Las 24 comprobaciones, con la prueba de cada una</li>
+                <li>Si la IA no puede leer tu web, el motivo exacto</li>
+            </ul>
+            <a class="boton boton--tinta" href="../auditoria/">Buscar mi restaurante</a>
+        </div>
+        <div class="maqueta aparece" aria-label="Ejemplo de diagnóstico">
+            <span class="maqueta__ejemplo">Ejemplo</span>
+            <p class="maqueta__nombre">Tu restaurante</p>
+            <div class="maqueta__nota">
+                <div class="maqueta__anillo"><b>58</b><span>de 100</span></div>
+                <div><p class="maqueta__nivel"><i></i>Mejorable</p><p class="maqueta__puesto">Puesto 1.420 de 2.795 · 21.ª de 38 a 1 km</p></div>
+            </div>
+            <div class="maqueta__barras">
+                <div><span>Puede entrar</span><i data-v="85"></i></div>
+                <div><span>Sabe quién eres</span><i data-v="55"></i></div>
+                <div><span>Sabe qué ofreces</span><i data-v="45"></i></div>
+                <div><span>Te entiende en su idioma</span><i data-v="20"></i></div>
+            </div>
+            <ul class="maqueta__fallos">
+                <li><b>La carta está en una foto</b>Una IA no sabe qué platos ni qué precios tienes.</li>
+                <li><b>Solo en español</b>Al turista que pregunta en alemán le recomienda a otro.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="seccion" id="precio">
+    <div class="contenedor">
+        <span class="etiqueta etiqueta--osc">Del diagnóstico al arreglo</span>
+        <h2 class="titulo">Primero mides. <em>Después decides.</em></h2>
+        <div class="planes">
+            <article class="plan aparece">
+                <p class="plan__paso">1 · Gratis</p>
+                <h3>Diagnóstico</h3>
+                <p class="plan__precio"><b>0 €</b></p>
+                <p>Tu nota, tu zona y lo que falla, al momento en el mapa. Para saber si tienes un problema.</p>
+                <a class="boton boton--linea-osc" href="../auditoria/">Ver el mío</a>
+            </article>
+            <article class="plan plan--destacado aparece">
+                <span class="plan__sello">Precio de lanzamiento</span>
+                <p class="plan__paso">2 · El cómo</p>
+                <h3>Análisis completo</h3>
+                <p class="plan__precio"><b>49 €</b> + IVA <small>59,29 € en total · después, 90 € + IVA</small></p>
+                <ul>
+                    <li>Cada problema, con su arreglo, quién lo hace y cómo comprobarlo</li>
+                    <li>Tu web con los arreglos aplicados, sin cambiar su diseño</li>
+                    <li>Tu zona y un plan por prioridades</li>
+                    <li>Un anexo técnico para quien te lleva la web</li>
+                </ul>
+                <p class="plan__nota">En 48 horas desde el pago. Te lo llevas aunque los arreglos los haga otra persona. Los primeros restaurantes, gratis a cambio de poder contar su caso.</p>
+                <a class="boton boton--oro" href="https://wa.me/34657695181?text=Hola%2C%20quiero%20el%20an%C3%A1lisis%20completo%20de%20mi%20restaurante." target="_blank" rel="noopener">Pedir el análisis</a>
+            </article>
+            <article class="plan aparece">
+                <p class="plan__paso">3 · Si lo quieres</p>
+                <h3>Arreglos o web nueva</h3>
+                <p class="plan__precio"><b>A medida</b></p>
+                <p>Hacemos las correcciones del análisis con presupuesto cerrado, o una web nueva si la necesitas. Y volvemos a medir para que veas el antes y el después.</p>
+                <a class="boton boton--linea-osc" href="https://wa.me/34657695181?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20los%20arreglos." target="_blank" rel="noopener">Preguntar</a>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="seccion seccion--papel" id="preguntas">
+    <div class="contenedor contenedor--estrecho">
+        <span class="etiqueta etiqueta--osc">Preguntas</span>
+        <h2 class="titulo">Lo que nos preguntan <em>en la primera visita.</em></h2>
+        <div class="faq">
+            <details><summary>¿Me ponéis el primero en ChatGPT?</summary>
+                <p>No, y desconfía de quien te lo prometa: nadie controla a quién recomienda una IA. Lo que sí se puede medir y mejorar es lo que depende de ti, que tu web se deje leer y entender. Medimos antes y después.</p></details>
+            <details><summary>¿De dónde salen los datos?</summary>
+                <p>Los restaurantes, de Overture Maps y OpenStreetMap, que son datos abiertos. Las notas, de leer cada web con nuestro lector el 18/10/2026: sin IA, siguiendo las mismas 24 comprobaciones y respetando su robots.txt. Cada resultado guarda su prueba.</p></details>
+            <details><summary>¿La nota dice si mi restaurante es bueno?</summary>
+                <p>No. Mide lo bien que una IA puede leer tu web, no tu cocina ni tu servicio. Hay restaurantes buenísimos con una web que una máquina no entiende: justo esos son los que más tienen que ganar.</p></details>
+            <details><summary>¿Tengo que cambiar mi web o su diseño?</summary>
+                <p>Casi nunca. La mayoría de arreglos son de texto y de datos que el visitante ni ve: la carta en texto, una ficha para máquinas, el horario, las páginas en otros idiomas. Tu web se queda como está.</p></details>
+            <details><summary>¿Y si no tengo web?</summary>
+                <p>Búscate igual en el mapa: te decimos lo que eso supone y qué haría falta. Si no apareces, mándanos tu local y lo añadimos.</p></details>
+            <details><summary>¿Cuánto tarda el análisis completo?</summary>
+                <p>Te lo entregamos en 48 horas desde el pago. Los primeros restaurantes lo tienen gratis a cambio de poder contar su caso.</p></details>
+            <details><summary>¿Puedo quitar mi restaurante del mapa?</summary>
+                <p>Sí. Escríbenos a <a href="mailto:francisco@studio32.es">francisco@studio32.es</a> y lo retiramos. También si ves un dato que no es correcto.</p></details>
+        </div>
+    </div>
+</section>
+
+<section class="final" id="buscar">
+    <div class="contenedor final__dentro">
+        <h2 class="titulo titulo--claro">¿Qué ve una IA cuando busca <em>tu restaurante?</em></h2>
+        <form class="buscar buscar--final" action="../auditoria/" method="get" role="search">
+            <label class="visualmente-oculto" for="q-final">Nombre de tu restaurante</label>
+            <svg class="buscar__icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="q-final" name="q" type="search" autocomplete="off" placeholder="Nombre de tu restaurante" required>
+            <button class="boton boton--oro" type="submit">Ver mi diagnóstico</button>
+        </form>
+        <p class="final__contacto">¿Prefieres hablar? Te atiende Francisco · <a href="tel:+34657695181">657 695 181</a> · <a href="mailto:francisco@studio32.es">francisco@studio32.es</a></p>
+    </div>
+</section>
+
+</main>
+
+<footer class="pie">
+    <div class="contenedor pie__dentro">
+        <div>
+            <p class="marca__nombre">Studio32</p>
+            <p class="pie__texto">Medimos cómo leen las IA las webs de los restaurantes y las arreglamos.</p>
+        </div>
+        <div class="pie__col">
+            <p class="pie__titulo">Studio32</p>
+            <a href="../auditoria/">Mapa del Índice</a>
+            <a href="#precio">Precio</a>
+            <a href="#preguntas">Preguntas</a>
+        </div>
+        <div class="pie__col">
+            <p class="pie__titulo">Otros servicios</p>
+            <a href="../agente-whatsapp-restaurantes/">Agente de WhatsApp para restaurantes</a>
+            <a href="../agente-whatsapp-servicios-locales/">Agente de WhatsApp para negocios locales</a>
+            <a href="../recursos/">Recursos</a>
+        </div>
+        <div class="pie__col">
+            <p class="pie__titulo">Legal</p>
+            <a href="../legal/aviso-legal">Aviso legal</a>
+            <a href="../legal/privacidad">Privacidad</a>
+            <a href="../legal/condiciones">Condiciones</a>
+        </div>
+    </div>
+    <p class="contenedor pie__fuentes">Restaurantes: Overture Maps Foundation (CDLA-Permissive 2.0) y © colaboradores de OpenStreetMap (ODbL). Índice Studio32 2.0, medido el 18/10/2026.</p>
+</footer>
+
+<script src="../assets/vendor/maplibre-gl-4.7.1/maplibre-gl.js" defer></script>
+<script src="portada.js?v=20261020-3" defer></script>
+</body>
+</html>
