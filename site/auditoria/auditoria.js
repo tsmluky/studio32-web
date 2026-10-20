@@ -468,7 +468,7 @@
         <li>Un anexo técnico para quien te lleva la web</li>
       </ul>
       <span class="promo">Promoción de lanzamiento</span>
-      <div class="precio"><span class="precio__num">0 €</span><s class="precio__antes">49&nbsp;€&nbsp;+&nbsp;IVA</s></div>
+      <div class="precio"><span class="visualmente-oculto">Antes 49 euros más IVA, ahora gratis.</span><span class="precio-promo" aria-hidden="true"><span class="tachado"><b>49&nbsp;€</b><small>+&nbsp;IVA</small></span><em class="gratis-ahora">Gratis ahora</em></span></div>
       <p class="precio__nota"><strong>Gratis para los primeros restaurantes</strong>, a cambio de poder contar su caso. Lo tienes en 48 horas.</p>
       <div class="oferta__botones">
         <a class="boton boton--oro boton--ancho" href="${wa(texto)}" target="_blank" rel="noopener">Pedir el análisis por WhatsApp</a>
