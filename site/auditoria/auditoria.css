@@ -335,7 +335,7 @@ button { font: inherit; color: inherit; }
 .leyenda__plegar { display: none; }
 
 .cartel {
-  position: absolute; left: 16px; top: 16px; z-index: 2;
+  position: absolute; left: 16px; top: 66px; z-index: 2;
   display: flex; align-items: center; gap: 10px;
   background: rgba(18, 16, 12, .86); color: var(--crema);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
@@ -346,6 +346,18 @@ button { font: inherit; color: inherit; }
 .cartel i { width: 8px; height: 8px; border-radius: 50%; background: var(--oro); animation: latir 1.6s ease-in-out infinite; }
 @keyframes latir { 50% { opacity: .35; } }
 
+.buscador__ayuda a { color: var(--oro); font-weight: 600; }
+.tipos {
+  position: absolute; left: 50%; top: 16px; transform: translateX(-50%); z-index: 2;
+  display: flex; gap: 4px; padding: 4px; border-radius: 999px;
+  background: rgba(247, 244, 238, .94); box-shadow: 0 10px 28px rgba(28, 24, 18, .16);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); max-width: calc(100% - 32px); overflow-x: auto; scrollbar-width: none;
+}
+.tipos:empty { display: none; }
+.tipo { flex: none; border: 0; border-radius: 999px; padding: 7px 13px; background: transparent; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--texto-2); white-space: nowrap; }
+.tipo span { font-weight: 500; opacity: .7; margin-left: 2px; }
+.tipo:hover { color: var(--texto); }
+.tipo.activo { background: var(--tinta); color: var(--crema); }
 .cargando { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; background: var(--papel); color: var(--texto-2); font-size: 14px; transition: opacity .5s; }
 .cargando.fuera { opacity: 0; pointer-events: none; }
 .error-mapa { color: var(--texto); max-width: 320px; text-align: center; line-height: 1.5; }
@@ -413,6 +425,8 @@ button { font: inherit; color: inherit; }
   .leyenda li span:last-child, .leyenda__pie { display: none; }
   .leyenda li { font-size: 12px; }
   .cartel { left: 10px; font-size: 12px; }
+  .tipos { top: auto; bottom: 74px; left: 10px; transform: none; max-width: calc(100% - 20px); }
+  .tipo { padding: 6px 11px; font-size: 12px; }
   .nota { grid-template-columns: 96px 1fr; padding: 16px; gap: 16px; }
   .anillo { width: 96px; height: 96px; }
   .anillo__num b { font-size: 33px; }

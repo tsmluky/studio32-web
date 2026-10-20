@@ -21,11 +21,14 @@
       texto: 'En los mapas, la web de tu restaurante es una red social o un portal. Una IA casi no puede leer Instagram o Facebook: no encuentra tu carta, tu horario ni tus idiomas.' },
     c: { grupo: 6, corto: 'Cadena o web compartida', titulo: 'Tu web es la de una cadena',
       texto: 'La web que figura en los mapas la comparten varios locales o es de una cadena. El índice mide restaurantes con web propia, así que no te hemos puesto nota.' },
-    n: { grupo: 6, corto: 'No entra en el índice de restaurantes', titulo: 'No entra en el índice de restaurantes',
-      texto: 'Por su nombre parece una cafetería, heladería u horno, y el índice solo mide restaurantes. Si es un restaurante, avísanos y lo medimos.' },
+    n: { grupo: 6, corto: 'Tipo pendiente de medir', titulo: 'Todavía no medimos este tipo de local',
+      texto: 'De momento el índice mide restaurantes. Bares, cafeterías y heladerías van a tener su propio ranking muy pronto, porque no compiten con un restaurante. Si es tu local, podemos leer tu web ya.' },
     x: { grupo: 6, corto: 'Web pendiente de medir', titulo: 'Tu web está pendiente de medir',
       texto: 'Tu restaurante tiene una web en los mapas que todavía no hemos medido. Si es el tuyo, pídenoslo y la leemos con las mismas reglas que a las demás.' },
   };
+  const TIPOS = [   // mismo orden que el exportador (visibilidad/mapa_web.py → TIPOS)
+    { plural: 'Restaurantes', uno: 'restaurante' }, { plural: 'Bares', uno: 'bar' }, { plural: 'Cafeterías', uno: 'cafetería' },
+    { plural: 'Heladerías y hornos', uno: 'heladería u horno' }, { plural: 'Comida rápida', uno: 'local de comida rápida' }];
   const GRUPOS = [...TRAMOS.map((t) => t.nombre), 'La IA no puede leer su web', 'Sin web propia', 'Fuera del índice'];
   const CONTACTO = { whatsapp: '34657695181', telefono: '657 695 181', correo: 'francisco@studio32.es' };
   const URL_PUBLICA = 'https://www.studio32.es/auditoria/';
@@ -48,6 +51,7 @@
   let lista = [];               // para buscar: medidos y sin leer
   const porId = new Map();
   let map = null, mapaListo = false, marcador = null, ventana = null;
+  let filtroTipo = null;        // al buscar tu local, el mapa enseña solo los de tu tipo
   let turno = 0;                // cada búsqueda nueva cancela la animación anterior
   let pendiente = null;         // restaurante pedido antes de que el mapa estuviera listo
 
@@ -70,9 +74,9 @@
       e.clave = norma(`${e.nombre} ${alias.join(' ')} ${e.mun}`); e.claveNombre = norma(e.nombre);
       lista.push(e); porId.set(e.id, e);
     };
-    D.medidos.forEach(([id, nombre, mun, lat, lon, t, alias]) => meter({ id, nombre, mun, lat, lon, t, g: t, tipo: 'medido' }, alias));
-    D.sin_leer.forEach(([id, nombre, mun, lat, lon, alias]) => meter({ id, nombre, mun, lat, lon, g: 4, tipo: 'sin_leer' }, alias));
-    D.otros.forEach(([nombre, mun, lat, lon, m], i) => meter({ id: `o${i}`, nombre, mun, lat, lon, m, g: OTROS[m].grupo, tipo: 'otro' }));
+    D.medidos.forEach(([id, nombre, mun, lat, lon, t, alias, k]) => meter({ id, nombre, mun, lat, lon, t, k: k || 0, g: t, tipo: 'medido' }, alias));
+    D.sin_leer.forEach(([id, nombre, mun, lat, lon, alias, k]) => meter({ id, nombre, mun, lat, lon, k: k || 0, g: 4, tipo: 'sin_leer' }, alias));
+    D.otros.forEach(([nombre, mun, lat, lon, m, k], i) => meter({ id: `o${i}`, nombre, mun, lat, lon, m, k: k || 0, g: OTROS[m].grupo, tipo: 'otro' }));
   }
 
   // ---------------------------------------------------------------- buscador
@@ -122,14 +126,14 @@
       if (norma(q).trim().length < 2) { cerrar(); return; }
       if (!actuales.length) {
         caja.innerHTML = `<li class="sugerencia sugerencia--vacia" role="option" aria-disabled="true">No lo encontramos con ese nombre. Puede que tu web no figure en los mapas.
-          <a href="${wa(`Hola, he buscado «${q}» en el mapa de Studio32 y no aparece. Mi web es: `)}" target="_blank" rel="noopener">Mándanos tu web y la medimos</a>.</li>`;
+          <a href="${wa(`Hola, quiero añadir mi local al mapa de Studio32. Nombre: ${q}. Dirección: . Web: `)}" target="_blank" rel="noopener">Añade tu local</a> y medimos su web.</li>`;
       } else {
         caja.innerHTML = actuales.map((e, i) => `
           <li class="sugerencia" role="option" id="sug-${i}" data-i="${i}" aria-selected="false">
             <span class="sugerencia__punto sugerencia__punto--g${e.g}"${e.tipo === 'medido' ? ` style="background:${TRAMOS[e.t].color}"` : ''}></span>
             <span class="sugerencia__texto">
               <span class="sugerencia__nombre">${resaltar(e.nombre, q)}</span>
-              <span class="sugerencia__lugar">${esc(e.mun || 'Comunitat Valenciana')}${e.tipo === 'sin_leer' ? ' · la IA no puede leer su web' : e.tipo === 'otro' ? ' · ' + OTROS[e.m].corto.toLowerCase() : ''}</span>
+              <span class="sugerencia__lugar">${e.k ? TIPOS[e.k].uno.charAt(0).toUpperCase() + TIPOS[e.k].uno.slice(1) + ' · ' : ''}${esc(e.mun || 'Comunitat Valenciana')}${e.tipo === 'sin_leer' ? ' · la IA no puede leer su web' : e.tipo === 'otro' ? ' · ' + OTROS[e.m].corto.toLowerCase() : ''}</span>
             </span>
           </li>`).join('');
       }
@@ -167,6 +171,7 @@
     if (marcador) { marcador.remove(); marcador = null; }
     if (mapaListo) { pintarZona(null); map.flyTo({ ...vistaInicial(), duration: 1600 }); }
     cartel('Toca cualquier punto o busca tu restaurante');
+    ponerFiltro(null);
     panel.scrollTop = 0;
   }
 
@@ -175,13 +180,14 @@
     const e = porId.get(id);
     if (!e) return;
     const yo = ++turno;
+    ponerFiltro(e.k);
     if (ventana) ventana.remove();
     history.replaceState(null, '', e.tipo === 'otro' ? location.pathname : `${location.pathname}?r=${encodeURIComponent(id)}`);
     if (MOVIL.matches) window.scrollTo({ top: 0, behavior: QUIETO.matches ? 'auto' : 'smooth' });
     panel.scrollTop = 0;
 
     const pedido = e.tipo === 'otro'
-      ? Promise.resolve({ tipo: 'otro', id: e.id, nombre: e.nombre, municipio: e.mun, lat: e.lat, lon: e.lon, motivo: e.m, zona: zonaLocal(e) })
+      ? Promise.resolve({ tipo: 'otro', id: e.id, nombre: e.nombre, municipio: e.mun, lat: e.lat, lon: e.lon, motivo: e.m, k: e.k, zona: zonaLocal(e) })
       : fetch(`datos/r/${encodeURIComponent(id)}.json`).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
     pintarLectura(e);
     let f;
@@ -245,7 +251,7 @@
     return `
       <button class="volver" type="button" data-volver>← Buscar otro restaurante</button>
       <header class="ficha__cabeza">
-        <span class="etiqueta">Diagnóstico · medido el ${esc(fecha(f.fecha))}</span>
+        <span class="etiqueta">${f.tipo === 'otro' ? 'Índice Studio32 · ' + esc(TIPOS[f.k || 0].uno) : 'Diagnóstico · medido el ' + esc(fecha(f.fecha))}</span>
         <h2 class="ficha__nombre">${esc(f.nombre)}</h2>
         <p class="ficha__lugar">${lugar}${f.web ? `${lugar ? '<br>' : ''}<a href="${esc(f.web)}" target="_blank" rel="noopener nofollow">${esc(dominio(f.web))}</a>` : ''}</p>
       </header>`;
@@ -265,11 +271,11 @@
         <p class="bloque__texto">Cuando un turista le pregunta a una IA dónde comer, ella recomienda a quien puede leer: carta, horario, idiomas, dónde está. Sin una web propia compites en desventaja con ${vecinos}.</p>
       </section>` : ''}
       <section class="bloque">
-        <h3 class="bloque__titulo">${sinWeb ? '¿Tienes web?' : '¿Es tu restaurante?'}</h3>
-        <p class="bloque__texto">${sinWeb ? 'Puede que los mapas no la tengan apuntada.' : 'Si tiene web propia,'} Mándanosla y la medimos con las mismas reglas que a las ${miles(D.webs)}.</p>
+        <h3 class="bloque__titulo">${sinWeb ? '¿Tienes web?' : '¿Es tu local?'}</h3>
+        <p class="bloque__texto">${sinWeb ? 'Puede que los mapas no la tengan apuntada. Mándanosla' : 'Si tiene web propia, mándanosla'} y la medimos con las mismas reglas que a las ${miles(D.webs)}.</p>
         <p class="bloque__texto--sep"><a class="boton boton--linea" href="${wa(`Hola, he visto ${f.nombre} en el mapa de Studio32. Mi web es: `)}" target="_blank" rel="noopener">Mandar mi web</a></p>
       </section>
-      ${f.zona ? zona(f.zona, false) : ''}
+      ${f.zona ? zona(f.zona, false, f.k) : ''}
       ${oferta(f, sinWeb ? 'Sin web, una IA solo te conoce por tu ficha' : 'Te decimos cómo te ve una IA')}
       ${limites()}
     </article>`;
@@ -377,7 +383,7 @@
     if (e.lat == null) return null;
     const rad = Math.PI / 180;
     const d = (a, b) => 6371000 * Math.hypot((b.lon - a.lon) * rad * Math.cos((a.lat + b.lat) * rad / 2), (b.lat - a.lat) * rad);
-    const cerca = lista.filter((x) => x.lat != null && Math.abs(x.lat - e.lat) < 0.03 && Math.abs(x.lon - e.lon) < 0.04).map((x) => [x, d(e, x)]);
+    const cerca = lista.filter((x) => x.lat != null && x.k === e.k && Math.abs(x.lat - e.lat) < 0.03 && Math.abs(x.lon - e.lon) < 0.04).map((x) => [x, d(e, x)]);
     let radio = 1000, dentro = [];
     for (radio of [1000, 2000, 3000]) {
       dentro = cerca.filter(([, m]) => m <= radio).map(([x]) => x);
@@ -404,13 +410,13 @@
       <div class="histo__eje" aria-hidden="true"><span>0</span><span>50</span><span>100</span></div>`;
   }
 
-  function zona(z, medido) {
-    const total = z.tramos.reduce((a, b) => a + b, 0) || 1;
+  function zona(z, medido, k = 0) {
+    const tipo = TIPOS[k] || TIPOS[0];
     return `<section class="bloque">
       <h3 class="bloque__titulo">Tu zona · ${km(z.radio_m)} alrededor</h3>
       <div class="zona">
         <div class="embudo">
-          <div><b>${miles(z.restaurantes)}</b>restaurantes en los mapas</div>
+          <div><b>${miles(z.restaurantes)}</b>${tipo.plural.toLowerCase()} en los mapas</div>
           <div><b>${miles(z.con_web)}</b>con una web apuntada</div>
           <div><b>${miles(z.medidas)}</b>que una IA puede leer</div>
         </div>
@@ -418,7 +424,8 @@
         <div class="pila-leyenda">${[3, 2, 1, 0].map((t) => `<span><i style="background:${TRAMOS[t].color}"></i>${z.tramos[t]} ${z.tramos[t] === 1 ? TRAMOS[t].nombre.toLowerCase() : PLURAL[t]}</span>`).join('')}</div>
         <p class="bloque__texto bloque__texto--sep">${medido
           ? `De las ${z.medidas} webs que una IA puede leer aquí, la tuya es la <strong>${z.puesto}.ª</strong>. En el mapa tienes a tus vecinos por colores.`
-          : `Aquí hay ${z.medidas} restaurantes cuya web sí lee una IA. Cuando un turista pregunta, compites con ellos.`}</p>
+          : z.medidas ? `Aquí hay ${z.medidas} ${z.medidas === 1 ? tipo.uno : tipo.plural.toLowerCase()} cuya web sí lee una IA. Cuando un turista pregunta, compites con ${z.medidas === 1 ? 'él' : 'ellos'}.`
+            : `Todavía no hay ${tipo.plural.toLowerCase()} con web medida en esta zona.`}</p>
       </div>
     </section>`;
   }
@@ -486,6 +493,7 @@
       tonoStudio32();
       capas();
       mapaListo = true;
+      ponerFiltro(filtroTipo);
       $('#cargando').classList.add('fuera');
       document.querySelector('.maplibregl-ctrl-attrib')?.classList.remove('maplibregl-compact-show');   // créditos plegados
       if (pendiente) { const f = pendiente; pendiente = null; encuadrar(f); ponerMarcador(f); pintarZona(f); }
@@ -515,31 +523,54 @@
     });
   }
 
+  const FILTRO_BASE = {
+    'p-otros': ['>=', ['get', 'g'], 5], 'p-sinleer': ['==', ['get', 'g'], 4], 'p-medidos': ['<=', ['get', 'g'], 3], 'p-nombres': ['>=', ['get', 'g'], 0] };
+
+  function ponerFiltro(k) {
+    filtroTipo = k == null ? null : k;
+    if (mapaListo) {
+      Object.entries(FILTRO_BASE).forEach(([capa, base]) => {
+        map.setFilter(capa, filtroTipo == null ? base : ['all', base, ['==', ['get', 'k'], filtroTipo]]);
+      });
+    }
+    pintarTipos();
+    pintarLeyenda();
+  }
+
+  function pintarTipos() {   // los botones de tipo encima del mapa, solo los que existen
+    const caja = $('#tipos');
+    if (!caja || !D) return;
+    const n = TIPOS.map((_, k) => lista.filter((e) => e.k === k && e.lat != null).length);
+    const boton = (k, texto, cuantos) => `<button type="button" class="tipo${filtroTipo === k ? ' activo' : ''}" data-tipo="${k ?? ''}"
+      aria-pressed="${filtroTipo === k}">${texto}${cuantos != null ? ` <span>${miles(cuantos)}</span>` : ''}</button>`;
+    caja.innerHTML = boton(null, 'Todos', null) + TIPOS.map((t, k) => n[k] ? boton(k, t.plural, n[k]) : '').join('');
+  }
+
   function capas() {
     const antes = (map.getStyle().layers.find((l) => l.type === 'symbol') || {}).id;   // los nombres del mapa, encima
     // un punto por restaurante; g = grupo: 0-3 tramo de la nota, 4 la IA no puede leer su web, 5 sin web propia, 6 fuera
     const puntos = lista.filter((e) => e.lat != null).map((e) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [e.lon, e.lat] },
-      properties: { id: e.id, g: e.g, n: e.nombre } }));
+      properties: { id: e.id, g: e.g, k: e.k, n: e.nombre } }));
     map.addSource('puntos', { type: 'geojson', data: { type: 'FeatureCollection', features: puntos } });
     map.addSource('zona', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
 
     const z = (...pares) => ['interpolate', ['linear'], ['zoom'], ...pares];
     map.addLayer({ id: 'zona-relleno', type: 'fill', source: 'zona', paint: { 'fill-color': '#c9a86a', 'fill-opacity': .08 } }, antes);
     map.addLayer({ id: 'zona-borde', type: 'line', source: 'zona', paint: { 'line-color': '#8a6421', 'line-width': 1.5, 'line-dasharray': [3, 3], 'line-opacity': .7 } }, antes);
-    map.addLayer({ id: 'p-otros', type: 'circle', source: 'puntos', filter: ['>=', ['get', 'g'], 5], paint: {
+    map.addLayer({ id: 'p-otros', type: 'circle', source: 'puntos', filter: FILTRO_BASE['p-otros'], paint: {
       'circle-radius': z(6, .8, 10, 1.6, 14, 3.4, 17, 5),
       'circle-color': ['match', ['get', 'g'], 5, SIN_WEB, '#e9e2d4'],
       'circle-stroke-color': ['match', ['get', 'g'], 5, 'rgba(255,255,255,.7)', '#b3a791'],
       'circle-stroke-width': z(6, 0, 12, .6, 16, 1.2), 'circle-opacity': z(6, .55, 12, .9) } }, antes);
-    map.addLayer({ id: 'p-sinleer', type: 'circle', source: 'puntos', filter: ['==', ['get', 'g'], 4], paint: {
+    map.addLayer({ id: 'p-sinleer', type: 'circle', source: 'puntos', filter: FILTRO_BASE['p-sinleer'], paint: {
       'circle-radius': z(6, 1.4, 10, 2.6, 14, 5, 17, 7.5), 'circle-color': '#ffffff',
       'circle-stroke-color': SIN_LEER, 'circle-stroke-width': z(6, .6, 10, 1, 14, 1.8, 17, 2.4) } }, antes);
-    map.addLayer({ id: 'p-medidos', type: 'circle', source: 'puntos', filter: ['<=', ['get', 'g'], 3], paint: {
+    map.addLayer({ id: 'p-medidos', type: 'circle', source: 'puntos', filter: FILTRO_BASE['p-medidos'], paint: {
       'circle-radius': z(6, 1.8, 10, 3.2, 14, 6, 17, 9),
       'circle-color': ['match', ['get', 'g'], 3, TRAMOS[3].color, 2, TRAMOS[2].color, 1, TRAMOS[1].color, TRAMOS[0].color],
       'circle-stroke-color': '#fff', 'circle-stroke-width': z(6, .3, 10, .8, 14, 1.6, 17, 2.2) },
       layout: { 'circle-sort-key': ['get', 'g'] } }, antes);
-    map.addLayer({ id: 'p-nombres', type: 'symbol', source: 'puntos', minzoom: 15, layout: {
+    map.addLayer({ id: 'p-nombres', type: 'symbol', source: 'puntos', minzoom: 15, filter: FILTRO_BASE['p-nombres'], layout: {
       'text-field': ['get', 'n'], 'text-font': ['Noto Sans Regular'], 'text-size': z(15, 10.5, 18, 12.5), 'text-offset': [0, 1.1],
       'text-anchor': 'top', 'text-max-width': 9, 'text-optional': true,
       'symbol-sort-key': ['get', 'g'] },          // si no caben todos, primero los medidos
@@ -614,11 +645,21 @@
     b.setAttribute('aria-expanded', String(!si));
   }
 
-  function pintarLeyenda() {
+  function montarLeyenda() {
     $('#leyenda-boton').addEventListener('click', () => plegarLeyenda(!$('#leyenda').classList.contains('plegada')));
     if (MOVIL.matches || window.innerWidth < 1280) plegarLeyenda(true);
+    $('#tipos').addEventListener('click', (ev) => {
+      const b = ev.target.closest('[data-tipo]');
+      if (b) ponerFiltro(b.dataset.tipo === '' ? null : +b.dataset.tipo);
+    });
+    pintarTipos();
+    pintarLeyenda();
+  }
+
+  function pintarLeyenda() {
+    if (!D) return;
     const cuenta = [0, 0, 0, 0, 0, 0, 0];
-    lista.forEach((e) => { if (e.lat != null) cuenta[e.g]++; });
+    lista.forEach((e) => { if (e.lat != null && (filtroTipo == null || e.k === filtroTipo)) cuenta[e.g]++; });
     const muestra = (g) => g <= 3 ? `<i style="background:${TRAMOS[g].color}"></i>` : `<i class="leyenda__g${g}"></i>`;
     const filas = [3, 2, 1, 0, 4, 5, 6].map((g) => `<li>${muestra(g)}<span>${GRUPOS[g]}</span><span>${miles(cuenta[g])}</span></li>`);
     $('#leyenda-lista').innerHTML = filas.join('');
@@ -640,9 +681,17 @@
       dentro.innerHTML = '<p class="bloque__texto">No hemos podido cargar el índice. Recarga la página en unos segundos.</p>';
       console.error(err); return;
     }
-    pintarLeyenda();
-    const pedido = new URLSearchParams(location.search).get('r');
-    if (pedido && porId.has(pedido)) { pintarInicio(); seleccionar(pedido); }
-    else pintarInicio();
+    montarLeyenda();
+    const params = new URLSearchParams(location.search);
+    const pedido = params.get('r'), q = params.get('q');
+    pintarInicio();
+    if (pedido && porId.has(pedido)) seleccionar(pedido);
+    else if (q) {             // desde la portada: el nombre ya escrito
+      const input = $('#q');
+      input.value = q;
+      const hay = buscar(q);
+      if (hay.length === 1) seleccionar(hay[0].id);
+      else input.dispatchEvent(new Event('input'));
+    }
   })();
 })();

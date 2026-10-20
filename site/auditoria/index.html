@@ -14,7 +14,7 @@
     <link rel="preload" href="../assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="datos/puntos.json" as="fetch" crossorigin>
     <link rel="stylesheet" href="../assets/vendor/maplibre-gl-4.7.1/maplibre-gl.css">
-    <link rel="stylesheet" href="auditoria.css?v=20261020-6">
+    <link rel="stylesheet" href="auditoria.css?v=20261020-7">
 </head>
 <body>
 <div class="app">
@@ -43,6 +43,7 @@
         <div id="mapa"></div>
         <div class="cargando" id="cargando">Cargando el mapa…</div>
         <p class="cartel" id="cartel"><i></i><span>Toca cualquier punto o busca tu restaurante</span></p>
+        <div class="tipos" id="tipos" role="group" aria-label="Tipo de local"></div>
         <aside class="leyenda" id="leyenda" aria-label="Qué significa cada color">
             <button class="leyenda__boton" id="leyenda-boton" type="button" aria-expanded="true" aria-controls="leyenda-cuerpo">
                 <span class="leyenda__puntos" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Cómo la lee una IA
@@ -69,7 +70,7 @@
                        role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugerencias">
             </div>
             <ul class="sugerencias" id="sugerencias" role="listbox" hidden></ul>
-            <p class="buscador__ayuda">También puedes tocar cualquier punto del mapa.</p>
+            <p class="buscador__ayuda">También puedes tocar cualquier punto del mapa. ¿No aparece tu local? <a href="https://wa.me/34657695181?text=Hola%2C%20quiero%20a%C3%B1adir%20mi%20local%20al%20mapa%20de%20Studio32.%20Nombre%3A%20%20Direcci%C3%B3n%3A%20%20Web%3A%20" target="_blank" rel="noopener">Añádelo</a>.</p>
         </div>
 
         <div class="cifras">
@@ -88,6 +89,6 @@
 </template>
 
 <script src="../assets/vendor/maplibre-gl-4.7.1/maplibre-gl.js"></script>
-<script src="auditoria.js?v=20261020-7"></script>
+<script src="auditoria.js?v=20261020-9"></script>
 </body>
 </html>
