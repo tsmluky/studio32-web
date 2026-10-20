@@ -1,5 +1,5 @@
 /* Propuesta de portada · Visibilidad en IA.
-   El mapa del hero usa los mismos datos que la demo (../auditoria/datos/puntos.json) y recorre algunas ciudades
+   El mapa del hero usa los mismos datos que la demo (auditoria/datos/puntos.json) y recorre algunas ciudades
    contando sus restaurantes por color. Sin interacción: para buscar está la demo. */
 (() => {
   'use strict';
@@ -100,7 +100,7 @@
 
   async function mapaHero() {
     if (!window.maplibregl) return;
-    try { datos = await (await fetch('../auditoria/datos/puntos.json')).json(); } catch { return; }
+    try { datos = await (await fetch('auditoria/datos/puntos.json')).json(); } catch { return; }
     document.querySelectorAll('[data-n="webs"]').forEach((el) => { el.textContent = miles(datos.webs); });
     const total = datos.medidos.filter((x) => x[3] != null).length + datos.sin_leer.length + datos.otros.length;
     document.querySelectorAll('.demo__cargar small').forEach((el) => { el.textContent = `${miles(total)} restaurantes de la Comunitat Valenciana`; });
@@ -160,14 +160,14 @@
     if (puesta) return;
     puesta = true;
     const f = document.createElement('iframe');
-    f.src = '../auditoria/?embed=1';
+    f.src = 'auditoria/?embed=1';
     f.title = 'Mapa del Índice Studio32';
     f.loading = 'lazy';
     f.setAttribute('allow', 'fullscreen');
     marco.appendChild(f);
     f.addEventListener('load', () => boton.remove());
   };
-  boton.addEventListener('click', () => { if (ESCRITORIO.matches) poner(); else location.href = '../auditoria/'; });
+  boton.addEventListener('click', () => { if (ESCRITORIO.matches) poner(); else location.href = 'auditoria/'; });
   if (ESCRITORIO.matches) {
     const cerca = () => { if (marco.getBoundingClientRect().top < window.innerHeight + 500) { poner(); window.removeEventListener('scroll', cerca); } };
     window.addEventListener('scroll', cerca, { passive: true });

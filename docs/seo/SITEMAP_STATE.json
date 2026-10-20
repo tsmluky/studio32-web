@@ -1,31 +1,39 @@
 {
+  "https://www.studio32.es/agente-whatsapp/": {
+    "sha256": "5b1872f28acfc124ed31ed885e087b72db7c0330b99ed2baa458a8e89fc31999",
+    "lastmod": "2026-10-20"
+  },
   "https://www.studio32.es/agente-whatsapp-centros-esteticos/": {
-    "sha256": "f90b8d5cbe7a1540fa329b2ffb4b93590c6b6fc8b0320d7e2c8625a036f6a92d",
-    "lastmod": "2026-10-04"
+    "sha256": "a4dae7e1dedc87ce8a8d1485ba5da832274002c22c4083afa5854163a74c6509",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/agente-whatsapp-clinicas-dentales/": {
-    "sha256": "861d47011db4f8841ee728209e2a3a3206ebae65edd81dfdfc9ac82ddc6422e9",
-    "lastmod": "2026-10-04"
+    "sha256": "ea9aa8848d3409e7a4088e823d3f9ce1e32ab8d873310fb0ea4499e15de1338b",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/agente-whatsapp-restaurantes/": {
-    "sha256": "1109810cddfbca9e7652d41236df2960f434d9adec16d9dcb92cf71dc01212f3",
-    "lastmod": "2026-10-04"
+    "sha256": "f40df233801328fd7b49710b308c2c5bb5809880127a6d04bfcaf0e88b74ff17",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/agente-whatsapp-servicios-locales/": {
-    "sha256": "69fb2439de62e574ae70538a4f2060142687d04846467e3346e417d1a8eccac5",
-    "lastmod": "2026-10-04"
+    "sha256": "ff44bcc76d6c45aaf7dbf190065807fd0ec4c66a9411c4ed1c4626e94358c1c8",
+    "lastmod": "2026-10-20"
+  },
+  "https://www.studio32.es/auditoria/": {
+    "sha256": "a057c5478d80150dbd1ad54a913f142a95a11bb4aa0644616afb9b76ac3899ad",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/herramientas/calculadora-consultas-perdidas/": {
-    "sha256": "65abaf790e8bd6b04b3c6e14ba734ec59a3250986325fbd7a8c9d98d6b885e85",
-    "lastmod": "2026-10-04"
+    "sha256": "92abf04e87eac534222a2ccaaadb680fc7ad7f13f02d87e2814fdea9cd1ce755",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/herramientas/": {
-    "sha256": "e7d8e0ee66ef8d586ed9a10af1791a32cd6cfba44ef2998b0999dbf14a7f77fc",
-    "lastmod": "2026-10-04"
+    "sha256": "e55dca87376d7ec2ba7dc759a89458a0d814ef1a343f645d0ff5b61ba6f960f1",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/": {
-    "sha256": "23067221a61593fbe4980944ceb95dfa0adce8fddeb3c49606d462bca6b91af5",
-    "lastmod": "2026-10-04"
+    "sha256": "23abf0a580866addb935af01c21ef79a9ea99c188fd3328b81fc0ff5f7255411",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/Landing1-L%27Obscur/restaurant_landing": {
     "sha256": "b1cd77df5ca5fec93f13b31774db7ed6414b1050a8e4792ec6a20af28d676802",
@@ -39,60 +47,64 @@
     "sha256": "06a953553c5924d3202111e8c99a09fc37667ddd12313f284be32cb4b90c299e",
     "lastmod": "2026-10-04"
   },
+  "https://www.studio32.es/metodologia/": {
+    "sha256": "5510c157b1b2048f38bf9df369c600a30f277465f1a9944ce52e2915dac1832f",
+    "lastmod": "2026-10-20"
+  },
   "https://www.studio32.es/panel-de-control/": {
-    "sha256": "f6bedf94ffbbedc40f9609bdc14ada294fd3d04d2de8cdfe279ca7850d10a25f",
-    "lastmod": "2026-10-04"
+    "sha256": "14dedf6b1f5722d8b8908070080c146f967c7ebf95fd70bcbc9047e52d922589",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/precio-agente-whatsapp/": {
-    "sha256": "3b589011b1dbd2e81b0937e62cfa75756b595c0f7ee7e7dcb90f92cbeedc39fd",
-    "lastmod": "2026-10-04"
+    "sha256": "867739109688fc1ca2d2dbf6bfd840de073714f21c62e6dfe99d3a7e9a0e7abf",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/problemas/consultas-fuera-de-horario/": {
-    "sha256": "6a1c64113170465d5df3ec193f8ea959b03ec73ac05d0301360cdef2a8b96013",
-    "lastmod": "2026-10-04"
+    "sha256": "ef274a3ea7fd00045a1859c568ccf2994c2616a39940b99f353991e3fc18b3e6",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/problemas/": {
-    "sha256": "c312fa71a3e7fcac0a39b521640aa6a1df732169d2ecb28600ad0bb8d83b2cef",
-    "lastmod": "2026-10-04"
+    "sha256": "f4ba84daabb20db24940a653846a4cd9973835f6f02efd38c2fc099782a45437",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/problemas/llamadas-y-mensajes-perdidos/": {
-    "sha256": "69b8194414032ad9d3e8e9500fb6c2fff2fac4cf39b33aa867089d92f7b615a8",
-    "lastmod": "2026-10-04"
+    "sha256": "250851641a8c6cef7bee5aa467363bd1bffcc9208b5baeb69091d9e600add0a4",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/problemas/recepcion-saturada/": {
-    "sha256": "1b714abacef2e4f1d1e681715ed120cd17b166862f043126a75122087160cc19",
-    "lastmod": "2026-10-04"
+    "sha256": "f79de23f3398b49765b3b8bad8dc12448b47720de8eee683088e0012913a75c8",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/recursos/automatizar-citas-whatsapp/": {
-    "sha256": "aa8c6780f4747a58c76f57a81eca42d2edbbb7625b903467ec3c5bbf0fb13e2c",
-    "lastmod": "2026-10-04"
+    "sha256": "84f3d08850a7c84ca267b62bfbff4d1fa27f8edcc82376580eb5e8bdecdf3b58",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/recursos/chatbot-vs-agente-ia-whatsapp/": {
-    "sha256": "5a5c97b4d3a0465a5d040436af3c4789ef79a6ee9472a949a98bb6c2457e056f",
-    "lastmod": "2026-10-04"
+    "sha256": "27b61ace0f0f7722369e7b84be04cf2462d41b672095f8112a76865956ed02ab",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/recursos/handoff-humano-agente-ia/": {
-    "sha256": "755310f619b1651851a30430942e48bd881a154801f1baee99c0a58ff06227a8",
-    "lastmod": "2026-10-04"
+    "sha256": "18a99929080ac3ba3ef362c196e36d4d7f7d37f25d23fc12496ddc63eb95382c",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/recursos/": {
-    "sha256": "83c1d412403deff1ba75f4fd44fdb436401c680a7c77ea5260bed8c4214bc2bd",
-    "lastmod": "2026-10-04"
+    "sha256": "1e9368af89ee4bedbbbcd3a5049c60a636a462388d8ecb68aaf19f63aed84336",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/recursos/integrar-whatsapp-con-agenda/": {
-    "sha256": "2587a10b2896337b836958aa10fdfa510cafda2208efe97fad0a17672ffe53c9",
-    "lastmod": "2026-10-04"
+    "sha256": "dd08c9e812c118b641c5b982f76458c5114c27398e66e661ed31c7031fabdaf0",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/recursos/numero-actual-whatsapp-business-api/": {
-    "sha256": "89720ddf9a16d352f02c2258899915a01d43015869db9c86d2eb571a99d8b344",
-    "lastmod": "2026-10-04"
+    "sha256": "6b7ee057b1b8590cab80bd48b40042630618927391edbf25f15fa12b23a79284",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/recursos/recepcionista-ia/": {
-    "sha256": "0513571cf429bffec4973f538eddf2cda11391beeaf86cdcb900808faa5445a7",
-    "lastmod": "2026-10-04"
+    "sha256": "9aef9516e18dfd660423eb02ce73ea564be3229faf57b3e40851de99f2c8a138",
+    "lastmod": "2026-10-20"
   },
   "https://www.studio32.es/recursos/whatsapp-business-api/": {
-    "sha256": "4af15017c79ccc565046dfcf84018ae433c659198b201a375b3e95dbc64db297",
-    "lastmod": "2026-10-04"
+    "sha256": "bd760c7227bb746659c495fcbced39b5ef183f73b2777acc21f80773ed458381",
+    "lastmod": "2026-10-20"
   }
 }

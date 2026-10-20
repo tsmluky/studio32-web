@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8">
+<!-- Fuente de site/assets/portada/og-portada.png (1200×630). Se captura con Edge sin cabecera:
+     msedge --headless --disable-gpu --hide-scrollbars --window-size=1200,630 --screenshot=og-portada.png og-portada.html -->
+<style>
+@font-face { font-family: 'Inter'; font-weight: 100 900; src: url(../../site/assets/fonts/inter-normal-latin.woff2) format('woff2'); }
+@font-face { font-family: 'Playfair Display'; font-weight: 400 900; src: url(../../site/assets/fonts/playfair-display-normal-latin.woff2) format('woff2'); }
+@font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 400 900; src: url(../../site/assets/fonts/playfair-display-italic-latin.woff2) format('woff2'); }
+html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+body { position: relative; font-family: Inter, sans-serif; color: #f6f0e5;
+  background: radial-gradient(70% 90% at 85% 40%, rgba(201,168,106,.2), transparent 60%), #0c0a08; }
+.texto { position: absolute; left: 72px; top: 72px; width: 600px; }
+.etiqueta { font-size: 17px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #c9a86a; }
+h1 { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 62px; line-height: 1.04; letter-spacing: -.02em; margin: 22px 0 26px; }
+h1 em { font-style: italic; font-weight: 500; color: #c9a86a; }
+p { font-size: 23px; line-height: 1.45; color: rgba(246,240,229,.75); margin: 0; }
+.marca { position: absolute; left: 72px; bottom: 60px; font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 600; }
+.marca span { font-family: Inter, sans-serif; font-size: 15px; letter-spacing: .16em; text-transform: uppercase; color: rgba(246,240,229,.5); margin-left: 12px; }
+.mapa { position: absolute; right: 56px; top: 64px; width: 430px; height: 502px; border-radius: 26px; overflow: hidden;
+  background: #f3eee4; box-shadow: 0 0 0 1px rgba(246,240,229,.14), 0 30px 70px rgba(0,0,0,.5); }
+.mapa i { position: absolute; border-radius: 50%; border: 2px solid #fff; }
+.ficha { position: absolute; right: 290px; bottom: 96px; padding: 18px 22px; border-radius: 18px; background: rgba(12,10,8,.92); box-shadow: 0 16px 40px rgba(0,0,0,.4); }
+.ficha b { font-family: 'Playfair Display', serif; font-size: 44px; }
+.ficha small { display: block; font-size: 15px; color: rgba(246,240,229,.6); margin-top: 2px; }
+</style></head>
+<body>
+  <div class="texto">
+    <div class="etiqueta">Visibilidad en IA para restaurantes</div>
+    <h1>¿Sale tu restaurante cuando un turista <em>pregunta a ChatGPT?</em></h1>
+    <p>Busca el tuyo en el mapa y mira cómo te lee una IA.</p>
+  </div>
+  <div class="marca">Studio32<span>studio32.es</span></div>
+  <div class="mapa" id="mapa"></div>
+  <div class="ficha"><b>17.197</b><small>restaurantes de la Comunitat, por colores</small></div>
+<script>
+  // puntos decorativos con la proporción real de tramos (91 · 641 · 1.327 · 736) y webs que no se leen
+  const caja = document.getElementById('mapa'), colores = [['#2f7d5b', 3], ['#8fa85a', 23], ['#d9a441', 47], ['#c4553a', 26], ['#ffffff', 30]];
+  let semilla = 7; const azar = () => (semilla = (semilla * 16807) % 2147483647) / 2147483647;
+  for (const [color, n] of colores) for (let i = 0; i < n * 2.4; i++) {
+    const el = document.createElement('i'), r = 7 + azar() * 6, x = 30 + azar() * 370, y = 30 + Math.pow(azar(), .8) * 440;
+    el.style.cssText = `left:${x}px;top:${y}px;width:${r}px;height:${r}px;background:${color};` + (color === '#ffffff' ? 'border-color:#3b352c' : '');
+    caja.appendChild(el);
+  }
+</script>
+</body></html>

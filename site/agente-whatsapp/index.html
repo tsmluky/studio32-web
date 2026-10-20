@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="msvalidate.01" content="9E0CC1297C5BA2C278774B981C67E286">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agente de WhatsApp con IA · Recepción 24/7 para tu negocio | Studio32</title>
+    <meta name="description"
+        content="Un recepcionista con IA que atiende por WhatsApp, resuelve dudas y gestiona citas 24/7. Con panel de control e intervención humana, para clínicas, restaurantes y servicios locales.">
+    <meta name="theme-color" content="#f7f4ee">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Studio32">
+    <meta property="og:title" content="Agente de WhatsApp con IA · Recepción 24/7 | Studio32">
+    <meta property="og:description"
+        content="Un recepcionista con IA que atiende por WhatsApp, resuelve dudas y gestiona citas 24/7, con panel de control e intervención humana.">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:url" content="https://www.studio32.es/agente-whatsapp/">
+    <meta property="og:image" content="https://www.studio32.es/assets/og-cover.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Agente de WhatsApp con IA para negocios · Studio32">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Agente de WhatsApp con IA · Recepción 24/7 | Studio32">
+    <meta name="twitter:description"
+        content="Un recepcionista con IA que atiende por WhatsApp, resuelve dudas y agenda citas 24/7, con panel de control e intervención humana.">
+    <meta name="twitter:image" content="https://www.studio32.es/assets/og-cover.png">
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23f7f4ee'/><text x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='18' fill='%238a6421'>32</text></svg>">
+
+    <link rel="preload" href="../assets/fonts/inter-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/playfair-display-italic-latin-a50b218e.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fonts/playfair-display-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    <link rel="stylesheet" href="../home-bundle.min.css?v=min-df9e55090f7c045f">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://unpkg.com/split-type@0.3.4" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js" defer></script>
+    <script src="../script.min.js?v=min-df9e55090f7c045f" defer></script>
+
+    <!-- Red de seguridad del preloader: si un CDN falla o el JS principal
+         no llega a retirarlo, lo forzamos para no dejar la web en negro. -->
+    <script>
+        (function () {
+            function hidePreloader() {
+                var p = document.querySelector('.preloader');
+                if (p) { p.classList.add('is-done'); }
+            }
+            document.addEventListener('DOMContentLoaded', function () {
+                if (typeof window.gsap === 'undefined') { hidePreloader(); }
+            });
+            document.addEventListener('DOMContentLoaded', function () {
+                setTimeout(function () {
+                    var p = document.querySelector('.preloader');
+                    if (p && !p.classList.contains('is-done')) { hidePreloader(); }
+                    // Red de seguridad de inicialización: si la animación del
+                    // preloader no llegó a llamar a initHeroAnimations (p. ej.
+                    // pestaña abierta en segundo plano con rAF frenado), arranca
+                    // igualmente el hero y los reveals de texto. El guard interno
+                    // evita que se inicialice dos veces.
+                    if (typeof window.initHeroAnimations === 'function') { window.initHeroAnimations(); }
+                }, 1600);
+            });
+        })();
+    </script>
+    <noscript>
+        <style>
+            .preloader,
+            .cursor,
+            .cursor-follower,
+            .grain {
+                display: none !important;
+            }
+        </style>
+    </noscript>
+
+    <link rel="canonical" href="https://www.studio32.es/agente-whatsapp/">
+
+    <!-- JSON-LD: entidad Studio32, con datos de contacto reales. -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.studio32.es/#studio32",
+  "name": "Studio32",
+  "alternateName": "Studio32 · Digital Systems",
+  "description": "Estudio de sistemas digitales para negocios locales. Producto principal: un recepcionista con IA (agente de WhatsApp) que atiende, informa y gestiona citas 24/7, con panel de control e intervención humana. También diseño web premium y sistemas a medida.",
+  "url": "https://www.studio32.es/",
+  "image": "https://www.studio32.es/assets/og-cover.png",
+  "telephone": "+34 694 29 31 66",
+  "email": "info@studio32.es",
+  "areaServed": {
+    "@type": "Country",
+    "name": "España"
+  },
+  "knowsAbout": [
+    "Agentes de WhatsApp para negocios locales",
+    "Automatización de citas y reservas",
+    "Atención al cliente con IA",
+    "Diseño web para restaurantes",
+    "Diseño web para clínicas dentales",
+    "Diseño web para estudios de arquitectura"
+  ]
+}
+</script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": "https://www.studio32.es/#agente-whatsapp",
+      "name": "Agente de recepción por WhatsApp",
+      "serviceType": "Agente de recepción por WhatsApp para negocios locales",
+      "description": "Agente que atiende por WhatsApp con la información real del negocio: responde dudas, informa de servicios y precios y gestiona citas 24/7, con panel de control, historial e intervención humana.",
+      "provider": { "@id": "https://www.studio32.es/#studio32" },
+      "areaServed": { "@type": "Country", "name": "España" },
+      "audience": {
+        "@type": "BusinessAudience",
+        "name": "Negocios locales: clínicas, restaurantes y servicios"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://www.studio32.es/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es un agente de WhatsApp y en qué se diferencia de un chatbot?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Un chatbot normal responde con menús y frases enlatadas. Nuestro agente entiende lo que le preguntan y contesta con la información real de tu negocio: tus servicios, tus precios, tus horarios. Y no se queda ahí: agenda la cita y avisa a tu equipo cuando hace falta una persona."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Atiende también fuera de horario?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, y ese es justo el punto. Las consultas no llegan solo en horario de oficina, y una respuesta a las once de la noche puede ser la diferencia entre una cita y un cliente que escribe al siguiente. El agente responde a cualquier hora, todos los días."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puede gestionar citas y reservas de verdad?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Crea, cambia y cancela citas sobre la disponibilidad real de tu negocio, sin llamadas cruzadas ni huecos dobles. Cada cita queda registrada y tu equipo la ve en el panel al momento."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Y si el cliente necesita hablar con una persona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cualquiera de tu equipo puede entrar en la conversación desde el panel, seguir donde lo dejó el agente y devolvérsela cuando quiera. El agente no sustituye el trato humano: lo cubre cuando tu equipo no puede atender."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Para qué tipo de negocios funciona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sobre todo para negocios donde atender rápido y ordenar las citas marca la diferencia: clínicas y centros de salud, restauración, y servicios locales que trabajan con cita o presupuesto. Cada uno se configura con sus propias reglas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se pone en marcha?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nos sentamos a entender cómo trabajas, preparamos el agente con tu información y lo probamos de principio a fin antes de abrirlo a tus clientes. Después seguimos encima: revisamos conversaciones y lo vamos afinando. No te dejamos solo con una herramienta el primer día."
+          }
+        }
+      ]
+    }
+    </script>
+<script src="../discovery-events.min.js?v=min-df9e55090f7c045f" defer></script>
+<link rel="stylesheet" href="../measurement-consent.min.css?v=min-df9e55090f7c045f">
+<script src="../measurement-consent.min.js?v=min-df9e55090f7c045f" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Studio32", "item": "https://www.studio32.es/"}, {"@type": "ListItem", "position": 2, "name": "Agente de WhatsApp con IA · Recepción 24/7 para tu negocio", "item": "https://www.studio32.es/agente-whatsapp/"}]}</script>
+</head>
+
+<body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <div class="grain"></div>
+
+    <div class="preloader">
+        <div class="preloader-text">
+            <span>S</span><span>T</span><span>U</span><span>D</span><span>I</span><span>O</span><span
+                class="preloader-space"></span><span>3</span><span>2</span><span
+                class="accent">.</span>
+        </div>
+        <div class="progress-bar-wrap">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+    <nav class="navbar" aria-label="Navegación principal">
+        <div class="container nav-content">
+            <a href="#top" class="logo" aria-label="Studio32 · Digital Systems">
+                <span>Studio32</span>
+                <small>Digital Systems</small>
+            </a>
+            <div class="nav-right">
+                <a href="#control" class="nav-link">Pruébalo</a>
+                <a href="#agente" class="nav-link">El agente</a>
+                <a href="#process" class="nav-link">Implantación</a>
+                <a href="#tarifas" class="nav-link">Tarifas</a>
+                <a href="#services" class="nav-link">Estudio</a>
+                <a href="#contact" class="nav-btn">Hablemos</a>
+                <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"
+                    aria-controls="mobile-menu">
+                    <span class="nav-toggle-bar"></span>
+                    <span class="nav-toggle-bar"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true" inert>
+        <div class="mobile-menu-inner">
+            <p class="mobile-menu-label">[ NAVEGACIÓN ]</p>
+            <nav class="mobile-menu-nav" aria-label="Menú móvil">
+                <a href="#control" class="mobile-menu-link" data-mobile-close>
+                    <span class="mobile-menu-index">01</span>
+                    <span class="mobile-menu-text">Pruébalo</span>
+                </a>
+                <a href="#agente" class="mobile-menu-link" data-mobile-close>
+                    <span class="mobile-menu-index">02</span>
+                    <span class="mobile-menu-text">El agente</span>
+                </a>
+                <a href="#process" class="mobile-menu-link" data-mobile-close>
+                    <span class="mobile-menu-index">03</span>
+                    <span class="mobile-menu-text">Implantación</span>
+                </a>
+                <a href="#tarifas" class="mobile-menu-link" data-mobile-close>
+                    <span class="mobile-menu-index">04</span>
+                    <span class="mobile-menu-text">Tarifas</span>
+                </a>
+                <a href="#services" class="mobile-menu-link" data-mobile-close>
+                    <span class="mobile-menu-index">05</span>
+                    <span class="mobile-menu-text">Estudio</span>
+                </a>
+                <a href="#contact" class="mobile-menu-link" data-mobile-close>
+                    <span class="mobile-menu-index">06</span>
+                    <span class="mobile-menu-text">Hablemos</span>
+                </a>
+            </nav>
+            <div class="mobile-menu-foot">
+                <a href="https://wa.me/34694293166?text=Hola,%20quiero%20ver%20si%20el%20agente%20de%20WhatsApp%20encaja%20en%20mi%20negocio."
+                    target="_blank" rel="noopener" class="mobile-menu-cta" data-mobile-close>
+                    Hablar sobre mi negocio
+                </a>
+                <div class="mobile-menu-contact">
+                    <a href="mailto:info@studio32.es">info@studio32.es</a>
+                    <a href="https://wa.me/34694293166" target="_blank" rel="noopener">+34 694 29 31 66</a>
+                </div>
+                <p class="mobile-menu-brand">Studio32 · Digital Systems</p>
+            </div>
+        </div>
+    </div>
+
+    <header class="hero" id="top">
+        <div class="container hero-inner">
+            <div class="hero-top">
+                <p class="hero-subtitle">[ AGENTE DE RECEPCIÓN POR WHATSAPP ]</p>
+                <p class="hero-meta">Atiende. Informa. Agenda. <em>24/7.</em></p>
+            </div>
+
+            <h1 class="hero-title">
+                <span class="line"><span class="reveal-text">Tu negocio <em>atiende</em></span></span>
+                <span class="line"><span class="reveal-text">aunque esté cerrado.</span></span>
+            </h1>
+
+            <div class="hero-bottom">
+                <p class="hero-desc">Un agente que atiende, informa y gestiona citas por WhatsApp, incluso fuera de
+                    horario. Con panel de control, historial e intervención humana cuando tu equipo la necesite.</p>
+                <div class="hero-action-group">
+                    <div class="hero-actions">
+                        <a href="https://wa.me/34694293166?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20el%20agente%20de%20recepci%C3%B3n%20por%20WhatsApp%20para%20mi%20negocio."
+                            target="_blank" rel="noopener" class="hero-cta">Hablar por WhatsApp</a>
+                        <a href="#control" class="hero-link">Hablar con el agente</a>
+                    </div>
+                    <p class="hero-assurance"><span aria-hidden="true"></span> Implantación acompañada · Control humano incluido</p>
+                </div>
+            </div>
+
+            <section class="system-rail" aria-label="Qué hace el agente">
+                <p class="system-rail-label">[ QUÉ HACE EL AGENTE · 01—04 ]</p>
+                <div class="system-rail-grid">
+                    <div>
+                        <span>01</span>
+                        <strong>Atiende</strong>
+                        <p>Responde al momento, a cualquier hora, con el tono de tu negocio.</p>
+                    </div>
+                    <div>
+                        <span>02</span>
+                        <strong>Informa</strong>
+                        <p>Servicios, precios, horarios y políticas: la información real, sin inventar.</p>
+                    </div>
+                    <div>
+                        <span>03</span>
+                        <strong>Agenda</strong>
+                        <p>Crea, cambia y cancela citas sobre tu disponibilidad real.</p>
+                    </div>
+                    <div>
+                        <span>04</span>
+                        <strong>Control</strong>
+                        <p>Panel con historial completo e intervención humana en un clic.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </header>
+
+    <main id="contenido">
+
+    <section class="section diagnosis" id="problema">
+        <div class="container">
+            <div class="diagnosis-grid">
+                <div>
+                    <p class="section-label">[ EL COSTE INVISIBLE ]</p>
+                    <h2 class="split-lines headline-med">Lo que no atiendes<br>también <em>cuesta</em>.</h2>
+                </div>
+                <div class="diagnosis-copy">
+                    <p class="body-large split-lines">Una llamada en hora punta que nadie coge. Un WhatsApp a las diez
+                        de la noche que se responde al día siguiente. Una recepción que hace tres cosas a la vez.
+                        Ninguna de esas consultas aparece en la contabilidad, pero todas tienen coste.</p>
+                    <p class="body-large split-lines">El agente de Studio32 cubre exactamente ese hueco: la
+                        conversación que llega cuando tu equipo no puede atenderla.</p>
+                </div>
+            </div>
+
+            <div class="signal-list">
+                <div>
+                    <span>Señal 01</span>
+                    <strong>Fuera de horario</strong>
+                    <p>Las consultas también llegan cuando el negocio está cerrado. Quien no obtiene respuesta puede
+                        escribir al siguiente.</p>
+                </div>
+                <div>
+                    <span>Señal 02</span>
+                    <strong>En hora punta</strong>
+                    <p>El teléfono suena mientras atiendes a quien tienes delante. Alguien pierde.</p>
+                </div>
+                <div>
+                    <span>Señal 03</span>
+                    <strong>Respuesta tardía</strong>
+                    <p>En WhatsApp, la primera respuesta marca la diferencia entre una cita y un silencio.</p>
+                </div>
+            </div>
+
+            <!-- Cifras de terceros, cada una con su fuente a la vista. No son
+                 resultados de Studio32 y no se presentan como tales. -->
+            <aside class="cifras" aria-label="Datos del mercado español">
+                <article>
+                    <strong>94<span>%</span></strong>
+                    <p>de penetración mensual de WhatsApp en el Estudio de Redes Sociales 2026.</p>
+                    <cite><a href="https://iabspain.es/iab-spain-presenta-estudio-rrss-2026/">IAB Spain y Elogia · Redes Sociales 2026</a></cite>
+                </article>
+                <article>
+                    <strong>21,1<span>%</span></strong>
+                    <p>de las empresas españolas de diez o más trabajadores usaba IA en el primer trimestre de 2025.</p>
+                    <cite><a href="https://www.ine.es/dyngs/Prensa/ETICCE20241T2025.htm">INE · Uso de TIC, primer trimestre de 2025</a></cite>
+                </article>
+                <article>
+                    <strong>35<span>%</span></strong>
+                    <p>de las pymes españolas encuestadas prevé destinar presupuesto a IA en 2026.</p>
+                    <cite><a href="https://www.ionos.es/newsroom/noticias/el-35-de-las-pymes-espanolas-invertira-en-ia-en-2026-situandose-entre-las-lideres-europeas/">IONOS / YouGov · Encuesta enero–marzo de 2026</a></cite>
+                </article>
+            </aside>
+        </div>
+    </section>
+
+    <section class="section control" id="control">
+        <div class="container">
+            <div class="verticals-header">
+                <p class="section-label">[ PRUÉBALO AQUÍ ]</p>
+                <h2 class="split-lines headline-med">El agente atiende.<br>Tu equipo <em>decide</em>.</h2>
+                <p>Esto no es un vídeo. Elige un sector, escribe como lo haría un cliente suyo y mira en el panel
+                    exactamente lo que ve el negocio mientras hablas: la conversación entrando, la cita creándose y
+                    el momento en que una persona toma el relevo.</p>
+            </div>
+
+            <div class="demo-sectores" role="tablist" aria-label="Elige un sector">
+                <button type="button" class="demo-sector is-active" role="tab" aria-selected="true"
+                    data-demo-sector="clinica">Clínica dental</button>
+                <button type="button" class="demo-sector" role="tab" aria-selected="false" tabindex="-1"
+                    data-demo-sector="restaurante">Restaurante</button>
+                <button type="button" class="demo-sector" role="tab" aria-selected="false" tabindex="-1"
+                    data-demo-sector="servicios">Servicio local</button>
+                <button type="button" class="demo-sector" role="tab" aria-selected="false" tabindex="-1"
+                    data-demo-sector="estetica">Centro de estética</button>
+            </div>
+
+            <div class="live-demo" data-live-demo="clinica"></div>
+
+            <div class="control-points">
+                <article>
+                    <span>01</span>
+                    <div>
+                        <h3>Historial completo</h3>
+                        <p>Conversaciones, datos de contacto, citas y acciones del agente en un mismo lugar.</p>
+                    </div>
+                </article>
+                <article>
+                    <span>02</span>
+                    <div>
+                        <h3>Intervención humana</h3>
+                        <p>Tu equipo toma una conversación cuando lo necesita y la devuelve al agente después.</p>
+                    </div>
+                </article>
+                <article>
+                    <span>03</span>
+                    <div>
+                        <h3>Sistema acompañado</h3>
+                        <p>Revisamos conversaciones, conocimiento e incidencias contigo; el agente no queda
+                            abandonado después del lanzamiento.</p>
+                    </div>
+                </article>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section assistant" id="agente">
+        <div class="container">
+            <div class="verticals-header">
+                <p class="section-label">[ EL AGENTE ]</p>
+                <h2 class="split-lines headline-med">Lo que hay<br>por <em>detrás</em>.</h2>
+                <div class="agent-intro">
+                    <p>Con lo que acabas de hablar no es una demostración preparada: es el mismo agente que atiende
+                        WhatsApp, con la información real de un negocio — servicios, precios, horarios y políticas.</p>
+                    <p>Cada conversación queda en un panel, con sus citas y lo que hizo el agente. Tu equipo entra
+                        cuando quiere, sin perder el contexto, y se la devuelve después.</p>
+                </div>
+            </div>
+
+            <div class="signal-list">
+                <div>
+                    <span>Capa 01</span>
+                    <strong>Atiende y capta</strong>
+                    <p>Responde con la información real del negocio y recoge nombre, contacto y necesidad antes de que
+                        llegue a ti.</p>
+                </div>
+                <div>
+                    <span>Capa 02</span>
+                    <strong>Gestiona las citas</strong>
+                    <p>Crea, cambia y cancela citas sobre la disponibilidad real del negocio, sin llamadas cruzadas.</p>
+                </div>
+                <div>
+                    <span>Capa 03</span>
+                    <strong>Tu equipo mantiene el control</strong>
+                    <p>Panel con historial, configuración editable e intervención humana: cualquiera del equipo puede
+                        tomar la conversación y devolvérsela al agente.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section process" id="process">
+        <div class="container">
+            <div class="process-header">
+                <p class="section-label">[ IMPLANTACIÓN ]</p>
+                <h2 class="split-lines headline-med">Lo ponemos en marcha.<br>Después, lo <em>acompañamos</em>.</h2>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <span>01</span>
+                    <h3>Entendemos el negocio</h3>
+                    <p>Servicios, horarios, precios, políticas, preguntas frecuentes y cuándo debe intervenir una
+                        persona.</p>
+                </div>
+                <div class="process-step">
+                    <span>02</span>
+                    <h3>Configuramos el agente</h3>
+                    <p>Preparamos conocimiento, tono, agenda y reglas de seguridad para que responda con información
+                        real.</p>
+                </div>
+                <div class="process-step">
+                    <span>03</span>
+                    <h3>Conectamos y probamos</h3>
+                    <p>WhatsApp, citas y panel se validan de extremo a extremo antes de abrir el flujo a clientes.</p>
+                </div>
+                <div class="process-step">
+                    <span>04</span>
+                    <h3>Revisamos y mejoramos</h3>
+                    <p>Seguimos conversaciones, afinamos el conocimiento y mantenemos el sistema conforme cambia la
+                        operativa.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section pricing" id="tarifas">
+        <div class="container">
+            <div class="verticals-header">
+                <p class="section-label">[ TARIFAS ]</p>
+                <h2 class="split-lines headline-med">Dos tramos.<br>Sin <em>letra pequeña</em>.</h2>
+                <p>Una inversión inicial para dejarlo funcionando y un acompañamiento mensual para que siga
+                    siéndolo. El importe depende del alcance real de tu negocio, así que lo cerramos por escrito
+                    después de la auditoría — nunca antes.</p>
+            </div>
+
+            <div class="commercial-model" aria-label="Modelo de implantación y acompañamiento">
+                <article>
+                    <span>01 · PUESTA EN MARCHA</span>
+                    <strong>Inversión inicial</strong>
+                    <p>Diseño del flujo, configuración del conocimiento, conexiones, pruebas y preparación del equipo.</p>
+                    <ul class="model-includes">
+                        <li>Auditoría del negocio y de tu presencia digital</li>
+                        <li>Configuración del agente con tu información y tu tono</li>
+                        <li>Conexión a WhatsApp Business API y a tu agenda</li>
+                        <li>Pruebas contigo antes de abrirlo a clientes</li>
+                    </ul>
+                </article>
+                <article>
+                    <span>02 · ACOMPAÑAMIENTO ACTIVO</span>
+                    <strong>Servicio mensual</strong>
+                    <p>Seguimiento, llamadas de control, ajustes, soporte e incorporación de cambios del negocio.</p>
+                    <ul class="model-includes">
+                        <li>Cambios de servicios, precios y horarios sin coste aparte</li>
+                        <li>Revisión de conversaciones reales y ajuste del criterio</li>
+                        <li>Panel, historial e intervención humana</li>
+                        <li>Soporte directo por WhatsApp y correo</li>
+                    </ul>
+                </article>
+                <div class="commercial-model-note">
+                    <span>Cómo se cierra</span>
+                    <p>Presupuesto cerrado por escrito tras la auditoría. Sabes el total antes de empezar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section capabilities" id="services">
+        <div class="container">
+            <div class="services-compact-header">
+                <div>
+                    <p class="section-label">[ STUDIO32 · DIGITAL SYSTEMS ]</p>
+                    <h2 class="split-lines headline-med">Agentes, webs y sistemas<br>que trabajan <em>juntos</em>.</h2>
+                </div>
+                <p>Agent Platform es nuestro producto operativo principal, no nuestra única capacidad. Diseñamos la
+                    presencia, la captación y las herramientas que el negocio necesita alrededor.</p>
+            </div>
+
+            <div class="service-mini-grid">
+                <article class="service-mini">
+                    <span>01</span>
+                    <h3>Digital Presence Audit</h3>
+                    <p>Una lectura completa de web, móvil, SEO local, contacto, reservas y oportunidades de
+                        automatización.</p>
+                </article>
+                <article class="service-mini service-mini--featured">
+                    <span>02</span>
+                    <h3>Presence Pack</h3>
+                    <p>Web premium mobile-first con dirección visual, estructura comercial y flujos claros de contacto
+                        o reserva.</p>
+                </article>
+                <article class="service-mini service-mini--featured">
+                    <span>03</span>
+                    <h3>Presence + AI Pack</h3>
+                    <p>Presencia digital con una capa inteligente para responder dudas, captar oportunidades y ordenar
+                        solicitudes.</p>
+                </article>
+                <article class="service-mini">
+                    <span>04</span>
+                    <h3>Digital System Custom</h3>
+                    <p>Paneles, automatizaciones e integraciones diseñados alrededor de una operativa concreta.</p>
+                </article>
+            </div>
+
+            <div class="demo-showcase-header">
+                <div>
+                    <p class="section-label">[ DEMOS DE PRESENCIA DIGITAL ]</p>
+                    <h3>Cuatro sectores.<br>Cuatro direcciones visuales.</h3>
+                </div>
+                <p>Una web no debería parecer una plantilla con otro logotipo. Cada negocio necesita ritmo, tono y
+                    recorrido propios.</p>
+            </div>
+
+            <section class="demo-showcase" aria-label="Demos de presencia digital por sector">
+                <a class="demo-card demo-card--restaurant" href="../Landing1-L%27Obscur/restaurant_landing"
+                    target="_blank" rel="noopener">
+                    <div class="demo-card-visual" aria-hidden="true">
+                        <span>01 · RESTAURACIÓN</span>
+                        <strong>L'OBSCUR</strong>
+                        <i></i>
+                    </div>
+                    <div class="demo-card-copy">
+                        <span>Demo sectorial</span>
+                        <h4>Una experiencia que empieza antes de sentarse a la mesa.</h4>
+                        <strong>Explorar demo ↗</strong>
+                    </div>
+                </a>
+                <a class="demo-card demo-card--food" href="../Landing2-PrimeBurger/" target="_blank"
+                    rel="noopener">
+                    <div class="demo-card-visual" aria-hidden="true">
+                        <span>02 · FOOD BRAND</span>
+                        <strong>PRIME</strong>
+                        <i></i>
+                    </div>
+                    <div class="demo-card-copy">
+                        <span>Demo sectorial</span>
+                        <h4>Producto, identidad y conversión pensados para móvil.</h4>
+                        <strong>Explorar demo ↗</strong>
+                    </div>
+                </a>
+                <a class="demo-card demo-card--clinic" href="../Landing3-Clinic/index.html" target="_blank"
+                    rel="noopener">
+                    <div class="demo-card-visual" aria-hidden="true">
+                        <span>03 · CLÍNICA</span>
+                        <strong>NORD</strong>
+                        <i></i>
+                    </div>
+                    <div class="demo-card-copy">
+                        <span>Demo sectorial</span>
+                        <h4>Confianza clínica, claridad de servicios y cita accesible.</h4>
+                        <strong>Explorar demo ↗</strong>
+                    </div>
+                </a>
+                <a class="demo-card demo-card--architecture" href="../Landing4-Habitat/" target="_blank"
+                    rel="noopener">
+                    <div class="demo-card-visual" aria-hidden="true">
+                        <span>04 · ARQUITECTURA</span>
+                        <strong>HÁBITAT</strong>
+                        <i></i>
+                    </div>
+                    <div class="demo-card-copy">
+                        <span>Demo sectorial</span>
+                        <h4>Espacio, criterio editorial y una obra que respira.</h4>
+                        <strong>Explorar demo ↗</strong>
+                    </div>
+                </a>
+            </section>
+        </div>
+    </section>
+
+    <section class="section faq" id="faq">
+        <div class="container">
+            <div class="faq-layout">
+                <div class="faq-header">
+                    <p class="section-label">[ PREGUNTAS FRECUENTES ]</p>
+                    <h2 class="split-lines headline-med">Antes de ponerlo<br><em>en marcha</em>.</h2>
+                    <p>Qué hace el agente, cómo mantiene el control tu equipo y qué implica implantarlo en un negocio real.</p>
+                    <a class="faq-contact" href="https://wa.me/34694293166?text=Hola,%20tengo%20una%20duda%20sobre%20Studio32%20Agent%20Platform."
+                        target="_blank" rel="noopener">¿Otra pregunta? Hablemos <span>↗</span></a>
+                </div>
+
+                <div class="faq-list">
+                <details class="faq-item" open>
+                    <summary>
+                        <span class="faq-q">¿Qué es un agente de WhatsApp y en qué se diferencia de un chatbot?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Un chatbot normal responde con menús y frases enlatadas. Nuestro agente entiende lo que le
+                            preguntan y contesta con la información real de tu negocio: tus servicios, tus precios, tus
+                            horarios. Y no se queda ahí: agenda la cita y avisa a tu equipo cuando hace falta una persona.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-q">¿Atiende también fuera de horario?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Sí, y ese es justo el punto. Las consultas no llegan solo en horario de oficina, y una
+                            respuesta a las once de la noche puede ser la diferencia entre una cita y un cliente que
+                            escribe al siguiente. El agente responde a cualquier hora, todos los días.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-q">¿Puede gestionar citas y reservas de verdad?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Sí. Crea, cambia y cancela citas sobre la disponibilidad real de tu negocio, sin llamadas
+                            cruzadas ni huecos dobles. Cada cita queda registrada y tu equipo la ve en el panel al
+                            momento.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-q">¿Y si el cliente necesita hablar con una persona?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Cualquiera de tu equipo puede entrar en la conversación desde el panel, seguir donde lo dejó
+                            el agente y devolvérsela cuando quiera. El agente no sustituye el trato humano: lo cubre
+                            cuando tu equipo no puede atender.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-q">¿Para qué tipo de negocios funciona?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Sobre todo para negocios donde atender rápido y ordenar las citas marca la diferencia:
+                            clínicas y centros de salud, restauración, y servicios locales que trabajan con cita o
+                            presupuesto. Cada uno se configura con sus propias reglas.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-q">¿Cómo se pone en marcha?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Nos sentamos a entender cómo trabajas, preparamos el agente con tu información y lo probamos
+                            de principio a fin antes de abrirlo a tus clientes. Después seguimos encima: revisamos
+                            conversaciones y lo vamos afinando. No te dejamos solo con una herramienta el primer día.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-q">¿Necesito un número de WhatsApp nuevo?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Puedes usar el número que ya tienes o uno nuevo. Si migras el tuyo, tus clientes siguen
+                            escribiendo al mismo sitio de siempre, pero ese número deja de funcionar en la app de
+                            WhatsApp del móvil: pasa a atenderse desde el panel. Lo hablamos antes de decidir, porque no
+                            todos los negocios quieren lo mismo.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-q">¿Y si cambio un precio, un horario o un servicio?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Nos lo dices y lo actualizamos. Entra dentro del acompañamiento mensual, no se factura aparte.
+                            El agente responde con la información vigente desde ese momento, sin arrastrar datos
+                            antiguos.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-q">¿Dónde quedan las conversaciones y los datos de mis clientes?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>En el panel de tu negocio, accesible para tu equipo y para Studio32 mientras dure el
+                            acompañamiento. No se venden ni se usan para otra cosa. Firmamos el contrato de
+                            encargado de tratamiento que exige el RGPD y, si dejas el servicio, te entregamos o
+                            eliminamos los datos según prefieras.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>
+                        <span class="faq-q">¿Cuánto tarda en estar funcionando?</span>
+                        <span class="faq-icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="faq-a">
+                        <p>Semanas, no meses. El plazo real depende de dos cosas: lo ordenada que esté tu información
+                            (servicios, precios, horarios, políticas) y la verificación del número en Meta, que es un
+                            trámite externo y no depende de nosotros. Te decimos el plazo concreto tras la auditoría
+                            inicial, no antes.</p>
+                    </div>
+                </details>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <footer id="contact" class="section footer-cta">
+        <div class="container">
+            <div class="cta-panel">
+                <p class="section-label centered">[ HABLEMOS DE TU NEGOCIO ]</p>
+                <h2 class="huge-text split-lines">Puede verse mejor.<br>Puede <em>atender mejor.</em></h2>
+                <p class="cta-sub">Podemos empezar por la presencia digital o por el sistema de atención. Lo importante
+                    es resolver el problema correcto.</p>
+
+                <div class="cta-wrapper cta-wrapper--dual">
+                    <a href="https://wa.me/34694293166?text=Hola,%20quiero%20mejorar%20la%20web%20y%20la%20presencia%20digital%20de%20mi%20negocio."
+                        target="_blank" rel="noopener" class="btn-massive">
+                        Quiero mejorar mi web ↗
+                    </a>
+                    <a href="https://wa.me/34694293166?text=Hola,%20quiero%20automatizar%20la%20atenci%C3%B3n%20por%20WhatsApp%20de%20mi%20negocio."
+                        target="_blank" rel="noopener" class="btn-secondary">Quiero automatizar la atención</a>
+                </div>
+            </div>
+
+            <div class="contact-grid">
+                <div class="footer-marca">
+                    <p class="section-label">[ STUDIO32 ]</p>
+                    <h3>Sistemas digitales que atienden y dejan el control en el negocio.</h3>
+                    <p>Studio32 Agent Platform es el producto principal: agente de recepción por WhatsApp, citas,
+                        panel e intervención humana. El estudio también diseña presencia digital y sistemas a medida
+                        cuando forman parte del mismo problema.</p>
+                </div>
+
+                <nav class="footer-col" aria-label="Páginas por sector">
+                    <p class="footer-col-titulo">Por sector</p>
+                    <a href="../agente-whatsapp-clinicas-dentales/">Clínicas dentales</a>
+                    <a href="../agente-whatsapp-restaurantes/">Restaurantes</a>
+                    <a href="../agente-whatsapp-servicios-locales/">Servicios locales</a>
+                    <a href="../agente-whatsapp-centros-esteticos/">Centros de estética</a>
+                </nav>
+
+                <nav class="footer-col" aria-label="Secciones de la web">
+                    <p class="footer-col-titulo">El agente</p>
+<a href="../recursos/" data-discovery-links>Recursos de recepción</a>
+<a href="../herramientas/">Herramientas</a>
+<a href="../problemas/llamadas-y-mensajes-perdidos/" data-discovery-context>Revisar cómo medir consultas pendientes</a>
+<a href="../herramientas/calculadora-consultas-perdidas/" data-discovery-context>Estimar su valor potencial</a>
+                    <a href="#control">Probar el agente</a>
+                    <a href="../panel-de-control/">El panel de control</a>
+                    <a href="../precio-agente-whatsapp/">Cuánto cuesta</a>
+                    <a href="#process">Implantación</a>
+                    <a href="#faq">Preguntas frecuentes</a>
+                </nav>
+
+                <nav class="footer-col" aria-label="Demos por sector">
+                    <p class="footer-col-titulo">Webs de ejemplo</p>
+                    <a href="../Landing3-Clinic/index.html">Clínica</a>
+                    <a href="../Landing1-L%27Obscur/restaurant_landing">Restaurante</a>
+                    <a href="../Landing2-PrimeBurger/">Marca de comida</a>
+                    <a href="../Landing4-Habitat/">Arquitectura</a>
+                </nav>
+
+                <div class="footer-col">
+                    <p class="footer-col-titulo">Contacto</p>
+                    <a href="mailto:info@studio32.es">info@studio32.es</a>
+                    <a href="https://wa.me/34694293166" target="_blank" rel="noopener">+34 694 29 31 66</a>
+                    <a href="../legal/aviso-legal">Aviso legal</a>
+                    <a href="../legal/privacidad">Privacidad</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="brand">Studio32 · Digital Systems ©2026</div>
+                <div class="footer-services">Agent Platform · Presence · Systems</div>
+            </div>
+        </div>
+    </footer>
+    <!-- Widget del agente propio de Studio32 (tenant `studio32`, no el de la demo).
+         Su burbuja flotante se oculta por CSS: con la demo en el centro de la
+         página, dos chats a la vez confunden y la burbuja tapaba contenido. La
+         función se conserva y la abre el botón "Hablemos" del menú, vía
+         `window.S32W.open()`. -->
+    <script src="../contact-accessibility.js?v=20261003-contact-1" defer></script>
+    <script src="https://web-production-d722c.up.railway.app/widget.js" data-tenant="studio32" data-title="Habla con Studio32"
+        data-accent="#8a6421" defer></script>
+</body>
+
+</html>

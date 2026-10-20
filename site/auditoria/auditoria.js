@@ -464,7 +464,8 @@
     return `<p class="limites">El Índice Studio32 mide cómo puede leer una IA la web de cada restaurante: si puede entrar, si sabe quién eres,
       qué ofreces y en qué idiomas. No mide la calidad del restaurante ni a quién recomienda ChatGPT, y no prometemos ponerte el primero:
       medimos y te decimos qué arreglar. Medición automática de octubre de 2026; si tu web ha cambiado, la medimos otra vez.
-      ¿Ves un error o prefieres no aparecer? <a href="mailto:${CONTACTO.correo}?subject=${encodeURIComponent('Mapa del Índice Studio32')}">Escríbenos</a>.</p>`;
+      ¿Ves un error o prefieres no aparecer? <a href="mailto:${CONTACTO.correo}?subject=${encodeURIComponent('Mapa del Índice Studio32')}">Escríbenos</a>.
+      <a href="../metodologia/">Cómo medimos</a>.</p>`;
   }
 
   function conectarFicha() {

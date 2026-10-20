@@ -28,3 +28,7 @@
 /landing4-habitat/ /Landing4-Habitat/ 301
 /landing4-habitat/index.html /Landing4-Habitat/ 301
 /favicon.ico /favicon.svg 301
+
+# La propuesta de portada del 20/10/2026 ya es la portada.
+/portada-ia/ / 301
+/portada-ia/index.html / 301

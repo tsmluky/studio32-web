@@ -329,7 +329,7 @@ PAGINA = """<!DOCTYPE html>
                 <a href="#demo" class="nav-link">Pruébalo</a>
                 <a href="#hace" class="nav-link">Qué hace</a>
                 <a href="#faq" class="nav-link">Preguntas</a>
-                <a href="../#tarifas" class="nav-link">Tarifas</a>
+                <a href="../agente-whatsapp/#tarifas" class="nav-link">Tarifas</a>
                 <a href="https://wa.me/34694293166?text={wa}" target="_blank" rel="noopener" class="nav-btn">Hablemos</a>
             </div>
         </div>
@@ -450,11 +450,11 @@ PAGINA = """<!DOCTYPE html>
                 </nav>
                 <nav class="footer-col" aria-label="El agente">
                     <p class="footer-col-titulo">El agente</p>
-                    <a href="../#control">Probar el agente</a>
+                    <a href="../agente-whatsapp/#control">Probar el agente</a>
                     <a href="../panel-de-control/">El panel de control</a>
                     <a href="../precio-agente-whatsapp/">Cuánto cuesta</a>
-                    <a href="../#process">Implantación</a>
-                    <a href="../#faq">Preguntas frecuentes</a>
+                    <a href="../agente-whatsapp/#process">Implantación</a>
+                    <a href="../agente-whatsapp/#faq">Preguntas frecuentes</a>
                 </nav>
                 <div class="footer-col">
                     <p class="footer-col-titulo">Contacto</p>
