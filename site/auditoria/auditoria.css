@@ -489,3 +489,15 @@ button { font: inherit; color: inherit; }
 }
 @keyframes subir { 50% { transform: rotate(45deg) translate(-3px, -1px); } }
 .tipo--plegado span { font-size: 10px; margin-left: 4px; opacity: .8; }
+
+/* precio tachado: una sola raya que cruza «49 €» y «+ IVA» a la misma altura, en vez del tachado del navegador */
+.precio-promo { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
+.tachado { position: relative; display: inline-flex; align-items: center; gap: 7px; padding: 2px 6px; line-height: 1; }
+.tachado b, .plan .tachado b, .plan--destacado .plan__precio .tachado b { font-family: var(--serif); font-size: 44px; font-weight: 600; line-height: 1;
+  color: rgba(246, 240, 229, .42); font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
+.tachado small { font-size: 15px; font-weight: 500; color: rgba(246, 240, 229, .42); position: relative; top: 2px; }
+/* la raya: recta, por el centro de las cifras, de punta a punta */
+.tachado::after { content: ""; position: absolute; left: 0; right: 0; top: 56%; height: 3px; margin-top: -1.5px; border-radius: 3px;
+  background: var(--oro, #c9a86a); }
+.precio { margin-bottom: 10px; }
+.gratis-ahora { font-style: normal; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 6px 12px; border-radius: 99px; background: var(--oro); color: var(--tinta); }

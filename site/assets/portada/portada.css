@@ -361,10 +361,7 @@ img, svg { display: block; }
 .bloque-r__num { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; font-size: 18px; background: rgba(138, 100, 33, .1); }
 
 /* precios */
-.plan__precio--promo s { color: var(--crema-3); text-decoration-thickness: 2px; text-decoration-color: rgba(246, 240, 229, .55); margin: 0; }
-.plan__precio--promo s b { font-family: var(--serif); font-size: 44px; color: var(--crema-2); }
-.plan__precio--promo s span { font-size: 14px; }
-.plan__gratis { display: inline-block; margin-left: 10px; vertical-align: 12px; font-style: normal; font-size: 12px; font-weight: 700; letter-spacing: .08em;
+.plan__gratis { display: inline-block; font-style: normal; font-size: 12px; font-weight: 700; letter-spacing: .08em;
   text-transform: uppercase; padding: 6px 12px; border-radius: 99px; background: var(--oro); color: var(--negro); }
 .plan--arreglos { background: linear-gradient(180deg, #fffaf0, var(--blanco)); box-shadow: 0 0 0 1.5px rgba(201, 168, 106, .6), 0 24px 60px rgba(28, 24, 18, .1); }
 .plan--arreglos .plan__precio b { color: var(--oro-osc); }
@@ -390,5 +387,15 @@ img, svg { display: block; }
   .ideas b { font-size: 16px; }
   .ideas span:not(.idea__dibujo) { font-size: 12px; line-height: 1.35; }
   .bloque-r { padding: 22px 18px; }
-  .plan__precio--promo s b { font-size: 38px; }
+  .tachado b { font-size: 38px; }
 }
+
+/* precio tachado: una sola raya que cruza «49 €» y «+ IVA» a la misma altura, en vez del tachado del navegador */
+.precio-promo { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
+.tachado { position: relative; display: inline-flex; align-items: center; gap: 7px; padding: 2px 6px; line-height: 1; }
+.tachado b, .plan .tachado b, .plan--destacado .plan__precio .tachado b { font-family: var(--serif); font-size: 44px; font-weight: 600; line-height: 1;
+  color: rgba(246, 240, 229, .42); font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
+.tachado small { font-size: 15px; font-weight: 500; color: rgba(246, 240, 229, .42); position: relative; top: 2px; }
+/* la raya: recta, por el centro de las cifras, de punta a punta */
+.tachado::after { content: ""; position: absolute; left: 0; right: 0; top: 56%; height: 3px; margin-top: -1.5px; border-radius: 3px;
+  background: var(--oro, #c9a86a); }
