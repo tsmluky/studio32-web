@@ -264,7 +264,10 @@ img, svg { display: block; }
   .cifra p { font-size: 13.5px; }
   .validez { grid-template-columns: 1fr; padding: 24px 20px; }
   .ventana__mapa { height: 360px; }
-  .ventana__ficha { left: 12px; right: 12px; width: auto; bottom: 48px; }
+  .ventana__ficha { left: 12px; right: auto; width: auto; bottom: 52px; padding: 10px 14px; }
+  .ventana__dato { margin: 2px 0 0; }
+  .ventana__dato b { font-size: 22px; }
+  .ventana__tramos { display: none; }
   .maqueta { padding: 22px 18px; }
   .faq summary { font-size: 18px; }
   .pie__dentro { grid-template-columns: 1fr; }
