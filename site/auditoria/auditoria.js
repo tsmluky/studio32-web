@@ -423,8 +423,12 @@
     const tuya = medido && z.puesto ? Math.min(z.puesto, colores.length) - 1 : -1;
     const pos = tuya >= 0 ? ((tuya + .5) / colores.length) * 100 : 0;
     return `<div class="fila-zona" aria-hidden="true">
-        ${tuya >= 0 ? `<span class="fila-zona__tu" style="left:${pos}%">Tú · ${z.puesto}.ª</span>` : ''}
-        <div class="fila-zona__marcas">${colores.map((col, i) => `<i class="${i === tuya ? 'tu' : ''}" style="background:${col}"></i>`).join('')}</div>
+        ${tuya >= 0 ? `<span class="fila-zona__tu" style="left:${pos}%;transform:translateX(${pos < 10 ? '-12%' : pos > 90 ? '-88%' : '-50%'})">Tú · ${z.puesto}.ª</span>` : ''}
+        ${colores.length <= 60
+          ? `<div class="fila-zona__marcas">${colores.map((col, i) => `<i class="${i === tuya ? 'tu' : ''}" style="background:${col}"></i>`).join('')}</div>`
+          // muchas webs (el centro de una ciudad): una barra por tramos y tu posición encima, para que nunca se salga de la caja
+          : `<div class="fila-zona__barra">${[3, 2, 1, 0].map((t) => z.tramos[t] ? `<span style="flex:${z.tramos[t]};background:${TRAMOS[t].color}"></span>` : '').join('')}
+              ${tuya >= 0 ? `<b class="fila-zona__aguja" style="left:${pos}%"></b>` : ''}</div>`}
         <div class="fila-zona__eje"><span>Mejor leída</span><span>Peor leída</span></div>
       </div>`;
   }
